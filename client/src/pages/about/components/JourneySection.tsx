@@ -32,111 +32,157 @@ const JourneySection = () => {
   ];
 
   return (
-    <section id="our-journey" className="py-16 lg:py-24 bg-white">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-20">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Our journey</h2>
-        </div>
+    <>
+      <style>{`
+        @keyframes growLine {
+          from {
+            transform: translateX(-50%) scaleY(0);
+          }
+          to {
+            transform: translateX(-50%) scaleY(1);
+          }
+        }
+        .line-grow-animation {
+          animation: growLine 0.7s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .content-fade-in {
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
+      `}</style>
+      <section id="our-journey" className="py-12 lg:py-16 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-5">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">Our journey</h2>
+          </div>
 
-        <div className="max-w-6xl mx-auto">
-          {/* Half Circle Timeline */}
-          <div className="relative flex items-center justify-center mb-24">
-            <div className="relative w-full max-w-[900px] h-[320px]">
-              {/* SVG Half Circle Path */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 900 320" preserveAspectRatio="xMidYMid meet">
-                {/* Background arc */}
-                <path
-                  d="M 100 280 A 350 350 0 0 1 800 280"
-                  fill="none"
-                  stroke="#e5e7eb"
-                  strokeWidth="2"
-                />
-                {/* Active segment - green line */}
-                <path
-                  d="M 100 280 A 350 350 0 0 1 800 280"
-                  fill="none"
-                  stroke="#16a34a"
-                  strokeWidth="3"
-                  strokeDasharray="1100"
-                  strokeDashoffset={1100 - (activeYear * (1100 / (journeyData.length - 1)))}
-                  className="transition-all duration-700 ease-in-out"
-                  strokeLinecap="round"
-                />
-              </svg>
+          <div className="max-w-6xl mx-auto">
+            {/* Half Circle Timeline with Content Inside */}
+            <div className="relative flex items-center justify-center min-h-[500px] overflow-hidden">
+              <div className="relative w-full max-w-[800px] h-[450px]">
+                {/* SVG Half Circle Path */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet">
+                  {/* Background arc */}
+                  <path
+                    d="M 80 400 A 320 320 0 0 1 720 400"
+                    fill="none"
+                    stroke="#d1d5db"
+                    strokeWidth="2"
+                  />
+                </svg>
 
-              {/* Year Dots on the arc */}
+              {/* Year Dots on the arc - rotated so active is at top */}
               {journeyData.map((item, index) => {
-                // Calculate position on half circle (180 degrees)
+                // Calculate position so clicked year moves to top (90 degrees)
                 const totalDots = journeyData.length;
                 const angleStep = 180 / (totalDots - 1);
-                const angle = (180 - (index * angleStep)) * (Math.PI / 180);
-                const radius = 350;
-                const centerX = 450;
-                const centerY = 280;
+                
+                // Calculate how many positions away from active year
+                let offset = index - activeYear;
+                
+                // The active year should be at position 2 (middle, which is top of arc)
+                // Position 0 = 180° (left), Position 2 = 90° (top), Position 4 = 0° (right)
+                const targetPosition = 2 + offset;
+                
+                // Calculate angle for this position (180° to 0°, left to right)
+                const angle = (180 - (targetPosition * angleStep)) * (Math.PI / 180);
+                const radius = 320;
+                const centerX = 400;
+                const centerY = 400;
+                
+                // Position ON the arc line
                 const x = centerX + radius * Math.cos(angle);
                 const y = centerY - radius * Math.sin(angle);
+                
+                // Position for year label (outside the arc, further from center)
+                const labelOffset = 35; // Distance from arc
+                const labelX = centerX + (radius + labelOffset) * Math.cos(angle);
+                const labelY = centerY - (radius + labelOffset) * Math.sin(angle);
+
+                const isActive = activeYear === index;
 
                 return (
-                  <div
-                    key={index}
-                    className="absolute cursor-pointer group"
-                    style={{
-                      left: `${x}px`,
-                      top: `${y}px`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                    onClick={() => setActiveYear(index)}
-                  >
-                    {/* Dot with connecting line */}
-                    <div className="relative flex flex-col items-center">
-                      {/* Year Label above dot */}
+                  <div key={index}>
+                    {/* Dot on the arc */}
+                    <div
+                      className="absolute cursor-pointer transition-all duration-700 ease-in-out z-10"
+                      style={{
+                        left: `${x}px`,
+                        top: `${y}px`,
+                        transform: 'translate(-50%, -50%)'
+                      }}
+                      onClick={() => setActiveYear(index)}
+                    >
                       <div
-                        className={`mb-2 whitespace-nowrap text-lg font-medium transition-all duration-300 ${
-                          activeYear === index ? 'text-gray-800' : 'text-gray-500'
+                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                          isActive
+                            ? 'bg-green-600 scale-150 shadow-lg'
+                            : 'bg-gray-400 hover:bg-gray-600 hover:scale-125'
+                        }`}
+                      ></div>
+                    </div>
+                    
+                    {/* Year Label outside the arc */}
+                    <div
+                      className="absolute cursor-pointer transition-all duration-700 ease-in-out"
+                      style={{
+                        left: `${labelX}px`,
+                        top: `${labelY}px`,
+                        transform: 'translate(-50%, -50%)'
+                      }}
+                      onClick={() => setActiveYear(index)}
+                    >
+                      <div
+                        className={`whitespace-nowrap text-base font-semibold transition-all duration-300 ${
+                          isActive ? 'text-green-600 scale-110' : 'text-gray-600'
                         }`}
                       >
                         {item.year}
                       </div>
-                      
-                      {/* Vertical line from year to dot */}
-                      <div 
-                        className={`w-0.5 mb-2 transition-all duration-300 ${
-                          activeYear === index ? 'bg-green-600 h-12' : 'bg-gray-300 h-8'
-                        }`}
-                      ></div>
-                      
-                      {/* Dot */}
-                      <div
-                        className={`w-3.5 h-3.5 rounded-full transition-all duration-300 ${
-                          activeYear === index
-                            ? 'bg-green-600 scale-150 shadow-lg'
-                            : 'bg-gray-400 hover:bg-green-500 hover:scale-125'
-                        }`}
-                      ></div>
                     </div>
                   </div>
                 );
               })}
+
+                {/* Vertical Line from Active Year to Content - Animates from dot */}
+                <div 
+                  key={activeYear}
+                  className="absolute w-0.5 bg-green-600 line-grow-animation"
+                  style={{
+                    left: '50%',
+                    top: '80px',
+                    height: '100px',
+                    transformOrigin: 'top center'
+                  }}
+                ></div>
+
+              {/* Content INSIDE Circle - Absolutely Positioned and Centered */}
+              <div className="absolute left-1/2 top-[220px] transform -translate-x-1/2 text-center max-w-xl w-full px-4">
+                <div key={activeYear} className="content-fade-in">
+                  <h3 className="text-6xl lg:text-7xl font-bold text-green-600 mb-3" style={{ lineHeight: '1' }}>
+                    {journeyData[activeYear].year}
+                  </h3>
+                  <p className="text-sm lg:text-base text-gray-700 leading-relaxed">
+                    Commissioned <span className="text-green-600 font-semibold">{journeyData[activeYear].title}</span> {journeyData[activeYear].description}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Content Below */}
-          <div className="text-center max-w-3xl mx-auto mt-20">
-            <div className="mb-8">
-              <h3 className="text-8xl font-bold text-green-600 mb-8" style={{ fontSize: '120px', lineHeight: '1' }}>
-                {journeyData[activeYear].year}
-              </h3>
-              <h4 className="text-xl text-gray-700 mb-4 leading-relaxed">
-                Commissioned <span className="text-green-600 font-semibold">{journeyData[activeYear].title}</span>
-              </h4>
-              <p className="text-gray-600 leading-relaxed text-base">
-                {journeyData[activeYear].description}
-              </p>
-            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

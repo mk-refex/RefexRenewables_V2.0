@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { investorsCmsApi, stockApi } from '../../../services/api';
+import { useState, useEffect, useRef } from "react";
+import { investorsCmsApi, stockApi } from "../../../services/api";
 
 interface StockQuoteSettings {
   title?: string;
@@ -37,31 +37,31 @@ interface StockQuoteAPIResponse {
 }
 
 export default function StockQuote() {
-  const [activeExchange, setActiveExchange] = useState<'NSE' | 'BSE'>('NSE');
+  const [activeExchange, setActiveExchange] = useState<"NSE" | "BSE">("NSE");
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<StockQuoteSettings | null>(null);
   const [nseData, setNseData] = useState<StockQuoteAPIResponse | null>(null);
   const [bseData, setBseData] = useState<StockQuoteAPIResponse | null>(null);
-  const [lastUpdated, setLastUpdated] = useState<string>('');
+  const [lastUpdated, setLastUpdated] = useState<string>("");
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Default settings as fallback
   const defaultSettings: StockQuoteSettings = {
-    title: 'STOCK QUOTE',
-    currency: 'Rupees',
-    columnCurrency: 'CURRENCY',
-    columnPrice: 'PRICE',
-    columnBid: 'BID',
-    columnOffer: 'OFFER',
-    columnChange: 'CHANGE IN (%)',
-    columnVolume: 'VOLUME',
+    title: "STOCK QUOTE",
+    currency: "Rupees",
+    columnCurrency: "CURRENCY",
+    columnPrice: "PRICE",
+    columnBid: "BID",
+    columnOffer: "OFFER",
+    columnChange: "CHANGE IN (%)",
+    columnVolume: "VOLUME",
     columnTodayOpen: "TODAY'S OPEN",
-    columnPreviousClose: 'PREVIOUS CLOSE',
-    columnIntradayHigh: 'INTRADAY HIGH',
-    columnIntradayLow: 'INTRADAY LOW',
-    columnWeekHigh52: '52 WEEK HIGH',
-    columnWeekLow52: '52 WEEK LOW',
-    footerText: 'Pricing delayed by 5 minutes',
+    columnPreviousClose: "PREVIOUS CLOSE",
+    columnIntradayHigh: "INTRADAY HIGH",
+    columnIntradayLow: "INTRADAY LOW",
+    columnWeekHigh52: "52 WEEK HIGH",
+    columnWeekLow52: "52 WEEK LOW",
+    footerText: "Pricing delayed by 5 minutes",
     isActive: true,
   };
 
@@ -110,90 +110,128 @@ export default function StockQuote() {
   const fetchStockData = async () => {
     try {
       // Fetch NSE data
-      const nseResponse = await stockApi.getStockQuoteValue('REFEX.NS');
-      console.log('=== NSE API Response (Raw) ===', JSON.stringify(nseResponse, null, 2));
-      
+      const nseResponse = await stockApi.getStockQuoteValue("REFEXRENEW.NS");
+      console.log(
+        "=== NSE API Response (Raw) ===",
+        JSON.stringify(nseResponse, null, 2),
+      );
+
       if (nseResponse) {
         // Handle new API response format: { status: true, data: {...} }
         let nseData = nseResponse;
-        
+
         // Check for new API format: { status: true, data: {...} }
-        if (nseResponse.status === true && nseResponse.data && typeof nseResponse.data === 'object') {
+        if (
+          nseResponse.status === true &&
+          nseResponse.data &&
+          typeof nseResponse.data === "object"
+        ) {
           nseData = nseResponse.data;
-        } 
+        }
         // Check for nested structure like { data: {...} } (fallback)
-        else if (nseResponse.data && typeof nseResponse.data === 'object' && !nseResponse.status) {
+        else if (
+          nseResponse.data &&
+          typeof nseResponse.data === "object" &&
+          !nseResponse.status
+        ) {
           nseData = nseResponse.data;
-        } 
+        }
         // Check for old format: { nse_data: {...} }
-        else if (nseResponse.nse_data && typeof nseResponse.nse_data === 'object') {
+        else if (
+          nseResponse.nse_data &&
+          typeof nseResponse.nse_data === "object"
+        ) {
           nseData = nseResponse.nse_data;
         }
-        
-        console.log('NSE Data extracted:', JSON.stringify(nseData, null, 2));
-        console.log('NSE fiftyTwoWeekHigh:', nseData.fiftyTwoWeekHigh);
-        console.log('NSE fiftyTwoWeekLow:', nseData.fiftyTwoWeekLow);
-        console.log('NSE All Keys:', Object.keys(nseData || {}));
-        
+
+        console.log("NSE Data extracted:", JSON.stringify(nseData, null, 2));
+        console.log("NSE fiftyTwoWeekHigh:", nseData.fiftyTwoWeekHigh);
+        console.log("NSE fiftyTwoWeekLow:", nseData.fiftyTwoWeekLow);
+        console.log("NSE All Keys:", Object.keys(nseData || {}));
+
         // Set data if we have any valid fields
-        if (nseData && typeof nseData === 'object' && nseData.current_price !== undefined) {
+        if (
+          nseData &&
+          typeof nseData === "object" &&
+          nseData.current_price !== undefined
+        ) {
           setNseData(nseData);
         }
       }
 
       // Fetch BSE data
-      const bseResponse = await stockApi.getStockQuoteValue('REFEX.BO');
-      console.log('=== BSE API Response (Raw) ===', JSON.stringify(bseResponse, null, 2));
-      
+      const bseResponse = await stockApi.getStockQuoteValue("REFEXRENEW.BO");
+      console.log(
+        "=== BSE API Response (Raw) ===",
+        JSON.stringify(bseResponse, null, 2),
+      );
+
       if (bseResponse) {
         // Handle new API response format: { status: true, data: {...} }
         let bseData = bseResponse;
-        
+
         // Check for new API format: { status: true, data: {...} }
-        if (bseResponse.status === true && bseResponse.data && typeof bseResponse.data === 'object') {
+        if (
+          bseResponse.status === true &&
+          bseResponse.data &&
+          typeof bseResponse.data === "object"
+        ) {
           bseData = bseResponse.data;
-        } 
+        }
         // Check for nested structure like { data: {...} } (fallback)
-        else if (bseResponse.data && typeof bseResponse.data === 'object' && !bseResponse.status) {
+        else if (
+          bseResponse.data &&
+          typeof bseResponse.data === "object" &&
+          !bseResponse.status
+        ) {
           bseData = bseResponse.data;
-        } 
+        }
         // Check for old format: { bse_data: {...} }
-        else if (bseResponse.bse_data && typeof bseResponse.bse_data === 'object') {
+        else if (
+          bseResponse.bse_data &&
+          typeof bseResponse.bse_data === "object"
+        ) {
           bseData = bseResponse.bse_data;
         }
-        
-        console.log('BSE Data extracted:', JSON.stringify(bseData, null, 2));
-        console.log('BSE fiftyTwoWeekHigh:', bseData.fiftyTwoWeekHigh);
-        console.log('BSE fiftyTwoWeekLow:', bseData.fiftyTwoWeekLow);
-        console.log('BSE All Keys:', Object.keys(bseData || {}));
-        
+
+        console.log("BSE Data extracted:", JSON.stringify(bseData, null, 2));
+        console.log("BSE fiftyTwoWeekHigh:", bseData.fiftyTwoWeekHigh);
+        console.log("BSE fiftyTwoWeekLow:", bseData.fiftyTwoWeekLow);
+        console.log("BSE All Keys:", Object.keys(bseData || {}));
+
         // Set data if we have any valid fields
-        if (bseData && typeof bseData === 'object' && bseData.current_price !== undefined) {
+        if (
+          bseData &&
+          typeof bseData === "object" &&
+          bseData.current_price !== undefined
+        ) {
           setBseData(bseData);
         }
       }
 
       // Update last updated timestamp
       const now = new Date();
-      setLastUpdated(`${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} ${now.getHours() >= 12 ? 'PM' : 'AM'}`);
+      setLastUpdated(
+        `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")} ${now.getHours() >= 12 ? "PM" : "AM"}`,
+      );
     } catch (err) {
-      console.error('Failed to fetch stock quote data:', err);
+      console.error("Failed to fetch stock quote data:", err);
     }
   };
 
   const formatValue = (value: string | number | undefined): string => {
-    if (value === undefined || value === null) return '-';
-    if (typeof value === 'number') {
+    if (value === undefined || value === null) return "-";
+    if (typeof value === "number") {
       return value.toFixed(2);
     }
     return String(value);
   };
 
   const getChangeValue = (change: string | number | undefined): string => {
-    if (change === undefined || change === null) return '-';
+    if (change === undefined || change === null) return "-";
     const changeStr = String(change);
     // If it doesn't start with + or -, add + for positive values
-    if (!changeStr.startsWith('+') && !changeStr.startsWith('-')) {
+    if (!changeStr.startsWith("+") && !changeStr.startsWith("-")) {
       const num = parseFloat(changeStr);
       return num >= 0 ? `+${changeStr}` : changeStr;
     }
@@ -203,11 +241,17 @@ export default function StockQuote() {
   const isPositiveChange = (change: string | number | undefined): boolean => {
     if (change === undefined || change === null) return false;
     const changeStr = String(change);
-    return changeStr.startsWith('+') || (!changeStr.startsWith('-') && parseFloat(changeStr) > 0);
+    return (
+      changeStr.startsWith("+") ||
+      (!changeStr.startsWith("-") && parseFloat(changeStr) > 0)
+    );
   };
 
   // Helper to get value from API response with multiple possible field names
-  const getFieldValue = (data: StockQuoteAPIResponse | null, fieldNames: string[]): string | number | undefined => {
+  const getFieldValue = (
+    data: StockQuoteAPIResponse | null,
+    fieldNames: string[],
+  ): string | number | undefined => {
     if (!data) return undefined;
     for (const fieldName of fieldNames) {
       if (data[fieldName] !== undefined && data[fieldName] !== null) {
@@ -218,7 +262,7 @@ export default function StockQuote() {
   };
 
   const currentSettings = settings || defaultSettings;
-  const currentData = activeExchange === 'NSE' ? nseData : bseData;
+  const currentData = activeExchange === "NSE" ? nseData : bseData;
 
   if (loading) {
     return (
@@ -246,24 +290,24 @@ export default function StockQuote() {
           <h2 className="text-3xl font-bold text-black uppercase tracking-wider text-center">
             {currentSettings.title}
           </h2>
-          
+
           <div className="flex justify-end gap-4 mt-6">
             <button
-              onClick={() => setActiveExchange('NSE')}
+              onClick={() => setActiveExchange("NSE")}
               className={`px-8 py-2.5 rounded-md font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                activeExchange === 'NSE'
-                  ? 'bg-[#7cd244] text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                activeExchange === "NSE"
+                  ? "bg-[#7cd244] text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
               NSE
             </button>
             <button
-              onClick={() => setActiveExchange('BSE')}
+              onClick={() => setActiveExchange("BSE")}
               className={`px-8 py-2.5 rounded-md font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                activeExchange === 'BSE'
-                  ? 'bg-[#7cd244] text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                activeExchange === "BSE"
+                  ? "bg-[#7cd244] text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
               BSE
@@ -275,24 +319,88 @@ export default function StockQuote() {
           <table className="w-full border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-900 text-white">
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnCurrency}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnPrice}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnBid}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnOffer}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnChange}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnVolume}</th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnCurrency}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnPrice}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnBid}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnOffer}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnChange}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnVolume}
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr className="bg-white">
-                <td className="border border-gray-300 px-4 py-3">{currentSettings.currency}</td>
-                <td className="border border-gray-300 px-4 py-3 font-semibold">{formatValue(getFieldValue(currentData, ['price', 'Price', 'PRICE', 'current_price', 'last_price']))}</td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['bid', 'Bid', 'BID', 'bid_price']))}</td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['offer', 'Offer', 'OFFER', 'ask', 'Ask', 'ASK', 'ask_price']))}</td>
-                <td className={`border border-gray-300 px-4 py-3 font-semibold ${isPositiveChange(getFieldValue(currentData, ['change', 'Change', 'CHANGE', 'change_percent', 'change_percentage'])) ? 'text-green-600' : 'text-red-600'}`}>
-                  {getChangeValue(getFieldValue(currentData, ['change', 'Change', 'CHANGE', 'change_percent', 'change_percentage']))}
+                <td className="border border-gray-300 px-4 py-3">
+                  {currentSettings.currency}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['volume', 'Volume', 'VOLUME', 'trading_volume']))}</td>
+                <td className="border border-gray-300 px-4 py-3 font-semibold">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "price",
+                      "Price",
+                      "PRICE",
+                      "current_price",
+                      "last_price",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "bid",
+                      "Bid",
+                      "BID",
+                      "bid_price",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "offer",
+                      "Offer",
+                      "OFFER",
+                      "ask",
+                      "Ask",
+                      "ASK",
+                      "ask_price",
+                    ]),
+                  )}
+                </td>
+                <td
+                  className={`border border-gray-300 px-4 py-3 font-semibold ${isPositiveChange(getFieldValue(currentData, ["change", "Change", "CHANGE", "change_percent", "change_percentage"])) ? "text-green-600" : "text-red-600"}`}
+                >
+                  {getChangeValue(
+                    getFieldValue(currentData, [
+                      "change",
+                      "Change",
+                      "CHANGE",
+                      "change_percent",
+                      "change_percentage",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "volume",
+                      "Volume",
+                      "VOLUME",
+                      "trading_volume",
+                    ]),
+                  )}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -300,22 +408,110 @@ export default function StockQuote() {
           <table className="w-full border-collapse border border-gray-300 mt-4">
             <thead>
               <tr className="bg-gray-900 text-white">
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnTodayOpen}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnPreviousClose}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnIntradayHigh}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnIntradayLow}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnWeekHigh52}</th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">{currentSettings.columnWeekLow52}</th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnTodayOpen}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnPreviousClose}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnIntradayHigh}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnIntradayLow}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnWeekHigh52}
+                </th>
+                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                  {currentSettings.columnWeekLow52}
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr className="bg-white">
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['today_open', 'todayOpen', 'open', 'Open', 'OPEN', 'opening_price']))}</td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['previous_close', 'previousClose', 'prev_close', 'PrevClose', 'close', 'Close', 'CLOSE', 'closing_price']))}</td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['intraday_high', 'intradayHigh', 'high', 'High', 'HIGH', 'day_high', 'dayHigh']))}</td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['intraday_low', 'intradayLow', 'low', 'Low', 'LOW', 'day_low', 'dayLow']))}</td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['fiftyTwoWeekHigh', 'FiftyTwoWeekHigh', 'FIFTY_TWO_WEEK_HIGH', 'week_high_52', 'weekHigh52', '52_week_high', '52WeekHigh', 'year_high', 'yearHigh']))}</td>
-                <td className="border border-gray-300 px-4 py-3">{formatValue(getFieldValue(currentData, ['fiftyTwoWeekLow', 'FiftyTwoWeekLow', 'FIFTY_TWO_WEEK_LOW', 'week_low_52', 'weekLow52', '52_week_low', '52WeekLow', 'year_low', 'yearLow']))}</td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "today_open",
+                      "todayOpen",
+                      "open",
+                      "Open",
+                      "OPEN",
+                      "opening_price",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "previous_close",
+                      "previousClose",
+                      "prev_close",
+                      "PrevClose",
+                      "close",
+                      "Close",
+                      "CLOSE",
+                      "closing_price",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "intraday_high",
+                      "intradayHigh",
+                      "high",
+                      "High",
+                      "HIGH",
+                      "day_high",
+                      "dayHigh",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "intraday_low",
+                      "intradayLow",
+                      "low",
+                      "Low",
+                      "LOW",
+                      "day_low",
+                      "dayLow",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "fiftyTwoWeekHigh",
+                      "FiftyTwoWeekHigh",
+                      "FIFTY_TWO_WEEK_HIGH",
+                      "week_high_52",
+                      "weekHigh52",
+                      "52_week_high",
+                      "52WeekHigh",
+                      "year_high",
+                      "yearHigh",
+                    ]),
+                  )}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {formatValue(
+                    getFieldValue(currentData, [
+                      "fiftyTwoWeekLow",
+                      "FiftyTwoWeekLow",
+                      "FIFTY_TWO_WEEK_LOW",
+                      "week_low_52",
+                      "weekLow52",
+                      "52_week_low",
+                      "52WeekLow",
+                      "year_low",
+                      "yearLow",
+                    ]),
+                  )}
+                </td>
               </tr>
             </tbody>
           </table>

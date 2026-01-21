@@ -113,7 +113,7 @@ const BoardSection = () => {
   ];
 
   return (
-    <section id="board-of-directors" className="py-16 lg:py-24 bg-white">
+    <section id="board-of-directors" className="py-8 lg:py-16 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Board of Directors</h2>

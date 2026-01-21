@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { investorsCmsApi, stockApi } from '../../../services/api';
+import { useState, useEffect, useRef } from "react";
+import { investorsCmsApi, stockApi } from "../../../services/api";
 
 interface ChartDataPoint {
   x: number;
@@ -33,19 +33,21 @@ interface StockChartSettings {
 
 export default function StockChart() {
   const [settings, setSettings] = useState<StockChartSettings | null>(null);
-  const [activeExchange, setActiveExchange] = useState<'BSE' | 'NSE'>('BSE');
-  const [activeFilter, setActiveFilter] = useState('Today');
-  const [chartType, setChartType] = useState<'line' | 'candle'>('line');
+  const [activeExchange, setActiveExchange] = useState<"BSE" | "NSE">("BSE");
+  const [activeFilter, setActiveFilter] = useState("Today");
+  const [chartType, setChartType] = useState<"line" | "candle">("line");
   const [showCustomFilter, setShowCustomFilter] = useState(false);
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
   const [sliderPosition, setSliderPosition] = useState({ start: 0, end: 100 });
-  const [isDragging, setIsDragging] = useState<'start' | 'end' | 'middle' | null>(null);
+  const [isDragging, setIsDragging] = useState<
+    "start" | "end" | "middle" | null
+  >(null);
   const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
+
   const sliderRef = useRef<HTMLDivElement>(null);
   const priceChartRef = useRef<HTMLDivElement>(null);
   const volumeChartRef = useRef<HTMLDivElement>(null);
@@ -67,45 +69,45 @@ export default function StockChart() {
       const data = await investorsCmsApi.getStockChart();
       if (data && data.isActive) {
         setSettings(data);
-        setActiveExchange((data.defaultExchange || 'BSE') as 'BSE' | 'NSE');
-        setActiveFilter(data.defaultFilter || 'Today');
-        setChartType((data.defaultChartType || 'line') as 'line' | 'candle');
+        setActiveExchange((data.defaultExchange || "BSE") as "BSE" | "NSE");
+        setActiveFilter(data.defaultFilter || "Today");
+        setChartType((data.defaultChartType || "line") as "line" | "candle");
       } else {
         setSettings({
-          title: 'STOCK CHART',
-          filterToday: 'Today',
-          filter5Days: '5 Days',
-          filter1Month: '1 Month',
-          filter3Months: '3 Months',
-          filter6Months: '6 Months',
-          filter1Year: '1 Year',
-          filter3Years: '3 Years',
-          filterYTD: 'YTD',
-          filterMAX: 'MAX',
-          filterCustom: 'Custom',
-          defaultChartType: 'line',
-          defaultExchange: 'BSE',
-          defaultFilter: 'Today',
+          title: "STOCK CHART",
+          filterToday: "Today",
+          filter5Days: "5 Days",
+          filter1Month: "1 Month",
+          filter3Months: "3 Months",
+          filter6Months: "6 Months",
+          filter1Year: "1 Year",
+          filter3Years: "3 Years",
+          filterYTD: "YTD",
+          filterMAX: "MAX",
+          filterCustom: "Custom",
+          defaultChartType: "line",
+          defaultExchange: "BSE",
+          defaultFilter: "Today",
           isActive: true,
         });
       }
     } catch (err) {
-      console.error('Failed to load stock chart settings:', err);
+      console.error("Failed to load stock chart settings:", err);
       setSettings({
-        title: 'STOCK CHART',
-        filterToday: 'Today',
-        filter5Days: '5 Days',
-        filter1Month: '1 Month',
-        filter3Months: '3 Months',
-        filter6Months: '6 Months',
-        filter1Year: '1 Year',
-        filter3Years: '3 Years',
-        filterYTD: 'YTD',
-        filterMAX: 'MAX',
-        filterCustom: 'Custom',
-        defaultChartType: 'line',
-        defaultExchange: 'BSE',
-        defaultFilter: 'Today',
+        title: "STOCK CHART",
+        filterToday: "Today",
+        filter5Days: "5 Days",
+        filter1Month: "1 Month",
+        filter3Months: "3 Months",
+        filter6Months: "6 Months",
+        filter1Year: "1 Year",
+        filter3Years: "3 Years",
+        filterYTD: "YTD",
+        filterMAX: "MAX",
+        filterCustom: "Custom",
+        defaultChartType: "line",
+        defaultExchange: "BSE",
+        defaultFilter: "Today",
         isActive: true,
       });
     } finally {
@@ -121,34 +123,39 @@ export default function StockChart() {
       let data: ChartDataPoint[] = [];
 
       // Get correct stock symbol based on exchange
-      const stockSymbol = activeExchange === 'BSE' ? 'REFEX.BO' : 'REFEX.NS';
+      const stockSymbol =
+        activeExchange === "BSE" ? "REFEXRENEW.BO" : "REFEXRENEW.NS";
 
-      if (activeFilter === 'Today') {
+      if (activeFilter === "Today") {
         // Use intraday API for today
         try {
-          const response = await stockApi.getIntradayChartData(stockSymbol, '');
-          console.log('Intraday API Response:', response);
+          const response = await stockApi.getIntradayChartData(stockSymbol, "");
+          console.log("Intraday API Response:", response);
           // Handle different response structures
           let chartArray = null;
           if (Array.isArray(response)) {
             chartArray = response;
           } else if (response && Array.isArray(response.data)) {
             chartArray = response.data;
-          } else if (response && response.chart_data && Array.isArray(response.chart_data)) {
+          } else if (
+            response &&
+            response.chart_data &&
+            Array.isArray(response.chart_data)
+          ) {
             chartArray = response.chart_data;
           }
-          
+
           if (chartArray) {
-            console.log('Chart data array sample:', chartArray[0]);
+            console.log("Chart data array sample:", chartArray[0]);
             data = parseIntradayData(chartArray);
           }
         } catch (err) {
-          console.error('Failed to fetch intraday data:', err);
+          console.error("Failed to fetch intraday data:", err);
         }
       } else {
         // Calculate date range based on filter
-        let startDate = '';
-        let endDate = '';
+        let startDate = "";
+        let endDate = "";
         const today = new Date();
         endDate = formatDateForApi(today);
 
@@ -157,31 +164,31 @@ export default function StockChart() {
           endDate = toDate;
         } else {
           const startDateObj = new Date();
-          
+
           switch (activeFilter) {
-            case '5 Days':
+            case "5 Days":
               startDateObj.setDate(startDateObj.getDate() - 5);
               break;
-            case '1 Month':
+            case "1 Month":
               startDateObj.setMonth(startDateObj.getMonth() - 1);
               break;
-            case '3 Months':
+            case "3 Months":
               startDateObj.setMonth(startDateObj.getMonth() - 3);
               break;
-            case '6 Months':
+            case "6 Months":
               startDateObj.setMonth(startDateObj.getMonth() - 6);
               break;
-            case '1 Year':
+            case "1 Year":
               startDateObj.setFullYear(startDateObj.getFullYear() - 1);
               break;
-            case '3 Years':
+            case "3 Years":
               startDateObj.setFullYear(startDateObj.getFullYear() - 3);
               break;
-            case 'YTD':
+            case "YTD":
               startDateObj.setMonth(0);
               startDateObj.setDate(1);
               break;
-            case 'MAX':
+            case "MAX":
               startDateObj.setFullYear(startDateObj.getFullYear() - 10);
               break;
           }
@@ -190,33 +197,45 @@ export default function StockChart() {
 
         // Use chart-by-api for historical data
         try {
-          const response = await stockApi.getChartByApi(stockSymbol, startDate, endDate);
-          console.log('Chart API Response:', response);
-          
+          const response = await stockApi.getChartByApi(
+            stockSymbol,
+            startDate,
+            endDate,
+          );
+          console.log("Chart API Response:", response);
+
           // Handle new API response format: { data: [...], start_date, end_date }
           let chartArray = null;
           if (response && Array.isArray(response.data)) {
             chartArray = response.data;
           } else if (Array.isArray(response)) {
             chartArray = response;
-          } else if (response && response.chart_data && Array.isArray(response.chart_data)) {
+          } else if (
+            response &&
+            response.chart_data &&
+            Array.isArray(response.chart_data)
+          ) {
             chartArray = response.chart_data;
           }
-          
+
           if (chartArray && chartArray.length > 0) {
             // Filter data by start_date and end_date
-            const filteredArray = filterDataByDateRange(chartArray, startDate, endDate);
-            console.log('Filtered chart data:', {
+            const filteredArray = filterDataByDateRange(
+              chartArray,
+              startDate,
+              endDate,
+            );
+            console.log("Filtered chart data:", {
               original: chartArray.length,
               filtered: filteredArray.length,
               startDate,
-              endDate
+              endDate,
             });
-            console.log('Chart data array sample:', filteredArray[0]);
+            console.log("Chart data array sample:", filteredArray[0]);
             data = parseHistoricalData(filteredArray, startDate, endDate);
           }
         } catch (err) {
-          console.error('Failed to fetch chart data:', err);
+          console.error("Failed to fetch chart data:", err);
         }
       }
 
@@ -227,7 +246,7 @@ export default function StockChart() {
       setChartData(data);
       setSliderPosition({ start: 0, end: 100 });
     } catch (err) {
-      console.error('Error fetching chart data:', err);
+      console.error("Error fetching chart data:", err);
       setChartData(generateMockChartData());
     } finally {
       setLoading(false);
@@ -236,14 +255,23 @@ export default function StockChart() {
 
   const formatDateForApi = (date: Date): string => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
   // Filter data array by start_date and end_date
-  const filterDataByDateRange = (dataArray: any[], startDate: string, endDate: string): any[] => {
-    if (!startDate || !endDate || !Array.isArray(dataArray) || dataArray.length === 0) {
+  const filterDataByDateRange = (
+    dataArray: any[],
+    startDate: string,
+    endDate: string,
+  ): any[] => {
+    if (
+      !startDate ||
+      !endDate ||
+      !Array.isArray(dataArray) ||
+      dataArray.length === 0
+    ) {
       return dataArray;
     }
 
@@ -255,11 +283,11 @@ export default function StockChart() {
     return dataArray.filter((item: any) => {
       const dateStr = item.Date || item.date || item.Datetime || item.datetime;
       if (!dateStr) return false;
-      
+
       // Parse date string (format: "2007-08-20" or "2007-08-20 00:00:00")
-      const itemDateStr = dateStr.split(' ')[0]; // Get date part only
+      const itemDateStr = dateStr.split(" ")[0]; // Get date part only
       const itemDate = new Date(itemDateStr);
-      
+
       // Check if date is within range (inclusive)
       return itemDate >= start && itemDate <= end;
     });
@@ -267,28 +295,39 @@ export default function StockChart() {
 
   const parseIntradayData = (apiData: any): ChartDataPoint[] => {
     const data: ChartDataPoint[] = [];
-    
+
     // Helper to parse date string like "2025-12-08 09:20:00"
     const parseDateTime = (dateStr: string): Date => {
       if (!dateStr) return new Date();
       // Replace space with T for ISO format compatibility
-      const isoStr = dateStr.replace(' ', 'T');
+      const isoStr = dateStr.replace(" ", "T");
       return new Date(isoStr);
     };
-    
+
     if (Array.isArray(apiData)) {
-      console.log('Parsing intraday data, total items:', apiData.length);
-      
+      console.log("Parsing intraday data, total items:", apiData.length);
+
       // First, map all raw data points
       apiData.forEach((item: any, idx: number) => {
-        const dateValue = item.Date || item.date || item.Time || item.time || item.Datetime || item.datetime;
+        const dateValue =
+          item.Date ||
+          item.date ||
+          item.Time ||
+          item.time ||
+          item.Datetime ||
+          item.datetime;
         const timestamp = parseDateTime(dateValue);
-        const closeValue = parseFloat(item.Close || item.close || '0');
-        
+        const closeValue = parseFloat(item.Close || item.close || "0");
+
         if (idx < 3) {
-          console.log(`Item ${idx}:`, { Date: dateValue, Close: item.Close, close: item.close, parsedClose: closeValue });
+          console.log(`Item ${idx}:`, {
+            Date: dateValue,
+            Close: item.Close,
+            close: item.close,
+            parsedClose: closeValue,
+          });
         }
-        
+
         data.push({
           x: 0, // Will be set after sorting / aggregation
           y: closeValue,
@@ -296,20 +335,20 @@ export default function StockChart() {
           high: parseFloat(item.High || item.high || closeValue.toString()),
           low: parseFloat(item.Low || item.low || closeValue.toString()),
           close: closeValue,
-          volume: parseFloat(item.Volume || item.volume || '0'),
+          volume: parseFloat(item.Volume || item.volume || "0"),
           time: timestamp,
         });
       });
-      
+
       // Sort by time to ensure correct order
       data.sort((a, b) => a.time.getTime() - b.time.getTime());
 
       // For "Today" filter, show data at 10-minute intervals with correct close values
-      if (activeFilter === 'Today') {
+      if (activeFilter === "Today") {
         // Filter to only show data points at 10-minute intervals (9:20, 9:30, 9:40, etc.)
         // and use the close value from that exact time
         const filteredData: ChartDataPoint[] = [];
-        
+
         data.forEach((point) => {
           const minutes = point.time.getMinutes();
           // Only include points where minutes are multiples of 10 (0, 10, 20, 30, 40, 50)
@@ -326,22 +365,30 @@ export default function StockChart() {
           point.x = index;
         });
 
-        console.log('Filtered 10‑minute interval points:', filteredData.slice(0, 5).map(d => ({
-          time: d.time.toLocaleTimeString(),
-          close: d.close,
-          y: d.y,
-          minutes: d.time.getMinutes()
-        })));
-        
+        console.log(
+          "Filtered 10‑minute interval points:",
+          filteredData.slice(0, 5).map((d) => ({
+            time: d.time.toLocaleTimeString(),
+            close: d.close,
+            y: d.y,
+            minutes: d.time.getMinutes(),
+          })),
+        );
+
         return filteredData;
       }
-      
+
       // Default: no aggregation, just assign x after sorting
       data.forEach((point, index) => {
         point.x = index;
       });
-      
-      console.log('Parsed data (first 3):', data.slice(0, 3).map(d => ({ time: d.time.toISOString(), y: d.y, close: d.close })));
+
+      console.log(
+        "Parsed data (first 3):",
+        data
+          .slice(0, 3)
+          .map((d) => ({ time: d.time.toISOString(), y: d.y, close: d.close })),
+      );
     }
     return data;
   };
@@ -349,22 +396,23 @@ export default function StockChart() {
   const parseHistoricalData = (
     apiData: any,
     startDate: string,
-    endDate: string
+    endDate: string,
   ): ChartDataPoint[] => {
     const data: ChartDataPoint[] = [];
     const start = new Date(startDate);
     const end = new Date(endDate);
-    
+
     // Helper to parse date string like "2025-12-08 09:20:00"
     const parseDateTime = (dateStr: string): Date => {
       if (!dateStr) return new Date();
       // Replace space with T for ISO format compatibility
-      const isoStr = dateStr.replace(' ', 'T');
+      const isoStr = dateStr.replace(" ", "T");
       return new Date(isoStr);
     };
-    
+
     if (Array.isArray(apiData)) {
-      const isDailyGrouping = activeFilter === '1 Month' || activeFilter === '5 Days';
+      const isDailyGrouping =
+        activeFilter === "1 Month" || activeFilter === "5 Days";
       if (isDailyGrouping) {
         // Group into 1-day candles for 1 Month filter
         const dayMap = new Map<
@@ -386,11 +434,11 @@ export default function StockChart() {
           if (timestamp < start || timestamp > end) return;
 
           const dayKey = timestamp.toISOString().slice(0, 10); // YYYY-MM-DD
-          const priceOpen = parseFloat(item.Open || item.open || '0');
-          const priceHigh = parseFloat(item.High || item.high || '0');
-          const priceLow = parseFloat(item.Low || item.low || '0');
-          const priceClose = parseFloat(item.Close || item.close || '0');
-          const vol = parseFloat(item.Volume || item.volume || '0');
+          const priceOpen = parseFloat(item.Open || item.open || "0");
+          const priceHigh = parseFloat(item.High || item.high || "0");
+          const priceLow = parseFloat(item.Low || item.low || "0");
+          const priceClose = parseFloat(item.Close || item.close || "0");
+          const vol = parseFloat(item.Volume || item.volume || "0");
 
           const existing = dayMap.get(dayKey);
           if (!existing) {
@@ -435,12 +483,12 @@ export default function StockChart() {
           if (timestamp >= start && timestamp <= end) {
             data.push({
               x: 0, // Will be set after sorting
-              y: parseFloat(item.Close || item.close || '0'),
-              open: parseFloat(item.Open || item.open || '0'),
-              high: parseFloat(item.High || item.high || '0'),
-              low: parseFloat(item.Low || item.low || '0'),
-              close: parseFloat(item.Close || item.close || '0'),
-              volume: parseFloat(item.Volume || item.volume || '0'),
+              y: parseFloat(item.Close || item.close || "0"),
+              open: parseFloat(item.Open || item.open || "0"),
+              high: parseFloat(item.High || item.high || "0"),
+              low: parseFloat(item.Low || item.low || "0"),
+              close: parseFloat(item.Close || item.close || "0"),
+              volume: parseFloat(item.Volume || item.volume || "0"),
               time: timestamp,
             });
           }
@@ -463,23 +511,23 @@ export default function StockChart() {
     const basePrice = 331;
     const today = new Date();
     today.setHours(9, 0, 0, 0);
-    
+
     const endTime = new Date();
     endTime.setHours(15, 30, 0, 0);
-    
+
     const totalMinutes = (endTime.getTime() - today.getTime()) / (1000 * 60);
     const points = Math.floor(totalMinutes / 5);
-    
+
     for (let i = 0; i < points; i++) {
       const variation = Math.sin(i / 15) * 3 + (Math.random() - 0.5) * 1.5;
       const timestamp = new Date(today.getTime() + i * 5 * 60 * 1000);
       const price = basePrice + variation;
-      
+
       const open = price + (Math.random() - 0.5) * 0.5;
       const close = price + (Math.random() - 0.5) * 0.5;
       const high = Math.max(open, close) + Math.random() * 0.5;
       const low = Math.min(open, close) - Math.random() * 0.5;
-      
+
       data.push({
         x: i,
         y: price,
@@ -499,48 +547,65 @@ export default function StockChart() {
   const endIdx = Math.ceil((sliderPosition.end / 100) * chartData.length);
   const visibleData = chartData.slice(startIdx, endIdx || chartData.length);
 
-  const maxPrice = visibleData.length > 0 ? Math.max(...visibleData.map(d => chartType === 'candle' ? (d.high || d.y) : d.y)) : 340;
-  const minPrice = visibleData.length > 0 ? Math.min(...visibleData.map(d => chartType === 'candle' ? (d.low || d.y) : d.y)) : 330;
+  const maxPrice =
+    visibleData.length > 0
+      ? Math.max(
+          ...visibleData.map((d) =>
+            chartType === "candle" ? d.high || d.y : d.y,
+          ),
+        )
+      : 340;
+  const minPrice =
+    visibleData.length > 0
+      ? Math.min(
+          ...visibleData.map((d) =>
+            chartType === "candle" ? d.low || d.y : d.y,
+          ),
+        )
+      : 330;
   const priceRange = maxPrice - minPrice || 1;
-  const maxVolume = visibleData.length > 0 ? Math.max(...visibleData.map(d => d.volume)) : 10000;
+  const maxVolume =
+    visibleData.length > 0
+      ? Math.max(...visibleData.map((d) => d.volume))
+      : 10000;
 
   // Adjust chart heights slightly for short ranges like 5 Days
-  const isFiveDays = activeFilter === '5 Days';
+  const isFiveDays = activeFilter === "5 Days";
   const priceChartHeight = isFiveDays ? 260 : 300;
   const volumeChartHeight = isFiveDays ? 80 : 100;
 
   // Format time for display (HH:MM format)
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
     });
   };
 
   // Format date for general display (DD/MM/YYYY format)
   const formatDisplayDate = (date: Date) => {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
 
   // Format date specifically for X-axis labels based on active filter
   const formatXAxisLabel = (date: Date): string => {
-    const monthShort = date.toLocaleString('en-US', { month: 'short' }); // Jan, Feb, ...
+    const monthShort = date.toLocaleString("en-US", { month: "short" }); // Jan, Feb, ...
     const monthShortUpper = monthShort.toUpperCase(); // JAN, FEB, ...
-    const day = String(date.getDate()).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
     const year = date.getFullYear();
 
     switch (activeFilter) {
       // Show day-level labels: "DEC 15"
-      case '5 Days':
-      case '1 Month':
+      case "5 Days":
+      case "1 Month":
         return `${monthShortUpper} ${day}`;
 
       // Custom range: if within ~1 month, also show day-level labels
-      case 'Custom': {
+      case "Custom": {
         if (fromDate && toDate) {
           const from = new Date(fromDate);
           const to = new Date(toDate);
@@ -555,14 +620,14 @@ export default function StockChart() {
       }
 
       // Show month-level labels: "Jan", "Feb", "Mar"
-      case '3 Months':
-      case '6 Months':
-      case '1 Year':
+      case "3 Months":
+      case "6 Months":
+      case "1 Year":
         return monthShort;
 
       // Show year + month for January, and month only for others:
       // e.g., "Jan 2023, Jul, Jan 2024, Jul, Jan 2025, Jul"
-      case '3 Years':
+      case "3 Years":
         if (date.getMonth() === 0) {
           // January
           return `${monthShort} ${year}`;
@@ -579,7 +644,7 @@ export default function StockChart() {
   // if the same month appears more than once in the same year, we also show the day.
   const finalizeTimeLabels = (
     raw: { date: Date; position: number }[],
-    useTimeOnly: boolean
+    useTimeOnly: boolean,
   ): { time: string; position: number }[] => {
     if (raw.length === 0) return [];
 
@@ -602,9 +667,9 @@ export default function StockChart() {
         if (count > 1) {
           // If the same month appears multiple times in this year, include the day as well: "DEC 16"
           const monthShortUpper = date
-            .toLocaleString('en-US', { month: 'short' })
+            .toLocaleString("en-US", { month: "short" })
             .toUpperCase();
-          const day = String(date.getDate()).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, "0");
           label = `${monthShortUpper} ${day}`;
         } else {
           // Normal behavior based on active filter
@@ -620,29 +685,29 @@ export default function StockChart() {
   const getFilterStartDate = (): Date => {
     const startDate = new Date();
     switch (activeFilter) {
-      case '5 Days':
+      case "5 Days":
         startDate.setDate(startDate.getDate() - 5);
         break;
-      case '1 Month':
+      case "1 Month":
         startDate.setMonth(startDate.getMonth() - 1);
         break;
-      case '3 Months':
+      case "3 Months":
         startDate.setMonth(startDate.getMonth() - 3);
         break;
-      case '6 Months':
+      case "6 Months":
         startDate.setMonth(startDate.getMonth() - 6);
         break;
-      case '1 Year':
+      case "1 Year":
         startDate.setFullYear(startDate.getFullYear() - 1);
         break;
-      case '3 Years':
+      case "3 Years":
         startDate.setFullYear(startDate.getFullYear() - 3);
         break;
-      case 'YTD':
+      case "YTD":
         startDate.setMonth(0);
         startDate.setDate(1);
         break;
-      case 'MAX':
+      case "MAX":
         startDate.setFullYear(startDate.getFullYear() - 10);
         break;
     }
@@ -652,23 +717,26 @@ export default function StockChart() {
   // Get display date based on filter
   const getFilterDateDisplay = (): string => {
     const today = new Date();
-    
-    if (activeFilter === 'Today') {
+
+    if (activeFilter === "Today") {
       return formatDisplayDate(today);
     }
-    
+
     if (showCustomFilter && fromDate && toDate) {
       const from = new Date(fromDate);
       const to = new Date(toDate);
       return `${formatDisplayDate(from)} - ${formatDisplayDate(to)}`;
     }
-    
+
     const startDate = getFilterStartDate();
-    
+
     return `${formatDisplayDate(startDate)} - ${formatDisplayDate(today)}`;
   };
 
-  const handleMouseDown = (e: React.MouseEvent, type: 'start' | 'end' | 'middle') => {
+  const handleMouseDown = (
+    e: React.MouseEvent,
+    type: "start" | "end" | "middle",
+  ) => {
     e.preventDefault();
     setIsDragging(type);
   };
@@ -680,22 +748,25 @@ export default function StockChart() {
     const x = e.clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
 
-    if (isDragging === 'start') {
-      setSliderPosition(prev => ({
+    if (isDragging === "start") {
+      setSliderPosition((prev) => ({
         ...prev,
-        start: Math.min(percentage, prev.end - 5)
+        start: Math.min(percentage, prev.end - 5),
       }));
-    } else if (isDragging === 'end') {
-      setSliderPosition(prev => ({
+    } else if (isDragging === "end") {
+      setSliderPosition((prev) => ({
         ...prev,
-        end: Math.max(percentage, prev.start + 5)
+        end: Math.max(percentage, prev.start + 5),
       }));
-    } else if (isDragging === 'middle') {
+    } else if (isDragging === "middle") {
       const width = sliderPosition.end - sliderPosition.start;
-      const newStart = Math.max(0, Math.min(100 - width, percentage - width / 2));
+      const newStart = Math.max(
+        0,
+        Math.min(100 - width, percentage - width / 2),
+      );
       setSliderPosition({
         start: newStart,
-        end: newStart + width
+        end: newStart + width,
       });
     }
   };
@@ -704,26 +775,32 @@ export default function StockChart() {
     setIsDragging(null);
   };
 
-  const handleChartMouseMove = (e: React.MouseEvent, chartRef: React.RefObject<HTMLDivElement | null>) => {
+  const handleChartMouseMove = (
+    e: React.MouseEvent,
+    chartRef: React.RefObject<HTMLDivElement | null>,
+  ) => {
     if (!chartRef.current || visibleData.length === 0) return;
-    
+
     const rect = chartRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     // Chart area: left margin is ~5%, right extends to ~100%
     const chartLeftMargin = rect.width * 0.05;
     const chartWidth = rect.width * 0.95;
-    
+
     if (x < chartLeftMargin) {
       setHoveredIndex(null);
       return;
     }
-    
+
     const relativeX = (x - chartLeftMargin) / chartWidth;
     const dataIndex = Math.round(relativeX * (visibleData.length - 1));
-    const clampedIndex = Math.max(0, Math.min(visibleData.length - 1, dataIndex));
-    
+    const clampedIndex = Math.max(
+      0,
+      Math.min(visibleData.length - 1, dataIndex),
+    );
+
     setHoveredIndex(clampedIndex);
     setMousePos({ x, y });
   };
@@ -734,32 +811,41 @@ export default function StockChart() {
 
   const getFilterLabel = (filter: string): string => {
     if (!settings) return filter;
-    
+
     const filterMap: { [key: string]: string } = {
-      'Today': settings.filterToday || 'Today',
-      '5 Days': settings.filter5Days || '5 Days',
-      '1 Month': settings.filter1Month || '1 Month',
-      '3 Months': settings.filter3Months || '3 Months',
-      '6 Months': settings.filter6Months || '6 Months',
-      '1 Year': settings.filter1Year || '1 Year',
-      '3 Years': settings.filter3Years || '3 Years',
-      'YTD': settings.filterYTD || 'YTD',
-      'MAX': settings.filterMAX || 'MAX',
-      'Custom': settings.filterCustom || 'Custom',
+      Today: settings.filterToday || "Today",
+      "5 Days": settings.filter5Days || "5 Days",
+      "1 Month": settings.filter1Month || "1 Month",
+      "3 Months": settings.filter3Months || "3 Months",
+      "6 Months": settings.filter6Months || "6 Months",
+      "1 Year": settings.filter1Year || "1 Year",
+      "3 Years": settings.filter3Years || "3 Years",
+      YTD: settings.filterYTD || "YTD",
+      MAX: settings.filterMAX || "MAX",
+      Custom: settings.filterCustom || "Custom",
     };
-    
+
     return filterMap[filter] || filter;
   };
 
-  const filters = ['Today', '5 Days', '1 Month', '3 Months', '6 Months', '1 Year', '3 Years', 'Custom'];
+  const filters = [
+    "Today",
+    "5 Days",
+    "1 Month",
+    "3 Months",
+    "6 Months",
+    "1 Year",
+    "3 Years",
+    "Custom",
+  ];
 
   // Generate time/date labels for X-axis based on active filter
   const getTimeLabels = () => {
     if (visibleData.length === 0) return [];
-    
+
     // We'll first collect raw date + position, then decide label text
     const rawLabels: { date: Date; position: number }[] = [];
-    const useTimeOnly = activeFilter === 'Today';
+    const useTimeOnly = activeFilter === "Today";
     const startTime = visibleData[0].time.getTime();
     const endTime = visibleData[visibleData.length - 1].time.getTime();
     const totalRange = Math.max(1, endTime - startTime);
@@ -772,18 +858,24 @@ export default function StockChart() {
     };
 
     // Special handling for 3 Months: show exactly 3 month labels (start/mid/end months)
-    if (activeFilter === '3 Months' && !useTimeOnly) {
+    if (activeFilter === "3 Months" && !useTimeOnly) {
       const startDate = new Date(visibleData[0].time);
       const labelDates: Date[] = [];
 
       // First month (start)
-      labelDates.push(new Date(startDate.getFullYear(), startDate.getMonth(), 1));
+      labelDates.push(
+        new Date(startDate.getFullYear(), startDate.getMonth(), 1),
+      );
 
       // Middle month (start month + 1)
-      labelDates.push(new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1));
+      labelDates.push(
+        new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1),
+      );
 
       // Last month (start month + 2)
-      labelDates.push(new Date(startDate.getFullYear(), startDate.getMonth() + 2, 1));
+      labelDates.push(
+        new Date(startDate.getFullYear(), startDate.getMonth() + 2, 1),
+      );
 
       labelDates.forEach((d) => {
         rawLabels.push({
@@ -797,7 +889,7 @@ export default function StockChart() {
     }
 
     // Special handling for 3 Years: show a few month markers per year (Jan with year, Apr, Sep)
-    if (activeFilter === '3 Years' && !useTimeOnly) {
+    if (activeFilter === "3 Years" && !useTimeOnly) {
       const startDate = new Date(visibleData[0].time);
       const endDate = new Date(visibleData[visibleData.length - 1].time);
       const startYear = startDate.getFullYear();
@@ -823,19 +915,19 @@ export default function StockChart() {
     // Default behaviour: sample visible data points evenly
     const baseLabelCount = 6;
     const step = Math.max(1, Math.floor(visibleData.length / baseLabelCount));
-    
+
     for (let i = 0; i < visibleData.length; i += step) {
       rawLabels.push({
         date: visibleData[i].time,
-        position: (i / (visibleData.length - 1)) * 100
+        position: (i / (visibleData.length - 1)) * 100,
       });
     }
-    
+
     // Always include last point
     if (rawLabels.length > 0 && rawLabels[rawLabels.length - 1].position < 95) {
       rawLabels.push({
         date: visibleData[visibleData.length - 1].time,
-        position: 100
+        position: 100,
       });
     }
 
@@ -844,11 +936,11 @@ export default function StockChart() {
 
   useEffect(() => {
     if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
       return () => {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('mouseup', handleMouseUp);
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mouseup", handleMouseUp);
       };
     }
   }, [isDragging, sliderPosition]);
@@ -878,31 +970,31 @@ export default function StockChart() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-black uppercase tracking-wider">
-            {settings.title || 'STOCK CHART'}
+            {settings.title || "STOCK CHART"}
           </h2>
         </div>
 
         {/* Exchange Tabs (BSE / NSE) - placed above filters */}
         <div className="flex items-center gap-3 mb-2">
           <button
-            onClick={() => setActiveExchange('BSE')}
+            onClick={() => setActiveExchange("BSE")}
             disabled={loading}
             className={`px-6 py-2 font-semibold text-sm rounded ${
-              activeExchange === 'BSE'
-                ? 'bg-[#7dc244] text-white'
-                : 'bg-white text-black border border-gray-300 hover:bg-gray-100'
-            } ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              activeExchange === "BSE"
+                ? "bg-[#7dc244] text-white"
+                : "bg-white text-black border border-gray-300 hover:bg-gray-100"
+            } ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
             BSE
           </button>
           <button
-            onClick={() => setActiveExchange('NSE')}
+            onClick={() => setActiveExchange("NSE")}
             disabled={loading}
             className={`px-6 py-2 font-semibold text-sm rounded ${
-              activeExchange === 'NSE'
-                ? 'bg-[#7dc244] text-white'
-                : 'bg-white text-black border border-gray-300 hover:bg-gray-100'
-            } ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              activeExchange === "NSE"
+                ? "bg-[#7dc244] text-white"
+                : "bg-white text-black border border-gray-300 hover:bg-gray-100"
+            } ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
             NSE
           </button>
@@ -918,7 +1010,7 @@ export default function StockChart() {
               key={filter}
               onClick={() => {
                 if (loading) return;
-                if (filter === 'Custom') {
+                if (filter === "Custom") {
                   // When opening Custom, default to previous filter's start date and today's date
                   if (!fromDate) {
                     const start = getFilterStartDate();
@@ -928,7 +1020,7 @@ export default function StockChart() {
                     const todayStr = formatDateForApi(new Date());
                     setToDate(todayStr);
                   }
-                  setActiveFilter('Custom');
+                  setActiveFilter("Custom");
                   setShowCustomFilter(true);
                 } else {
                   setActiveFilter(filter);
@@ -937,14 +1029,13 @@ export default function StockChart() {
               }}
               disabled={loading}
               className={`px-4 py-2 font-medium transition-all whitespace-nowrap ${
-                loading
-                  ? 'opacity-50 cursor-not-allowed'
-                  : 'cursor-pointer'
+                loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
               } ${
-                (activeFilter === filter && filter !== 'Custom') || (filter === 'Custom' && showCustomFilter)
-                  ? 'bg-white text-black'
-                  : 'text-white hover:bg-gray-800'
-              } ${index > 0 ? 'border-l border-white' : ''}`}
+                (activeFilter === filter && filter !== "Custom") ||
+                (filter === "Custom" && showCustomFilter)
+                  ? "bg-white text-black"
+                  : "text-white hover:bg-gray-800"
+              } ${index > 0 ? "border-l border-white" : ""}`}
             >
               {getFilterLabel(filter)}
             </button>
@@ -970,8 +1061,13 @@ export default function StockChart() {
                     setFromDate(newFrom);
                   }
                   // Automatically update chart when both dates are set and valid
-                  if (newFrom && toDate && newFrom <= toDate && toDate <= todayStr) {
-                    setActiveFilter('Custom');
+                  if (
+                    newFrom &&
+                    toDate &&
+                    newFrom <= toDate &&
+                    toDate <= todayStr
+                  ) {
+                    setActiveFilter("Custom");
                   }
                 }}
                 className="px-3 py-2 border border-gray-300 rounded text-sm"
@@ -985,7 +1081,7 @@ export default function StockChart() {
                 max={formatDateForApi(new Date())}
                 onChange={(e) => {
                   const todayStr = formatDateForApi(new Date());
-                  let newTo = e.target.value || '';
+                  let newTo = e.target.value || "";
                   // Prevent selecting future dates
                   if (newTo > todayStr) {
                     newTo = todayStr;
@@ -996,8 +1092,13 @@ export default function StockChart() {
                   }
                   setToDate(newTo);
                   // Automatically update chart when both dates are set and valid
-                  if (fromDate && newTo && fromDate <= newTo && newTo <= todayStr) {
-                    setActiveFilter('Custom');
+                  if (
+                    fromDate &&
+                    newTo &&
+                    fromDate <= newTo &&
+                    newTo <= todayStr
+                  ) {
+                    setActiveFilter("Custom");
                   }
                 }}
                 className="px-3 py-2 border border-gray-300 rounded text-sm"
@@ -1019,10 +1120,14 @@ export default function StockChart() {
 
           {/* Date and Chart Type Selector */}
           <div className="px-6 py-3 flex items-center justify-between border-b border-gray-200">
-            <p className="text-sm text-gray-700 font-medium">{getFilterDateDisplay()}</p>
+            <p className="text-sm text-gray-700 font-medium">
+              {getFilterDateDisplay()}
+            </p>
             <select
               value={chartType}
-              onChange={(e) => setChartType(e.target.value as 'line' | 'candle')}
+              onChange={(e) =>
+                setChartType(e.target.value as "line" | "candle")
+              }
               className="px-4 py-2 border border-gray-300 rounded text-sm cursor-pointer bg-white"
             >
               <option value="line">Line</option>
@@ -1031,7 +1136,7 @@ export default function StockChart() {
           </div>
 
           {/* Main Price Chart */}
-          <div 
+          <div
             ref={priceChartRef}
             className="relative bg-[#f5f5f5] cursor-crosshair"
             style={{ height: `${priceChartHeight}px` }}
@@ -1043,14 +1148,22 @@ export default function StockChart() {
               {[0, 1, 2, 3, 4].map((i) => {
                 const value = maxPrice - (priceRange / 4) * i;
                 return (
-                  <span key={i} className="text-right pr-2">{value.toFixed(0)}</span>
+                  <span key={i} className="text-right pr-2">
+                    {value.toFixed(0)}
+                  </span>
                 );
               })}
             </div>
 
             {/* Chart Area */}
             <div className="absolute left-12 right-0 top-0 bottom-0">
-              <svg width="100%" height="100%" viewBox="0 0 1000 300" preserveAspectRatio="none" className="overflow-visible">
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 1000 300"
+                preserveAspectRatio="none"
+                className="overflow-visible"
+              >
                 {/* Grid lines */}
                 {[0, 1, 2, 3, 4].map((i) => (
                   <line
@@ -1065,28 +1178,36 @@ export default function StockChart() {
                   />
                 ))}
 
-                {chartType === 'line' ? (
+                {chartType === "line" ? (
                   <>
                     {/* Line chart */}
                     <polyline
                       points={visibleData
                         .map((point, i) => {
-                          const x = (i / Math.max(1, visibleData.length - 1)) * 1000;
+                          const x =
+                            (i / Math.max(1, visibleData.length - 1)) * 1000;
                           const y = ((maxPrice - point.y) / priceRange) * 300;
                           return `${x},${y}`;
                         })
-                        .join(' ')}
+                        .join(" ")}
                       fill="none"
                       stroke="#2196F3"
                       strokeWidth="2"
                       vectorEffect="non-scaling-stroke"
                     />
-                    
+
                     {/* Hover point circle */}
                     {hoveredIndex !== null && visibleData[hoveredIndex] && (
                       <circle
-                        cx={(hoveredIndex / Math.max(1, visibleData.length - 1)) * 1000}
-                        cy={((maxPrice - visibleData[hoveredIndex].y) / priceRange) * 300}
+                        cx={
+                          (hoveredIndex / Math.max(1, visibleData.length - 1)) *
+                          1000
+                        }
+                        cy={
+                          ((maxPrice - visibleData[hoveredIndex].y) /
+                            priceRange) *
+                          300
+                        }
                         r="6"
                         fill="#2196F3"
                         stroke="#fff"
@@ -1099,21 +1220,34 @@ export default function StockChart() {
                   <>
                     {/* Candle chart */}
                     {visibleData.map((point, i) => {
-                      const x = (i / Math.max(1, visibleData.length - 1)) * 1000;
+                      const x =
+                        (i / Math.max(1, visibleData.length - 1)) * 1000;
                       // Make 5 Days candles slimmer so they don't look oversized
                       const baseWidth = 800 / Math.max(1, visibleData.length);
                       const maxWidth = isFiveDays ? 40 : 80;
-                      const candleWidth = Math.max(3, Math.min(baseWidth, maxWidth));
-                      
-                      const highY = ((maxPrice - (point.high || point.y)) / priceRange) * 300;
-                      const lowY = ((maxPrice - (point.low || point.y)) / priceRange) * 300;
-                      const openY = ((maxPrice - (point.open || point.y)) / priceRange) * 300;
-                      const closeY = ((maxPrice - (point.close || point.y)) / priceRange) * 300;
-                      
-                      const isGreen = (point.close || point.y) >= (point.open || point.y);
+                      const candleWidth = Math.max(
+                        3,
+                        Math.min(baseWidth, maxWidth),
+                      );
+
+                      const highY =
+                        ((maxPrice - (point.high || point.y)) / priceRange) *
+                        300;
+                      const lowY =
+                        ((maxPrice - (point.low || point.y)) / priceRange) *
+                        300;
+                      const openY =
+                        ((maxPrice - (point.open || point.y)) / priceRange) *
+                        300;
+                      const closeY =
+                        ((maxPrice - (point.close || point.y)) / priceRange) *
+                        300;
+
+                      const isGreen =
+                        (point.close || point.y) >= (point.open || point.y);
                       const bodyTop = Math.min(openY, closeY);
                       const bodyHeight = Math.abs(closeY - openY);
-                      
+
                       return (
                         <g key={i}>
                           <line
@@ -1142,9 +1276,15 @@ export default function StockChart() {
                   <>
                     {/* Vertical line */}
                     <line
-                      x1={(hoveredIndex / Math.max(1, visibleData.length - 1)) * 1000}
+                      x1={
+                        (hoveredIndex / Math.max(1, visibleData.length - 1)) *
+                        1000
+                      }
                       y1="0"
-                      x2={(hoveredIndex / Math.max(1, visibleData.length - 1)) * 1000}
+                      x2={
+                        (hoveredIndex / Math.max(1, visibleData.length - 1)) *
+                        1000
+                      }
                       y2="300"
                       stroke="#9ca3af"
                       strokeWidth="1"
@@ -1154,9 +1294,17 @@ export default function StockChart() {
                     {/* Horizontal line */}
                     <line
                       x1="0"
-                      y1={((maxPrice - visibleData[hoveredIndex].y) / priceRange) * 300}
+                      y1={
+                        ((maxPrice - visibleData[hoveredIndex].y) /
+                          priceRange) *
+                        300
+                      }
                       x2="1000"
-                      y2={((maxPrice - visibleData[hoveredIndex].y) / priceRange) * 300}
+                      y2={
+                        ((maxPrice - visibleData[hoveredIndex].y) /
+                          priceRange) *
+                        300
+                      }
                       stroke="#9ca3af"
                       strokeWidth="1"
                       strokeDasharray="4,4"
@@ -1168,61 +1316,65 @@ export default function StockChart() {
             </div>
 
             {/* Tooltip */}
-            {hoveredIndex !== null && visibleData[hoveredIndex] && (() => {
-              const point = visibleData[hoveredIndex];
-              return (
-                <div 
-                  className="absolute bg-[#1a237e] text-white px-3 py-2 rounded shadow-lg text-sm pointer-events-none z-20"
-                  style={{
-                    left: mousePos.x > (priceChartRef.current?.clientWidth || 0) / 2 
-                      ? `${mousePos.x - 170}px` 
-                      : `${mousePos.x + 20}px`,
-                    top: `${Math.min(mousePos.y, 220)}px`,
-                  }}
-                >
-                  <div className="whitespace-nowrap">
-                    <span className="text-gray-300">Date:</span>{' '}
-                    {formatDisplayDate(point.time)}
-                  </div>
-                  {activeFilter === 'Today' && (
+            {hoveredIndex !== null &&
+              visibleData[hoveredIndex] &&
+              (() => {
+                const point = visibleData[hoveredIndex];
+                return (
+                  <div
+                    className="absolute bg-[#1a237e] text-white px-3 py-2 rounded shadow-lg text-sm pointer-events-none z-20"
+                    style={{
+                      left:
+                        mousePos.x >
+                        (priceChartRef.current?.clientWidth || 0) / 2
+                          ? `${mousePos.x - 170}px`
+                          : `${mousePos.x + 20}px`,
+                      top: `${Math.min(mousePos.y, 220)}px`,
+                    }}
+                  >
                     <div className="whitespace-nowrap">
-                      <span className="text-gray-300">Time:</span>{' '}
-                      {formatTime(point.time)}
+                      <span className="text-gray-300">Date:</span>{" "}
+                      {formatDisplayDate(point.time)}
                     </div>
-                  )}
+                    {activeFilter === "Today" && (
+                      <div className="whitespace-nowrap">
+                        <span className="text-gray-300">Time:</span>{" "}
+                        {formatTime(point.time)}
+                      </div>
+                    )}
 
-                  {chartType === 'candle' ? (
-                    <>
+                    {chartType === "candle" ? (
+                      <>
+                        <div className="whitespace-nowrap">
+                          <span className="text-gray-300">open:</span>{" "}
+                          {(point.open ?? point.y).toFixed(2)}
+                        </div>
+                        <div className="whitespace-nowrap">
+                          <span className="text-gray-300">low:</span>{" "}
+                          {(point.low ?? point.y).toFixed(2)}
+                        </div>
+                        <div className="whitespace-nowrap">
+                          <span className="text-gray-300">high:</span>{" "}
+                          {(point.high ?? point.y).toFixed(2)}
+                        </div>
+                        <div className="whitespace-nowrap">
+                          <span className="text-gray-300">close:</span>{" "}
+                          {(point.close ?? point.y).toFixed(2)}
+                        </div>
+                      </>
+                    ) : (
                       <div className="whitespace-nowrap">
-                        <span className="text-gray-300">open:</span>{' '}
-                        {(point.open ?? point.y).toFixed(2)}
+                        <span className="text-gray-300">Price:</span>{" "}
+                        {point.y.toFixed(2)}
                       </div>
-                      <div className="whitespace-nowrap">
-                        <span className="text-gray-300">low:</span>{' '}
-                        {(point.low ?? point.y).toFixed(2)}
-                      </div>
-                      <div className="whitespace-nowrap">
-                        <span className="text-gray-300">high:</span>{' '}
-                        {(point.high ?? point.y).toFixed(2)}
-                      </div>
-                      <div className="whitespace-nowrap">
-                        <span className="text-gray-300">close:</span>{' '}
-                        {(point.close ?? point.y).toFixed(2)}
-                      </div>
-                    </>
-                  ) : (
-                    <div className="whitespace-nowrap">
-                      <span className="text-gray-300">Price:</span>{' '}
-                      {point.y.toFixed(2)}
-                    </div>
-                  )}
-                </div>
-              );
-            })()}
+                    )}
+                  </div>
+                );
+              })()}
           </div>
 
           {/* Volume Chart */}
-          <div 
+          <div
             ref={volumeChartRef}
             className="relative bg-[#f5f5f5] border-t border-gray-300 cursor-crosshair"
             style={{ height: `${volumeChartHeight}px` }}
@@ -1231,20 +1383,33 @@ export default function StockChart() {
           >
             {/* Y-axis labels for volume */}
             <div className="absolute left-0 top-0 bottom-0 w-12 flex flex-col justify-between py-2 text-xs text-gray-600">
-              <span className="text-right pr-2">{maxVolume >= 1000 ? `${(maxVolume / 1000).toFixed(0)},000` : maxVolume.toFixed(0)}</span>
-              <span className="text-right pr-2">{maxVolume >= 1000 ? `${(maxVolume / 2000).toFixed(0)},000` : (maxVolume / 2).toFixed(0)}</span>
+              <span className="text-right pr-2">
+                {maxVolume >= 1000
+                  ? `${(maxVolume / 1000).toFixed(0)},000`
+                  : maxVolume.toFixed(0)}
+              </span>
+              <span className="text-right pr-2">
+                {maxVolume >= 1000
+                  ? `${(maxVolume / 2000).toFixed(0)},000`
+                  : (maxVolume / 2).toFixed(0)}
+              </span>
               <span className="text-right pr-2">0</span>
             </div>
 
             {/* Volume bars */}
             <div className="absolute left-12 right-0 top-0 bottom-6">
-              <svg width="100%" height="100%" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 1000 100"
+                preserveAspectRatio="none"
+              >
                 {visibleData.map((point, i) => {
                   const x = (i / Math.max(1, visibleData.length - 1)) * 1000;
                   const barWidth = Math.max(3, 800 / visibleData.length);
                   const barHeight = (point.volume / maxVolume) * 100;
                   const isHovered = hoveredIndex === i;
-                  
+
                   return (
                     <rect
                       key={i}
@@ -1256,13 +1421,19 @@ export default function StockChart() {
                     />
                   );
                 })}
-                
+
                 {/* Crosshair vertical line on volume chart */}
                 {hoveredIndex !== null && (
                   <line
-                    x1={(hoveredIndex / Math.max(1, visibleData.length - 1)) * 1000}
+                    x1={
+                      (hoveredIndex / Math.max(1, visibleData.length - 1)) *
+                      1000
+                    }
                     y1="0"
-                    x2={(hoveredIndex / Math.max(1, visibleData.length - 1)) * 1000}
+                    x2={
+                      (hoveredIndex / Math.max(1, visibleData.length - 1)) *
+                      1000
+                    }
                     y2="100"
                     stroke="#9ca3af"
                     strokeWidth="1"
@@ -1275,12 +1446,12 @@ export default function StockChart() {
 
             {/* Volume value indicator */}
             {hoveredIndex !== null && visibleData[hoveredIndex] && (
-              <div 
+              <div
                 className="absolute bg-[#1a237e] text-white px-2 py-1 rounded text-xs pointer-events-none z-10"
                 style={{
                   left: `${12 + (hoveredIndex / Math.max(1, visibleData.length - 1)) * (volumeChartRef.current?.clientWidth ? volumeChartRef.current.clientWidth - 48 : 0)}px`,
-                  bottom: '28px',
-                  transform: 'translateX(-50%)',
+                  bottom: "28px",
+                  transform: "translateX(-50%)",
                 }}
               >
                 {visibleData[hoveredIndex].volume.toLocaleString()}
@@ -1290,7 +1461,14 @@ export default function StockChart() {
             {/* Time axis labels */}
             <div className="absolute left-12 right-0 bottom-0 h-6 flex items-center justify-between px-2 text-xs text-gray-600">
               {timeLabels.map((label, i) => (
-                <span key={i} style={{ position: 'absolute', left: `${label.position}%`, transform: 'translateX(-50%)' }}>
+                <span
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    left: `${label.position}%`,
+                    transform: "translateX(-50%)",
+                  }}
+                >
                   {label.time}
                 </span>
               ))}
@@ -1298,12 +1476,12 @@ export default function StockChart() {
 
             {/* Hovered time indicator */}
             {hoveredIndex !== null && visibleData[hoveredIndex] && (
-              <div 
+              <div
                 className="absolute bg-[#1a237e] text-white px-2 py-1 rounded text-xs pointer-events-none z-10"
                 style={{
                   left: `${12 + (hoveredIndex / Math.max(1, visibleData.length - 1)) * (volumeChartRef.current?.clientWidth ? volumeChartRef.current.clientWidth - 48 : 0)}px`,
-                  bottom: '0px',
-                  transform: 'translateX(-50%)',
+                  bottom: "0px",
+                  transform: "translateX(-50%)",
                 }}
               >
                 {formatTime(visibleData[hoveredIndex].time)}
@@ -1316,18 +1494,26 @@ export default function StockChart() {
             <div className="relative h-[60px] bg-gray-100 border-t border-gray-300">
               <div ref={sliderRef} className="relative h-full px-2 py-2">
                 {/* Mini chart */}
-                <svg width="100%" height="100%" viewBox="0 0 1000 40" preserveAspectRatio="none" className="absolute inset-0 px-2 py-2">
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 1000 40"
+                  preserveAspectRatio="none"
+                  className="absolute inset-0 px-2 py-2"
+                >
                   <polyline
                     points={chartData
                       .map((point, i) => {
-                        const x = (i / Math.max(1, chartData.length - 1)) * 1000;
-                        const allMax = Math.max(...chartData.map(d => d.y));
-                        const allMin = Math.min(...chartData.map(d => d.y));
+                        const x =
+                          (i / Math.max(1, chartData.length - 1)) * 1000;
+                        const allMax = Math.max(...chartData.map((d) => d.y));
+                        const allMin = Math.min(...chartData.map((d) => d.y));
                         const allRange = allMax - allMin || 1;
-                        const y = 5 + (35 - ((point.y - allMin) / allRange) * 30);
+                        const y =
+                          5 + (35 - ((point.y - allMin) / allRange) * 30);
                         return `${x},${y}`;
                       })
-                      .join(' ')}
+                      .join(" ")}
                     fill="none"
                     stroke="#9ca3af"
                     strokeWidth="1"
@@ -1337,40 +1523,40 @@ export default function StockChart() {
                 {/* Slider overlay */}
                 <div className="absolute inset-x-2 top-2 bottom-2 flex items-stretch">
                   {/* Left gray area */}
-                  <div 
+                  <div
                     className="absolute top-0 bottom-0 left-0 bg-gray-400 opacity-40"
                     style={{ width: `${sliderPosition.start}%` }}
                   />
-                  
+
                   {/* Selected area with handles */}
-                  <div 
+                  <div
                     className="absolute top-0 bottom-0 border-2 border-blue-500 cursor-move bg-blue-500 bg-opacity-10"
-                    style={{ 
-                      left: `${sliderPosition.start}%`, 
-                      width: `${sliderPosition.end - sliderPosition.start}%` 
+                    style={{
+                      left: `${sliderPosition.start}%`,
+                      width: `${sliderPosition.end - sliderPosition.start}%`,
                     }}
-                    onMouseDown={(e) => handleMouseDown(e, 'middle')}
+                    onMouseDown={(e) => handleMouseDown(e, "middle")}
                   >
                     {/* Left handle */}
-                    <div 
+                    <div
                       className="absolute top-0 bottom-0 left-0 w-2 bg-blue-500 cursor-ew-resize hover:bg-blue-600"
                       onMouseDown={(e) => {
                         e.stopPropagation();
-                        handleMouseDown(e, 'start');
+                        handleMouseDown(e, "start");
                       }}
                     />
                     {/* Right handle */}
-                    <div 
+                    <div
                       className="absolute top-0 bottom-0 right-0 w-2 bg-blue-500 cursor-ew-resize hover:bg-blue-600"
                       onMouseDown={(e) => {
                         e.stopPropagation();
-                        handleMouseDown(e, 'end');
+                        handleMouseDown(e, "end");
                       }}
                     />
                   </div>
 
                   {/* Right gray area */}
-                  <div 
+                  <div
                     className="absolute top-0 bottom-0 right-0 bg-gray-400 opacity-40"
                     style={{ width: `${100 - sliderPosition.end}%` }}
                   />
@@ -1379,8 +1565,14 @@ export default function StockChart() {
                 {/* Time labels for slider */}
                 <div className="absolute bottom-0 left-2 right-2 flex justify-between text-xs text-gray-500">
                   <span>{formatTime(chartData[0].time)}</span>
-                  <span>{formatTime(chartData[Math.floor(chartData.length / 2)].time)}</span>
-                  <span>{formatTime(chartData[chartData.length - 1].time)}</span>
+                  <span>
+                    {formatTime(
+                      chartData[Math.floor(chartData.length / 2)].time,
+                    )}
+                  </span>
+                  <span>
+                    {formatTime(chartData[chartData.length - 1].time)}
+                  </span>
                 </div>
               </div>
             </div>
