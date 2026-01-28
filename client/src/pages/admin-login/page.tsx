@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '@/services/api';
 
 const AdminLoginPage = () => {
   const navigate = useNavigate();
@@ -15,18 +16,18 @@ const AdminLoginPage = () => {
     setError('');
     setIsLoading(true);
 
-    // Simple validation - you can replace this with actual authentication
-    if (formData.email === 'admin@rril.com' && formData.password === 'admin123') {
-      // Store authentication token
+    try {
+      const res = await login(formData.email, formData.password);
+      localStorage.setItem('auth_token', res.token);
       localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('adminEmail', formData.email);
-      
-      // Navigate to dashboard
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 500);
-    } else {
-      setError('Invalid email or password');
+      localStorage.setItem('adminEmail', res.user.email);
+      if (res.user.name) {
+        localStorage.setItem('adminName', res.user.name);
+      }
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Invalid email or password');
+    } finally {
       setIsLoading(false);
     }
   };
@@ -136,15 +137,6 @@ const AdminLoginPage = () => {
               )}
             </button>
           </form>
-
-          {/* Demo Credentials */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <p className="text-xs text-gray-500 text-center mb-2">Demo Credentials:</p>
-            <div className="bg-gray-50 rounded-lg p-3 text-xs font-mono text-gray-700">
-              <div>Email: admin@rril.com</div>
-              <div>Password: admin123</div>
-            </div>
-          </div>
         </div>
 
         {/* Back to Website */}

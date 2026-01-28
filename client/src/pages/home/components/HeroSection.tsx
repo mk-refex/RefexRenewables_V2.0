@@ -16,7 +16,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
+      <div className="relative z-10 container mx-auto px-[130px] h-full flex items-center">
         <div className="max-w-5xl">
           <h1 className="text-white mb-8 leading-tight">
             <span className="inline-block animate-slideInLeft opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>

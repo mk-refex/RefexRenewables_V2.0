@@ -25,8 +25,7 @@ const ContentSection = () => {
   };
 
   const handleSave = () => {
-    localStorage.setItem('investorsHeroTitle', heroTitle);
-    localStorage.setItem('investorsHeroImage', heroImageUrl);
+    // TODO: persist via DB later
     setIsSaved(true);
     setTimeout(() => setIsSaved(false), 3000);
   };

@@ -8,7 +8,10 @@ const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const handleLogout = () => {
+    localStorage.removeItem('auth_token');
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('adminEmail');
+    localStorage.removeItem('adminName');
     window.location.href = '/admin-login';
   };
 
@@ -64,8 +67,12 @@ const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
                 <i className="ri-user-line text-white text-sm"></i>
               </div>
               <div className="hidden sm:block text-left">
-                <p className="text-sm font-medium text-gray-900">Admin User</p>
-                <p className="text-xs text-gray-500">admin@rril.com</p>
+                <p className="text-sm font-medium text-gray-900">
+                  {typeof window !== 'undefined' && localStorage.getItem('adminName') ? localStorage.getItem('adminName') : 'Admin User'}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {typeof window !== 'undefined' && localStorage.getItem('adminEmail') ? localStorage.getItem('adminEmail') : ''}
+                </p>
               </div>
               <i className={`ri-arrow-${showUserMenu ? 'up' : 'down'}-s-line text-gray-500`}></i>
             </button>
@@ -73,8 +80,12 @@ const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
             {showUserMenu && (
               <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2">
                 <div className="px-4 py-3 border-b border-gray-200">
-                  <p className="text-sm font-semibold text-gray-900">Admin User</p>
-                  <p className="text-xs text-gray-500 mt-1">admin@rril.com</p>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {typeof window !== 'undefined' && localStorage.getItem('adminName') ? localStorage.getItem('adminName') : 'Admin User'}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {typeof window !== 'undefined' && localStorage.getItem('adminEmail') ? localStorage.getItem('adminEmail') : ''}
+                  </p>
                 </div>
                 <button
                   onClick={handleLogout}

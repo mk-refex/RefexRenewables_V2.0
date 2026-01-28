@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getCurrentStockPrice, type StockPriceResponse } from '@/services/api';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
   const [mobileSubDropdown, setMobileSubDropdown] = useState<string | null>(null);
+  const [stockData, setStockData] = useState<StockPriceResponse | null>(null);
+  const [stockLoading, setStockLoading] = useState(true);
 
   const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
@@ -48,12 +51,34 @@ export default function Navbar() {
     }, 100);
   };
 
+  useEffect(() => {
+    getCurrentStockPrice()
+      .then((data) => {
+        setStockData(data);
+        setStockLoading(false);
+      })
+      .catch(() => {
+        setStockLoading(false);
+      });
+  }, []);
+
+  const getStockIcon = () => {
+    if (!stockData) return 'ri-arrow-down-s-fill';
+    return stockData.index.startsWith('+') ? 'ri-arrow-up-s-fill' : 'ri-arrow-down-s-fill';
+  };
+
+  const getStockColor = () => {
+    if (!stockData) return 'text-red-600';
+    return stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600';
+  };
+
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
+      <div className="lg:mx-[110px]">
       {/* Top Bar with Logo and Stock Ticker */}
       <div className="w-full bg-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between py-3">
+          <div className="flex items-center">
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
               <img 
@@ -64,12 +89,27 @@ export default function Navbar() {
             </Link>
             
             {/* Stock Ticker - Hidden on mobile */}
-            <div className="hidden sm:flex items-center gap-2 text-xs ml-4 md:ml-8">
-              <span className="font-semibold text-gray-800">BSE</span>
-              <i className="ri-arrow-down-s-fill text-red-600"></i>
-              <span className="font-semibold text-red-600">₹ 310</span>
-              <span className="text-red-600">(-2.82%)</span>
-            </div>
+            {stockLoading ? (
+              <div className="hidden sm:flex items-center gap-2 text-xs ml-4 md:ml-10">
+                <span className="font-semibold text-gray-800">Loading...</span>
+              </div>
+            ) : stockData ? (
+              <div className="hidden sm:flex items-center gap-2 text-xs ml-4 md:ml-10">
+                <span className="font-semibold text-gray-800">{stockData.exchange}</span>
+                <i className={`${getStockIcon()} ${getStockColor()}`}></i>
+                <span className={`font-semibold ${getStockColor()}`}>₹ {stockData.current_price.toFixed(2)}</span>
+                <span className={getStockColor()}>
+                  ({stockData.index})
+                </span>
+              </div>
+            ) : (
+              <div className="hidden sm:flex items-center gap-2 text-xs ml-4 md:ml-10">
+                <span className="font-semibold text-gray-800">BSE</span>
+                <i className="ri-arrow-down-s-fill text-red-600"></i>
+                <span className="font-semibold text-red-600">₹ 310</span>
+                <span className="text-red-600">(-2.82%)</span>
+              </div>
+            )}
 
             {/* Mobile Menu Button */}
             <button 
@@ -82,7 +122,7 @@ export default function Navbar() {
         </div>
         {/* Horizontal line that stops at logo - Hidden on mobile */}
         <div className="hidden lg:block container mx-auto px-4 lg:px-8">
-          <div className="border-b border-gray-200" style={{ marginLeft: '140px' }}></div>
+          <div className="border-b border-gray-200" style={{ marginLeft: '187px' }}></div>
         </div>
       </div>
 
@@ -91,13 +131,25 @@ export default function Navbar() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center h-14">
             {/* Company Name */}
-            <div className="text-xs font-bold text-gray-800 leading-tight uppercase">
+            <div
+              className="text-gray-800 uppercase"
+              style={{
+                fontSize: '11.5px',
+                fontWeight: 500,
+                lineHeight: '15px',
+                letterSpacing: '0.3px',
+              }}
+            >
               REFEX RENEWABLES &<br />INFRASTRUCTURE LIMITED
             </div>
 
             {/* Navigation Links */}
-            <div className="flex items-center gap-6 xl:gap-8 ml-8">
-              <Link to="/" className="text-sm font-bold text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
+            <div className="flex items-center gap-6 xl:gap-10 ml-8">
+              <Link 
+                to="/" 
+                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
+              >
                 HOME
               </Link>
               
@@ -109,7 +161,8 @@ export default function Navbar() {
               >
                 <Link 
                   to="/about-us" 
-                  className="text-sm font-bold text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
                 >
                   ABOUT US
                   <i className="ri-arrow-down-s-line"></i>
@@ -167,7 +220,10 @@ export default function Navbar() {
                   setIsCBGOpen(false);
                 }}
               >
-                <button className="text-sm font-bold text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1">
+                <button 
+                  className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
+                >
                   BUSINESSES
                   <i className="ri-arrow-down-s-line"></i>
                 </button>
@@ -231,7 +287,8 @@ export default function Navbar() {
               >
                 <Link 
                   to="/investors" 
-                  className="text-sm font-bold text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
                 >
                   INVESTOR RELATIONS
                   <i className="ri-arrow-down-s-line"></i>
@@ -266,16 +323,25 @@ export default function Navbar() {
                 )}
               </div>
 
-              <Link to="/esg" className="text-sm font-bold text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
+              <Link 
+                to="/esg" 
+                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
+              >
                 ESG
               </Link>
 
-              <Link to="/contact" className="text-sm font-bold text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">
+              <Link 
+                to="/contact" 
+                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
+              >
                 CONTACT US
               </Link>
             </div>
           </div>
         </div>
+      </div>
       </div>
 
       {/* Mobile Menu */}

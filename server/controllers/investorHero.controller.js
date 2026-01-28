@@ -66,6 +66,21 @@ const investorHeroSchema = z.object({
 });
 
 // Get investor hero (public)
+// Upload hero image only (returns URL for dashboard to store)
+export async function uploadHeroImage(req, res) {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No image file provided" });
+    }
+    // Return URL that works with /uploads mount: /uploads/images/filename
+    const imageUrl = `/uploads/images/${req.file.filename}`;
+    return res.json({ imageUrl });
+  } catch (error) {
+    console.error("Upload investor hero image error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 export async function getInvestorHero(_req, res) {
   try {
     // Get the first (and only) hero entry, or create default if none exists
@@ -101,21 +116,12 @@ export async function getInvestorHero(_req, res) {
       await hero.save();
     }
 
-    // Return relative URL path: /images/filename.jpg
-    // Images stored as "images/filename.jpg" in DB, convert to "/images/filename.jpg"
+    // Return imageUrl as stored: /uploads/images/... or https://...
     let imageUrl = hero.imageUrl;
     if (imageUrl) {
-      if (imageUrl.startsWith('http')) {
+      if (imageUrl.startsWith("http")) {
         // Keep external URLs as is
-        imageUrl = imageUrl;
-      } else if (imageUrl.startsWith('uploads/images/')) {
-        // Convert old format to new format
-        imageUrl = `/${imageUrl.replace('uploads/images/', 'images/')}`;
-      } else if (imageUrl.startsWith('/')) {
-        // Already has leading slash
-        imageUrl = imageUrl;
-      } else {
-        // Add leading slash for relative path
+      } else if (!imageUrl.startsWith("/")) {
         imageUrl = `/${imageUrl}`;
       }
     } else {
@@ -184,21 +190,12 @@ export async function upsertInvestorHero(req, res) {
 
     // Priority: File upload > URL update > keep existing
     if (file) {
-      // If file is uploaded, use the uploaded file
-      // Store as images/filename.jpg (will be served at /images/filename.jpg)
-      updateData.imageUrl = `images/${file.filename}`;
+      // Store as /uploads/images/filename (served via /uploads mount)
+      updateData.imageUrl = `/uploads/images/${file.filename}`;
     } else if (imageUrlFromBody !== undefined && imageUrlFromBody !== null && imageUrlFromBody !== '') {
-      // If imageUrl is provided in request body, use it (for URL editing)
-      // Remove leading slash if present, normalize to images/filename format
-      let normalizedUrl = imageUrlFromBody.startsWith('/') ? imageUrlFromBody.slice(1) : imageUrlFromBody;
-      // Convert from old format (uploads/images/...) to new format (images/...)
-      if (normalizedUrl.startsWith('uploads/images/')) {
-        normalizedUrl = normalizedUrl.replace('uploads/images/', 'images/');
-      } else if (!normalizedUrl.startsWith('images/') && !normalizedUrl.startsWith('http')) {
-        // If it's a relative path without images/ prefix, add it
-        normalizedUrl = `images/${normalizedUrl}`;
-      }
-      updateData.imageUrl = normalizedUrl;
+      // Accept /uploads/images/..., https://..., or other paths as-is
+      const u = imageUrlFromBody.trim();
+      updateData.imageUrl = u.startsWith("/") || u.startsWith("http") ? u : `/${u}`;
     }
     // If neither file nor imageUrl provided, keep existing imageUrl
 
@@ -236,24 +233,10 @@ export async function upsertInvestorHero(req, res) {
       await hero.save();
     }
 
-    // Return relative URL path: /images/filename.jpg
-    // Images stored as "images/filename.jpg" in DB, convert to "/images/filename.jpg"
     let imageUrl = hero.imageUrl;
-    if (imageUrl) {
-      if (imageUrl.startsWith('http')) {
-        // Keep external URLs as is
-        imageUrl = imageUrl;
-      } else if (imageUrl.startsWith('uploads/images/')) {
-        // Convert old format to new format
-        imageUrl = `/${imageUrl.replace('uploads/images/', 'images/')}`;
-      } else if (imageUrl.startsWith('/')) {
-        // Already has leading slash
-        imageUrl = imageUrl;
-      } else {
-        // Add leading slash for relative path
-        imageUrl = `/${imageUrl}`;
-      }
-    } else {
+    if (imageUrl && !imageUrl.startsWith("/") && !imageUrl.startsWith("http")) {
+      imageUrl = `/${imageUrl}`;
+    } else if (!imageUrl) {
       imageUrl = null;
     }
 

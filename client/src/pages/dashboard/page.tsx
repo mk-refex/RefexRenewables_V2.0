@@ -4,6 +4,24 @@ import DashboardHeader from './components/DashboardHeader';
 import Sidebar from './components/Sidebar';
 import OverviewSection from './components/OverviewSection';
 import UsersSection from './components/UsersSection';
+import { investorApi, resolveImageUrl, uploadImage, uploadPdf } from '@/services/api';
+
+type RelatedLinkSectionLabelType = 'name' | 'financialYear';
+interface RelatedLinkSectionType {
+  id: number;
+  name: string;
+  labelType?: RelatedLinkSectionLabelType;
+  financialYear?: string;
+  order: number;
+  items: Array<{ id: number; name: string; publishDate: string; pdfUrl: string; imageUrl: string; isStatic: boolean; staticContent: string; order: number }>;
+}
+interface RelatedLinkCategoryType {
+  id: number;
+  name: string;
+  order: number;
+  collapsible?: boolean;
+  sections: RelatedLinkSectionType[];
+}
 
 export default function DashboardPage() {
   const navigate = useNavigate();
@@ -24,7 +42,7 @@ export default function DashboardPage() {
   const [imagePreview, setImagePreview] = useState('');
 
   // Related Links CMS State
-  const [relatedLinksCategories, setRelatedLinksCategories] = useState([
+  const [relatedLinksCategories, setRelatedLinksCategories] = useState<RelatedLinkCategoryType[]>([
     {
       id: 1,
       name: 'Shareholding Pattern',
@@ -33,6 +51,8 @@ export default function DashboardPage() {
         {
           id: 1,
           name: '2025 - 2026',
+          labelType: 'financialYear',
+          financialYear: '2025-26',
           order: 1,
           items: [
             {
@@ -42,6 +62,7 @@ export default function DashboardPage() {
               pdfUrl: '/reports/RRIL-Shareholding_Pattern_30.06.2025.pdf',
               imageUrl: '',
               isStatic: false,
+              staticContent: '',
               order: 1
             }
           ]
@@ -53,11 +74,35 @@ export default function DashboardPage() {
   const [expandedSections, setExpandedSections] = useState<number[]>([]);
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-    if (!isAuthenticated) {
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
       navigate('/admin-login');
     }
   }, [navigate]);
+
+  // Load Investor Hero from API when on investors/hero tab
+  useEffect(() => {
+    if (activePage !== 'investors' || activeTab !== 'hero') return;
+    investorApi.getHero().then((hero) => {
+      const title = Array.isArray(hero.titleItems) && hero.titleItems.length
+        ? hero.titleItems.map((t) => t.text).join(' ')
+        : 'Investor Relations';
+      setInvestorsHeroTitle(title);
+      setInvestorsHeroImage(hero.imageUrl ?? '');
+      setImagePreview(hero.imageUrl ?? '');
+    }).catch(() => {});
+  }, [activePage, activeTab]);
+
+  // Load Related Links from API when on investors/links tab
+  useEffect(() => {
+    if (activePage !== 'investors' || activeTab !== 'links') return;
+    investorApi.getRelatedLinks().then((categories) => {
+      if (Array.isArray(categories) && categories.length) {
+        setRelatedLinksCategories(categories as RelatedLinkCategoryType[]);
+        setSelectedCategory(categories[0]?.id ?? null);
+      }
+    }).catch(() => {});
+  }, [activePage, activeTab]);
 
   // Snackbar function
   const showNotification = (message: string, type: 'success' | 'error' | 'info' = 'success') => {
@@ -244,6 +289,8 @@ export default function DashboardPage() {
               {
                 id: 1,
                 name: '2025 - 2026',
+                labelType: 'financialYear',
+                financialYear: '2025-26',
                 order: 1,
                 items: [
                   {
@@ -253,6 +300,7 @@ export default function DashboardPage() {
                     pdfUrl: '/reports/RRIL-Shareholding_Pattern_30.06.2025.pdf',
                     imageUrl: '',
                     isStatic: false,
+                    staticContent: '',
                     order: 1
                   }
                 ]
@@ -267,21 +315,28 @@ export default function DashboardPage() {
     }
   };
 
-  const handleSave = () => {
-    // Save logic based on page and tab
-    console.log('Save changes for:', activePage, activeTab);
-    
-    // Save Investors Hero
+  const handleSave = async () => {
     if (activePage === 'investors' && activeTab === 'hero') {
-      localStorage.setItem('investors_hero_title', investorsHeroTitle);
-      localStorage.setItem('investors_hero_image', investorsHeroImage);
+      try {
+        await investorApi.saveHero({
+          titleItems: [{ text: investorsHeroTitle, size: 'normal', order: 0 }],
+          imageUrl: investorsHeroImage || null,
+        });
+        showNotification('Investor hero saved successfully!', 'success');
+      } catch {
+        showNotification('Failed to save investor hero', 'error');
+      }
+      return;
     }
-
-    // Save Related Links
     if (activePage === 'investors' && activeTab === 'links') {
-      localStorage.setItem('investors_related_links', JSON.stringify(relatedLinksCategories));
+      try {
+        await investorApi.saveRelatedLinks(relatedLinksCategories);
+        showNotification('Related links saved successfully!', 'success');
+      } catch {
+        showNotification('Failed to save related links', 'error');
+      }
+      return;
     }
-    
     showNotification('Changes saved successfully!', 'success');
   };
 
@@ -292,42 +347,44 @@ export default function DashboardPage() {
     }
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        if (activePage === 'investors' && activeTab === 'hero') {
-          setInvestorsHeroImage(result);
-          setImagePreview(result);
-        }
-      };
-      reader.readAsDataURL(file);
+    if (!file || (activePage !== 'investors' || activeTab !== 'hero')) return;
+    try {
+      const imageUrl = await investorApi.uploadHeroImage(file);
+      setInvestorsHeroImage(imageUrl);
+      setImagePreview(imageUrl);
+      showNotification('Image uploaded. Save hero to apply.', 'success');
+    } catch {
+      showNotification('Image upload failed.', 'error');
     }
+    e.target.value = '';
   };
 
-  const handlePDFUpload = (categoryId: number, sectionId: number, itemId: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePDFUpload = async (categoryId: number, sectionId: number, itemId: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      // In a real app, you would upload to a server here
-      const fakeUrl = `/uploads/${file.name}`;
-      updateItem(categoryId, sectionId, itemId, { pdfUrl: fakeUrl });
-      showNotification('PDF uploaded successfully!', 'success');
+    if (!file) return;
+    try {
+      const pdfUrl = await uploadPdf(file);
+      updateItem(categoryId, sectionId, itemId, { pdfUrl });
+      showNotification('PDF uploaded. Save to apply.', 'success');
+    } catch {
+      showNotification('PDF upload failed.', 'error');
     }
+    e.target.value = '';
   };
 
-  const handleItemImageUpload = (categoryId: number, sectionId: number, itemId: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleItemImageUpload = async (categoryId: number, sectionId: number, itemId: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        updateItem(categoryId, sectionId, itemId, { imageUrl: result });
-        showNotification('Image uploaded successfully!', 'success');
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+    try {
+      const imageUrl = await uploadImage(file);
+      updateItem(categoryId, sectionId, itemId, { imageUrl });
+      showNotification('Image uploaded. Save to apply.', 'success');
+    } catch {
+      showNotification('Image upload failed.', 'error');
     }
+    e.target.value = '';
   };
 
   // Category Management Functions
@@ -348,6 +405,14 @@ export default function DashboardPage() {
     setRelatedLinksCategories(categories =>
       categories.map(cat =>
         cat.id === categoryId ? { ...cat, name: newName } : cat
+      )
+    );
+  };
+
+  const updateCategoryCollapsible = (categoryId: number, collapsible: boolean) => {
+    setRelatedLinksCategories(categories =>
+      categories.map(cat =>
+        cat.id === categoryId ? { ...cat, collapsible } : cat
       )
     );
   };
@@ -386,9 +451,11 @@ export default function DashboardPage() {
       categories.map(cat => {
         if (cat.id === categoryId) {
           const newSectionId = Math.max(...cat.sections.map(s => s.id), 0) + 1;
-          const newSection = {
+          const newSection: RelatedLinkSectionType = {
             id: newSectionId,
             name: 'New Section',
+            labelType: 'name',
+            financialYear: '',
             order: cat.sections.length + 1,
             items: []
           };
@@ -415,6 +482,39 @@ export default function DashboardPage() {
       })
     );
   };
+
+  const updateSection = (categoryId: number, sectionId: number, updates: Partial<{ name: string; labelType: 'name' | 'financialYear'; financialYear: string }>) => {
+    setRelatedLinksCategories(categories =>
+      categories.map(cat => {
+        if (cat.id === categoryId) {
+          return {
+            ...cat,
+            sections: cat.sections.map(sec =>
+              sec.id === sectionId ? { ...sec, ...updates } : sec
+            )
+          };
+        }
+        return cat;
+      })
+    );
+  };
+
+  const parseFinancialYear = (fy: string | undefined): { startYear: number; endYear: number } => {
+    const curr = new Date().getFullYear();
+    if (!fy || !fy.trim()) return { startYear: curr, endYear: curr + 1 };
+    const parts = fy.split('-').map((p) => parseInt(p.trim(), 10)).filter((n) => !isNaN(n));
+    if (parts.length < 2) return { startYear: curr, endYear: curr + 1 };
+    let start = parts[0];
+    let end = parts[1];
+    if (end < 100) end = end >= 90 ? 1900 + end : 2000 + end;
+    return { startYear: start, endYear: end };
+  };
+
+  const formatFinancialYear = (startYear: number, endYear: number): string =>
+    `${startYear}-${endYear}`;
+
+  const MIN_YEAR = 2010;
+  const MAX_YEAR = 2030;
 
   const deleteSection = (categoryId: number, sectionId: number) => {
     if (window.confirm('Are you sure you want to delete this section? All items will be removed.')) {
@@ -491,6 +591,7 @@ export default function DashboardPage() {
                   pdfUrl: '',
                   imageUrl: '',
                   isStatic: false,
+                  staticContent: '',
                   order: sec.items.length + 1
                 };
                 return { ...sec, items: [...sec.items, newItem] };
@@ -511,6 +612,7 @@ export default function DashboardPage() {
     pdfUrl: string;
     imageUrl: string;
     isStatic: boolean;
+    staticContent: string;
   }>) => {
     setRelatedLinksCategories(categories =>
       categories.map(cat => {
@@ -665,7 +767,7 @@ export default function DashboardPage() {
               {(imagePreview || investorsHeroImage) ? (
                 <div className="relative w-full h-[300px] overflow-hidden rounded-lg bg-gray-200">
                   <img
-                    src={imagePreview || investorsHeroImage}
+                    src={resolveImageUrl(imagePreview || investorsHeroImage)}
                     alt="Hero preview"
                     className="w-full h-full object-cover"
                   />
@@ -804,13 +906,24 @@ export default function DashboardPage() {
                       </h4>
                       <p className="text-xs text-white/90 mt-1 ml-8">Organize documents by time periods or sub-categories</p>
                     </div>
-                    <button
-                      onClick={() => addSection(selectedCategoryData.id)}
-                      className="flex items-center gap-2 px-4 py-2 bg-white text-[#2879b6] rounded-lg hover:bg-blue-50 transition-colors cursor-pointer whitespace-nowrap"
-                    >
-                      <i className="ri-add-line"></i>
-                      <span className="text-sm font-medium">Add Section</span>
-                    </button>
+                    <div className="flex items-center gap-3">
+                      <label className="flex items-center gap-2 text-white text-sm font-medium cursor-pointer whitespace-nowrap">
+                        <input
+                          type="checkbox"
+                          checked={!!selectedCategoryData.collapsible}
+                          onChange={(e) => updateCategoryCollapsible(selectedCategoryData.id, e.target.checked)}
+                          className="w-4 h-4 rounded text-[#2879b6] cursor-pointer"
+                        />
+                        <span>Sections are collapsible</span>
+                      </label>
+                      <button
+                        onClick={() => addSection(selectedCategoryData.id)}
+                        className="flex items-center gap-2 px-4 py-2 bg-white text-[#2879b6] rounded-lg hover:bg-blue-50 transition-colors cursor-pointer whitespace-nowrap"
+                      >
+                        <i className="ri-add-line"></i>
+                        <span className="text-sm font-medium">Add Section</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -841,13 +954,74 @@ export default function DashboardPage() {
                                 <span className="text-sm">{sectionIndex + 1}</span>
                               </div>
 
-                              <input
-                                type="text"
-                                value={section.name}
-                                onChange={(e) => updateSectionName(selectedCategoryData.id, section.id, e.target.value)}
-                                className="flex-1 px-3 py-2 bg-white border border-blue-300 rounded text-sm font-medium focus:ring-2 focus:ring-[#2879b6] focus:border-transparent outline-none"
-                                placeholder="Section name..."
-                              />
+                              <div className="flex-1 flex flex-wrap items-center gap-3">
+                                <div className="flex items-center gap-2 shrink-0">
+                                  <label className="flex items-center gap-1.5 text-white text-xs font-medium cursor-pointer">
+                                    <input
+                                      type="radio"
+                                      name={`section-label-${section.id}`}
+                                      checked={section.labelType !== 'financialYear'}
+                                      onChange={() => updateSection(selectedCategoryData.id, section.id, { labelType: 'name' })}
+                                      className="w-3.5 h-3.5 text-[#2879b6] cursor-pointer"
+                                    />
+                                    <span>Name</span>
+                                  </label>
+                                  <label className="flex items-center gap-1.5 text-white text-xs font-medium cursor-pointer">
+                                    <input
+                                      type="radio"
+                                      name={`section-label-${section.id}`}
+                                      checked={section.labelType === 'financialYear'}
+                                      onChange={() => {
+                                        const { startYear, endYear } = parseFinancialYear(section.financialYear);
+                                        updateSection(selectedCategoryData.id, section.id, { labelType: 'financialYear', financialYear: formatFinancialYear(startYear, endYear) });
+                                      }}
+                                      className="w-3.5 h-3.5 text-[#2879b6] cursor-pointer"
+                                    />
+                                    <span>Financial Year</span>
+                                  </label>
+                                </div>
+                                {section.labelType === 'financialYear' ? (
+                                  (() => {
+                                    const { startYear, endYear } = parseFinancialYear(section.financialYear);
+                                    return (
+                                      <div className="flex items-center gap-2 flex-wrap">
+                                        <label className="text-white text-xs font-medium shrink-0">From Year</label>
+                                        <input
+                                          type="number"
+                                          min={MIN_YEAR}
+                                          max={MAX_YEAR}
+                                          value={startYear}
+                                          onChange={(e) => {
+                                            const y = parseInt(e.target.value, 10);
+                                            if (!isNaN(y)) updateSection(selectedCategoryData.id, section.id, { financialYear: formatFinancialYear(y, endYear) });
+                                          }}
+                                          className="w-20 px-2 py-2 bg-white border border-blue-300 rounded text-sm font-medium focus:ring-2 focus:ring-[#2879b6] focus:border-transparent outline-none"
+                                        />
+                                        <label className="text-white text-xs font-medium shrink-0">To Year</label>
+                                        <input
+                                          type="number"
+                                          min={MIN_YEAR}
+                                          max={MAX_YEAR}
+                                          value={endYear}
+                                          onChange={(e) => {
+                                            const y = parseInt(e.target.value, 10);
+                                            if (!isNaN(y)) updateSection(selectedCategoryData.id, section.id, { financialYear: formatFinancialYear(startYear, y) });
+                                          }}
+                                          className="w-20 px-2 py-2 bg-white border border-blue-300 rounded text-sm font-medium focus:ring-2 focus:ring-[#2879b6] focus:border-transparent outline-none"
+                                        />
+                                      </div>
+                                    );
+                                  })()
+                                ) : (
+                                  <input
+                                    type="text"
+                                    value={section.name}
+                                    onChange={(e) => updateSectionName(selectedCategoryData.id, section.id, e.target.value)}
+                                    className="flex-1 min-w-[140px] px-3 py-2 bg-white border border-blue-300 rounded text-sm font-medium focus:ring-2 focus:ring-[#2879b6] focus:border-transparent outline-none"
+                                    placeholder="Section name..."
+                                  />
+                                )}
+                              </div>
 
                               <div className="flex items-center gap-1">
                                 <button
@@ -923,107 +1097,138 @@ export default function DashboardPage() {
                                                 <span className="text-sm text-gray-700 font-medium">Static Content (instead of PDF)</span>
                                               </label>
 
-                                              {/* Item Name */}
-                                              <input
-                                                type="text"
-                                                value={item.name}
-                                                onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { name: e.target.value })}
-                                                className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none"
-                                                placeholder="Item name..."
-                                              />
-
-                                              {/* Publish Date */}
-                                              <div>
-                                                <div className="flex items-center justify-between mb-1">
-                                                  <label className="block text-xs font-medium text-gray-700">
-                                                    Published Date <span className="text-gray-400 font-normal">(optional)</span>
-                                                  </label>
-                                                  {item.publishDate && (
-                                                    <button
-                                                      onClick={() => updateItem(selectedCategoryData.id, section.id, item.id, { publishDate: '' })}
-                                                      className="flex items-center gap-1 text-red-600 hover:text-red-700 transition-colors cursor-pointer"
-                                                    >
-                                                      <i className="ri-close-line text-sm"></i>
-                                                      <span className="text-xs">Clear</span>
-                                                    </button>
-                                                  )}
+                                              {/* Static HTML input – shown only when Static Content is checked; hide all other fields */}
+                                              {item.isStatic ? (
+                                                <div className="space-y-2 flex-1">
+                                                  <p className="text-xs text-gray-600">
+                                                    Static Content (HTML supported: <code className="bg-gray-100 px-1 rounded">&lt;strong&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;em&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;a&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;p&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;br&gt;</code>, <code className="bg-gray-100 px-1 rounded">{'<span style="color:...">'}</code>)
+                                                  </p>
+                                                  <textarea
+                                                    value={item.staticContent ?? ''}
+                                                    onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { staticContent: e.target.value })}
+                                                    rows={8}
+                                                    className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none font-mono resize-y min-h-[120px]"
+                                                    placeholder="Enter static content with HTML formatting. Example: <p>Investor get two options...</p><ol><li>Providing nomination...</li></ol>"
+                                                  />
+                                                  <p className="text-xs text-gray-500">
+                                                    You can use HTML tags: <code className="bg-gray-100 px-1 rounded">&lt;p&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;strong&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;em&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;ol&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;ul&gt;</code>, <code className="bg-gray-100 px-1 rounded">&lt;li&gt;</code>, <code className="bg-gray-100 px-1 rounded">{'<a href="...">'}</code>, <code className="bg-gray-100 px-1 rounded">{'<span style="color: red">'}</code>
+                                                  </p>
                                                 </div>
-                                                <input
-                                                  type="date"
-                                                  value={item.publishDate || ''}
-                                                  onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { publishDate: e.target.value })}
-                                                  className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none cursor-pointer"
-                                                />
-                                              </div>
+                                              ) : (
+                                                <>
+                                                  {/* Item Name */}
+                                                  <input
+                                                    type="text"
+                                                    value={item.name}
+                                                    onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { name: e.target.value })}
+                                                    className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none"
+                                                    placeholder="Item name..."
+                                                  />
 
-                                              {/* Preview Image Label and Actions */}
-                                              <div>
-                                                <div className="flex items-center justify-between mb-2">
-                                                  <label className="block text-xs font-medium text-gray-700">
-                                                    Preview Image <span className="text-gray-400 font-normal">(optional)</span>
-                                                  </label>
-                                                  {item.imageUrl && (
-                                                    <button
-                                                      onClick={() => updateItem(selectedCategoryData.id, section.id, item.id, { imageUrl: '' })}
-                                                      className="flex items-center gap-1 text-red-600 hover:text-red-700 transition-colors cursor-pointer"
-                                                    >
-                                                      <i className="ri-close-line text-sm"></i>
-                                                      <span className="text-xs">Remove</span>
-                                                    </button>
-                                                  )}
-                                                </div>
+                                                  {/* Publish Date */}
+                                                  <div>
+                                                    <div className="flex items-center justify-between mb-1">
+                                                      <label className="block text-xs font-medium text-gray-700">
+                                                        Published Date <span className="text-gray-400 font-normal">(optional)</span>
+                                                      </label>
+                                                      {item.publishDate && (
+                                                        <button
+                                                          onClick={() => updateItem(selectedCategoryData.id, section.id, item.id, { publishDate: '' })}
+                                                          className="flex items-center gap-1 text-red-600 hover:text-red-700 transition-colors cursor-pointer"
+                                                        >
+                                                          <i className="ri-close-line text-sm"></i>
+                                                          <span className="text-xs">Clear</span>
+                                                        </button>
+                                                      )}
+                                                    </div>
+                                                    <input
+                                                      type="date"
+                                                      value={item.publishDate || ''}
+                                                      onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { publishDate: e.target.value })}
+                                                      className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none cursor-pointer"
+                                                    />
+                                                  </div>
 
-                                                {!item.imageUrl && (
-                                                  <div className="w-full">
+                                                  {/* Preview Image Label and Actions */}
+                                                  <div>
+                                                    <div className="flex items-center justify-between mb-2">
+                                                      <label className="block text-xs font-medium text-gray-700">
+                                                        Preview Image <span className="text-gray-400 font-normal">(optional)</span>
+                                                      </label>
+                                                      {item.imageUrl && (
+                                                        <button
+                                                          onClick={() => updateItem(selectedCategoryData.id, section.id, item.id, { imageUrl: '' })}
+                                                          className="flex items-center gap-1 text-red-600 hover:text-red-700 transition-colors cursor-pointer"
+                                                        >
+                                                          <i className="ri-close-line text-sm"></i>
+                                                          <span className="text-xs">Remove</span>
+                                                        </button>
+                                                      )}
+                                                    </div>
+
+                                                    {!item.imageUrl && (
+                                                      <div className="w-full">
+                                                        <input
+                                                          type="text"
+                                                          value={item.imageUrl || ''}
+                                                          onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { imageUrl: e.target.value })}
+                                                          className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none mb-2"
+                                                          placeholder="Image URL..."
+                                                        />
+                                                        <label className="flex items-center justify-center gap-2 px-4 py-2 bg-white border-2 border-[#ee6a31]/30 text-[#ee6a31] rounded hover:bg-orange-50 transition-colors cursor-pointer whitespace-nowrap">
+                                                          <i className="ri-image-add-line"></i>
+                                                          <span className="text-sm font-medium">Upload Image</span>
+                                                          <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={(e) => handleItemImageUpload(selectedCategoryData.id, section.id, item.id, e)}
+                                                            className="hidden"
+                                                          />
+                                                        </label>
+                                                      </div>
+                                                    )}
+                                                  </div>
+
+                                                  {/* PDF URL, Upload, and Preview icon */}
+                                                  <div className="flex gap-2 items-center flex-wrap">
                                                     <input
                                                       type="text"
-                                                      value={item.imageUrl || ''}
-                                                      onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { imageUrl: e.target.value })}
-                                                      className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none mb-2"
-                                                      placeholder="Image URL..."
+                                                      value={item.pdfUrl}
+                                                      onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { pdfUrl: e.target.value })}
+                                                      className="flex-1 min-w-0 px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none"
+                                                      placeholder="PDF URL or path..."
                                                     />
-                                                    <label className="flex items-center justify-center gap-2 px-4 py-2 bg-white border-2 border-[#ee6a31]/30 text-[#ee6a31] rounded hover:bg-orange-50 transition-colors cursor-pointer whitespace-nowrap">
-                                                      <i className="ri-image-add-line"></i>
-                                                      <span className="text-sm font-medium">Upload Image</span>
+                                                    <label className="flex items-center justify-center gap-2 px-4 py-2 bg-[#ee6a31] text-white rounded hover:bg-[#d95f2c] transition-colors cursor-pointer whitespace-nowrap shadow-sm">
+                                                      <i className="ri-upload-cloud-line"></i>
+                                                      <span className="text-sm font-medium">Upload PDF</span>
                                                       <input
                                                         type="file"
-                                                        accept="image/*"
-                                                        onChange={(e) => handleItemImageUpload(selectedCategoryData.id, section.id, item.id, e)}
+                                                        accept=".pdf,application/pdf"
+                                                        onChange={(e) => handlePDFUpload(selectedCategoryData.id, section.id, item.id, e)}
                                                         className="hidden"
                                                       />
                                                     </label>
+                                                    {item.pdfUrl && (
+                                                      <button
+                                                        type="button"
+                                                        onClick={() => window.open(resolveImageUrl(item.pdfUrl), '_blank', 'noopener,noreferrer')}
+                                                        title="Preview PDF"
+                                                        className="flex items-center justify-center w-10 h-10 rounded border-2 border-[#ee6a31]/30 text-[#ee6a31] hover:bg-[#ee6a31]/10 transition-colors cursor-pointer"
+                                                      >
+                                                        <i className="ri-file-pdf-line text-xl"></i>
+                                                      </button>
+                                                    )}
                                                   </div>
-                                                )}
-                                              </div>
-
-                                              {/* PDF URL */}
-                                              <input
-                                                type="text"
-                                                value={item.pdfUrl}
-                                                onChange={(e) => updateItem(selectedCategoryData.id, section.id, item.id, { pdfUrl: e.target.value })}
-                                                className="w-full px-3 py-2 bg-white border-2 border-[#ee6a31]/30 rounded text-sm focus:ring-2 focus:ring-[#ee6a31] focus:border-[#ee6a31] outline-none"
-                                                placeholder="PDF URL or path..."
-                                              />
-
-                                              {/* Upload Button */}
-                                              <label className="flex items-center justify-center gap-2 px-4 py-2 bg-[#ee6a31] text-white rounded hover:bg-[#d95f2c] transition-colors cursor-pointer whitespace-nowrap shadow-sm">
-                                                <i className="ri-upload-cloud-line"></i>
-                                                <span className="text-sm font-medium">Upload PDF</span>
-                                                <input
-                                                  type="file"
-                                                  accept=".pdf"
-                                                  onChange={(e) => handlePDFUpload(selectedCategoryData.id, section.id, item.id, e)}
-                                                  className="hidden"
-                                                />
-                                              </label>
+                                                </>
+                                              )}
                                             </div>
 
-                                            {/* Right Side - Image Preview */}
-                                            {item.imageUrl && (
+                                            {/* Right Side - Image Preview – hidden when Static Content is selected */}
+                                            {!item.isStatic && item.imageUrl && !item.imageUrl.startsWith('data:') && (
                                               <div className="w-48 flex-shrink-0">
                                                 <div className="relative w-full h-full rounded border-2 border-[#ee6a31]/30 overflow-hidden bg-white">
                                                   <img
-                                                    src={item.imageUrl}
+                                                    src={resolveImageUrl(item.imageUrl)}
                                                     alt="Preview"
                                                     className="w-full h-full object-cover"
                                                   />

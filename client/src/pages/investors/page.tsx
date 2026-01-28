@@ -12,7 +12,7 @@ export default function InvestorsPage() {
       <StockQuoteSection />
       <StockChartSection />
       <HistoricalStockSection />
-      {/* <RelatedLinksSection /> */}
+      <RelatedLinksSection />
     </Layout>
   );
 }

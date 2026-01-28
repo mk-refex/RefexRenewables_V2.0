@@ -5,12 +5,14 @@ import pageAccessRouter from "./pageAccess.routes.js";
 import investorContentRouter from "./investorContent.routes.js";
 import investorHeroRouter from "./investorHero.routes.js";
 import pageContentRouter from "./pageContent.routes.js";
+import uploadRouter from "./upload.routes.js";
 import { getOverview } from "../controllers/overview.controller.js";
 import { authRequired } from "../middleware/auth.js";
 
 const router = Router();
 
 router.use("/auth", authRouter);
+router.use("/upload", uploadRouter);
 router.use("/users", usersRouter);
 router.use("/page-access", pageAccessRouter);
 router.use("/investor-content", investorContentRouter);

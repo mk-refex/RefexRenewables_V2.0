@@ -19,48 +19,36 @@ const AwardsSection = () => {
           </h2>
         </div>
 
-        {/* Awards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* Award 1 */}
-          <div className="text-center">
-            <div className="mb-6">
-              <img 
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Solar-award-768x578-1.png" 
-                alt="Solar Energy Award" 
-                className="w-full h-64 object-contain mx-auto"
-              />
+        {/* Awards - Centered Content */}
+        <div className="flex justify-center">
+          <div className="flex flex-col md:flex-row gap-8 lg:gap-12 max-w-5xl">
+            {/* Award 1 */}
+            <div className="text-center flex-1">
+              <div className="mb-6">
+                <img 
+                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Solar-award-768x578-1.png" 
+                  alt="Solar Energy Award" 
+                  className="w-full h-64 object-contain mx-auto"
+                />
+              </div>
+              <p className="text-white text-base leading-relaxed">
+                Solar Energy Company of the Year 2023 by MSMECCII
+              </p>
             </div>
-            <p className="text-white text-base leading-relaxed">
-              Solar Energy Company of the Year 2023 by MSMECCII
-            </p>
-          </div>
 
-          {/* Award 2 */}
-          <div className="text-center">
-            <div className="mb-6">
-              <img 
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Refex_Group_IN_English_2025_Certification_Badge-scaled.png" 
-                alt="Great Place to Work" 
-                className="w-full h-64 object-contain mx-auto"
-              />
+            {/* Award 2 */}
+            <div className="text-center flex-1">
+              <div className="mb-6">
+                <img 
+                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Refex_Group_IN_English_2025_Certification_Badge-scaled.png" 
+                  alt="Great Place to Work" 
+                  className="w-full h-64 object-contain mx-auto"
+                />
+              </div>
+              <p className="text-white text-base leading-relaxed">
+                Great Place to Work Certified India
+              </p>
             </div>
-            <p className="text-white text-base leading-relaxed">
-              Great Place to Work Certified India
-            </p>
-          </div>
-
-          {/* Award 3 */}
-          <div className="text-center">
-            <div className="mb-6">
-              <img 
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Solar-award-768x578-1.png" 
-                alt="Solar Energy Award" 
-                className="w-full h-64 object-contain mx-auto"
-              />
-            </div>
-            <p className="text-white text-base leading-relaxed">
-              Solar Energy Company of the Year 2023 by MSMECCII
-            </p>
           </div>
         </div>
       </div>

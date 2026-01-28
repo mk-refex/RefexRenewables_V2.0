@@ -128,6 +128,49 @@ export async function getInvestorContentByCategory(req, res) {
   }
 }
 
+const RELATED_LINKS_CATEGORY_ID = "related_links";
+
+// Get Related Links (Hero + Related Links CMS: full categories/sections/items)
+export async function getRelatedLinks(_req, res) {
+  try {
+    const row = await InvestorContent.findOne({
+      where: { categoryId: RELATED_LINKS_CATEGORY_ID },
+    });
+    const categories = row?.content?.categories ?? [];
+    return res.json({ categories });
+  } catch (error) {
+    console.error("Get related links error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+// Save Related Links (full categories/sections/items from dashboard)
+export async function saveRelatedLinks(req, res) {
+  try {
+    const { categories } = req.body;
+    if (!Array.isArray(categories)) {
+      return res.status(400).json({ message: "categories must be an array" });
+    }
+    const [row, created] = await InvestorContent.findOrCreate({
+      where: { categoryId: RELATED_LINKS_CATEGORY_ID },
+      defaults: {
+        categoryId: RELATED_LINKS_CATEGORY_ID,
+        categoryName: "Related Links",
+        content: { categories },
+        isActive: true,
+        displayOrder: 0,
+      },
+    });
+    if (!created) {
+      await row.update({ content: { categories }, categoryName: "Related Links" });
+    }
+    return res.json({ categories: row.content?.categories ?? [] });
+  } catch (error) {
+    console.error("Save related links error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 // Create or update investor content
 export async function upsertInvestorContent(req, res) {
   try {
