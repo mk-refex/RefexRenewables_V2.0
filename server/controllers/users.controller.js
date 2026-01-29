@@ -23,6 +23,7 @@ const createUserSchema = z.object({
   username: z.string().min(1, "Username is required").optional(),
   password: z.string().min(6, "Password must be at least 6 characters"),
   role: z.enum(["admin", "user"]).default("user"),
+  status: z.enum(["active", "inactive"]).optional(),
   permissions: z.array(z.string()).optional(),
 });
 
@@ -36,7 +37,7 @@ export async function createUser(req, res) {
       });
     }
 
-    const { name, email, password, role, username } = parse.data;
+    const { name, email, password, role, username, status } = parse.data;
 
     // Check if user with email already exists
     const existingUser = await User.findOne({ where: { email } });
@@ -60,6 +61,7 @@ export async function createUser(req, res) {
       username: generatedUsername,
       passwordHash,
       role: role || "user",
+      status: status || "active",
       permissions: userPermissions,
     });
 
@@ -69,6 +71,7 @@ export async function createUser(req, res) {
       email: user.email,
       name: user.name,
       role: user.role,
+      status: user.status,
       permissions: user.permissions,
       createdAt: user.createdAt,
     });
@@ -82,6 +85,7 @@ const updateSchema = z.object({
   name: z.string().min(1).optional(),
   email: z.string().email().optional(),
   role: z.enum(["admin", "user"]).optional(),
+  status: z.enum(["active", "inactive"]).optional(),
   password: z.string().min(6).optional(),
   permissions: z.array(z.string()).optional(),
 });
@@ -136,6 +140,7 @@ export async function updateUser(req, res) {
       email: user.email,
       name: user.name,
       role: user.role,
+      status: user.status,
       permissions: user.permissions,
     });
   } catch (error) {
@@ -177,6 +182,8 @@ export async function listUsers(_req, res) {
         role: u.role,
         permissions: u.permissions,
         createdAt: u.createdAt,
+        lastActive: u.lastActive,
+        status: u.status,
       }))
     );
   } catch (error) {

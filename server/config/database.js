@@ -20,7 +20,7 @@ export async function initializeDatabase() {
     applyAssociations();
     // Use sync without alter to avoid MySQL "Too many keys" error
     // This will create tables if they don't exist but won't alter existing ones
-    await sequelize.sync({ alter: false });
+    await sequelize.sync({ alter: true });
   } catch (error) {
     throw error;
   }

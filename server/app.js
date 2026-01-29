@@ -24,7 +24,7 @@ app.use(
       "Origin",
       "x-api-key",
     ],
-  })
+  }),
 );
 // Explicit preflight handling for all routes
 app.options("*", cors());

@@ -19,6 +19,11 @@ User.init(
       allowNull: false,
       defaultValue: "user",
     },
+    status: {
+      type: DataTypes.ENUM("active", "inactive"),
+      allowNull: false,
+      defaultValue: "active",
+    },
     permissions: {
       type: DataTypes.JSON,
       allowNull: true,

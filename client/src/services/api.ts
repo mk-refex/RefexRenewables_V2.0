@@ -1,8 +1,9 @@
 /** Server running by default (auth, CMS). Use '' for same-origin, or set VITE_API_URL for a specific backend. */
-const SERVER_BASE_URL = (import.meta.env?.VITE_API_URL as string | undefined) ?? "";
+const SERVER_BASE_URL =
+  (import.meta.env?.VITE_API_URL as string | undefined) ?? "";
 
 /** External API base used only for Stock API to fetch stock details from external services. */
-const EXTERNAL_STOCK_API_BASE_URL = "https://uat.refex.co.in";
+const EXTERNAL_STOCK_API_BASE_URL = "https://refex.co.in";
 
 export const getApiBaseUrl = () => SERVER_BASE_URL;
 export const getStockApiBaseUrl = () => EXTERNAL_STOCK_API_BASE_URL;
@@ -18,14 +19,17 @@ export interface StockPriceResponse {
 
 /** Fetch current stock price from refex-finance API */
 export async function getCurrentStockPrice(): Promise<StockPriceResponse> {
-  const response = await fetch("https://refex-finance.lab2.sharajman.com/stock_current_price", {
-    method: "POST",
-    headers: {
-      "accept": "application/json",
-      "Content-Type": "application/json",
+  const response = await fetch(
+    "https://refex-finance.lab2.sharajman.com/stock_current_price",
+    {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ stock_name: "REFEXRENEW.BO" }),
     },
-    body: JSON.stringify({ stock_name: "REFEXRENEW.BO" }),
-  });
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch stock price");
   }
@@ -79,26 +83,35 @@ export interface LoginResponse {
   };
 }
 
-export async function login(email: string, password: string): Promise<LoginResponse> {
-  const base = SERVER_BASE_URL || (typeof window !== "undefined" ? window.location.origin : "");
+export async function login(
+  email: string,
+  password: string,
+): Promise<LoginResponse> {
+  const base =
+    SERVER_BASE_URL ||
+    (typeof window !== "undefined" ? window.location.origin : "");
   const response = await fetch(`${base}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
 
-  const contentType = response.headers.get('content-type');
-  const isJson = contentType && contentType.includes('application/json');
-  const body = isJson ? await response.json() : { message: 'Invalid response from server' };
+  const contentType = response.headers.get("content-type");
+  const isJson = contentType && contentType.includes("application/json");
+  const body = isJson
+    ? await response.json()
+    : { message: "Invalid response from server" };
 
   if (!response.ok) {
-    throw new Error((body.message as string) || 'Invalid email or password');
+    throw new Error((body.message as string) || "Invalid email or password");
   }
 
   return body as LoginResponse;
 }
 
-const getServerBase = () => SERVER_BASE_URL || (typeof window !== "undefined" ? window.location.origin : "");
+const getServerBase = () =>
+  SERVER_BASE_URL ||
+  (typeof window !== "undefined" ? window.location.origin : "");
 
 /** Resolve hero image URL for display: use as-is for https?; else prepend server base for /uploads/images/... or other relative paths. */
 export function resolveImageUrl(url: string | null | undefined): string {
@@ -149,13 +162,23 @@ export const investorApi = {
   getHero: async () => {
     const res = await fetch(`${getServerBase()}/api/investor-hero`);
     if (!res.ok) throw new Error("Failed to fetch investor hero");
-    return res.json() as Promise<{ id?: number; imageUrl?: string | null; titleItems: Array<{ text: string; size: string; order: number }> }>;
+    return res.json() as Promise<{
+      id?: number;
+      imageUrl?: string | null;
+      titleItems: Array<{ text: string; size: string; order: number }>;
+    }>;
   },
-  saveHero: async (data: { titleItems: Array<{ text: string; size: string; order: number }>; imageUrl?: string | null }) => {
+  saveHero: async (data: {
+    titleItems: Array<{ text: string; size: string; order: number }>;
+    imageUrl?: string | null;
+  }) => {
     const token = localStorage.getItem("auth_token");
     const res = await fetch(`${getServerBase()}/api/investor-hero`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", ...(token && { Authorization: `Bearer ${token}` }) },
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
       body: JSON.stringify(data),
     });
     if (!res.ok) throw new Error("Failed to save investor hero");
@@ -179,18 +202,26 @@ export const investorApi = {
     return j.imageUrl ?? "";
   },
   getRelatedLinks: async () => {
-    const res = await fetch(`${getServerBase()}/api/investor-content/related-links`);
+    const res = await fetch(
+      `${getServerBase()}/api/investor-content/related-links`,
+    );
     if (!res.ok) throw new Error("Failed to fetch related links");
     const j = (await res.json()) as { categories?: unknown[] };
     return (j.categories ?? []) as RelatedLinksCategory[];
   },
   saveRelatedLinks: async (categories: unknown[]) => {
     const token = localStorage.getItem("auth_token");
-    const res = await fetch(`${getServerBase()}/api/investor-content/related-links`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", ...(token && { Authorization: `Bearer ${token}` }) },
-      body: JSON.stringify({ categories }),
-    });
+    const res = await fetch(
+      `${getServerBase()}/api/investor-content/related-links`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+        body: JSON.stringify({ categories }),
+      },
+    );
     if (!res.ok) throw new Error("Failed to save related links");
     const j = (await res.json()) as { categories?: unknown[] };
     return j.categories ?? [];
@@ -199,56 +230,67 @@ export const investorApi = {
 
 async function apiRequest<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
 ): Promise<T> {
   const token = localStorage.getItem("auth_token");
-  const base = SERVER_BASE_URL || (typeof window !== "undefined" ? window.location.origin : "");
+  const base =
+    SERVER_BASE_URL ||
+    (typeof window !== "undefined" ? window.location.origin : "");
 
   try {
     const response = await fetch(`${base}${endpoint}`, {
       ...options,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         ...(token && { Authorization: `Bearer ${token}` }),
         ...options.headers,
       },
     });
 
     // Check if response is JSON
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
       const text = await response.text();
-      throw new Error(`Server returned non-JSON response: ${text.substring(0, 100)}`);
+      throw new Error(
+        `Server returned non-JSON response: ${text.substring(0, 100)}`,
+      );
     }
 
     const data: ApiResponse<T> = await response.json();
 
     if (!response.ok || !data.success) {
-      throw new Error(data.message || 'Request failed');
+      throw new Error(data.message || "Request failed");
     }
 
     return data.data as T;
   } catch (error: any) {
     // If it's a network error (backend not available), re-throw it
     // so components can handle it with demo mode
-    if (error.name === "TypeError" ||
+    if (
+      error.name === "TypeError" ||
       error.message.includes("fetch") ||
       error.message.includes("ERR_CONNECTION_REFUSED") ||
       error.message.includes("Failed to fetch") ||
       error.message.includes("NetworkError") ||
-      error.message.includes("network")) {
+      error.message.includes("network")
+    ) {
       throw new Error("Backend server not available");
     }
     // If it's a JSON parse error, provide better error message
     if (error.message.includes("JSON") || error.message.includes("<!DOCTYPE")) {
-      throw new Error("Server returned HTML instead of JSON. Check if the endpoint exists.");
+      throw new Error(
+        "Server returned HTML instead of JSON. Check if the endpoint exists.",
+      );
     }
     throw error;
   }
 }
 
 /** Stock API requests use external base URL for fetching stock details from external services. */
-async function stockApiRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+async function stockApiRequest<T>(
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<T> {
   const token = localStorage.getItem("auth_token");
   try {
     const response = await fetch(`${EXTERNAL_STOCK_API_BASE_URL}${endpoint}`, {
@@ -262,7 +304,9 @@ async function stockApiRequest<T>(endpoint: string, options: RequestInit = {}): 
     const contentType = response.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       const text = await response.text();
-      throw new Error(`Server returned non-JSON response: ${text.substring(0, 100)}`);
+      throw new Error(
+        `Server returned non-JSON response: ${text.substring(0, 100)}`,
+      );
     }
     const data: ApiResponse<T> = await response.json();
     if (!response.ok || !data.success) {
@@ -270,12 +314,127 @@ async function stockApiRequest<T>(endpoint: string, options: RequestInit = {}): 
     }
     return data.data as T;
   } catch (error: any) {
-    if (error.name === "TypeError" || error.message?.includes("fetch") || error.message?.includes("Failed to fetch")) {
+    if (
+      error.name === "TypeError" ||
+      error.message?.includes("fetch") ||
+      error.message?.includes("Failed to fetch")
+    ) {
       throw new Error("Stock service unavailable");
     }
     throw error;
   }
 }
+
+/** Admin/user management API types */
+export interface AdminUser {
+  id: number;
+  name: string;
+  email: string;
+  role: "admin" | "user";
+  status: "active" | "inactive";
+  createdAt: string;
+  lastActive?: string | null;
+}
+
+export const usersApi = {
+  list: async (): Promise<AdminUser[]> => {
+    const token = localStorage.getItem("auth_token");
+    const base =
+      SERVER_BASE_URL ||
+      (typeof window !== "undefined" ? window.location.origin : "");
+    const res = await fetch(`${base}/api/users`, {
+      method: "GET",
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(text || "Failed to load users");
+    }
+    return res.json() as Promise<AdminUser[]>;
+  },
+  create: async (payload: {
+    name: string;
+    email: string;
+    password: string;
+    role: "admin" | "user";
+    status?: "active" | "inactive";
+  }): Promise<AdminUser> => {
+    const token = localStorage.getItem("auth_token");
+    const base =
+      SERVER_BASE_URL ||
+      (typeof window !== "undefined" ? window.location.origin : "");
+    const res = await fetch(`${base}/api/users`, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(text || "Failed to create user");
+    }
+    return res.json() as Promise<AdminUser>;
+  },
+  update: async (
+    id: number,
+    payload: Partial<{
+      name: string;
+      email: string;
+      password: string;
+      role: "admin" | "user";
+      status: "active" | "inactive";
+    }>,
+  ): Promise<AdminUser> => {
+    const token = localStorage.getItem("auth_token");
+    const base =
+      SERVER_BASE_URL ||
+      (typeof window !== "undefined" ? window.location.origin : "");
+    const res = await fetch(`${base}/api/users/${id}`, {
+      method: "PATCH",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(text || "Failed to update user");
+    }
+    return res.json() as Promise<AdminUser>;
+  },
+  delete: async (id: number): Promise<{ message: string }> => {
+    const token = localStorage.getItem("auth_token");
+    const base =
+      SERVER_BASE_URL ||
+      (typeof window !== "undefined" ? window.location.origin : "");
+    const res = await fetch(`${base}/api/users/${id}`, {
+      method: "DELETE",
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(text || "Failed to delete user");
+    }
+    return res.json().catch(() => ({ message: "User deleted" })) as Promise<{
+      message: string;
+    }>;
+  },
+};
 
 // // Home CMS API
 // export const homeCmsApi = {
@@ -1044,71 +1203,92 @@ async function stockApiRequest<T>(endpoint: string, options: RequestInit = {}): 
 // Investors CMS API — uses external Stock API base for stock/investors data from external services
 export const investorsCmsApi = {
   getHero: () => stockApiRequest<any>("/api/cms/investors/hero"),
-  saveHero: (hero: any) => stockApiRequest("/api/cms/investors/hero", {
-    method: "PUT",
-    body: JSON.stringify(hero),
-  }),
+  saveHero: (hero: any) =>
+    stockApiRequest("/api/cms/investors/hero", {
+      method: "PUT",
+      body: JSON.stringify(hero),
+    }),
   getStockQuote: () => stockApiRequest<any>("/api/cms/investors/stock-quote"),
-  saveStockQuote: (stockQuote: any) => stockApiRequest("/api/cms/investors/stock-quote", {
-    method: "PUT",
-    body: JSON.stringify(stockQuote),
-  }),
+  saveStockQuote: (stockQuote: any) =>
+    stockApiRequest("/api/cms/investors/stock-quote", {
+      method: "PUT",
+      body: JSON.stringify(stockQuote),
+    }),
   getStockChart: () => stockApiRequest<any>("/api/cms/investors/stock-chart"),
-  saveStockChart: (stockChart: any) => stockApiRequest("/api/cms/investors/stock-chart", {
-    method: "PUT",
-    body: JSON.stringify(stockChart),
-  }),
-  getHistoricalStockQuote: () => stockApiRequest<any>("/api/cms/investors/historical-stock-quote"),
-  saveHistoricalStockQuote: (historicalStockQuote: any) => stockApiRequest("/api/cms/investors/historical-stock-quote", {
-    method: "PUT",
-    body: JSON.stringify(historicalStockQuote),
-  }),
-  getRelatedLinksSection: () => stockApiRequest<any>("/api/cms/investors/related-links/section"),
-  saveRelatedLinksSection: (section: any) => stockApiRequest("/api/cms/investors/related-links/section", {
-    method: "PUT",
-    body: JSON.stringify(section),
-  }),
-  getRelatedLinks: () => stockApiRequest<any[]>("/api/cms/investors/related-links"),
-  createRelatedLink: (link: any) => stockApiRequest("/api/cms/investors/related-links", {
-    method: "POST",
-    body: JSON.stringify(link),
-  }),
-  updateRelatedLink: (id: number, link: any) => stockApiRequest(`/api/cms/investors/related-links/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(link),
-  }),
-  deleteRelatedLink: (id: number) => stockApiRequest(`/api/cms/investors/related-links/${id}`, {
-    method: "DELETE",
-  }),
-  getKeyPersonnel: () => stockApiRequest<any[]>("/api/cms/investors/key-personnel"),
-  createKeyPersonnel: (personnel: any) => stockApiRequest("/api/cms/investors/key-personnel", {
-    method: "POST",
-    body: JSON.stringify(personnel),
-  }),
-  updateKeyPersonnel: (id: number, personnel: any) => stockApiRequest(`/api/cms/investors/key-personnel/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(personnel),
-  }),
-  deleteKeyPersonnel: (id: number) => stockApiRequest(`/api/cms/investors/key-personnel/${id}`, {
-    method: "DELETE",
-  }),
-  getAllPageContent: () => stockApiRequest<any[]>("/api/cms/investors/page-content"),
-  getPageContentBySlug: (slug: string) => stockApiRequest<any>(`/api/cms/investors/page-content/slug/${slug}`),
-  createPageContent: (pageContent: any) => stockApiRequest("/api/cms/investors/page-content", {
-    method: "POST",
-    body: JSON.stringify(pageContent),
-  }),
-  updatePageContent: (id: number, pageContent: any) => stockApiRequest(`/api/cms/investors/page-content/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(pageContent),
-  }),
-  deletePageContent: (id: number) => stockApiRequest(`/api/cms/investors/page-content/${id}`, {
-    method: "DELETE",
-  }),
-  downloadAndSavePdf: (url: string, pageType: string) => stockApiRequest("/api/cms/investors/download-pdf", {
-    method: "POST",
-    body: JSON.stringify({ url, pageType }),
-  }),
+  saveStockChart: (stockChart: any) =>
+    stockApiRequest("/api/cms/investors/stock-chart", {
+      method: "PUT",
+      body: JSON.stringify(stockChart),
+    }),
+  getHistoricalStockQuote: () =>
+    stockApiRequest<any>("/api/cms/investors/historical-stock-quote"),
+  saveHistoricalStockQuote: (historicalStockQuote: any) =>
+    stockApiRequest("/api/cms/investors/historical-stock-quote", {
+      method: "PUT",
+      body: JSON.stringify(historicalStockQuote),
+    }),
+  getRelatedLinksSection: () =>
+    stockApiRequest<any>("/api/cms/investors/related-links/section"),
+  saveRelatedLinksSection: (section: any) =>
+    stockApiRequest("/api/cms/investors/related-links/section", {
+      method: "PUT",
+      body: JSON.stringify(section),
+    }),
+  getRelatedLinks: () =>
+    stockApiRequest<any[]>("/api/cms/investors/related-links"),
+  createRelatedLink: (link: any) =>
+    stockApiRequest("/api/cms/investors/related-links", {
+      method: "POST",
+      body: JSON.stringify(link),
+    }),
+  updateRelatedLink: (id: number, link: any) =>
+    stockApiRequest(`/api/cms/investors/related-links/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(link),
+    }),
+  deleteRelatedLink: (id: number) =>
+    stockApiRequest(`/api/cms/investors/related-links/${id}`, {
+      method: "DELETE",
+    }),
+  getKeyPersonnel: () =>
+    stockApiRequest<any[]>("/api/cms/investors/key-personnel"),
+  createKeyPersonnel: (personnel: any) =>
+    stockApiRequest("/api/cms/investors/key-personnel", {
+      method: "POST",
+      body: JSON.stringify(personnel),
+    }),
+  updateKeyPersonnel: (id: number, personnel: any) =>
+    stockApiRequest(`/api/cms/investors/key-personnel/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(personnel),
+    }),
+  deleteKeyPersonnel: (id: number) =>
+    stockApiRequest(`/api/cms/investors/key-personnel/${id}`, {
+      method: "DELETE",
+    }),
+  getAllPageContent: () =>
+    stockApiRequest<any[]>("/api/cms/investors/page-content"),
+  getPageContentBySlug: (slug: string) =>
+    stockApiRequest<any>(`/api/cms/investors/page-content/slug/${slug}`),
+  createPageContent: (pageContent: any) =>
+    stockApiRequest("/api/cms/investors/page-content", {
+      method: "POST",
+      body: JSON.stringify(pageContent),
+    }),
+  updatePageContent: (id: number, pageContent: any) =>
+    stockApiRequest(`/api/cms/investors/page-content/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(pageContent),
+    }),
+  deletePageContent: (id: number) =>
+    stockApiRequest(`/api/cms/investors/page-content/${id}`, {
+      method: "DELETE",
+    }),
+  downloadAndSavePdf: (url: string, pageType: string) =>
+    stockApiRequest("/api/cms/investors/download-pdf", {
+      method: "POST",
+      body: JSON.stringify({ url, pageType }),
+    }),
 };
 
 // // Contact CMS API
@@ -1160,17 +1340,26 @@ export const investorsCmsApi = {
 // Stock Price API — uses external API base URL for getting stock details from external services
 export const stockApi = {
   getStockPrice: () => stockApiRequest<any>("/api/stock"),
-  updateHeaderStockPrice: () => stockApiRequest("/api/stock/update-header", {
-    method: "POST",
-  }),
-  getStockPriceFromExternal: () => stockApiRequest<any>("/api/stock/external", {
-    method: "POST",
-  }),
-  getStockQuoteValue: (stockName: string) => stockApiRequest<any>("/api/stock/quote-value", {
-    method: "POST",
-    body: JSON.stringify({ stock_name: stockName }),
-  }),
-  getStockChartData: (params: { action: string; stock_name: string; start_date?: string; end_date?: string; nonce?: string }) => {
+  updateHeaderStockPrice: () =>
+    stockApiRequest("/api/stock/update-header", {
+      method: "POST",
+    }),
+  getStockPriceFromExternal: () =>
+    stockApiRequest<any>("/api/stock/external", {
+      method: "POST",
+    }),
+  getStockQuoteValue: (stockName: string) =>
+    stockApiRequest<any>("/api/stock/quote-value", {
+      method: "POST",
+      body: JSON.stringify({ stock_name: stockName }),
+    }),
+  getStockChartData: (params: {
+    action: string;
+    stock_name: string;
+    start_date?: string;
+    end_date?: string;
+    nonce?: string;
+  }) => {
     const formData = new URLSearchParams();
     formData.append("action", params.action);
     formData.append("stock_name", params.stock_name);
@@ -1186,15 +1375,28 @@ export const stockApi = {
       body: formData.toString(),
     });
   },
-  getIntradayChartData: (stockName: string, date?: string) => stockApiRequest<any>("/api/stock/intraday-chart", {
-    method: "POST",
-    body: JSON.stringify({ stock_name: stockName, date: date || "" }),
-  }),
-  getChartByApi: (stockName: string, startDate?: string, endDate?: string) => stockApiRequest<any>("/api/stock/chart-by-api", {
-    method: "POST",
-    body: JSON.stringify({ stock_name: stockName, start_date: startDate || "", end_date: endDate || "" }),
-  }),
-  getHistoricalData: async (params: { page?: number; limit?: number; search?: string; startDate?: string; endDate?: string; exchange?: string }) => {
+  getIntradayChartData: (stockName: string, date?: string) =>
+    stockApiRequest<any>("/api/stock/intraday-chart", {
+      method: "POST",
+      body: JSON.stringify({ stock_name: stockName, date: date || "" }),
+    }),
+  getChartByApi: (stockName: string, startDate?: string, endDate?: string) =>
+    stockApiRequest<any>("/api/stock/chart-by-api", {
+      method: "POST",
+      body: JSON.stringify({
+        stock_name: stockName,
+        start_date: startDate || "",
+        end_date: endDate || "",
+      }),
+    }),
+  getHistoricalData: async (params: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    startDate?: string;
+    endDate?: string;
+    exchange?: string;
+  }) => {
     const queryParams = new URLSearchParams();
     if (params.page) queryParams.append("page", params.page.toString());
     if (params.limit) queryParams.append("limit", params.limit.toString());
@@ -1226,4 +1428,3 @@ export const stockApi = {
 };
 
 export default apiRequest;
-

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { usersApi, type AdminUser } from '@/services/api';
 
 interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
-  role: string;
+  role: 'admin' | 'user';
   status: 'active' | 'inactive';
   avatar: string;
   lastLogin: string;
@@ -16,61 +17,10 @@ interface UsersSectionProps {
 }
 
 const UsersSection = ({ showNotification }: UsersSectionProps) => {
-  const [users, setUsers] = useState<User[]>([
-    {
-      id: '1',
-      name: 'Admin User',
-      email: 'admin@rril.com',
-      role: 'Administrator',
-      status: 'active',
-      avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20person%20portrait%20male%20corporate%20executive%20suit%20confident%20modern%20office%20background&width=200&height=200&seq=user-avatar-001&orientation=squarish',
-      lastLogin: '2 hours ago',
-      createdAt: 'Jan 15, 2024',
-    },
-    {
-      id: '2',
-      name: 'Sarah Johnson',
-      email: 'sarah.j@rril.com',
-      role: 'Editor',
-      status: 'active',
-      avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20woman%20portrait%20female%20corporate%20executive%20suit%20confident%20modern%20office%20background&width=200&height=200&seq=user-avatar-002&orientation=squarish',
-      lastLogin: '1 day ago',
-      createdAt: 'Jan 10, 2024',
-    },
-    {
-      id: '3',
-      name: 'Michael Chen',
-      email: 'michael.c@rril.com',
-      role: 'Editor',
-      status: 'active',
-      avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20person%20portrait%20male%20asian%20corporate%20executive%20suit%20modern%20office%20background&width=200&height=200&seq=user-avatar-003&orientation=squarish',
-      lastLogin: '3 days ago',
-      createdAt: 'Dec 28, 2023',
-    },
-    {
-      id: '4',
-      name: 'Emily Davis',
-      email: 'emily.d@rril.com',
-      role: 'Contributor',
-      status: 'inactive',
-      avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20woman%20portrait%20female%20corporate%20professional%20casual%20modern%20office%20background&width=200&height=200&seq=user-avatar-004&orientation=squarish',
-      lastLogin: '2 weeks ago',
-      createdAt: 'Dec 15, 2023',
-    },
-    {
-      id: '5',
-      name: 'James Wilson',
-      email: 'james.w@rril.com',
-      role: 'Contributor',
-      status: 'active',
-      avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20person%20portrait%20male%20corporate%20casual%20modern%20office%20background%20friendly&width=200&height=200&seq=user-avatar-005&orientation=squarish',
-      lastLogin: '5 hours ago',
-      createdAt: 'Nov 20, 2023',
-    },
-  ]);
+  const [users, setUsers] = useState<User[]>([]);
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterRole, setFilterRole] = useState('all');
+  const [filterRole, setFilterRole] = useState<'all' | 'admin' | 'user'>('all');
   const [filterStatus, setFilterStatus] = useState('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -81,11 +31,61 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    role: 'Editor',
+    password: '',
+    role: 'user' as 'admin' | 'user',
     status: 'active' as 'active' | 'inactive',
   });
 
-  const roles = ['Administrator', 'Editor', 'Contributor'];
+  const roles: Array<{ value: 'admin' | 'user'; label: string }> = [
+    { value: 'admin', label: 'Admin' },
+    { value: 'user', label: 'User' },
+  ];
+
+  const formatDateTime = (value?: string | null) => {
+    if (!value) return 'Never';
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return value;
+    return d.toLocaleString('en-IN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  const formatDate = (value?: string | null) => {
+    if (!value) return '';
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return value;
+    return d.toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  useEffect(() => {
+    usersApi
+      .list()
+      .then((data) => {
+        const mapped: User[] = data.map((u: AdminUser) => ({
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          role: u.role,
+          status: u.status ?? 'active',
+          avatar:
+            'https://readdy.ai/api/search-image?query=professional%20business%20person%20portrait%20corporate%20executive%20suit%20modern%20office%20background&width=200&height=200&seq=user-avatar-db&orientation=squarish',
+          lastLogin: formatDateTime(u.lastActive),
+          createdAt: formatDate(u.createdAt),
+        }));
+        setUsers(mapped);
+      })
+      .catch((err: any) => {
+        showNotification(err?.message || 'Failed to load users', 'error');
+      });
+  }, [showNotification]);
 
   const filteredUsers = users.filter((user) => {
     const matchesSearch = 
@@ -96,63 +96,108 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
     return matchesSearch && matchesRole && matchesStatus;
   });
 
-  const handleCreateUser = () => {
-    if (!formData.name || !formData.email) {
+  const handleCreateUser = async () => {
+    if (!formData.name || !formData.email || !formData.password) {
       showNotification('Please fill in all required fields', 'error');
       return;
     }
 
-    const newUser: User = {
-      id: Date.now().toString(),
-      name: formData.name,
-      email: formData.email,
-      role: formData.role,
-      status: formData.status,
-      avatar: 'https://readdy.ai/api/search-image?query=professional%20business%20person%20portrait%20corporate%20executive%20suit%20modern%20office%20background&width=200&height=200&seq=user-avatar-new&orientation=squarish',
-      lastLogin: 'Never',
-      createdAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-    };
+    try {
+      const created = await usersApi.create({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+        status: formData.status,
+      });
 
-    setUsers([...users, newUser]);
-    setShowCreateModal(false);
-    resetForm();
-    showNotification('User created successfully!', 'success');
+      const newUser: User = {
+        id: created.id,
+        name: created.name,
+        email: created.email,
+        role: created.role,
+        status: created.status ?? 'active',
+        avatar:
+          'https://readdy.ai/api/search-image?query=professional%20business%20person%20portrait%20corporate%20executive%20suit%20modern%20office%20background&width=200&height=200&seq=user-avatar-new&orientation=squarish',
+        lastLogin: 'Never',
+        createdAt: formatDate(created.createdAt),
+      };
+
+      setUsers([...users, newUser]);
+      setShowCreateModal(false);
+      resetForm();
+      showNotification('User created successfully!', 'success');
+    } catch (err: any) {
+      showNotification(err?.message || 'Failed to create user', 'error');
+    }
   };
 
-  const handleEditUser = () => {
+  const handleEditUser = async () => {
     if (!selectedUser || !formData.name || !formData.email) {
       showNotification('Please fill in all required fields', 'error');
       return;
     }
 
-    setUsers(users.map((user) => 
-      user.id === selectedUser.id
-        ? { ...user, name: formData.name, email: formData.email, role: formData.role, status: formData.status }
-        : user
-    ));
+    try {
+      const payload: Partial<{ name: string; email: string; password: string; role: 'admin' | 'user'; status: 'active' | 'inactive' }> = {
+        name: formData.name,
+        email: formData.email,
+        role: formData.role,
+        status: formData.status,
+      };
+      // Only send password if set
+      if (formData.password) {
+        payload.password = formData.password;
+      }
 
-    setShowEditModal(false);
-    setSelectedUser(null);
-    resetForm();
-    showNotification('User updated successfully!', 'success');
+      const updated = await usersApi.update(selectedUser.id, payload);
+
+      setUsers(users.map((user) =>
+        user.id === selectedUser.id
+          ? {
+              ...user,
+              name: updated.name,
+              email: updated.email,
+              role: updated.role,
+              status: updated.status ?? user.status,
+            }
+          : user
+      ));
+
+      setShowEditModal(false);
+      setSelectedUser(null);
+      resetForm();
+      showNotification('User updated successfully!', 'success');
+    } catch (err: any) {
+      showNotification(err?.message || 'Failed to update user', 'error');
+    }
   };
 
-  const handleDeleteUser = () => {
+  const handleDeleteUser = async () => {
     if (!selectedUser) return;
 
-    setUsers(users.filter((user) => user.id !== selectedUser.id));
-    setShowDeleteModal(false);
-    setSelectedUser(null);
-    showNotification('User deleted successfully!', 'success');
+    try {
+      await usersApi.delete(selectedUser.id);
+      setUsers(users.filter((user) => user.id !== selectedUser.id));
+      setShowDeleteModal(false);
+      setSelectedUser(null);
+      showNotification('User deleted successfully!', 'success');
+    } catch (err: any) {
+      showNotification(err?.message || 'Failed to delete user', 'error');
+    }
   };
 
-  const handleToggleStatus = (userId: string) => {
-    setUsers(users.map((user) => 
-      user.id === userId
-        ? { ...user, status: user.status === 'active' ? 'inactive' : 'active' }
-        : user
-    ));
-    showNotification('User status updated!', 'info');
+  const handleToggleStatus = async (userId: number) => {
+    const user = users.find((u) => u.id === userId);
+    if (!user) return;
+    const newStatus: 'active' | 'inactive' = user.status === 'active' ? 'inactive' : 'active';
+    try {
+      await usersApi.update(userId, { status: newStatus });
+      setUsers(users.map((u) => (u.id === userId ? { ...u, status: newStatus } : u)));
+      showNotification('User status updated!', 'info');
+    } catch (err: any) {
+      showNotification(err?.message || 'Failed to update status', 'error');
+    }
   };
 
   const openEditModal = (user: User) => {
@@ -160,6 +205,7 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
     setFormData({
       name: user.name,
       email: user.email,
+      password: '',
       role: user.role,
       status: user.status,
     });
@@ -175,7 +221,8 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
     setFormData({
       name: '',
       email: '',
-      role: 'Editor',
+      password: '',
+      role: 'user',
       status: 'active',
     });
   };
@@ -223,12 +270,12 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
           {/* Role Filter */}
           <select
             value={filterRole}
-            onChange={(e) => setFilterRole(e.target.value)}
+            onChange={(e) => setFilterRole(e.target.value as 'all' | 'admin' | 'user')}
             className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm cursor-pointer"
           >
             <option value="all">All Roles</option>
             {roles.map((role) => (
-              <option key={role} value={role}>{role}</option>
+              <option key={role.value} value={role.value}>{role.label}</option>
             ))}
           </select>
 
@@ -378,14 +425,25 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
               </div>
 
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Password <span className="text-red-500">*</span></label>
+                <input
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                  placeholder="Set a password"
+                />
+              </div>
+
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Role</label>
                 <select
                   value={formData.role}
-                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, role: e.target.value as 'admin' | 'user' })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm cursor-pointer"
                 >
                   {roles.map((role) => (
-                    <option key={role} value={role}>{role}</option>
+                    <option key={role.value} value={role.value}>{role.label}</option>
                   ))}
                 </select>
               </div>
@@ -463,14 +521,25 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
               </div>
 
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">New Password (optional)</label>
+                <input
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                  placeholder="Set a new password"
+                />
+              </div>
+
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Role</label>
                 <select
                   value={formData.role}
-                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, role: e.target.value as 'admin' | 'user' })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm cursor-pointer"
                 >
                   {roles.map((role) => (
-                    <option key={role} value={role}>{role}</option>
+                    <option key={role.value} value={role.value}>{role.label}</option>
                   ))}
                 </select>
               </div>
