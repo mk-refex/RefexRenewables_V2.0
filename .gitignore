@@ -48,8 +48,6 @@ web_modules/
 # Files and folders
 uploads/
 
-config/
-
 # TypeScript cache
 *.tsbuildinfo
 
