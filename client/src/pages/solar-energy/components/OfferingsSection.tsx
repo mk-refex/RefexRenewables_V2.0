@@ -1,3 +1,6 @@
+import FadeInUp from "@/components/common/FadeInUp";
+import SectionHeading from "@/components/common/SectionHeading";
+
 export default function OfferingsSection() {
   const offerings = [
     {
@@ -19,10 +22,10 @@ export default function OfferingsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-900">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-[#F6F7F9]">
+      <div className="container">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[500px] rounded-lg overflow-hidden">
+          <div className="relative h-[866px] rounded-lg overflow-hidden">
             <img
               src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/solar-services-image-new.jpg"
               alt="Solar Installation Team"
@@ -30,25 +33,54 @@ export default function OfferingsSection() {
             />
           </div>
 
-          <div className="text-white">
+          <div>
             <div className="mb-8">
-              <span className="text-green-500 font-semibold text-sm uppercase tracking-wide">
-                WHAT DO WE OFFER
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold mt-3 leading-tight">
-                We offer end-to-end project support from concept to
-                commissioning ensuring efficiency, reliability, and optimal ROI.
-              </h2>
+              <FadeInUp delay={0.2}>
+                <SectionHeading
+                  badgeText="WHAT DO"
+                  text="WE OFFER"
+                  showWatermark={false}
+                />
+              </FadeInUp>
+              <FadeInUp delay={0.2}>
+                <h2
+                  style={{
+                    fontSize: "48px",
+                    fontWeight: 700,
+                    lineHeight: "63px",
+                    margin: "0px 0px 0px 0px",
+                  }}
+                >
+                  We offer end-to-end project support from concept to
+                  commissioning ensuring efficiency, reliability, and optimal
+                  ROI.
+                </h2>
+              </FadeInUp>
             </div>
 
             <div className="space-y-6">
               {offerings.map((offering, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <i className={`${offering.icon} text-xl text-white`}></i>
+                <div key={index} className="flex items-center gap-4">
+                  <div
+                    className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{
+                      fontSize: "24px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    <i className={`${offering.icon} text-white`}></i>
                   </div>
-                  <div className="pt-2">
-                    <h3 className="text-lg font-semibold">{offering.title}</h3>
+                  <div>
+                    <h3
+                      style={{
+                        color: "#1f1f25",
+                        fontFamily: "DM Sans, sans-serif",
+                        fontSize: "30px",
+                        lineHeight: "40px",
+                      }}
+                    >
+                      {offering.title}
+                    </h3>
                   </div>
                 </div>
               ))}

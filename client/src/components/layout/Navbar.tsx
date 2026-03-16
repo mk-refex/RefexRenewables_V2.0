@@ -68,83 +68,74 @@ export default function Navbar() {
   };
 
   const getStockColor = () => {
-    if (!stockData) return 'text-red-600';
-    return stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600';
+    if (!stockData) return 'text-red-400';
+    return stockData.index.startsWith('+') ? 'text-green-400' : 'text-red-400';
   };
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="lg:mx-[110px]">
-      {/* Top Bar with Logo and Stock Ticker */}
-      <div className="w-full bg-white">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center">
-            {/* Logo */}
-            <Link to="/" className="flex-shrink-0">
-              <img 
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2023/07/refex-logo-seperate.svg" 
-                alt="Refex Logo" 
-                className="h-10 md:h-12"
-              />
-            </Link>
-            
-            {/* Stock Ticker - Hidden on mobile */}
-            {stockLoading ? (
-              <div className="hidden sm:flex items-center gap-2 text-xs ml-4 md:ml-10">
-                <span className="font-semibold text-gray-800">Loading...</span>
-              </div>
-            ) : stockData ? (
-              <div className="hidden sm:flex items-center gap-2 text-xs ml-4 md:ml-10">
-                <span className="font-semibold text-gray-800">{stockData.exchange}</span>
-                <i className={`${getStockIcon()} ${getStockColor()}`}></i>
-                <span className={`font-semibold ${getStockColor()}`}>₹ {stockData.current_price.toFixed(2)}</span>
-                <span className={getStockColor()}>
-                  ({stockData.index})
-                </span>
-              </div>
-            ) : (
-              <div className="hidden sm:flex items-center gap-2 text-xs ml-4 md:ml-10">
-                <span className="font-semibold text-gray-800">BSE</span>
-                <i className="ri-arrow-down-s-fill text-red-600"></i>
-                <span className="font-semibold text-red-600">₹ 310</span>
-                <span className="text-red-600">(-2.82%)</span>
-              </div>
-            )}
 
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-800 hover:text-green-600 transition-colors cursor-pointer"
-            >
-              <i className={`${isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl`}></i>
-            </button>
-          </div>
-        </div>
-        {/* Horizontal line that stops at logo - Hidden on mobile */}
-        <div className="hidden lg:block container mx-auto px-4 lg:px-8">
-          <div className="border-b border-gray-200" style={{ marginLeft: '187px' }}></div>
-        </div>
-      </div>
-
-      {/* Main Navigation Bar with Company Name - Desktop Only */}
-      <div className="hidden lg:block w-full bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center h-14">
-            {/* Company Name */}
-            <div
-              className="text-gray-800 uppercase"
-              style={{
-                fontSize: '11.5px',
-                fontWeight: 500,
-                lineHeight: '15px',
-                letterSpacing: '0.3px',
-              }}
-            >
-              REFEX RENEWABLES &<br />INFRASTRUCTURE LIMITED
+      {/* Main Header Section */}
+      <div className="w-full bg-white border-b border-gray-200">
+        <div className="container mx-auto px-4 lg:px-[110px]">
+          <div className="flex items-center py-2 gap-8 lg:gap-[7rem]">
+            {/* Left Container - Logo and Company Name */}
+            <div className="flex flex-col flex-shrink-0">
+              <Link to="/" className="flex-shrink-0 mb-2">
+                <img 
+                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2023/07/refex-logo-seperate.svg" 
+                  alt="Refex Logo" 
+                  className="h-10 md:h-12"
+                />
+              </Link>
+              {/* Company Name */}
+              <div
+                className="text-gray-800 uppercase"
+                style={{
+                  fontSize: '11.5px',
+                  fontWeight: 500,
+                  lineHeight: '15px',
+                  letterSpacing: '0.3px',
+                }}
+              >
+                REFEX RENEWABLES &<br />INFRASTRUCTURE LIMITED
+              </div>
             </div>
 
-            {/* Navigation Links */}
-            <div className="flex items-center gap-6 xl:gap-10 ml-8">
+            {/* Right Container - Stock Ticker, Ruler Line, and Navigation */}
+            <div className="hidden lg:flex flex-col flex-1 ">
+              {/* Stock Ticker */}
+              <div className="mb-2">
+                {stockLoading ? (
+                  <div className="flex items-center gap-2 text-xs text-gray-800">
+                    <span className="font-semibold">Loading BSE Data...</span>
+                  </div>
+                ) : stockData ? (
+                  <div className="flex items-center gap-2 text-xs text-gray-800">
+                    <span className="font-semibold">{stockData.exchange}</span>
+                    <i className={`${getStockIcon()} ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}></i>
+                    <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>₹ {stockData.current_price.toFixed(2)}</span>
+                    <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>{stockData.index}</span>
+                    <span className={stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}>
+                      ({stockData.overall_index}%)
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 text-xs text-gray-800">
+                    <span className="font-semibold">BSE</span>
+                    <i className="ri-arrow-down-s-fill text-red-600"></i>
+                    <span className="font-semibold text-red-600">₹ 310.00</span>
+                    <span className="font-semibold text-red-600">-10.65</span>
+                    <span className="text-red-600">(-4.03%)</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Horizontal Ruler Line */}
+              <div className="w-full border-b border-gray-200 mb-3"></div>
+
+              {/* Navigation Links */}
+              <div className="flex items-center gap-6 xl:gap-10">
               <Link 
                 to="/" 
                 className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
@@ -229,22 +220,25 @@ export default function Navbar() {
                 </button>
                 {isBusinessOpen && (
                   <div className="absolute top-full left-0 mt-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                    {/* Solar Energy with Sub-dropdown */}
+                    {/* Renewable IPP with Sub-dropdown */}
                     <div 
                       className="relative group/solar"
                       onMouseEnter={() => setIsSolarOpen(true)}
                       onMouseLeave={() => setIsSolarOpen(false)}
                     >
                       <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap flex items-center justify-between">
-                        Solar Energy
+                      Renewable IPP
                         <i className="ri-arrow-right-s-line"></i>
                       </Link>
                       {isSolarOpen && (
                         <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                          <Link to="/energy-storage-solutions" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
-                            Energy Storage Solutions
+                                                    <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                            Solar Energy
                           </Link>
-                        </div>
+                                                <Link to="/energy-storage-solutions" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                                                  Energy Storage Solutions
+                                                </Link>
+                                              </div>
                       )}
                     </div>
 
@@ -276,7 +270,7 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Investor Relations Dropdown */}
+              {/* Investor Relations Dropdown 
               <div 
                 className="relative group"
                 onMouseEnter={() => setIsInvestorOpen(true)}
@@ -295,7 +289,6 @@ export default function Navbar() {
                 </Link>
                 {isInvestorOpen && (
                   <div className="absolute top-full left-0 mt-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                    {/* Smart ODR with Sub-dropdown */}
                     <div 
                       className="relative group/smartodr"
                       onMouseEnter={() => setIsSmartODROpen(true)}
@@ -322,6 +315,15 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
+              */}
+
+<Link 
+                to="/investors" 
+                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
+              >
+                INVESTOR RELATIONS
+              </Link>
 
               <Link 
                 to="/esg" 
@@ -338,10 +340,18 @@ export default function Navbar() {
               >
                 CONTACT US
               </Link>
+              </div>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-800 hover:text-green-600 transition-colors cursor-pointer"
+            >
+              <i className={`${isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl`}></i>
+            </button>
           </div>
         </div>
-      </div>
       </div>
 
       {/* Mobile Menu */}
@@ -355,10 +365,27 @@ export default function Navbar() {
 
             {/* Stock Ticker - Mobile */}
             <div className="sm:hidden flex items-center gap-2 text-xs mb-4 pb-4 border-b border-gray-200">
-              <span className="font-semibold text-gray-800">BSE</span>
-              <i className="ri-arrow-down-s-fill text-red-600"></i>
-              <span className="font-semibold text-red-600">₹ 310</span>
-              <span className="text-red-600">(-2.82%)</span>
+              {stockLoading ? (
+                <span className="text-gray-800">Loading BSE Data...</span>
+              ) : stockData ? (
+                <>
+                  <span className="font-semibold text-gray-800">{stockData.exchange}</span>
+                  <i className={`${getStockIcon()} ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}></i>
+                  <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>₹ {stockData.current_price.toFixed(2)}</span>
+                  <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>{stockData.index}</span>
+                  <span className={stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}>
+                    ({stockData.overall_index}%)
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="font-semibold text-gray-800">BSE</span>
+                  <i className="ri-arrow-down-s-fill text-red-600"></i>
+                  <span className="font-semibold text-red-600">₹ 310.00</span>
+                  <span className="font-semibold text-red-600">-10.65</span>
+                  <span className="text-red-600">(-4.03%)</span>
+                </>
+              )}
             </div>
 
             <nav className="flex flex-col gap-2">
@@ -533,7 +560,7 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Investor Relations - Mobile */}
+              {/* Investor Relations - Mobile 
               <div>
                 <button 
                   onClick={() => setMobileDropdown(mobileDropdown === 'investor' ? null : 'investor')}
@@ -544,7 +571,6 @@ export default function Navbar() {
                 </button>
                 {mobileDropdown === 'investor' && (
                   <div className="pl-4 mt-1 flex flex-col gap-1">
-                    {/* Smart ODR Sub-dropdown */}
                     <div>
                       <button 
                         onClick={() => setMobileSubDropdown(mobileSubDropdown === 'smartodr' ? null : 'smartodr')}
@@ -588,6 +614,15 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
+              */}
+
+            <Link 
+                to="/investors" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors"
+              >
+                INVESTOR RELATIONS
+              </Link>
 
               <Link 
                 to="/esg" 

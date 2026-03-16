@@ -16,15 +16,15 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-[130px] h-full flex items-center">
-        <div className="max-w-5xl">
+      <div className="relative z-10 container mx-auto px-[110px] h-full flex items-end pb-16">
+        <div className="max-w-7xl">
           <h1 className="text-white mb-8 leading-tight">
-            <span className="inline-block animate-slideInLeft opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+            <span className="inline-block animate-slideInLeft opacity-0" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
               <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">Lighting the path to </span>
               <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">Sustainability</span>
             </span>
             <br />
-            <span className="inline-block animate-slideInLeft opacity-0" style={{ animationDelay: '0.10s', animationFillMode: 'forwards' }}>
+            <span className="inline-block animate-slideInLeft opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
               <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">with </span>
               <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">Renewable </span>
               <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">Energy solutions</span>
@@ -33,7 +33,7 @@ const HeroSection = () => {
 
           <div className="mt-12 animate-slideInLeft opacity-0" style={{ animationDelay: '1s', animationFillMode: 'forwards' }}>
             <a 
-              href="#about" 
+              href="/about-us" 
               className="inline-flex items-center gap-2 text-white px-10 py-4 rounded-md text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap cursor-pointer"
               style={{ backgroundColor: 'rgb(132, 193, 76)' }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgb(112, 173, 56)'}

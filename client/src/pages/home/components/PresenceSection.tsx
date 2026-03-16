@@ -1,23 +1,25 @@
+import FadeInUp from '@/components/common/FadeInUp';
+import SectionHeading from '@/components/common/SectionHeading';
 import { useState, useEffect } from 'react';
 
 const PresenceSection = () => {
   const [activeState, setActiveState] = useState(0);
 
   const states = [
-    { name: 'Chhattisgarh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Chhattisgarh-map-new.png', position: { top: '48%', left: '58%' } },
-    { name: 'Gujarat', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Gujarat-map.png', position: { top: '42%', left: '28%' } },
-    { name: 'Punjab', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/punjab-map.png', position: { top: '18%', left: '35%' } },
-    { name: 'Uttar Pradesh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Uttar-Pradesh-map.png', position: { top: '32%', left: '50%' } },
-    { name: 'Maharashtra', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Maharashtra-map.png', position: { top: '58%', left: '38%' } },
-    { name: 'Delhi', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/delhi-map.png', position: { top: '26%', left: '42%' } },
-    { name: 'Madhya Pradesh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Madhya-Pradesh-map.png', position: { top: '45%', left: '43%' } },
-    { name: 'Rajasthan', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Rajasthan-map.png', position: { top: '35%', left: '33%' } },
-    { name: 'Ladakh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Ladakh-map.png', position: { top: '12%', left: '42%' } },
-    { name: 'Haryana', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/haryana-map.png', position: { top: '28%', left: '38%' } },
-    { name: 'Karnataka', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Karnataka-map.png', position: { top: '68%', left: '40%' } }
+    { name: 'Chhattisgarh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Chhattisgarh-map-new.png', position: { top: '50%', left: '48%' } },
+    { name: 'Gujarat', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Gujarat-map.png', position: { top: '45%', left: '15%' } },
+    { name: 'Punjab', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/punjab-map.png', position: { top: '21%', left: '28%' } },
+    { name: 'Uttar Pradesh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Uttar-Pradesh-map.png', position: { top: '34%', left: '44%' } },
+    { name: 'Maharashtra', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Maharashtra-map.png', position: { top: '57%', left: '26%' } },
+    { name: 'Delhi', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/delhi-map.png', position: { top: '27%', left: '33%' } },
+    { name: 'Madhya Pradesh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Madhya-Pradesh-map.png', position: { top: '45%', left: '36%' } },
+    { name: 'Rajasthan', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Rajasthan-map.png', position: { top: '35%', left: '22%' } },
+    { name: 'Ladakh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Ladakh-map.png', position: { top: '10%', left: '35%' } },
+    { name: 'Haryana', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/haryana-map.png', position: { top: '26%', left: '30%' } },
+    { name: 'Karnataka', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Karnataka-map.png', position: { top: '73%', left: '26%' } }
   ];
 
-  // Auto-slide effect
+  // Auto-slide effect - continuously update active state
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveState((prev) => (prev + 1) % states.length);
@@ -25,6 +27,10 @@ const PresenceSection = () => {
 
     return () => clearInterval(interval);
   }, [states.length]);
+
+  const handleStateChange = (index: number) => {
+    setActiveState(index);
+  };
 
   return (
     <section className="relative py-20 overflow-hidden">
@@ -37,8 +43,8 @@ const PresenceSection = () => {
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 container mx-auto px-[110px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left - Map with Markers */}
           <div className="relative">
             <div className="relative">
@@ -58,18 +64,34 @@ const PresenceSection = () => {
                     left: state.position.left,
                     transform: 'translate(-50%, -50%)'
                   }}
-                  onMouseEnter={() => setActiveState(index)}
+                  onMouseEnter={() => handleStateChange(index)}
                 >
                   {/* Marker with Glow Effect */}
                   <div className="relative">
                     {/* Glow Animation */}
-                    <div className="absolute inset-0 w-6 h-6 bg-green-500 rounded-full animate-ping opacity-75"></div>
+                    <div 
+                      className="absolute inset-0 w-5 h-5 rounded-full animate-ping opacity-75"
+                      style={{ backgroundColor: '#4AAB3D' }}
+                    ></div>
                     
-                    {/* Marker Icon */}
-                    <div className={`relative w-6 h-6 flex items-center justify-center transition-all duration-300 ${
+                    {/* Marker Icon with Background */}
+                    <div className={`relative w-5 h-5 flex items-center justify-center transition-all duration-300 ${
                       activeState === index ? 'scale-125' : ''
                     }`}>
-                      <i className="fas fa-map-marker-alt text-green-600 text-2xl drop-shadow-lg"></i>
+                      {/* Circular Background */}
+                      <div 
+                        className="absolute rounded-full"
+                        style={{ 
+                          backgroundColor: '#4AAB3D',
+                          width: '25px',
+                          height: '25px',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                        }}
+                      ></div>
+                      {/* Marker Icon */}
+                      <i className="fas fa-map-marker-alt text-white text-lg drop-shadow-lg relative z-10"></i>
                     </div>
                     
                     {/* Tooltip */}
@@ -90,44 +112,62 @@ const PresenceSection = () => {
           {/* Right - Content */}
           <div>
             <div className="mb-6">
-              <span className="inline-block bg-green-600 text-white text-sm font-semibold tracking-wider uppercase px-4 py-2 rounded">
-                STATE WISE
-              </span>
+              <SectionHeading badgeText="STATE" text="WISE" showWatermark={false}/>
             </div>
+            <FadeInUp delay={0.2}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-12 leading-tight">
               Our Presence
             </h2>
+            </FadeInUp>
 
-            {/* State Card with Auto-Slide */}
-            <div className="relative">
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
-                <div className="flex items-center gap-8">
-                  {/* State Map Image */}
-                  <div className="w-40 h-40 flex-shrink-0 transition-all duration-700">
-                    <img 
-                      src={states[activeState].image} 
-                      alt={states[activeState].name} 
-                      className="w-full h-full object-contain"
-                      key={activeState}
-                    />
+            {/* State Card with Continuous Slide */}
+            <div className="relative overflow-hidden h-[280px]">
+              <div 
+                className="flex"
+                style={{
+                  width: `${states.length * 100}%`,
+                  transform: `translateX(-${(activeState * 100) / states.length}%)`,
+                  transition: 'transform 0.8s ease-in-out',
+                }}
+              >
+                {states.map((state, index) => (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex items-center justify-center"
+                    style={{ 
+                      width: `calc(100% / ${states.length})`,
+                      minWidth: `calc(100% / ${states.length})`,
+                      height: '100%',
+                    }}
+                  >
+                    <div className="flex items-center justify-center gap-8">
+                      {/* State Map Image */}
+                      <div className="w-40 h-40 flex-shrink-0">
+                        <img 
+                          src={state.image} 
+                          alt={state.name} 
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      
+                      {/* State Name */}
+                      <div className="flex-1">
+                        <h3 className="text-3xl lg:text-4xl font-bold text-gray-900">
+                          {state.name}
+                        </h3>
+                      </div>
+                    </div>
                   </div>
-                  
-                  {/* State Name */}
-                  <div className="flex-1">
-                    <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 transition-all duration-700" key={`name-${activeState}`}>
-                      {states[activeState].name}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Slide Counter */}
-              <div className="text-center mt-6">
-                <span className="text-sm text-gray-500 font-medium">
-                  {activeState + 1} / {states.length}
-                </span>
+                ))}
               </div>
             </div>
+
+            {/* Slide Counter */}
+            {/* <div className="text-center mt-6">
+              <span className="text-sm text-gray-500 font-medium">
+                {activeState + 1} / {states.length}
+              </span>
+            </div> */}
           </div>
         </div>
       </div>

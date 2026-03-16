@@ -1,25 +1,27 @@
+import SectionHeading from '../../../components/common/SectionHeading';
+
 export default function ContactInfoSection() {
   const contacts = [
     {
-      title: 'CORPORATE OFFICE',
+      title: 'Corporate Office',
       name: 'Refex Renewables & Infrastructure Limited',
-      cin: 'CIN: L40101TN1989PLC028263',
-      address: 'Refex Building, G7, Besullah Road,\nParthasarathy Puram, T Nagar,\nChennai – 600 017, Tamil Nadu',
+      cin: 'CIN: L40100TN1994PLC028263',
+      address: 'Refex Building, 67, Bazullah Road,\nParthasarathy Puram, T Nagar,\nChennai – 600 017, Tamil Nadu',
       phone: '+91-44 – 4340 5950',
       email: 'cs@refexrenewables.com',
       color: 'text-emerald-600'
     },
     {
-      title: 'REGISTERED OFFICE',
+      title: 'Registered Office',
       name: 'Refex Renewables & Infrastructure Limited',
-      cin: 'CIN: L40101TN1989PLC028263',
+      cin: 'CIN: L40100TN1994PLC028263',
       address: '2nd Floor, Refex Towers, Sterling Road Signal\n313, Valluvar Kottam High Road, Nungambakkam,\nChennai – 600 034, Tamil Nadu',
       phone: 'Tel: +91-44 – 4340 5950',
       email: 'cs@refexrenewables.com',
       color: 'text-emerald-600'
     },
     {
-      title: 'INVESTOR RELATIONS',
+      title: 'Investor Relations',
       name: 'Mr. Vinay Aggarwal',
       designation: 'Company Secretary & Compliance Officer',
       company: 'Refex Renewables & Infrastructure Limited',
@@ -29,11 +31,11 @@ export default function ContactInfoSection() {
       color: 'text-emerald-600'
     },
     {
-      title: 'REGISTRAR AND SHARE TRANSFER AGENT',
+      title: 'Registrar and Share Transfer Agent',
       name: 'Mr. Krishna Kumar N',
       designation: 'Director & Compliance Officer',
       company: 'GNSA Infotech Private Limited',
-      address: 'Nelson Chambers, 2/A Second Floor,\nNo. 115, Nelson Manickam Road, Aminjikarai,\nChennai – 600029, Tamil Nadu',
+      address: '4th and 5th Floors,\nF-Block, Nelson Chambers\nNo.115, Nelson Manickam Road,\nAminjikarai, Chennai-600030, Tamil Nadu',
       phone: '+91-44 – 42962025',
       email: 'sta@gnsaindia.com',
       color: 'text-emerald-600'
@@ -43,12 +45,22 @@ export default function ContactInfoSection() {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6">
+        {/* <div className="mb-12 flex flex-col items-center text-center">
+          <SectionHeading
+            badgeText="CONTACT"
+            text="Information"
+            className="justify-center"
+            watermarkAlign="center"
+          />
+        </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {contacts.map((contact, index) => (
             <div key={index} className="border-b border-gray-200 pb-8">
-              <h3 className={`text-sm font-semibold ${contact.color} mb-3 uppercase tracking-wide`}>
-                {contact.title}
-              </h3>
+              <SectionHeading
+                badgeText={contact.title}
+                showWatermark={false}
+                className="mb-3"
+              />
               <h4 className="text-xl font-bold text-gray-900 mb-2">
                 {contact.name}
               </h4>

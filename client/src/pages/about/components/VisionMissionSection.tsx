@@ -1,7 +1,9 @@
+import FadeInUp from "@/components/common/FadeInUp";
+
 const VisionMissionSection = () => {
   return (
     <section id="vision-mission" className="py-16 lg:py-24 bg-white">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 lg:px-[110px]">
         {/* Vision */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           <div className="order-2 lg:order-1">
@@ -15,17 +17,19 @@ const VisionMissionSection = () => {
           </div>
 
           <div className="order-1 lg:order-2">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Vision
-            </h2>
+            <FadeInUp delay={0.2}>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                Vision
+              </h2>
+            </FadeInUp>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                As the first Indian wind company committed to net-carbon neutral
-                operations, we are dedicated to accelerating the global
-                transition to renewable energy through innovation and
-                sustainable practices.
+                Refex aims to be a globally admired conglomerate, driving
+                long-term sustainable growth through innovation, purposeful
+                collaborations and partnerships, and an unwavering commitment to
+                excellence, while contributing meaningfully to societal progress
               </p>
-              <p>
+              {/* <p>
                 To lead India's clean energy revolution, making sustainable
                 power accessible to all while fostering economic growth and
                 environmental stewardship.
@@ -34,7 +38,7 @@ const VisionMissionSection = () => {
                 We envision a future where renewable energy is the backbone of
                 India's energy infrastructure, empowering communities and
                 driving progress towards a carbon-neutral society.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
@@ -42,16 +46,19 @@ const VisionMissionSection = () => {
         {/* Mission */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-              Mission
-            </h2>
+            <FadeInUp delay={0.2}>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                Mission
+              </h2>
+            </FadeInUp>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                To develop and operate world-class renewable energy projects
-                that deliver reliable, affordable clean power while creating
-                value for our stakeholders and communities.
+                Refex shall create enduring value across industries through
+                innovation, operational excellence, and sustainable practices,
+                thereby empowering our customers, enriching our communities, and
+                delivering responsible growth for all stakeholders
               </p>
-              <p>
+              {/* <p>
                 We are committed to quality, innovation, and excellence in
                 execution. We continuously invest in cutting-edge technology and
                 sustainable business models to optimize our operations.
@@ -61,7 +68,7 @@ const VisionMissionSection = () => {
                 catalysts for positive change, contributing to India's economic
                 development and environmental goals while maintaining the
                 highest standards of corporate governance.
-              </p>
+              </p> */}
             </div>
           </div>
 

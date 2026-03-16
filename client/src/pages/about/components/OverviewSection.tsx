@@ -1,38 +1,54 @@
+import FadeInUp from "@/components/common/FadeInUp";
+import SectionHeading from "@/components/common/SectionHeading";
+
 const OverviewSection = () => {
   return (
-    <section className="py-16 lg:py-20 bg-white">
-      <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+    <section className="py-16 lg:py-24 bg-[#F6F6F6]">
+      <div className="container mx-auto px-4 lg:px-[110px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Content */}
           <div>
             <div className="mb-8">
-              <img 
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2023/07/refex-logo-seperate.svg"
-                alt="Refex Logo"
-                className="h-12 lg:h-14 mb-6"
-              />
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                Refex Renewables &<br />Infrastructure Limited
-              </h2>
+              <FadeInUp delay={0.1}>
+                <SectionHeading
+                  badgeText="ABOUT"
+                  text="US"
+                  showWatermark={false}
+                />
+              </FadeInUp>
+              <FadeInUp delay={0.2}>
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+                  Refex Renewables &<br />
+                  Infrastructure Limited
+                </h2>
+              </FadeInUp>
             </div>
-            
+
             <div className="space-y-4">
-              <p className="text-gray-700 leading-relaxed text-base">
-                Refex Renewables and Infrastructure Limited (RRIL) is an Independent Power Producer (IPP) with diversified operations across renewable energy, generation and infrastructure sectors. RRIL commenced its operations in 2011, backed by a team of professionals well versed in the development of utility scale renewable energy assets and a proven track record at an accelerated pace. RRIL currently has operational renewable energy (~1 GW) and thermal (~550 MW) assets across India.
+              <p className="text-[#6E777D] text-[18px] leading-relaxed text-base">
+                Refex Renewables & Infrastructure Limited (RRIL) is a leading
+                name in solar energy, recognized for pioneering projects and
+                delivering innovative, first-of-their-kind renewable energy
+                systems across India. Operating at nearly 89 sites in 12 states,
+                RRIL offers end-to-end solutions in solar installation and clean
+                energy deployment.
               </p>
             </div>
           </div>
 
           {/* Right Content */}
           <div className="space-y-4">
-            <p className="text-gray-700 leading-relaxed text-base">
-              RRIL has established a reputation as one of India's leaders in renewable energy space with a commitment towards safe, accountable and sustainable business practices. We strive to continuously improve & deploy cutting-edge technology for providing clean energy solutions to our customers.
-            </p>
-            <p className="text-gray-700 leading-relaxed text-base">
-              RRIL's renewable energy portfolio consists of utility scale ground mounted solar power plants and rooftop solar installations. Our Compressed Bio Gas (CBG) business further supports transition to clean energy with an environmentally friendly solution for waste management and power generation, supporting the Government of India's SATAT (Sustainable Alternative Towards Affordable Transportation) scheme to promote CBG.
-            </p>
-            <p className="text-gray-700 leading-relaxed text-base">
-              RRIL is promoted by Mr. Anil Jain and other associates, who bring with them rich experience and understanding of the renewable energy ecosystem. Their vision and leadership has fostered robust growth for the company, helping realise our purpose of providing clean, reliable & affordable energy solutions to our customers. Through our operations, we continue to contribute meaningfully towards India's commitment to building a clean energy future.
+            <p className="text-[#6E777D] text-[18px] leading-relaxed text-base">
+              Since its inception in 2017 as an Independent Power Producer
+              (IPP), RRIL has been at the forefront of promoting solar, wind,
+              and battery energy storage systems (BESS) as sustainable
+              alternatives. We excel in the development of rooftop solar
+              projects for industrial and commercial sectors, as well as
+              large-scale solar power plants through greenfield ground-mounted
+              solar installations. With a strong portfolio and a trusted
+              clientele that includes key government bodies and reputed private
+              enterprises, RRIL continues to shape India’s renewable energy
+              landscape.
             </p>
           </div>
         </div>
@@ -43,22 +59,34 @@ const OverviewSection = () => {
             <div className="flex items-center justify-center mb-4">
               <i className="ri-building-line text-4xl lg:text-5xl"></i>
             </div>
-            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">89</div>
-            <div className="text-sm font-medium text-center uppercase tracking-wide">Sites</div>
+            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">
+              89
+            </div>
+            <div className="text-sm font-medium text-center uppercase tracking-wide">
+              Sites
+            </div>
           </div>
           <div className="bg-[#1a5d3a] text-white p-6 lg:p-8 rounded-lg">
             <div className="flex items-center justify-center mb-4">
               <i className="ri-sun-line text-4xl lg:text-5xl"></i>
             </div>
-            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">1 GW</div>
-            <div className="text-sm font-medium text-center uppercase tracking-wide">Solar</div>
+            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">
+              1 GW
+            </div>
+            <div className="text-sm font-medium text-center uppercase tracking-wide">
+              Solar
+            </div>
           </div>
           <div className="bg-[#1a5d3a] text-white p-6 lg:p-8 rounded-lg">
             <div className="flex items-center justify-center mb-4">
               <i className="ri-map-pin-line text-4xl lg:text-5xl"></i>
             </div>
-            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">12</div>
-            <div className="text-sm font-medium text-center uppercase tracking-wide">States</div>
+            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">
+              12
+            </div>
+            <div className="text-sm font-medium text-center uppercase tracking-wide">
+              States
+            </div>
           </div>
         </div>
       </div>

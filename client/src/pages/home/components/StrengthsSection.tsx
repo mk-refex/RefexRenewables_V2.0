@@ -1,3 +1,5 @@
+import FadeInUp from '@/components/common/FadeInUp';
+import SectionHeading from '@/components/common/SectionHeading';
 import { useRef } from 'react';
 
 const StrengthsSection = () => {
@@ -7,48 +9,48 @@ const StrengthsSection = () => {
     {
       icon: 'ri-star-line',
       title: 'End-to-End Project Expertise',
-      description: 'From feasibility to commissioning and lifecycle management, we bring full-stack capability in renewable energy systems',
-      image: 'https://readdy.ai/api/search-image?query=professional%20renewable%20energy%20engineers%20working%20on%20solar%20panel%20installation%20project%20with%20technical%20equipment%20blueprints%20and%20modern%20industrial%20facility%20showing%20end%20to%20end%20project%20management%20expertise%20with%20clean%20simple%20background&width=600&height=400&seq=strength-expertise-001&orientation=landscape'
+      description: 'From feasibility to commissioning and lifecycle management, we bring full-stack capability in renewable energy and infrastructure projects.',
+      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/strength02-new.jpg'
     },
     {
       icon: 'ri-settings-3-line',
       title: 'Engineering Excellence at Scale',
-      description: 'Our team of solar engineers and energy experts deliver precision-engineered solutions backed by decades of combined experience',
-      image: 'https://readdy.ai/api/search-image?query=large%20scale%20solar%20energy%20engineering%20facility%20with%20rows%20of%20photovoltaic%20panels%20and%20technical%20infrastructure%20showing%20precision%20engineering%20excellence%20and%20industrial%20scale%20renewable%20energy%20systems%20with%20clean%20simple%20background&width=600&height=400&seq=strength-engineering-002&orientation=landscape'
+      description: 'Our team of solar engineers and energy experts deliver high-performance systems with precision and scalability—across commercial, industrial, and utility-scale projects.',
+      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/strength04-new.jpg'
     },
     {
       icon: 'ri-shield-check-line',
-      title: 'Proven Track Record',
-      description: 'With 89 operational sites across 12 states and 1 GW of installed capacity, our results speak for themselves',
-      image: 'https://readdy.ai/api/search-image?query=successful%20completed%20solar%20power%20plant%20installation%20with%20multiple%20operational%20sites%20showing%20proven%20track%20record%20of%20renewable%20energy%20projects%20across%20different%20locations%20with%20clean%20simple%20background&width=600&height=400&seq=strength-track-003&orientation=landscape'
+      title: 'Robust O&M and Lifecycle Support',
+      description: "Our solar responsibility doesn’t end at commissioning. With predictive maintenance, uptime guarantees, and regular audits, we ensure long-term asset performance.",
+      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/strength03-new01.jpg',
     }
-  ];
+    ];
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24 bg-[#F6F6F6]">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <div className="mb-4">
-            <span className="inline-block bg-green-600 text-white text-sm font-bold tracking-wider uppercase px-4 py-2">
-              OUR STRENGTHS
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight max-w-4xl mx-auto">
+          <SectionHeading badgeText="OUR" text="STRENGTHS" className="justify-center" watermarkAlign="center" />
+          <FadeInUp delay={0.2}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight max-w-5xl mx-auto">
             Strong Foundations built on Innovation, Sustainability and Reliability
           </h2>
+          </FadeInUp>
         </div>
 
         {/* Strengths Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {strengths.map((strength, index) => (
             <div
               key={index}
-              ref={(el) => (cardRefs.current[index] = el)}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
               className="group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-96 cursor-pointer"
             >
               {/* Default Background - Gray */}
-              <div className="absolute inset-0 bg-gray-100"></div>
+              <div className="absolute inset-0 bg-[#FFFFFF]"></div>
 
               {/* Background Image - Hidden by default, reveals on hover from bottom to top */}
               <div className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out">

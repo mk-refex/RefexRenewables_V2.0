@@ -11,9 +11,9 @@ export default function CompressedBioGasPage() {
     <Layout>
       <HeroSection />
       <AboutSection />
+      <OfferingsSection />
       <ServicesSection />
       <InitiativesSection />
-      <OfferingsSection />
       <ProjectsSection />
     </Layout>
   );

@@ -1,3 +1,5 @@
+import HeroHeading from "@/components/common/HeroHeading";
+
 export default function HeroSection() {
   return (
     <section
@@ -9,9 +11,7 @@ export default function HeroSection() {
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40"></div>
       <div className="relative z-10 container mx-auto px-6">
-        <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 animate-slideInLeft">
-          Spectrum Renewable
-        </h1>
+        <HeroHeading watermarkText="Renewable" text="Spectrum Renewables" watermarkAlign="center" className="text-center" />
       </div>
     </section>
   );

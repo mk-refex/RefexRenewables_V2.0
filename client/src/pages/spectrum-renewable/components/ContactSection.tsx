@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import SectionHeading from "../../../components/common/SectionHeading";
+import FadeInUp from "../../../components/common/FadeInUp";
 
 export default function ContactSection() {
   return (
@@ -10,11 +12,16 @@ export default function ContactSection() {
       }}
     >
       <div className="absolute inset-0 bg-black/60"></div>
-      <div className="relative z-10 container mx-auto px-6">
-        <div className="max-w-3xl">
-          <h2 className="text-4xl font-bold text-white mb-6">
+      <div className="relative z-10 container mx-auto px-4 lg:px-[110px]">
+        <FadeInUp delay={0} className="max-w-3xl">
+          <SectionHeading
+            badgeText="CONTACT"
+            text="Information"
+            showWatermark={false}
+          />
+          {/* <h2 className="text-4xl font-bold text-white mb-6 mt-3">
             Contact Information
-          </h2>
+          </h2> */}
           <div className="text-white text-lg space-y-2 mb-8">
             <p className="font-semibold">
               Spectrum Renewable Energy Private Limited
@@ -29,7 +36,7 @@ export default function ContactSection() {
           >
             Contact Us
           </Link>
-        </div>
+        </FadeInUp>
       </div>
     </section>
   );

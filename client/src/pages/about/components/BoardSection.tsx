@@ -1,3 +1,4 @@
+import FadeInUp from '@/components/common/FadeInUp';
 import { useState } from 'react';
 
 const BoardSection = () => {
@@ -19,7 +20,9 @@ const BoardSection = () => {
         'Sherisha Rooftop Solar SPV Three Private Limited',
         'Sherisha Rooftop Solar SPV Four Private Limited',
         'Sherisha Agriculture Private Limited',
-        'STPL Horticulture Private Limited'
+        'STPL Horticulture Private Limited',
+        'Spectrum Renewable Energy Private Limited',
+        'Sherisha Solar LLP'
       ]
     },
     {
@@ -42,7 +45,17 @@ const BoardSection = () => {
         'Refex Green Power Limited',
         'Refex Airports and Transportation Private Limited',
         'Refex Beverages Private Limited',
-        'AJ Incubation Forum'
+        'AJ Incubation Forum',
+        'Refex Life Sciences Private Limited',
+        'STPL Solutions LLP',
+        'LSM Developers LLP',
+        'Traction Infra LLP',
+        'Refex Capital Advisors LLP',
+        'Aabhuti Special Situations Advisory LLP',
+        'Coastalview Estates LLP',
+        'Smartdwell Realty LLP',
+        'Sherisha Solar LLP'
+
       ]
     },
     {
@@ -69,7 +82,17 @@ const BoardSection = () => {
         'Sherisha Infrastructure Private Limited',
         'Scorch Solar Energy Private Limited',
         'Singe Solar Energy Private Limited',
-        'Sparzana Aviation Private Limited'
+        'Sparzana Aviation Private Limited',
+        'Traction Infra LLP',
+        'Refex Capital Advisors LLP',
+        'Aabhuti Special Situations Advisory LLP',
+        'Coastalview Estates LLP',
+        'Smartdwell Realty LLP',
+        'SKCNP Infraparks LLP',
+        'LSM Developers LLP',
+        'RKMR Consultants LLP',
+        'RKMR Estates LLP',
+
       ]
     },
     {
@@ -81,9 +104,10 @@ const BoardSection = () => {
       directorships: [
         'Securekloud Technologies Limited',
         'Talluri\'s Kitchen Temple Private Limited',
-        'Som Datt Finance Corporation Limited',
+        // 'Som Datt Finance Corporation Limited',
         'Talluri Law Consultancy (OPC) Private Limited',
-        'International Conveyors Limited'
+        'International Conveyors Limited',
+        'Crescentis Capital Limited',
       ]
     },
     {
@@ -94,7 +118,7 @@ const BoardSection = () => {
       bio: 'Mr. Pillappan Amalanathan has an established independent practice for the past 20 years with a well-equipped library, office and three junior associates. He appeared in many cases relating to political fronts, commercial matters for several private concerns and companies including matters relating to Company Law such as winding up, amalgamation and reconstitution and have advised on company formation, tax planning, pre-litigation settlements, international contracts formation. He has wide exposure and experience in diverse fields of law and enjoy a good reputation in the Bar.',
       directorships: [
         'Krish Solar Ventures Private Limited',
-        'Torrid Solar Power Private Limited',
+        // 'Torrid Solar Power Private Limited',
         'V Tree Traders Private Limited'
       ]
     },
@@ -106,20 +130,23 @@ const BoardSection = () => {
       bio: 'Ms. Latha Venkatesh is a senior Auditor with eleven years of experience in practice. Having worked with clients in multiple industries, she has good knowledge and vast experience in cost audit, internal audits, processes and standards that significantly improve the opinion on company records, banking practices and management & taxation, technology driven performances. She has engaged with multiple business sectors like Engineering & Manufacturing, Construction & Civil Engineering and Banking.',
       directorships: [
         'K.S.Oils Limited',
-        'Torrid Solar Power Private Limited',
-        'Refex Industries Limited'
+        // 'Torrid Solar Power Private Limited',
+        'Refex Industries Limited',
+        'Kwick Forensic Solutions Limited'
       ]
     }
   ];
 
   return (
     <section id="board-of-directors" className="py-8 lg:py-16 bg-white">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 lg:px-[110px]">
         <div className="text-center mb-12">
+          <FadeInUp delay={0.2}>
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Board of Directors</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Our board comprises experienced professionals who provide strategic guidance and governance
           </p>
+          </FadeInUp>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -208,7 +235,7 @@ const BoardSection = () => {
                       }
                     }}
                   >
-                    <span>DIRECTORSHIP DETAILS</span>
+                    <span>Directorship and Designated Partnership Details</span>
                     <i className="ri-arrow-down-s-line text-xl"></i>
                   </button>
                   <div style={{ display: 'none' }}>

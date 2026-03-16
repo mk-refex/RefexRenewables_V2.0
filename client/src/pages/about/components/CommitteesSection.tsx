@@ -1,3 +1,5 @@
+import FadeInUp from "@/components/common/FadeInUp";
+
 const CommitteesSection = () => {
   const committees = [
     {
@@ -28,11 +30,13 @@ const CommitteesSection = () => {
 
   return (
     <section className="py-16 lg:py-24 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 lg:px-[110px]">
         <div className="text-center mb-12">
+          <FadeInUp delay={0.2}>
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Composition of Committees
           </h2>
+          </FadeInUp>
         </div>
 
         <div className="overflow-x-auto">

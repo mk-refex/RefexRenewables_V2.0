@@ -33,7 +33,7 @@ interface StockChartSettings {
 
 export default function StockChart() {
   const [settings, setSettings] = useState<StockChartSettings | null>(null);
-  const [activeExchange, setActiveExchange] = useState<"BSE" | "NSE">("BSE");
+  const activeExchange: "BSE" = "BSE"; // Always BSE
   const [activeFilter, setActiveFilter] = useState("Today");
   const [chartType, setChartType] = useState<"line" | "candle">("line");
   const [showCustomFilter, setShowCustomFilter] = useState(false);
@@ -57,19 +57,18 @@ export default function StockChart() {
     loadSettings();
   }, []);
 
-  // Fetch chart data when exchange/filter changes
+  // Fetch chart data when filter changes
   useEffect(() => {
     if (settings) {
       fetchChartData();
     }
-  }, [activeExchange, activeFilter, fromDate, toDate, settings]);
+  }, [activeFilter, fromDate, toDate, settings]);
 
   const loadSettings = async () => {
     try {
       const data = await investorsCmsApi.getStockChart();
       if (data && data.isActive) {
         setSettings(data);
-        setActiveExchange((data.defaultExchange || "BSE") as "BSE" | "NSE");
         setActiveFilter(data.defaultFilter || "Today");
         setChartType((data.defaultChartType || "line") as "line" | "candle");
       } else {
@@ -122,9 +121,8 @@ export default function StockChart() {
       setLoading(true);
       let data: ChartDataPoint[] = [];
 
-      // Get correct stock symbol based on exchange
-      const stockSymbol =
-        activeExchange === "BSE" ? "REFEXRENEW.BO" : "REFEXRENEW.NS";
+      // Always use BSE stock symbol
+      const stockSymbol = "REFEXRENEW.BO";
 
       if (activeFilter === "Today") {
         // Use intraday API for today
@@ -972,36 +970,12 @@ export default function StockChart() {
           <h2 className="text-3xl font-bold text-black uppercase tracking-wider">
             {settings.title || "STOCK CHART"}
           </h2>
+          <div className="mt-4">
+            <span className="inline-block px-4 py-2 bg-[#7cd244] text-white rounded-md font-semibold text-sm">
+              BSE
+            </span>
+          </div>
         </div>
-
-        {/* Exchange Tabs (BSE / NSE) - placed above filters */}
-        <div className="flex items-center gap-3 mb-2">
-          <button
-            onClick={() => setActiveExchange("BSE")}
-            disabled={loading}
-            className={`px-6 py-2 font-semibold text-sm rounded ${
-              activeExchange === "BSE"
-                ? "bg-[#7dc244] text-white"
-                : "bg-white text-black border border-gray-300 hover:bg-gray-100"
-            } ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
-          >
-            BSE
-          </button>
-          <button
-            onClick={() => setActiveExchange("NSE")}
-            disabled={loading}
-            className={`px-6 py-2 font-semibold text-sm rounded ${
-              activeExchange === "NSE"
-                ? "bg-[#7dc244] text-white"
-                : "bg-white text-black border border-gray-300 hover:bg-gray-100"
-            } ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
-          >
-            NSE
-          </button>
-        </div>
-
-        {/* Separator line between exchange tabs and filters */}
-        <div className="w-full h-px bg-black mb-3" />
 
         {/* Filter Tabs (Today, 5 Days, 1 Month, etc.) */}
         <div className="bg-black text-white flex flex-wrap items-center px-4 py-2 gap-0">

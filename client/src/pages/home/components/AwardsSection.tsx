@@ -1,3 +1,6 @@
+import FadeInUp from "@/components/common/FadeInUp";
+import SectionHeading from "@/components/common/SectionHeading";
+
 const AwardsSection = () => {
   return (
     <section className="py-16 lg:py-24 bg-gray-900 relative overflow-hidden">
@@ -10,13 +13,13 @@ const AwardsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <div className="mb-4">
-            <span className="text-green-400 text-sm font-semibold tracking-wider uppercase">
-              <span className="text-white">AWARDS</span> & ACCOLADES
-            </span>
+            <SectionHeading badgeText="AWARDS" text="ACCOLADES" className="justify-center" watermarkColor="white" watermarkAlign="center" />
           </div>
+          <FadeInUp delay={0.2}>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight max-w-5xl mx-auto">
             Excellence celebrated through awards and accolades for quality and innovation
           </h2>
+          </FadeInUp>
         </div>
 
         {/* Awards - Centered Content */}

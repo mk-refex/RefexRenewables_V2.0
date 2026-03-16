@@ -37,10 +37,8 @@ interface StockQuoteAPIResponse {
 }
 
 export default function StockQuote() {
-  const [activeExchange, setActiveExchange] = useState<"NSE" | "BSE">("NSE");
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<StockQuoteSettings | null>(null);
-  const [nseData, setNseData] = useState<StockQuoteAPIResponse | null>(null);
   const [bseData, setBseData] = useState<StockQuoteAPIResponse | null>(null);
   const [lastUpdated, setLastUpdated] = useState<string>("");
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -109,56 +107,6 @@ export default function StockQuote() {
 
   const fetchStockData = async () => {
     try {
-      // Fetch NSE data
-      const nseResponse = await stockApi.getStockQuoteValue("REFEXRENEW.NS");
-      console.log(
-        "=== NSE API Response (Raw) ===",
-        JSON.stringify(nseResponse, null, 2),
-      );
-
-      if (nseResponse) {
-        // Handle new API response format: { status: true, data: {...} }
-        let nseData = nseResponse;
-
-        // Check for new API format: { status: true, data: {...} }
-        if (
-          nseResponse.status === true &&
-          nseResponse.data &&
-          typeof nseResponse.data === "object"
-        ) {
-          nseData = nseResponse.data;
-        }
-        // Check for nested structure like { data: {...} } (fallback)
-        else if (
-          nseResponse.data &&
-          typeof nseResponse.data === "object" &&
-          !nseResponse.status
-        ) {
-          nseData = nseResponse.data;
-        }
-        // Check for old format: { nse_data: {...} }
-        else if (
-          nseResponse.nse_data &&
-          typeof nseResponse.nse_data === "object"
-        ) {
-          nseData = nseResponse.nse_data;
-        }
-
-        console.log("NSE Data extracted:", JSON.stringify(nseData, null, 2));
-        console.log("NSE fiftyTwoWeekHigh:", nseData.fiftyTwoWeekHigh);
-        console.log("NSE fiftyTwoWeekLow:", nseData.fiftyTwoWeekLow);
-        console.log("NSE All Keys:", Object.keys(nseData || {}));
-
-        // Set data if we have any valid fields
-        if (
-          nseData &&
-          typeof nseData === "object" &&
-          nseData.current_price !== undefined
-        ) {
-          setNseData(nseData);
-        }
-      }
-
       // Fetch BSE data
       const bseResponse = await stockApi.getStockQuoteValue("REFEXRENEW.BO");
       console.log(
@@ -262,7 +210,7 @@ export default function StockQuote() {
   };
 
   const currentSettings = settings || defaultSettings;
-  const currentData = activeExchange === "NSE" ? nseData : bseData;
+  const currentData = bseData;
 
   if (loading) {
     return (
@@ -290,28 +238,10 @@ export default function StockQuote() {
           <h2 className="text-3xl font-bold text-black uppercase tracking-wider text-center">
             {currentSettings.title}
           </h2>
-
-          <div className="flex justify-end gap-4 mt-6">
-            <button
-              onClick={() => setActiveExchange("NSE")}
-              className={`px-8 py-2.5 rounded-md font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                activeExchange === "NSE"
-                  ? "bg-[#7cd244] text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-              }`}
-            >
-              NSE
-            </button>
-            <button
-              onClick={() => setActiveExchange("BSE")}
-              className={`px-8 py-2.5 rounded-md font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                activeExchange === "BSE"
-                  ? "bg-[#7cd244] text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-              }`}
-            >
+          <div className="mt-4 text-center">
+            <span className="inline-block px-4 py-2 bg-[#7cd244] text-white rounded-md font-semibold text-sm">
               BSE
-            </button>
+            </span>
           </div>
         </div>
 

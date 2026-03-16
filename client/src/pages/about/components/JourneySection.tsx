@@ -1,3 +1,4 @@
+import FadeInUp from '@/components/common/FadeInUp';
 import { useState } from 'react';
 
 const JourneySection = () => {
@@ -61,9 +62,11 @@ const JourneySection = () => {
         }
       `}</style>
       <section id="our-journey" className="py-12 lg:py-16 bg-white">
-        <div className="container mx-auto px-4 lg:px-8">
+        <div className="container mx-auto px-4 lg:px-[100px]">
           <div className="text-center mb-5">
+          <FadeInUp delay={0.2}>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">Our journey</h2>
+          </FadeInUp>
           </div>
 
           <div className="max-w-6xl mx-auto">

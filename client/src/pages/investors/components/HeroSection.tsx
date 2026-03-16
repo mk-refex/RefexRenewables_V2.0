@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { investorApi, resolveImageUrl } from '@/services/api';
+import HeroHeading from '@/components/common/HeroHeading';
 
 const DEFAULT_IMAGE = 'https://readdy.ai/api/search-image?query=professional%20business%20meeting%20with%20investors%20discussing%20financial%20reports%20and%20charts%20in%20modern%20corporate%20office%20setting&width=1920&height=600&seq=investors-hero-bg-001&orientation=landscape';
 const DEFAULT_TITLE = 'Investor Relations';
@@ -29,9 +30,7 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-slideInLeft">
-            {title}
-          </h1>
+          <HeroHeading watermarkText={title.split(' ')[0]} text={title} watermarkAlign="center" className="text-center" />
         </div>
       </div>
     </section>

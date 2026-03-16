@@ -1,3 +1,6 @@
+import SectionHeading from "@/components/common/SectionHeading";
+import FadeInUp from "@/components/common/FadeInUp";
+
 const BusinessSection = () => {
   return (
     <section className="py-16 lg:py-24 bg-gray-900 relative overflow-hidden">
@@ -6,17 +9,17 @@ const BusinessSection = () => {
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(https://static.readdy.ai/image/d0ead66ce635a168f1e83b108be94826/33b8d94f94adb3857885e3267a1b144d.png)' }}></div>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 lg:px-[110px] relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <div className="mb-4">
-            <span className="text-green-400 text-sm font-semibold tracking-wider uppercase">
-              <span className="text-white">OUR</span> BUSINESS
-            </span>
+          <div className="flex justify-center">
+            <SectionHeading badgeText="OUR" text="BUSINESS" className="justify-center" showWatermark={false}/>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight max-w-4xl mx-auto">
-            Empowering Tomorrow with Sustainable Renewable Infrastructure for All
-          </h2>
+          <FadeInUp delay={0.2}>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              Empowering Tomorrow with Sustainable Renewable Infrastructure for All
+            </h2>
+          </FadeInUp>
         </div>
 
         {/* Business Cards */}

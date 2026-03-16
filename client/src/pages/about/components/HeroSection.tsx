@@ -1,3 +1,5 @@
+import HeroHeading from '@/components/common/HeroHeading';
+
 const HeroSection = () => {
   return (
     <section className="relative h-[300px] lg:h-[400px] flex items-center justify-center overflow-hidden">
@@ -11,7 +13,7 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="text-4xl lg:text-5xl font-bold text-white">About Us</h1>
+        <HeroHeading watermarkText="About Us" text="About Us" watermarkAlign="center" />
       </div>
     </section>
   );

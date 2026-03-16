@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="relative text-white">
+    <footer className="relative text-white px-4 lg:px-[110px]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -211,7 +211,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/20">
-          <div className="container mx-auto px-4 lg:px-8 py-6">
+          <div className="container mx-auto py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-sm text-gray-300 text-center md:text-left">
                 © 2025 Refex Renewables & Infrastructure Limited. All rights reserved
@@ -220,21 +220,12 @@ const Footer = () => {
                 <a href="/terms-conditions" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
                   Terms & Conditions
                 </a>
-                <a href="#" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
-                  Terms of Use
+                <a href="/privacy-policy" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
+                Privacy Policy
                 </a>
-                <Link
-                  to="/privacy-policy"
-                  className="text-gray-400 hover:text-emerald-500 transition-colors text-sm whitespace-nowrap"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  to="/legal-disclaimer"
-                  className="text-gray-400 hover:text-emerald-500 transition-colors text-sm whitespace-nowrap"
-                >
-                  Legal Disclaimer
-                </Link>
+                <a href="/legal-disclaimer" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
+                Legal Disclaimer
+                </a>
               </div>
             </div>
           </div>

@@ -43,7 +43,7 @@ interface HistoricalStockQuoteSettings {
 
 export default function HistoricalStockQuote() {
   const [settings, setSettings] = useState<HistoricalStockQuoteSettings | null>(null);
-  const [exchange, setExchange] = useState<'BSE' | 'NSE'>('NSE');
+  const exchange: 'BSE' = 'BSE'; // Always BSE
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -379,24 +379,15 @@ export default function HistoricalStockQuote() {
           <h2 className="text-3xl font-bold text-black uppercase tracking-wider">
             {settings.title || 'Historical Stock Quote'}
           </h2>
+          <div className="mt-4">
+            <span className="inline-block px-4 py-2 bg-[#7cd244] text-white rounded-md font-semibold text-sm">
+              BSE
+            </span>
+          </div>
         </div>
 
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="mb-6 flex flex-wrap gap-4 items-end">
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700 mb-2">Exchange</label>
-              <select
-                value={exchange}
-                onChange={(e) => {
-                  setExchange(e.target.value as 'BSE' | 'NSE');
-                  setCurrentPage(1); // Reset to first page when exchange changes
-                }}
-                className="px-4 py-2 border border-gray-300 rounded-md cursor-pointer bg-white"
-              >
-                <option value="NSE">NSE</option>
-                <option value="BSE">BSE</option>
-              </select>
-            </div>
 
             <div className="flex flex-col">
               <label className="text-sm font-medium text-gray-700 mb-2">Start Date:</label>

@@ -1,3 +1,6 @@
+import SectionHeading from "../../../components/common/SectionHeading";
+import FadeInUp from "../../../components/common/FadeInUp";
+
 export default function FacilitySection() {
   const features = [
     {
@@ -8,7 +11,7 @@ export default function FacilitySection() {
     {
       icon: "2",
       title:
-        "Processes 100 MT of organic waste per day through advanced anaerobic digestion technology",
+        "Processes 100 MT of press mud per day through advanced anaerobic digestion technology",
     },
     {
       icon: "3",
@@ -39,37 +42,50 @@ export default function FacilitySection() {
 
   return (
     <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+      <div className="container mx-auto px-4 lg:px-[110px]">
+        <FadeInUp
+          delay={0}
+          className="text-center mb-12 flex flex-col items-center"
+        >
+          <SectionHeading
+            badgeText="OUR"
+            text="KOLHAPUR FACILITY"
+            className="justify-center"
+            showWatermark={false}
+          />
+          <h2 className="text-4xl font-bold text-gray-900 mb-4 mt-3">
             Our Kolhapur facility is India's first large-scale Compressed Biogas
             (CBG) plant, MNRE-approved and operational since 2012.
           </h2>
-        </div>
+        </FadeInUp>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div
-            className="w-full h-[600px] bg-cover bg-center rounded-lg"
-            style={{
-              backgroundImage:
-                "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/spectrum-img.jpg)",
-            }}
-          ></div>
+          <FadeInUp delay={0.1}>
+            <div
+              className="w-full h-[600px] bg-cover bg-center rounded-lg"
+              style={{
+                backgroundImage:
+                  "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/spectrum-img.jpg)",
+              }}
+            ></div>
+          </FadeInUp>
 
-          <div className="space-y-6">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
-                  {feature.icon}
+          <FadeInUp delay={0.2}>
+            <div className="space-y-6">
+              {features.map((feature, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    {feature.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {feature.title}
+                    </h3>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {feature.title}
-                  </h3>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </FadeInUp>
         </div>
       </div>
     </section>

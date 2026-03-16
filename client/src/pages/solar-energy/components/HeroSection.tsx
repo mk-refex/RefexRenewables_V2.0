@@ -1,3 +1,5 @@
+import HeroHeading from "@/components/common/HeroHeading";
+
 export default function HeroSection() {
   return (
     <section className="relative h-[400px] flex items-center bg-gray-900 overflow-hidden">
@@ -10,10 +12,8 @@ export default function HeroSection() {
       >
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
-      <div className="relative z-10 container mx-auto px-4">
-        <h1 className="text-5xl md:text-6xl font-bold text-white animate-slideInLeft">
-          Solar Energy
-        </h1>
+      <div className="relative z-10 container mx-auto px-4 text-center">
+        <HeroHeading watermarkText="Solar Energy" text="Solar Energy" watermarkAlign="center" className="text-center" />
       </div>
     </section>
   );
