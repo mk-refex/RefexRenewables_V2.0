@@ -1,43 +1,126 @@
 export default function ContentSection() {
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="prose prose-lg max-w-none">
-          <p className="text-gray-700 leading-relaxed mb-8">
-            The information contained in this website is for general information purposes only. The information is provided by Refex Renewables & Infrastructure Limited and while we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is therefore strictly at your own risk.
-          </p>
-
-          <p className="text-gray-700 leading-relaxed mb-8">
-            In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.
-          </p>
-
-          <p className="text-gray-700 leading-relaxed mb-8">
-            Through this website you are able to link to other websites which are not under the control of Refex Renewables & Infrastructure Limited. We have no control over the nature, content and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.
-          </p>
-
-          <p className="text-gray-700 leading-relaxed mb-8">
-            Every effort is made to keep the website up and running smoothly. However, Refex Renewables & Infrastructure Limited takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.
-          </p>
-
-          <div className="mt-12 p-8 bg-emerald-50 rounded-lg border-l-4 border-emerald-500">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact Us</h3>
-            <p className="text-gray-700 mb-3">
-              If you have any questions about this Legal Disclaimer, please contact us:
+    <section className="py-20 bg-white">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="text-gray-700 leading-relaxed text-base space-y-12 font-['Inter']">
+          {/* I. Legal */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              I. Legal
+            </h2>
+            <p>
+              Welcome to the Refex Renewables Infrastructure Limited (&quot;Refex Renewables&quot;) website. Please review the following terms and conditions concerning your use of this site. By accessing, using or downloading content from this website you agree to follow and be bound by these terms and conditions. Refex Renewables reserves the right to change these terms and conditions from time to time at its sole discretion. Therefore, you should periodically visit this page to review the then current terms and conditions to which you are bound. In the case of any violation of the terms and conditions set forth herein, Refex Renewables reserves the right to seek all remedies available by law and in equity for such violations. These terms and conditions apply to all visits to the Refex Renewables website, both now and in the future.
             </p>
-            <div className="space-y-2">
-              <p className="text-gray-700">
-                <strong className="text-emerald-600">Email:</strong>{' '}
-                <a href="mailto:cs@refexrenewables.com" className="text-emerald-600 hover:text-emerald-700 no-underline">
-                  cs@refexrenewables.com
-                </a>
-              </p>
-              <p className="text-gray-700">
-                <strong className="text-emerald-600">Phone:</strong>{' '}
-                <a href="tel:18001020765" className="text-emerald-600 hover:text-emerald-700 no-underline">
-                  1800 102 0765
-                </a>
-              </p>
-            </div>
+          </div>
+
+          {/* II. Use */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              II. Use
+            </h2>
+            <p className="mb-4">
+              You may not use, download or copy any content on this website unless:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 mb-4">
+              <li>You use the content solely for personal, informational and non-commercial purposes;</li>
+              <li>The Refex Renewables trademark and copyright symbol and statement set forth on each page of this website appears on each downloaded or copied page; and</li>
+              <li>No modifications are made to any content.</li>
+            </ul>
+            <p>
+              The rights granted to you constitute a license and not a transfer of title. Refex Renewables reserves the right to revoke the authorization to view, download and print the content available on this website at any time, and any such use shall be discontinued immediately upon written notice from Refex Renewables. Except as expressly provided herein, you may not use, download, upload, copy, print, display, perform, reproduce, publish, license, post, transmit or distribute any content from this website in whole or in part without the prior written permission of Refex Renewables. You may not &quot;mirror&quot; any content contained on this website on any other server without Refex Renewables&apos;s prior express written permission. Any unauthorized use of any content contained on this website may violate copyright laws, trademark laws, the laws of privacy and publicity, and communications regulations and statutes. Any rights not expressly granted herein are reserved by Refex Renewables.
+            </p>
+          </div>
+
+          {/* III. Copyright */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              III. Copyright
+            </h2>
+            <p className="mb-4">
+              All content, images, designs, logos, and other intellectual property appearing on this website is the property of Refex Renewables unless otherwise stated. Refex Renewables retains copyright on all the text, contents, graphics and trademarks displayed on this website.
+            </p>
+            <p>
+              All rights reserved. All text, electronic documents, graphics, audio, video and other content published on this site are protected by the laws of India. By accessing and using this website, you agree to abide by the laws of India and all other applicable laws. Distribution or publication of any of this site&apos;s content in any form without prior written permission of Refex Renewables is expressly forbidden.
+            </p>
+          </div>
+
+          {/* IV. Trademarks */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              IV. Trademarks
+            </h2>
+            <p className="mb-4">
+              The trademarks, logos, product names, trade name (collectively the &quot;Trademarks&quot;) displayed on the website are registered and unregistered trademarks of Refex Renewables. No additional rights are granted by implication, estoppel, or otherwise.
+            </p>
+            <p className="mb-4">
+              You are not permitted to use these trademarks, or any other Refex Renewables trademarks, without the prior written consent of Refex Renewables.
+            </p>
+            <p>
+              All other trademarks, product names, trade names, and logos used within these pages are the property of their respective holders. Use of other company/entity trademarks, trade names, product names and logos or images of the same does not necessarily constitute:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 mt-2">
+              <li>An endorsement by such company of Refex Renewables and its products, and</li>
+              <li>An endorsement of the company or its products by Refex Renewables.</li>
+            </ul>
+          </div>
+
+          {/* V. Links to Third Party Sites */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              V. Links to Third Party Sites
+            </h2>
+            <p>
+              This website may contain hyperlinks to websites that are not controlled by Refex Renewables. Refex Renewables is not responsible for and does not make any representation and warranties express or implied over the contents or use of these websites, including, without limitation, the accuracy or reliability of any information, data, opinions, advice or statements made on these websites.
+            </p>
+          </div>
+
+          {/* VI. No Unlawful or Prohibited Use */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              VI. No Unlawful or Prohibited Use
+            </h2>
+            <p>
+              As a condition of your use of this website, you agree that you will not use this website or the content contained herein for any purpose that is unlawful or prohibited by these terms and conditions.
+            </p>
+          </div>
+
+          {/* VII. Disclaimer */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              VII. Disclaimer
+            </h2>
+            <p className="mb-4">
+              While every effort is made to ensure the accuracy of content offered on these pages, Refex Renewables assumes no legal liability or responsibility whatsoever for the accuracy, completeness, or usefulness of any such information and hereby disclaims any and all liability to any person for any actual or threatened loss or damage caused by errors or omissions, whether such errors or omissions result from negligence, accident or otherwise.
+            </p>
+            <p className="mb-4">
+              This website could include inaccuracies or out-dated content and is subject to change at any time without notice. Your use of this website is at your own risk. You agree to hold Refex Renewables harmless from and not sue Refex Renewables for any claims based upon using this website.
+            </p>
+            <p className="mb-4 font-semibold">
+              THE CONTENT, DOCUMENTATION, PRODUCTS, AND SERVICES CONTAINED ON THE Refex Renewables WEBSITE ARE PROVIDED ON &quot;AS IS BASIS&quot; Refex Renewables MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NON-INFRINGEMENT OF THIRD-PARTY RIGHTS.
+            </p>
+            <p className="mb-4 font-semibold">
+              WITHOUT ANY WARRANTY OF ANY KIND. Refex Renewables AND ITS SUPPLIERS DISCLAIM ALL WARRANTIES RELATING TO THE CONTENT, DOCUMENTATION, PRODUCTS, AND SERVICES CONTAINED ON THE Refex Renewables WEB SITE, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTIES AGAINST INFRINGEMENT OF THIRD-PARTY RIGHTS, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR ARISING FROM A COURSE OF DEALING, USAGE, OR TRADE PRACTICE.
+            </p>
+            <p className="font-semibold">
+              Refex Renewables AND ITS SUPPLIERS SHALL NOT BE LIABLE FOR ANY INDIRECT, SPECIAL, CONSEQUENTIAL, OR INCIDENTAL DAMAGES INCLUDING, WITHOUT LIMITATION, LOST PROFITS OR REVENUES, COSTS OF REPLACEMENT GOODS, LOSS OR DAMAGE TO DATA ARISING OUT OF THE USE OR INABILITY TO USE THIS SITE, DAMAGES RESULTING FROM USE OF OR RELIANCE ON THE INFORMATION PRESENT, EVEN IF Refex Renewables OR ITS SUPPLIERS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+            </p>
+          </div>
+
+          {/* VIII. Governing Law */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+              VIII. Governing Law
+            </h2>
+            <p>
+              Any claim or dispute relating to your use or attempted use of this website shall be governed by and construed in accordance with the laws India, without giving effect to its conflict of law&apos;s provisions. By using this Web site, you submit to the exclusive jurisdiction of courts of Chennai in any proceeding relating to any such claim or dispute.
+            </p>
+          </div>
+
+          {/* Copyright */}
+          <div className="pt-8 border-t border-gray-200">
+            <p className="text-gray-600 text-sm">
+              Copyright © 2021 Refex Renewables. All rights reserved
+            </p>
           </div>
         </div>
       </div>

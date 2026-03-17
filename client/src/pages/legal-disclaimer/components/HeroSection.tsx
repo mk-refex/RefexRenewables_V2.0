@@ -3,9 +3,9 @@ export default function HeroSection() {
     <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://refexrenewables.com/assets/images/pvt.jpg"
+          src="/images/aboutBanner.jpg"
           alt="Legal Disclaimer"
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-bottom"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40"></div>
       </div>

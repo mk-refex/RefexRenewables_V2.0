@@ -15,6 +15,7 @@ const ContactPage = lazy(() => import('../pages/contact/page'));
 const AdminLoginPage = lazy(() => import('../pages/admin-login/page'));
 const DashboardPage = lazy(() => import('../pages/dashboard/page'));
 const PrivacyPolicyPage = lazy(() => import('../pages/privacy-policy/page'));
+const TermsConditionsPage = lazy(() => import('../pages/terms-conditions/page'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 import LegalDisclaimerPage from '../pages/legal-disclaimer/page';
 
@@ -53,7 +54,7 @@ const routes: RouteObject[] = [
   },
   {
     path: '/terms-conditions',
-    element: <PrivacyPolicyPage />,
+    element: <TermsConditionsPage />,
   },
   {
     path: '/investors',
