@@ -1,22 +1,24 @@
 import FadeInUp from '@/components/common/FadeInUp';
-import SectionHeading from '@/components/common/SectionHeading';
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "@/components/common/SectionHeading";
 import { useState, useEffect } from 'react';
 
 const PresenceSection = () => {
   const [activeState, setActiveState] = useState(0);
 
   const states = [
-    { name: 'Chhattisgarh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Chhattisgarh-map-new.png', position: { top: '50%', left: '48%' } },
-    { name: 'Gujarat', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Gujarat-map.png', position: { top: '45%', left: '15%' } },
-    { name: 'Punjab', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/punjab-map.png', position: { top: '21%', left: '28%' } },
-    { name: 'Uttar Pradesh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Uttar-Pradesh-map.png', position: { top: '34%', left: '44%' } },
-    { name: 'Maharashtra', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Maharashtra-map.png', position: { top: '57%', left: '26%' } },
-    { name: 'Delhi', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/delhi-map.png', position: { top: '27%', left: '33%' } },
-    { name: 'Madhya Pradesh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Madhya-Pradesh-map.png', position: { top: '45%', left: '36%' } },
-    { name: 'Rajasthan', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Rajasthan-map.png', position: { top: '35%', left: '22%' } },
-    { name: 'Ladakh', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Ladakh-map.png', position: { top: '10%', left: '35%' } },
-    { name: 'Haryana', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/haryana-map.png', position: { top: '26%', left: '30%' } },
-    { name: 'Karnataka', image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Karnataka-map.png', position: { top: '73%', left: '26%' } }
+    { name: 'Chhattisgarh', image: '/wp-content/uploads/2025/09/Chhattisgarh-map-new.png', position: { top: '50%', left: '48%' } },
+    { name: 'Gujarat', image: '/wp-content/uploads/2025/09/Gujarat-map.png', position: { top: '45%', left: '15%' } },
+    { name: 'Punjab', image: '/wp-content/uploads/2025/09/punjab-map.png', position: { top: '21%', left: '28%' } },
+    { name: 'Uttar Pradesh', image: '/wp-content/uploads/2025/09/Uttar-Pradesh-map.png', position: { top: '34%', left: '44%' } },
+    { name: 'Maharashtra', image: '/wp-content/uploads/2025/09/Maharashtra-map.png', position: { top: '57%', left: '26%' } },
+    { name: 'Delhi', image: '/wp-content/uploads/2025/09/delhi-map.png', position: { top: '27%', left: '33%' } },
+    { name: 'Madhya Pradesh', image: '/wp-content/uploads/2025/09/Madhya-Pradesh-map.png', position: { top: '45%', left: '36%' } },
+    { name: 'Rajasthan', image: '/wp-content/uploads/2025/09/Rajasthan-map.png', position: { top: '35%', left: '22%' } },
+    { name: 'Jammu and Kashmir', image: '/wp-content/uploads/2025/09/Ladakh-map.png', position: { top: '10%', left: '35%' } },
+    { name: 'Haryana', image: '/wp-content/uploads/2025/09/haryana-map.png', position: { top: '26%', left: '30%' } },
+    { name: 'Karnataka', image: '/wp-content/uploads/2025/09/Karnataka-map.png', position: { top: '73%', left: '26%' } }
   ];
 
   // Auto-slide effect - continuously update active state
@@ -49,7 +51,7 @@ const PresenceSection = () => {
           <div className="relative">
             <div className="relative">
               <img 
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/map.png" 
+                src="/wp-content/uploads/2025/09/map.png" 
                 alt="India Map" 
                 className="w-full h-auto"
               />
@@ -115,7 +117,9 @@ const PresenceSection = () => {
               <SectionHeading badgeText="STATE" text="WISE" showWatermark={false}/>
             </div>
             <FadeInUp delay={0.2}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-12 leading-tight">
+            <h2
+              className={`${sectionMainHeadingClassName} mb-12 text-gray-900`}
+            >
               Our Presence
             </h2>
             </FadeInUp>

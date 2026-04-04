@@ -1,83 +1,89 @@
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
+
+const FADE_THRESHOLD = 0.98;
 
 export default function FacilitySection() {
   const features = [
     {
-      icon: "1",
+      iconSrc: "/wp-content/uploads/svg_icons/spectrum-renewable-icon01.svg",
       title:
         "India's first large-scale Compressed Biogas (CBG) plant, approved by MNRE and operational since 2012",
     },
     {
-      icon: "2",
+      iconSrc: "/wp-content/uploads/svg_icons/spectrum-renewable-icon02.svg",
       title:
         "Processes 100 MT of press mud per day through advanced anaerobic digestion technology",
     },
     {
-      icon: "3",
+      iconSrc: "/wp-content/uploads/svg_icons/spectrum-renewable-icon03.svg",
       title:
-        "Produces 3.5–4.0 tons of Bio-CNG daily, used as vehicle fuel under the SATAT and CBG–CGD Synchronization schemes",
+        "Produces 4 tons of Bio-CNG daily, used as vehicle fuel under the SATAT and CBG–CGD Synchronization schemes",
     },
     {
-      icon: "4",
+      iconSrc: "/wp-content/uploads/svg_icons/spectrum-renewable-icon04.svg",
       title:
         "Supplies Bio-CNG to leading Oil Marketing Companies (IOCL and HPOIL)",
     },
     {
-      icon: "5",
+      iconSrc: "/wp-content/uploads/svg_icons/spectrum-renewable-icon05.svg",
       title:
         "Generates 15 MT of solid Fermented Organic Manure (FOM) and 150–180 KL of Liquid FOM (LFOM) per day",
     },
     {
-      icon: "6",
+      iconSrc: "/wp-content/uploads/svg_icons/spectrum-renewable-icon06.svg",
       title:
         "Supports sustainable agriculture by providing nutrient-rich organic fertilizers that enhance soil health and fertility",
     },
     {
-      icon: "7",
+      iconSrc: "/wp-content/uploads/svg_icons/green-house.svg",
       title:
         "Partners with RCF and regional dealers to supply high-quality organic manure products, for large-scale distribution",
     },
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="bg-gray-50 py-20">
       <div className="container mx-auto px-4 lg:px-[110px]">
         <FadeInUp
           delay={0}
-          className="text-center mb-12 flex flex-col items-center"
+          threshold={FADE_THRESHOLD}
+          className="mb-12 flex flex-col items-center text-center"
         >
-          <SectionHeading
-            badgeText="OUR"
-            text="KOLHAPUR FACILITY"
-            className="justify-center"
-            showWatermark={false}
-          />
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 mt-3">
-            Our Kolhapur facility is India's first large-scale Compressed Biogas
-            (CBG) plant, MNRE-approved and operational since 2012.
+          <h2
+            className={`${sectionMainHeadingClassName} mx-auto max-w-4xl text-balance text-gray-900`}
+          >
+            India&apos;s first large-scale Compressed
+            Biogas (CBG) plant, MNRE-approved and operational since 2012.
           </h2>
         </FadeInUp>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <FadeInUp delay={0.1}>
+        <div className="grid items-start gap-12 md:grid-cols-2">
+          <FadeInUp delay={0.1} threshold={FADE_THRESHOLD}>
             <div
-              className="w-full h-[600px] bg-cover bg-center rounded-lg"
+              className="h-[600px] w-full rounded-lg bg-cover bg-center"
               style={{
                 backgroundImage:
                   "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/spectrum-img.jpg)",
               }}
-            ></div>
+            />
           </FadeInUp>
 
-          <FadeInUp delay={0.2}>
+          <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
             <div className="space-y-6">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
-                    {feature.icon}
+                <div key={index} className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center">
+                    <img
+                      src={feature.iconSrc}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 object-contain"
+                      decoding="async"
+                    />
                   </div>
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-lg font-semibold text-gray-900">
                       {feature.title}
                     </h3>

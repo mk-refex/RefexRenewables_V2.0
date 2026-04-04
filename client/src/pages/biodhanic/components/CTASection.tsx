@@ -1,4 +1,3 @@
-import SectionHeading from "../../../components/common/SectionHeading";
 import FadeInUp from "../../../components/common/FadeInUp";
 
 export default function CTASection() {
@@ -7,7 +6,7 @@ export default function CTASection() {
       className="relative py-32 bg-cover bg-center"
       style={{
         backgroundImage:
-          "url(https://readdy.ai/api/search-image?query=vibrant%20green%20rice%20paddy%20fields%20with%20young%20crops%20growing%20in%20rows%20showing%20sustainable%20organic%20agriculture%20with%20simple%20clean%20natural%20background%20emphasizing%20environmental%20farming%20practices&width=1920&height=600&seq=biodhanic-cta-001&orientation=landscape)",
+          "url(/wp-content/uploads/2025/10/bio-dhanic-banner-scaled.jpg)",
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50"></div>
@@ -18,12 +17,12 @@ export default function CTASection() {
           </h2>
         </FadeInUp>
         <FadeInUp delay={0.15}>
-          <p className="text-xl text-white/95 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/95 mb-8 max-w-4xl mx-auto leading-relaxed">
             Let's nurture the soil naturally and empower farmers to grow
             sustainably.
             <br />
             Together, we can build a greener, more resilient agricultural future
-            with Refex BioDhanic.
+            with Refex Bio-Dhanic.
           </p>
           <a
             href="/contact"

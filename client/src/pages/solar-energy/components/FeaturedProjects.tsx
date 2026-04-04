@@ -6,7 +6,7 @@ const staticProjects = [
     id: "bhilai-project",
     name: "Bhilai Project",
     location: "Bhilai, Chhattisgarh",
-    capacity: "68 MWp",
+    capacity: "75 MWp",
     description: "Ongoing Project.",
     details: "Off-taker – Indian Railways – AAA rated 1st solar project.",
     extraDetails: "",
@@ -21,7 +21,7 @@ const staticProjects = [
     id: "diwana-project",
     name: "Diwana Project",
     location: "Panipat, Haryana",
-    capacity: "12.938 MWp",
+    capacity: "2.93 MWp",
     description: "1st solar project alongside the railway track",
     details: "Project Completed in September 2020.",
     extraDetails: "Name of off-taker – Indian Railways- AAA rated",
@@ -73,7 +73,7 @@ export default function FeaturedProjects() {
   }, [lightboxOpen, activeProject]);
 
   // Static title / description / visuals (no API)
-  const title = "Featured Solar Projects";
+  const title = "Featured Projects";
   const description =
     "Explore a few of our flagship solar projects that showcase Refex’s engineering excellence, execution capability and long-term asset management.";
 

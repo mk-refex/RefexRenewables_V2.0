@@ -1,24 +1,26 @@
 import FadeInUp from "@/components/common/FadeInUp";
-import SectionHeading from "@/components/common/SectionHeading";
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "@/components/common/SectionHeading";
 
 export default function OfferingsSection() {
   const offerings = [
     {
-      icon: "ri-sun-line",
-      title: "Ground-mounted Solar & Rooftop Solar Installation",
+      iconSrc: "/wp-content/uploads/svg_icons/solar-services-icon01.svg",
+      title: "Ground-mounted Solar",
     },
     {
-      icon: "ri-battery-charge-line",
-      title: "Energy Storage",
+      iconSrc: "/wp-content/uploads/svg_icons/solar-services-icon02.svg",
+      title: "Battery Energy Storage System (BESS)",
     },
     {
-      icon: "ri-flashlight-line",
+      iconSrc: "/wp-content/uploads/svg_icons/solar-services-icon03.svg",
       title: "Solar & Wind Open Access",
     },
-    {
-      icon: "ri-plug-line",
-      title: "ISTS-connected (Inter-State Transmission System) Supply",
-    },
+    // {
+    //   iconSrc: "/wp-content/uploads/svg_icons/solar-services-icon04.svg",
+    //   title: "ISTS-connected (Inter-State Transmission System) Supply",
+    // },
   ];
 
   return (
@@ -27,7 +29,7 @@ export default function OfferingsSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative h-[866px] rounded-lg overflow-hidden">
             <img
-              src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/solar-services-image-new.jpg"
+              src="/wp-content/uploads/2025/10/solar-services-image-new.jpg"
               alt="Solar Installation Team"
               className="w-full h-full object-cover"
             />
@@ -43,14 +45,7 @@ export default function OfferingsSection() {
                 />
               </FadeInUp>
               <FadeInUp delay={0.2}>
-                <h2
-                  style={{
-                    fontSize: "48px",
-                    fontWeight: 700,
-                    lineHeight: "63px",
-                    margin: "0px 0px 0px 0px",
-                  }}
-                >
+                <h2 className={`${sectionMainHeadingClassName} text-gray-900`}>
                   We offer end-to-end project support from concept to
                   commissioning ensuring efficiency, reliability, and optimal
                   ROI.
@@ -61,24 +56,16 @@ export default function OfferingsSection() {
             <div className="space-y-6">
               {offerings.map((offering, index) => (
                 <div key={index} className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{
-                      fontSize: "24px",
-                      fontWeight: 700,
-                    }}
-                  >
-                    <i className={`${offering.icon} text-white`}></i>
-                  </div>
-                  <div>
-                    <h3
-                      style={{
-                        color: "#1f1f25",
-                        fontFamily: "DM Sans, sans-serif",
-                        fontSize: "30px",
-                        lineHeight: "40px",
-                      }}
-                    >
+                  <img
+                    src={offering.iconSrc}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 flex-shrink-0 object-contain md:h-11 md:w-11"
+                    decoding="async"
+                  />
+                  <div className="min-w-0">
+                    <h3 className="font-bold leading-snug text-[#1f1f25] text-base md:text-lg lg:text-xl">
                       {offering.title}
                     </h3>
                   </div>

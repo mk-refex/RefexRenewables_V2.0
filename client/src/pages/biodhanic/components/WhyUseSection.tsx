@@ -1,69 +1,82 @@
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
+
+const FADE_THRESHOLD = 0.98;
 
 export default function WhyUseSection() {
   const reasons = [
     {
-      icon: "ri-seedling-line",
+      iconSrc: "/wp-content/uploads/svg_icons/soil-fertility.svg",
       title: "Enhances Soil Fertility",
       description: "Replenishes organic carbon and nutrients",
     },
     {
-      icon: "ri-line-chart-line",
+      iconSrc: "/wp-content/uploads/svg_icons/crop-yield.svg",
       title: "Boosts Crop Yield",
       description: "Supports healthy plant growth and root development",
     },
     {
-      icon: "ri-heart-pulse-line",
+      iconSrc: "/wp-content/uploads/svg_icons/soil-health.svg",
       title: "Improves Soil Health",
       description: "Encourages microbial balance and moisture retention",
     },
     {
-      icon: "ri-test-tube-line",
+      iconSrc: "/wp-content/uploads/svg_icons/reduce-chemical-dependence.svg",
       title: "Reduces Chemical Dependence",
       description: "Lowers fertilizer usage, saving costs for farmers",
     },
     {
-      icon: "ri-earth-line",
+      iconSrc: "/wp-content/uploads/svg_icons/energy.svg",
       title: "Supports Circular Economy",
       description: "Utilizes organic waste from CBG plants efficiently",
     },
   ];
 
   return (
-    <section className="py-20 bg-[#1a4d2e]">
+    <section className="bg-[#1a4d2e] py-20">
       <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <FadeInUp delay={0.1}>
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <FadeInUp delay={0.1} threshold={FADE_THRESHOLD}>
             <div
-              className="w-full h-[600px] bg-cover bg-center rounded-lg"
+              className="h-[600px] w-full rounded-lg bg-cover bg-center"
               style={{
                 backgroundImage:
                   "url(/images/indian-farmer-farm-field_621325-2958.avif)",
               }}
-            ></div>
+            />
           </FadeInUp>
 
           <div>
-            <FadeInUp delay={0}>
-              <SectionHeading
-                badgeText="WHY USE"
-                text="BioDhanic"
-                showWatermark={false}
-              />
+            <FadeInUp delay={0} threshold={FADE_THRESHOLD}>
+              <h2
+                className={`${sectionMainHeadingClassName} text-balance text-white`}
+              >
+                Why use BioDhanic?
+              </h2>
             </FadeInUp>
-            <FadeInUp delay={0.2} className="mt-10">
+            <FadeInUp
+              delay={0.15}
+              threshold={FADE_THRESHOLD}
+              className="mt-10"
+            >
               <div className="space-y-6">
                 {reasons.map((reason, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-12 h-12 flex items-center justify-center bg-white/10 rounded-full flex-shrink-0 border-2 border-white/20">
-                      <i className={`${reason.icon} text-xl text-white`}></i>
+                  <div key={index} className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+                      <img
+                        src={reason.iconSrc}
+                        alt=""
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 object-contain"
+                        decoding="async"
+                      />
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
+                    <div className="min-w-0">
+                      <h3 className="mb-2 text-xl font-bold text-white">
                         {reason.title}
                       </h3>
-                      <p className="text-white/80 leading-relaxed">
+                      <p className="leading-relaxed text-white/80">
                         {reason.description}
                       </p>
                     </div>

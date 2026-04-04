@@ -13,7 +13,7 @@ export default function VyzagBioEnergyPage() {
       <div className="vyzag-bio-energy-page">
         <HeroSection />
         <AboutSection />
-        <OutputsSection />
+        {/* <OutputsSection /> */}
         <HighlightsSection />
         <LFOMSection />
         <GallerySection />

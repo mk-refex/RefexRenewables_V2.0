@@ -1,57 +1,59 @@
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
+
+const FADE_THRESHOLD = 0.98;
 
 export default function BenefitsSection() {
   const benefits = [
     {
-      icon: "ri-plant-line",
+      iconSrc: "/wp-content/uploads/svg_icons/nature.svg",
       title: "Promotes Stronger Plant Growth",
       description: "Enriched with essential macro and micronutrients",
     },
     {
-      icon: "ri-leaf-line",
+      iconSrc: "/wp-content/uploads/svg_icons/chemical-free.svg",
       title: "Chemical-Free & Eco-Friendly",
       description:
         "100% organic and reduces dependence on synthetic fertilizers",
     },
     {
-      icon: "ri-water-percent-line",
+      iconSrc: "/wp-content/uploads/svg_icons/improve-soil.svg",
       title: "Improves Soil Structure",
       description:
         "Boosts water retention and aeration for long-term soil health",
     },
     {
-      icon: "ri-flask-line",
+      iconSrc: "/wp-content/uploads/svg_icons/jar.svg",
       title: "Fermented for Enhanced Fertility",
       description:
         "Natural fermentation enhances nutrient bioavailability and soil microbial activity",
     },
     {
-      icon: "ri-recycle-line",
-      title: "Slow and Sustainable nutrient release",
+      iconSrc: "/wp-content/uploads/svg_icons/eco-factory.svg",
+      title: "Sustainable Manufacturing",
       description:
         "Derived from our CBG production process, ensuring complete utilization of agricultural waste",
     },
     {
-      icon: "ri-recycle-line",
+      iconSrc: "/wp-content/uploads/svg_icons/green-house.svg",
       title: "Boosts plant immunity against fungal stress",
       description:
-        " Contains bioactive compounds that enhance plant resilience to fungal diseases",
+        "Contains bioactive compounds that enhance plant resilience to fungal diseases",
     },
     {
-      icon: "ri-recycle-line",
+      iconSrc: "/wp-content/uploads/svg_icons/nmz32yjkelolkp8lz9e.svg",
       title: "Enhances NPK availability",
       description:
         "Improves the uptake and utilization of nitrogen, phosphorus, and potassium by plants",
     },
     {
-      icon: "ri-recycle-line",
+      iconSrc: "/wp-content/uploads/svg_icons/soil-fertility.svg",
       title: "Improves soil moisture retention",
       description:
         "Increases the soil's ability to retain water, reducing irrigation needs and promoting drought resistance",
     },
     {
-      icon: "ri-recycle-line",
+      iconSrc: "/wp-content/uploads/svg_icons/soil-health.svg",
       title: "Manufactured through a sustainable process",
       description:
         "Produced using a sustainable process that minimizes waste and energy consumption, contributing to a lower carbon footprint",
@@ -59,55 +61,51 @@ export default function BenefitsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="bg-gray-50 py-20">
       <div className="container mx-auto px-4 lg:px-[110px]">
         <FadeInUp
           delay={0}
-          className="text-center mb-16 flex flex-col items-center"
+          threshold={FADE_THRESHOLD}
+          className="mb-16 flex flex-col items-center text-center"
         >
-          <SectionHeading
-            badgeText="WHAT MAKES"
-            text="BioDhanic unique?"
-            className="justify-center"
-            showWatermark={false}
-          />
+          <h2
+            className={`${sectionMainHeadingClassName} max-w-4xl text-balance text-gray-900`}
+          >
+            What makes Bio-Dhanic unique?
+          </h2>
         </FadeInUp>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="mb-8 grid gap-8 md:grid-cols-3">
           {benefits.map((benefit, index) => (
-            <FadeInUp key={index} delay={0.1 * index}>
-              <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                <div className="w-16 h-16 flex items-center justify-center bg-[#22c55e]/10 rounded-full mb-6">
-                  <i className={`${benefit.icon} text-3xl text-[#22c55e]`}></i>
+            <FadeInUp
+              key={index}
+              delay={0.05 * index}
+              threshold={FADE_THRESHOLD}
+              className="h-full"
+            >
+              <div className="flex h-full flex-col items-center gap-4 rounded-lg bg-white p-8 text-center shadow-md transition-shadow duration-300 hover:shadow-xl sm:flex-row sm:items-center sm:gap-5 sm:text-left">
+                <div className="flex w-16 flex-shrink-0 justify-center">
+                  <img
+                    src={benefit.iconSrc}
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 object-contain"
+                    decoding="async"
+                  />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {benefit.description}
-                </p>
+                <div className="min-w-0 w-full flex-1">
+                  <h3 className="mb-3 text-xl font-bold text-gray-900 sm:text-left">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-justify text-gray-600 leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </div>
               </div>
             </FadeInUp>
           ))}
         </div>
-
-        {/* <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {benefits.slice(7).map((benefit, index) => (
-            <FadeInUp key={index} delay={0.1 * (index + 3)}>
-              <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                <div className="w-16 h-16 flex items-center justify-center bg-[#22c55e]/10 rounded-full mb-6">
-                  <i className={`${benefit.icon} text-3xl text-[#22c55e]`}></i>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
-            </FadeInUp>
-          ))}
-        </div> */}
       </div>
     </section>
   );

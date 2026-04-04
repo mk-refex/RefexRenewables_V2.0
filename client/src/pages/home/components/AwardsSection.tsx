@@ -1,5 +1,7 @@
 import FadeInUp from "@/components/common/FadeInUp";
-import SectionHeading from "@/components/common/SectionHeading";
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "@/components/common/SectionHeading";
 
 const AwardsSection = () => {
   return (
@@ -16,7 +18,9 @@ const AwardsSection = () => {
             <SectionHeading badgeText="AWARDS" text="ACCOLADES" className="justify-center" watermarkColor="white" watermarkAlign="center" />
           </div>
           <FadeInUp delay={0.2}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight max-w-5xl mx-auto">
+          <h2
+            className={`${sectionMainHeadingClassName} mx-auto max-w-5xl text-white`}
+          >
             Excellence celebrated through awards and accolades for quality and innovation
           </h2>
           </FadeInUp>

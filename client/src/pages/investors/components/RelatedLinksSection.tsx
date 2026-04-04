@@ -129,8 +129,8 @@ export default function RelatedLinksSection() {
                     }}
                     className={`text-left w-full text-sm py-2 border-b border-gray-100 transition-colors cursor-pointer ${
                       selectedCategoryId === cat.id
-                        ? 'text-green-600 font-medium'
-                        : 'text-gray-700 hover:text-green-600'
+                        ? 'font-medium text-brand'
+                        : 'text-gray-700 hover:text-brand'
                     }`}
                   >
                     {cat.name}
@@ -244,7 +244,7 @@ export default function RelatedLinksSection() {
                                           href={resolveImageUrl(item.pdfUrl)}
                                           target="_blank"
                                           rel="noopener noreferrer"
-                                          className="text-sm text-green-600 hover:text-green-700 cursor-pointer"
+                                          className="cursor-pointer text-sm text-brand hover:text-brand-hover"
                                         >
                                           View
                                         </a>
@@ -265,7 +265,7 @@ export default function RelatedLinksSection() {
                                         <a
                                           href={resolveImageUrl(item.pdfUrl)}
                                           download
-                                          className="text-sm text-green-600 hover:text-green-700 cursor-pointer"
+                                          className="cursor-pointer text-sm text-brand hover:text-brand-hover"
                                         >
                                           Download
                                         </a>
@@ -352,7 +352,7 @@ export default function RelatedLinksSection() {
                                     href={resolveImageUrl(item.pdfUrl)}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-sm text-green-600 hover:text-green-700 cursor-pointer"
+                                    className="cursor-pointer text-sm text-brand hover:text-brand-hover"
                                   >
                                     View
                                   </a>
@@ -373,7 +373,7 @@ export default function RelatedLinksSection() {
                                   <a
                                     href={resolveImageUrl(item.pdfUrl)}
                                     download
-                                    className="text-sm text-green-600 hover:text-green-700 cursor-pointer"
+                                    className="cursor-pointer text-sm text-brand hover:text-brand-hover"
                                   >
                                     Download
                                   </a>

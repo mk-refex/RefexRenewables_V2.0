@@ -32,12 +32,9 @@ const HeroSection = () => {
           </h1>
 
           <div className="mt-12 animate-slideInLeft opacity-0" style={{ animationDelay: '1s', animationFillMode: 'forwards' }}>
-            <a 
-              href="/about-us" 
-              className="inline-flex items-center gap-2 text-white px-10 py-4 rounded-md text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap cursor-pointer"
-              style={{ backgroundColor: 'rgb(132, 193, 76)' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgb(112, 173, 56)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgb(132, 193, 76)'}
+            <a
+              href="/about-us"
+              className="inline-flex items-center gap-2 rounded-md bg-brand px-10 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-brand-hover hover:shadow-xl whitespace-nowrap cursor-pointer"
             >
               About Us
             </a>

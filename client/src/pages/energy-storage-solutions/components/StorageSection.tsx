@@ -1,27 +1,27 @@
 export default function StorageSection() {
   const storageFeatures = [
     {
-      icon: "ri-database-2-line",
+      iconSrc: "/wp-content/uploads/svg_icons/store-excess.svg",
       title: "Store Excess",
       description: "Store excess solar energy and release during peak hours",
     },
     {
-      icon: "ri-settings-3-line",
+      iconSrc: "/wp-content/uploads/svg_icons/energy-support.svg",
       title: "Ancillary services",
       description: "Frequency regulation, voltage support",
     },
     {
-      icon: "ri-plant-line",
+      iconSrc: "/wp-content/uploads/svg_icons/energy.svg",
       title: "Peaker Plant Replacement",
       description: "BESS + RE as a cleaner dispatchable power source",
     },
     {
-      icon: "ri-grid-line",
+      iconSrc: "/wp-content/uploads/svg_icons/solar-panel.svg",
       title: "Grid stability",
       description: "Grid stability through capacity firming and RE integration",
     },
     {
-      icon: "ri-flashlight-line",
+      iconSrc: "/wp-content/uploads/svg_icons/eco.svg",
       title: "Virtual Power Plants",
       description: "Virtual Power Plants using aggregated distributed ESS",
     },
@@ -48,9 +48,14 @@ export default function StorageSection() {
             <div className="space-y-6">
               {storageFeatures.map((feature, index) => (
                 <div key={index} className="flex items-start gap-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-green-100 rounded-full flex-shrink-0">
-                    <i className={`${feature.icon} text-xl text-green-600`}></i>
-                  </div>
+                  <img
+                    src={feature.iconSrc}
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 flex-shrink-0 object-contain"
+                    decoding="async"
+                  />
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-1">
                       {feature.title}

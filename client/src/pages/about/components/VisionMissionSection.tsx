@@ -27,7 +27,7 @@ const VisionMissionSection = () => {
                 Refex aims to be a globally admired conglomerate, driving
                 long-term sustainable growth through innovation, purposeful
                 collaborations and partnerships, and an unwavering commitment to
-                excellence, while contributing meaningfully to societal progress
+                excellence, while contributing meaningfully to societal progress.
               </p>
               {/* <p>
                 To lead India's clean energy revolution, making sustainable
@@ -56,7 +56,7 @@ const VisionMissionSection = () => {
                 Refex shall create enduring value across industries through
                 innovation, operational excellence, and sustainable practices,
                 thereby empowering our customers, enriching our communities, and
-                delivering responsible growth for all stakeholders
+                delivering responsible growth for all stakeholders.
               </p>
               {/* <p>
                 We are committed to quality, innovation, and excellence in

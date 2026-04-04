@@ -1,6 +1,7 @@
 import { useState } from "react";
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+
+const FADE_THRESHOLD = 0.98;
 
 export function GallerySection() {
   const images = [
@@ -34,19 +35,13 @@ export function GallerySection() {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 lg:px-[110px]">
-        <FadeInUp
-          delay={0}
-          className="text-center mb-12 flex flex-col items-center"
-        >
-          <SectionHeading
-            badgeText="GALLERY"
-            text="Vyzag Bio-Energy"
-            className="justify-center"
-            showWatermark={false}
-          />
-        </FadeInUp>
 
-        <FadeInUp delay={0.15}>
+        <FadeInUp
+          delay={0.1}
+          threshold={FADE_THRESHOLD}
+          translateHidden="20px"
+          duration={0.5}
+        >
           <div className="relative">
             <div className="grid md:grid-cols-3 gap-6">
               {getVisibleImages().map((image, index) => (
@@ -64,16 +59,18 @@ export function GallerySection() {
             </div>
 
             <button
+              type="button"
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-colors duration-300 cursor-pointer"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-brand hover:text-white transition-colors duration-300 cursor-pointer"
               aria-label="Previous"
             >
               <i className="ri-arrow-left-s-line text-2xl"></i>
             </button>
 
             <button
+              type="button"
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-colors duration-300 cursor-pointer"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-brand hover:text-white transition-colors duration-300 cursor-pointer"
               aria-label="Next"
             >
               <i className="ri-arrow-right-s-line text-2xl"></i>
@@ -84,9 +81,10 @@ export function GallerySection() {
             {images.map((_, index) => (
               <button
                 key={index}
+                type="button"
                 onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
-                  index === currentIndex ? "bg-green-600 w-8" : "bg-gray-300"
+                  index === currentIndex ? "bg-brand w-8" : "bg-gray-300"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

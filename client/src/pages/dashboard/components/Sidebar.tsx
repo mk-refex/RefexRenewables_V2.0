@@ -64,8 +64,8 @@ const Sidebar = ({ isOpen, onClose, activePage, onPageChange }: SidebarProps) =>
                   }}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors whitespace-nowrap ${
                     activePage === page.id
-                      ? 'bg-green-600 text-white'
-                      : 'text-gray-700 hover:bg-green-50 hover:text-green-600'
+                      ? 'bg-brand text-white'
+                      : 'text-gray-700 hover:bg-brand/10 hover:text-brand'
                   }`}
                 >
                   <i className={`${page.icon} text-lg ${activePage === page.id ? 'text-white' : ''}`}></i>

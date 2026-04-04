@@ -6,6 +6,8 @@ interface FadeInUpProps {
   duration?: number;
   className?: string;
   threshold?: number;
+  /** Hidden-state vertical offset (e.g. "24px" for a subtler nudge than default 100%). */
+  translateHidden?: string;
 }
 
 const FadeInUp = ({ 
@@ -13,7 +15,8 @@ const FadeInUp = ({
   delay = 0, 
   duration = 0.6, 
   className = '',
-  threshold = 0.8 
+  threshold = 0.8,
+  translateHidden = '100%',
 }: FadeInUpProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
@@ -42,7 +45,7 @@ const FadeInUp = ({
       ref={elementRef}
       className={className}
       style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(100%)',
+        transform: isVisible ? 'translateY(0)' : `translateY(${translateHidden})`,
         opacity: isVisible ? 1 : 0,
         transition: `transform ${duration}s ease-out ${delay}s, opacity ${duration}s ease-out ${delay}s`,
         transformOrigin: 'bottom',

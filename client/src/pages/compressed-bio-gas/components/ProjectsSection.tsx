@@ -1,4 +1,6 @@
-import SectionHeading from '../../../components/common/SectionHeading';
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "../../../components/common/SectionHeading";
 import FadeInUp from '../../../components/common/FadeInUp';
 
 export default function ProjectsSection() {
@@ -35,7 +37,9 @@ export default function ProjectsSection() {
             className="justify-center"
             watermarkAlign="center"
           />
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-3 leading-tight">
+          <h2
+            className={`${sectionMainHeadingClassName} mt-3 text-gray-900`}
+          >
             Greenfield Project <br/> of 800 TPD input and 38 TPD CBG output
           </h2>
         </FadeInUp>

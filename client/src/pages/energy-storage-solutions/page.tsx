@@ -13,7 +13,7 @@ export default function EnergyStorageSolutionsPage() {
       <AboutSection />
       <CapabilitiesSection />
       <StorageSection />
-      <MicroGridSection />
+      {/* <MicroGridSection /> */}
       <ProjectsSection />
     </Layout>
   );

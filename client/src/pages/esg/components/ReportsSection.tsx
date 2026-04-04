@@ -32,7 +32,7 @@ export function ReportsSection() {
                   href={report.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition-colors duration-300 whitespace-nowrap cursor-pointer"
+                  className="inline-block rounded-md bg-brand px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-brand-hover whitespace-nowrap cursor-pointer"
                 >
                   View Report
                 </a>

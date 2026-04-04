@@ -106,13 +106,13 @@ const AdminLoginPage = () => {
               <label className="flex items-center cursor-pointer">
                 <input
                   type="checkbox"
-                  className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500 cursor-pointer"
+                  className="h-4 w-4 cursor-pointer rounded border-gray-300 text-brand focus:ring-brand"
                 />
                 <span className="ml-2 text-gray-700">Remember me</span>
               </label>
               <button
                 type="button"
-                className="text-green-600 hover:text-green-700 font-medium whitespace-nowrap"
+                className="font-medium text-brand hover:text-brand-hover whitespace-nowrap"
               >
                 Forgot password?
               </button>
@@ -122,7 +122,7 @@ const AdminLoginPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand py-3 px-6 font-semibold text-white transition-all duration-300 hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap"
             >
               {isLoading ? (
                 <>
@@ -143,7 +143,7 @@ const AdminLoginPage = () => {
         <div className="text-center mt-6">
           <button
             onClick={() => navigate('/')}
-            className="text-gray-600 hover:text-green-600 font-medium text-sm flex items-center gap-2 mx-auto whitespace-nowrap"
+            className="mx-auto flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-brand whitespace-nowrap"
           >
             <i className="ri-arrow-left-line"></i>
             <span>Back to Website</span>

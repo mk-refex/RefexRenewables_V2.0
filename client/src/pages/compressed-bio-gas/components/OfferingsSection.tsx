@@ -1,4 +1,6 @@
-import SectionHeading from "../../../components/common/SectionHeading";
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "../../../components/common/SectionHeading";
 import FadeInUp from "../../../components/common/FadeInUp";
 
 export default function OfferingsSection() {
@@ -33,7 +35,7 @@ export default function OfferingsSection() {
                 text="WE OFFER"
                 showWatermark={false}
               />
-              <h2 className="text-4xl md:text-5xl font-bold mt-3 leading-tight">
+              <h2 className={`${sectionMainHeadingClassName} mt-3 text-white`}>
                 Turning waste into clean energy with sustainable Compressed
                 Biogas solutions.
               </h2>

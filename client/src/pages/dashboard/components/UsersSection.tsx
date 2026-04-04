@@ -246,7 +246,7 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
           </div>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap cursor-pointer"
+            className="flex items-center gap-2 px-6 py-3 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors whitespace-nowrap cursor-pointer"
           >
             <i className="ri-user-add-line text-lg"></i>
             <span className="font-medium">Create User</span>
@@ -470,7 +470,7 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
               </button>
               <button
                 onClick={handleCreateUser}
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap cursor-pointer"
+                className="px-6 py-3 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors whitespace-nowrap cursor-pointer"
               >
                 Create User
               </button>
@@ -566,7 +566,7 @@ const UsersSection = ({ showNotification }: UsersSectionProps) => {
               </button>
               <button
                 onClick={handleEditUser}
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap cursor-pointer"
+                className="px-6 py-3 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors whitespace-nowrap cursor-pointer"
               >
                 Save Changes
               </button>

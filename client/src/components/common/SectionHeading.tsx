@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 
+/** Use on the main `<h2>` directly under `<SectionHeading />` (smaller than the 30px badge). */
+export const sectionMainHeadingClassName =
+  "text-xl font-bold leading-tight md:text-2xl lg:text-[26px]";
+
 interface SectionHeadingProps {
   badgeText: string;
   text?: string;

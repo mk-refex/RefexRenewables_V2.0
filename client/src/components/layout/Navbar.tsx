@@ -138,7 +138,7 @@ export default function Navbar() {
               <div className="flex items-center gap-6 xl:gap-10">
               <Link 
                 to="/" 
-                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
                 style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
               >
                 HOME
@@ -152,7 +152,7 @@ export default function Navbar() {
               >
                 <Link 
                   to="/about-us" 
-                  className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1"
                   style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
                 >
                   ABOUT US
@@ -163,38 +163,38 @@ export default function Navbar() {
                     <a 
                       href="/about-us#vision-mission" 
                       onClick={(e) => handleSectionClick(e, 'vision-mission')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap cursor-pointer"
+                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
                     >
                       Vision & Mission
                     </a>
                     <a 
                       href="/about-us#core-values" 
                       onClick={(e) => handleSectionClick(e, 'core-values')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap cursor-pointer"
+                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
                     >
                       Core Values
                     </a>
                     <a 
                       href="/about-us#our-journey" 
                       onClick={(e) => handleSectionClick(e, 'our-journey')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap cursor-pointer"
+                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
                     >
                       Our Journey
                     </a>
                     <a 
                       href="/about-us#board-of-directors" 
                       onClick={(e) => handleSectionClick(e, 'board-of-directors')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap cursor-pointer"
+                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
                     >
                       Board of Directors
                     </a>
-                    <a href="https://www.refex.group/careers/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                    <a href="https://www.refex.group/careers/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                       Careers
                     </a>
-                    <a href="https://www.refex.group/diversity-inclusion/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                    <a href="https://www.refex.group/diversity-inclusion/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                       Diversity Inclusion
                     </a>
-                    <a href="https://www.refex.group/gallery/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                    <a href="https://www.refex.group/gallery/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                       Gallery
                     </a>
                   </div>
@@ -212,7 +212,7 @@ export default function Navbar() {
                 }}
               >
                 <button 
-                  className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1"
                   style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
                 >
                   BUSINESSES
@@ -226,16 +226,16 @@ export default function Navbar() {
                       onMouseEnter={() => setIsSolarOpen(true)}
                       onMouseLeave={() => setIsSolarOpen(false)}
                     >
-                      <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap flex items-center justify-between">
+                      <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap flex items-center justify-between">
                       Renewable IPP
                         <i className="ri-arrow-right-s-line"></i>
                       </Link>
                       {isSolarOpen && (
                         <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                                                    <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                                                    <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                             Solar Energy
                           </Link>
-                                                <Link to="/energy-storage-solutions" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                                                <Link to="/energy-storage-solutions" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                                                   Energy Storage Solutions
                                                 </Link>
                                               </div>
@@ -248,20 +248,20 @@ export default function Navbar() {
                       onMouseEnter={() => setIsCBGOpen(true)}
                       onMouseLeave={() => setIsCBGOpen(false)}
                     >
-                      <Link to="/compressed-bio-gas" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap flex items-center justify-between">
+                      <Link to="/compressed-bio-gas" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap flex items-center justify-between">
                         Compressed Bio-Gas
                         <i className="ri-arrow-right-s-line"></i>
                       </Link>
                       {isCBGOpen && (
                         <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                          <Link to="/biodhanic" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
-                            BioDhanic
-                          </Link>
-                          <Link to="/spectrum-renewable" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                          <Link to="/spectrum-renewable" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                             Spectrum Renewables
                           </Link>
-                          <Link to="/vyzag-bio-energy" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                          <Link to="/vyzag-bio-energy" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                             Vyzag Bio-Energy
+                          </Link>
+                          <Link to="/biodhanic" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
+                            Refex Bio-Dhanic
                           </Link>
                         </div>
                       )}
@@ -281,7 +281,7 @@ export default function Navbar() {
               >
                 <Link 
                   to="/investors" 
-                  className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1"
+                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1"
                   style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
                 >
                   INVESTOR RELATIONS
@@ -294,19 +294,19 @@ export default function Navbar() {
                       onMouseEnter={() => setIsSmartODROpen(true)}
                       onMouseLeave={() => setIsSmartODROpen(false)}
                     >
-                      <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap flex items-center justify-between">
+                      <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap flex items-center justify-between">
                         Smart ODR
                         <i className="ri-arrow-right-s-line"></i>
                       </button>
                       {isSmartODROpen && (
                         <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                          <a href="https://www.sebi.gov.in/legal/master-circulars/aug-2023/online-resolution-of-disputes-in-the-indian-securities-market_75220.html" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                          <a href="https://www.sebi.gov.in/legal/master-circulars/aug-2023/online-resolution-of-disputes-in-the-indian-securities-market_75220.html" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                             SEBI Circular On ODR
                           </a>
-                          <a href="https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=40" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                          <a href="https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=40" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                             Online Dispute Resolution
                           </a>
-                          <a href="https://smartodr.in/login" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors whitespace-nowrap">
+                          <a href="https://smartodr.in/login" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
                             Link To SMART ODR
                           </a>
                         </div>
@@ -319,7 +319,7 @@ export default function Navbar() {
 
 <Link 
                 to="/investors" 
-                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
                 style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
               >
                 INVESTOR RELATIONS
@@ -327,7 +327,7 @@ export default function Navbar() {
 
               <Link 
                 to="/esg" 
-                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
                 style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
               >
                 ESG
@@ -335,7 +335,7 @@ export default function Navbar() {
 
               <Link 
                 to="/contact" 
-                className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap"
+                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
                 style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
               >
                 CONTACT US
@@ -346,7 +346,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-800 hover:text-green-600 transition-colors cursor-pointer"
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-800 hover:text-brand transition-colors cursor-pointer"
             >
               <i className={`${isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl`}></i>
             </button>
@@ -392,7 +392,7 @@ export default function Navbar() {
               <Link 
                 to="/" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors"
+                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
                 HOME
               </Link>
@@ -401,7 +401,7 @@ export default function Navbar() {
               <div>
                 <button 
                   onClick={() => setMobileDropdown(mobileDropdown === 'about' ? null : 'about')}
-                  className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors flex items-center justify-between cursor-pointer"
+                  className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors flex items-center justify-between cursor-pointer"
                 >
                   ABOUT US
                   <i className={`ri-arrow-${mobileDropdown === 'about' ? 'up' : 'down'}-s-line text-base`}></i>
@@ -411,35 +411,35 @@ export default function Navbar() {
                     <Link 
                       to="/about-us" 
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                     >
                       About Us
                     </Link>
                     <a 
                       href="/about-us#vision-mission" 
                       onClick={(e) => handleMobileSectionClick(e, 'vision-mission')}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors cursor-pointer"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Vision & Mission
                     </a>
                     <a 
                       href="/about-us#core-values" 
                       onClick={(e) => handleMobileSectionClick(e, 'core-values')}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors cursor-pointer"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Core Values
                     </a>
                     <a 
                       href="/about-us#our-journey" 
                       onClick={(e) => handleMobileSectionClick(e, 'our-journey')}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors cursor-pointer"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Our Journey
                     </a>
                     <a 
                       href="/about-us#board-of-directors" 
                       onClick={(e) => handleMobileSectionClick(e, 'board-of-directors')}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors cursor-pointer"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Board of Directors
                     </a>
@@ -448,7 +448,7 @@ export default function Navbar() {
                       target="_blank" 
                       rel="noopener noreferrer"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                     >
                       Careers
                     </a>
@@ -457,7 +457,7 @@ export default function Navbar() {
                       target="_blank" 
                       rel="noopener noreferrer"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                     >
                       Diversity Inclusion
                     </a>
@@ -466,7 +466,7 @@ export default function Navbar() {
                       target="_blank" 
                       rel="noopener noreferrer"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors"
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                     >
                       Gallery
                     </a>
@@ -478,7 +478,7 @@ export default function Navbar() {
               <div>
                 <button 
                   onClick={() => setMobileDropdown(mobileDropdown === 'business' ? null : 'business')}
-                  className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors flex items-center justify-between cursor-pointer"
+                  className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors flex items-center justify-between cursor-pointer"
                 >
                   BUSINESSES
                   <i className={`ri-arrow-${mobileDropdown === 'business' ? 'up' : 'down'}-s-line text-base`}></i>
@@ -489,7 +489,7 @@ export default function Navbar() {
                     <div>
                       <button 
                         onClick={() => setMobileSubDropdown(mobileSubDropdown === 'solar' ? null : 'solar')}
-                        className="w-full px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors flex items-center justify-between cursor-pointer"
+                        className="w-full px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors flex items-center justify-between cursor-pointer"
                       >
                         Solar Energy
                         <i className={`ri-arrow-${mobileSubDropdown === 'solar' ? 'up' : 'down'}-s-line text-base`}></i>
@@ -499,14 +499,14 @@ export default function Navbar() {
                           <Link 
                             to="/solar-energy" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Solar Energy
                           </Link>
                           <Link 
                             to="/energy-storage-solutions" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Energy Storage Solutions
                           </Link>
@@ -518,7 +518,7 @@ export default function Navbar() {
                     <div>
                       <button 
                         onClick={() => setMobileSubDropdown(mobileSubDropdown === 'cbg' ? null : 'cbg')}
-                        className="w-full px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors flex items-center justify-between cursor-pointer"
+                        className="w-full px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors flex items-center justify-between cursor-pointer"
                       >
                         Compressed Bio-Gas
                         <i className={`ri-arrow-${mobileSubDropdown === 'cbg' ? 'up' : 'down'}-s-line text-base`}></i>
@@ -528,28 +528,28 @@ export default function Navbar() {
                           <Link 
                             to="/compressed-bio-gas" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Compressed Bio-Gas
                           </Link>
                           <Link 
                             to="/biodhanic" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             BioDhanic
                           </Link>
                           <Link 
                             to="/spectrum-renewable" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Spectrum Renewables
                           </Link>
                           <Link 
                             to="/vyzag-bio-energy" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Vyzag Bio-Energy
                           </Link>
@@ -564,7 +564,7 @@ export default function Navbar() {
               <div>
                 <button 
                   onClick={() => setMobileDropdown(mobileDropdown === 'investor' ? null : 'investor')}
-                  className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors flex items-center justify-between cursor-pointer"
+                  className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors flex items-center justify-between cursor-pointer"
                 >
                   INVESTOR RELATIONS
                   <i className={`ri-arrow-${mobileDropdown === 'investor' ? 'up' : 'down'}-s-line text-base`}></i>
@@ -574,7 +574,7 @@ export default function Navbar() {
                     <div>
                       <button 
                         onClick={() => setMobileSubDropdown(mobileSubDropdown === 'smartodr' ? null : 'smartodr')}
-                        className="w-full px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors flex items-center justify-between cursor-pointer"
+                        className="w-full px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors flex items-center justify-between cursor-pointer"
                       >
                         Smart ODR
                         <i className={`ri-arrow-${mobileSubDropdown === 'smartodr' ? 'up' : 'down'}-s-line text-base`}></i>
@@ -586,7 +586,7 @@ export default function Navbar() {
                             target="_blank" 
                             rel="noopener noreferrer"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             SEBI Circular On ODR
                           </a>
@@ -595,7 +595,7 @@ export default function Navbar() {
                             target="_blank" 
                             rel="noopener noreferrer"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Online Dispute Resolution
                           </a>
@@ -604,7 +604,7 @@ export default function Navbar() {
                             target="_blank" 
                             rel="noopener noreferrer"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Link To SMART ODR
                           </a>
@@ -619,7 +619,7 @@ export default function Navbar() {
             <Link 
                 to="/investors" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors"
+                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
                 INVESTOR RELATIONS
               </Link>
@@ -627,7 +627,7 @@ export default function Navbar() {
               <Link 
                 to="/esg" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors"
+                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
                 ESG
               </Link>
@@ -635,7 +635,7 @@ export default function Navbar() {
               <Link 
                 to="/contact" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors"
+                className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
                 CONTACT US
               </Link>

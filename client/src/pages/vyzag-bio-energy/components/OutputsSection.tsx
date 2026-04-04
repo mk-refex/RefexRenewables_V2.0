@@ -1,4 +1,6 @@
-import SectionHeading from "../../../components/common/SectionHeading";
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "../../../components/common/SectionHeading";
 import FadeInUp from "../../../components/common/FadeInUp";
 
 export function OutputsSection() {
@@ -33,7 +35,9 @@ export function OutputsSection() {
             className="justify-center"
             watermarkAlign="center"
           />
-          <h2 className="text-4xl font-bold text-gray-900 mt-3">
+          <h2
+            className={`${sectionMainHeadingClassName} mt-3 text-gray-900`}
+          >
             The process yields multiple high-value outputs, including
           </h2>
         </FadeInUp>

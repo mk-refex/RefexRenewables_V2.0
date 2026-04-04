@@ -1,3 +1,4 @@
+import SectionHeading from '@/components/common/SectionHeading';
 import { useState } from 'react';
 
 export default function ContactFormSection() {
@@ -71,10 +72,10 @@ export default function ContactFormSection() {
           {/* Left Side - Text */}
           <div>
             <div className="inline-block mb-6">
-              <img
-                src="https://readdy.ai/api/search-image?query=Green%20renewable%20energy%20icon%20with%20leaf%20and%20circuit%20design%2C%20sustainable%20technology%20symbol%2C%20eco-friendly%20business%20logo%20on%20white%20background%2C%20minimalist%20clean%20design&width=120&height=80&seq=contact-partner-logo&orientation=landscape"
-                alt="Partner"
-                className="h-20"
+            <SectionHeading
+                badgeText={"Business Enquiries"}
+                showWatermark={false}
+                className="mb-3"
               />
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">

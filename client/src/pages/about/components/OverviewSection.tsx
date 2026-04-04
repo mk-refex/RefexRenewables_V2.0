@@ -1,5 +1,10 @@
 import FadeInUp from "@/components/common/FadeInUp";
-import SectionHeading from "@/components/common/SectionHeading";
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "@/components/common/SectionHeading";
+
+const aboutStatsIcon = (name: "sites" | "projects" | "location") =>
+  `${import.meta.env.BASE_URL}about-stats-icons/${name}.svg`;
 
 const OverviewSection = () => {
   return (
@@ -8,7 +13,7 @@ const OverviewSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Content */}
           <div>
-            <div className="mb-8">
+            <div className="mb-2">
               <FadeInUp delay={0.1}>
                 <SectionHeading
                   badgeText="ABOUT"
@@ -17,19 +22,19 @@ const OverviewSection = () => {
                 />
               </FadeInUp>
               <FadeInUp delay={0.2}>
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                  Refex Renewables &<br />
-                  Infrastructure Limited
+                <h2
+                  className={`${sectionMainHeadingClassName} text-gray-900`}
+                >
+                  Refex Renewables & Infrastructure Limited (RRIL)
                 </h2>
               </FadeInUp>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-2">
               <p className="text-[#6E777D] text-[18px] leading-relaxed text-base">
-                Refex Renewables & Infrastructure Limited (RRIL) is a leading
-                name in solar energy, recognized for pioneering projects and
+                is a leading name in solar energy, recognized for pioneering projects and
                 delivering innovative, first-of-their-kind renewable energy
-                systems across India. Operating at nearly 89 sites in 12 states,
+                systems across India. Operating at nearly 89 sites in 11 states,
                 RRIL offers end-to-end solutions in solar installation and clean
                 energy deployment.
               </p>
@@ -53,39 +58,72 @@ const OverviewSection = () => {
           </div>
         </div>
 
-        {/* Stats Cards - Full Width Below */}
-        <div className="grid grid-cols-3 gap-6 mt-12">
-          <div className="bg-[#1a5d3a] text-white p-6 lg:p-8 rounded-lg">
-            <div className="flex items-center justify-center mb-4">
-              <i className="ri-building-line text-4xl lg:text-5xl"></i>
-            </div>
-            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">
-              89
-            </div>
-            <div className="text-sm font-medium text-center uppercase tracking-wide">
-              Sites
+        {/* Stats — centered block in each card; icons fill white tile */}
+        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6 sm:items-stretch">
+          <div className="flex min-h-[10rem] items-center justify-center rounded-lg bg-[#1a5d3a] px-5 py-7 text-white sm:min-h-[11rem] lg:min-h-[12rem] lg:px-8 lg:py-8">
+            <div className="flex max-w-full items-center gap-4 sm:gap-5">
+              <div className="grid h-20 w-20 shrink-0 place-items-stretch rounded-xl bg-white p-2.5 shadow-md ring-1 ring-black/10 sm:h-[5.25rem] sm:w-[5.25rem]">
+                <img
+                  src={aboutStatsIcon("sites")}
+                  alt=""
+                  width={47}
+                  height={47}
+                  className="h-full w-full min-h-0 min-w-0 object-contain"
+                  decoding="async"
+                />
+              </div>
+              <div className="min-w-0 text-left">
+                <p className="text-3xl font-bold leading-none tracking-tight lg:text-4xl">
+                  89
+                </p>
+                <p className="mt-1.5 text-xs font-medium uppercase leading-snug tracking-wide text-white/90 sm:text-sm">
+                  Sites
+                </p>
+              </div>
             </div>
           </div>
-          <div className="bg-[#1a5d3a] text-white p-6 lg:p-8 rounded-lg">
-            <div className="flex items-center justify-center mb-4">
-              <i className="ri-sun-line text-4xl lg:text-5xl"></i>
-            </div>
-            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">
-              1 GW
-            </div>
-            <div className="text-sm font-medium text-center uppercase tracking-wide">
-              Solar
+          <div className="flex min-h-[10rem] items-center justify-center rounded-lg bg-[#1a5d3a] px-5 py-7 text-white sm:min-h-[11rem] lg:min-h-[12rem] lg:px-8 lg:py-8">
+            <div className="flex max-w-full items-center gap-4 sm:gap-5">
+              <div className="grid h-20 w-20 shrink-0 place-items-stretch rounded-xl bg-white p-2.5 shadow-md ring-1 ring-black/10 sm:h-[5.25rem] sm:w-[5.25rem]">
+                <img
+                  src={aboutStatsIcon("projects")}
+                  alt=""
+                  width={51}
+                  height={55}
+                  className="h-full w-full min-h-0 min-w-0 object-contain"
+                  decoding="async"
+                />
+              </div>
+              <div className="min-w-0 text-left">
+                <p className="text-3xl font-bold leading-none tracking-tight lg:text-4xl">
+                  125 MW
+                </p>
+                <p className="mt-1.5 text-xs font-medium uppercase leading-snug tracking-wide text-white/90 sm:text-sm">
+                  Projects Across India
+                </p>
+              </div>
             </div>
           </div>
-          <div className="bg-[#1a5d3a] text-white p-6 lg:p-8 rounded-lg">
-            <div className="flex items-center justify-center mb-4">
-              <i className="ri-map-pin-line text-4xl lg:text-5xl"></i>
-            </div>
-            <div className="text-3xl lg:text-4xl font-bold text-center mb-2">
-              12
-            </div>
-            <div className="text-sm font-medium text-center uppercase tracking-wide">
-              States
+          <div className="flex min-h-[10rem] items-center justify-center rounded-lg bg-[#1a5d3a] px-5 py-7 text-white sm:min-h-[11rem] lg:min-h-[12rem] lg:px-8 lg:py-8">
+            <div className="flex max-w-full items-center gap-4 sm:gap-5">
+              <div className="grid h-20 w-20 shrink-0 place-items-stretch rounded-xl bg-white p-2.5 shadow-md ring-1 ring-black/10 sm:h-[5.25rem] sm:w-[5.25rem]">
+                <img
+                  src={aboutStatsIcon("location")}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="h-full w-full min-h-0 min-w-0 object-contain"
+                  decoding="async"
+                />
+              </div>
+              <div className="min-w-0 text-left">
+                <p className="text-3xl font-bold leading-none tracking-tight lg:text-4xl">
+                  11
+                </p>
+                <p className="mt-1.5 text-xs font-medium uppercase leading-snug tracking-wide text-white/90 sm:text-sm">
+                  States
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -1,54 +1,57 @@
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
+
+const FADE_THRESHOLD = 0.98;
 
 export default function AboutSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="bg-[#F6F7F9] py-12 lg:py-16">
       <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <FadeInUp delay={0.1}>
-            <div className="w-full h-full flex items-center justify-center">
-              <img
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/SREPL-img.png"
-                alt="Spectrum Renewable Energy"
-                className="w-full max-w-md h-auto object-contain"
-              />
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
+          <div className="mx-auto w-full max-w-md md:mx-0 md:max-w-none">
+            <div className="overflow-hidden rounded-lg shadow-sm md:max-w-lg">
+              <div className="aspect-[4/3] w-full sm:aspect-[5/4]">
+                <img
+                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/SREPL-img.png"
+                  alt="Spectrum Renewable Energy"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
             </div>
-          </FadeInUp>
+          </div>
           <div>
-            <FadeInUp delay={0}>
-              {/* <SectionHeading
-                badgeText="Spectrum Renewable Energy Private Limited"
-                // text="SPECTRUM RENEWABLE"
-                showWatermark={false}
-              /> */}
-              <h2 className="text-4xl font-bold text-gray-900 mb-6 mt-3">
-                Spectrum Renewable Energy Private Limited
-              </h2>
-            </FadeInUp>
-            <FadeInUp delay={0.2}>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
+            <div className="mb-4 lg:mb-5">
+              {/* <FadeInUp delay={0.2} threshold={FADE_THRESHOLD}>
+                <h2
+                  className={`${sectionMainHeadingClassName} text-gray-900 md:mt-0`}
+                >
+                  Spectrum Renewable Energy Private Limited
+                </h2>
+              </FadeInUp> */}
+            </div>
+            <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
+              <div className="space-y-4 rounded-lg bg-white p-5 text-base leading-relaxed text-[#74787C] shadow-sm sm:p-6 lg:p-7">
                 <p>
-                  Spectrum Renewable Energy Pvt. Ltd. (SREPL), located at
+                  <b>Refex Spectrum Renewable Energy Pvt. Ltd. (RSREPL)</b>, located at
                   Warananagar, Kolhapur, is engaged in the generation of
                   Compressed Biogas (CBG) and organic manure from press mud and
                   other biodegradable wastes.
                 </p>
                 <p>
-                  A subsidiary of Refex Sustainability Solutions Private Limited
-                  (SREPL) is a leading bio-energy company committed to providing
-                  innovative renewable energy solutions for organic waste
-                  management and sustainable agriculture.
+                  A subsidiary of Refex Sustainability Solutions Private
+                  Limited (RSSPL) is a leading bio-energy company committed to
+                  providing innovative renewable energy solutions for organic
+                  waste management and sustainable agriculture.
                 </p>
-                <p>
+                {/* <p>
                   The company operates an integrated, end-to-end value chain
                   encompassing project development, plant design, construction,
                   operations and maintenance, and technology deployment. These
-                  internal capabilities enable SREPL to efficiently convert
+                  internal capabilities enable RSREPL to efficiently convert
                   organic waste into Bio-CNG and high-quality organic
                   manure/soil conditioners, supporting agricultural productivity
                   and environmental sustainability.
-                </p>
+                </p> */}
               </div>
             </FadeInUp>
           </div>

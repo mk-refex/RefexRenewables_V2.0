@@ -42,7 +42,7 @@ const CommitteesSection = () => {
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-lg overflow-hidden shadow-sm">
             <thead>
-              <tr className="bg-green-600 text-white">
+              <tr className="bg-brand text-white">
                 <th className="py-4 px-6 text-left font-semibold text-base lg:text-lg">
                   Name of Committee
                 </th>

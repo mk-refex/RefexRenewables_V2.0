@@ -63,7 +63,7 @@ const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all whitespace-nowrap"
             >
-              <div className="w-8 h-8 flex items-center justify-center bg-green-600 rounded-full">
+              <div className="w-8 h-8 flex items-center justify-center bg-brand rounded-full">
                 <i className="ri-user-line text-white text-sm"></i>
               </div>
               <div className="hidden sm:block text-left">

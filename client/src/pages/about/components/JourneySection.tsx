@@ -129,7 +129,7 @@ const JourneySection = () => {
                       <div
                         className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                           isActive
-                            ? 'bg-green-600 scale-150 shadow-lg'
+                            ? 'bg-brand scale-150 shadow-lg'
                             : 'bg-gray-400 hover:bg-gray-600 hover:scale-125'
                         }`}
                       ></div>
@@ -147,7 +147,7 @@ const JourneySection = () => {
                     >
                       <div
                         className={`whitespace-nowrap text-base font-semibold transition-all duration-300 ${
-                          isActive ? 'text-green-600 scale-110' : 'text-gray-600'
+                          isActive ? 'text-brand scale-110' : 'text-gray-600'
                         }`}
                       >
                         {item.year}
@@ -160,7 +160,7 @@ const JourneySection = () => {
                 {/* Vertical Line from Active Year to Content - Animates from dot */}
                 <div 
                   key={activeYear}
-                  className="absolute w-0.5 bg-green-600 line-grow-animation"
+                  className="absolute w-0.5 bg-brand line-grow-animation"
                   style={{
                     left: '50%',
                     top: '80px',
@@ -172,11 +172,11 @@ const JourneySection = () => {
               {/* Content INSIDE Circle - Absolutely Positioned and Centered */}
               <div className="absolute left-1/2 top-[220px] transform -translate-x-1/2 text-center max-w-xl w-full px-4">
                 <div key={activeYear} className="content-fade-in">
-                  <h3 className="text-6xl lg:text-7xl font-bold text-green-600 mb-3" style={{ lineHeight: '1' }}>
+                  <h3 className="text-6xl lg:text-7xl font-bold text-brand mb-3" style={{ lineHeight: '1' }}>
                     {journeyData[activeYear].year}
                   </h3>
                   <p className="text-sm lg:text-base text-gray-700 leading-relaxed">
-                    Commissioned <span className="text-green-600 font-semibold">{journeyData[activeYear].title}</span> {journeyData[activeYear].description}
+                    Commissioned <span className="font-semibold text-brand">{journeyData[activeYear].title}</span> {journeyData[activeYear].description}
                   </p>
                 </div>
               </div>

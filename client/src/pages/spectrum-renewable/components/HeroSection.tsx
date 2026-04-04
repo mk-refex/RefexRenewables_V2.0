@@ -11,7 +11,7 @@ export default function HeroSection() {
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40"></div>
       <div className="relative z-10 container mx-auto px-6">
-        <HeroHeading watermarkText="Renewable" text="Spectrum Renewables" watermarkAlign="center" className="text-center" />
+        <HeroHeading watermarkText="Renewables" text="Spectrum Renewables" watermarkAlign="center" className="text-center" />
       </div>
     </section>
   );

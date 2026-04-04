@@ -1,5 +1,7 @@
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
+
+const FADE_THRESHOLD = 0.98;
 
 const uses = [
   "Testing different feedstocks",
@@ -10,30 +12,27 @@ const uses = [
 export default function UseOfPilotDigestor() {
   return (
     <section>
-      <div className="container mx-auto">
-        <FadeInUp
-          delay={0}
-          className="mb-12 "
-        >
-          <SectionHeading
-            badgeText="WHAT IS THE USE OF"
-            text="Pilot Digestor?"
-            showWatermark={false}
-          />
-        </FadeInUp>
-        <FadeInUp delay={0.15}>
-          <ul className="mx-auto space-y-4 text-lg text-gray-700 list-none mb-6">
-            {uses.map((item, index) => (
-              <li key={index} className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold">
-                  {index + 1}
-                </span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </FadeInUp>
-      </div>
+      <FadeInUp
+        delay={0}
+        threshold={FADE_THRESHOLD}
+        className="mb-12"
+      >
+        <h2 className={`${sectionMainHeadingClassName} text-gray-900`}>
+          What is the use of Pilot Digestor?
+        </h2>
+      </FadeInUp>
+      <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
+        <ul className="mx-auto mb-6 list-none space-y-4 text-lg text-gray-700">
+          {uses.map((item, index) => (
+            <li key={index} className="flex gap-3">
+              <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </FadeInUp>
     </section>
   );
 }

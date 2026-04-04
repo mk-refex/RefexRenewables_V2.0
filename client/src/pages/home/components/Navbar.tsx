@@ -59,53 +59,53 @@ const Navbar = () => {
 
               {/* Desktop Navigation */}
               <nav className="hidden lg:flex items-center gap-6 xl:gap-8 ml-8">
-                <Link to="/" className="text-sm font-bold text-gray-800 hover:text-green-600 transition-colors whitespace-nowrap">
+                <Link to="/" className="text-sm font-bold text-gray-800 hover:text-brand transition-colors whitespace-nowrap">
                   HOME
                 </Link>
                 
                 <div className="relative group">
-                  <button className="text-sm font-bold text-gray-800 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1">
+                  <button className="text-sm font-bold text-gray-800 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1">
                     ABOUT US
                     <i className="ri-arrow-down-s-line text-base"></i>
                   </button>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <Link to="/about-us" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">About Us</Link>
-                    <a href="/about-us#vision-mission" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Vision & Mission</a>
-                    <a href="/about-us#core-values" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Core Values</a>
-                    <a href="/about-us#our-journey" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Our Journey</a>
-                    <a href="/about-us#board-of-directors" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Board of Directors</a>
-                    <a href="https://www.refex.group/careers/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Careers</a>
-                    <a href="https://www.refex.group/diversity-inclusion/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Diversity Inclusion</a>
-                    <a href="https://www.refex.group/gallery/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Gallery</a>
+                    <Link to="/about-us" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">About Us</Link>
+                    <a href="/about-us#vision-mission" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Vision & Mission</a>
+                    <a href="/about-us#core-values" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Core Values</a>
+                    <a href="/about-us#our-journey" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Our Journey</a>
+                    <a href="/about-us#board-of-directors" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Board of Directors</a>
+                    <a href="https://www.refex.group/careers/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Careers</a>
+                    <a href="https://www.refex.group/diversity-inclusion/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Diversity Inclusion</a>
+                    <a href="https://www.refex.group/gallery/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Gallery</a>
                   </div>
                 </div>
 
                 <div className="relative group">
-                  <button className="text-sm font-bold text-gray-800 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1">
+                  <button className="text-sm font-bold text-gray-800 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1">
                     BUSINESSES
                     <i className="ri-arrow-down-s-line text-base"></i>
                   </button>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <Link to="/solar-energy" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Solar Energy</Link>
-                    <Link to="/compressed-bio-gas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Compressed Bio-Gas</Link>
+                    <Link to="/solar-energy" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Solar Energy</Link>
+                    <Link to="/compressed-bio-gas" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Compressed Bio-Gas</Link>
                   </div>
                 </div>
 
                 <div className="relative group">
-                  <button className="text-sm font-bold text-gray-800 hover:text-green-600 transition-colors whitespace-nowrap flex items-center gap-1">
+                  <button className="text-sm font-bold text-gray-800 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1">
                     INVESTOR RELATIONS
                     <i className="ri-arrow-down-s-line text-base"></i>
                   </button>
                   <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <Link to="/investors" className="block px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors">Investor Relations</Link>
+                    <Link to="/investors" className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors">Investor Relations</Link>
                   </div>
                 </div>
 
-                <Link to="/esg" className="text-sm font-bold text-gray-800 hover:text-green-600 transition-colors whitespace-nowrap">
+                <Link to="/esg" className="text-sm font-bold text-gray-800 hover:text-brand transition-colors whitespace-nowrap">
                   ESG
                 </Link>
 
-                <Link to="/contact" className="text-sm font-bold text-gray-800 hover:text-green-600 transition-colors whitespace-nowrap">
+                <Link to="/contact" className="text-sm font-bold text-gray-800 hover:text-brand transition-colors whitespace-nowrap">
                   CONTACT US
                 </Link>
               </nav>
@@ -113,7 +113,7 @@ const Navbar = () => {
               {/* Mobile Menu Button */}
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-800 hover:text-green-600 transition-colors cursor-pointer"
+                className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-800 hover:text-brand transition-colors cursor-pointer"
               >
                 <i className={`${isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl`}></i>
               </button>
@@ -126,25 +126,25 @@ const Navbar = () => {
           <div className="lg:hidden bg-white border-t border-gray-200 shadow-lg">
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col gap-2">
-                <Link to="/" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors">
+                <Link to="/" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors">
                   HOME
                 </Link>
                 
                 <div>
                   <button 
                     onClick={() => setOpenDropdown(openDropdown === 'about' ? null : 'about')}
-                    className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors flex items-center justify-between cursor-pointer"
+                    className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors flex items-center justify-between cursor-pointer"
                   >
                     ABOUT US
                     <i className={`ri-arrow-${openDropdown === 'about' ? 'up' : 'down'}-s-line text-base`}></i>
                   </button>
                   {openDropdown === 'about' && (
                     <div className="pl-4 mt-1 flex flex-col gap-1">
-                      <Link to="/about-us" className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors">About Us</Link>
-                      <a href="/about-us#vision-mission" className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors">Vision & Mission</a>
-                      <a href="/about-us#core-values" className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors">Core Values</a>
-                      <a href="/about-us#our-journey" className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors">Our Journey</a>
-                      <a href="/about-us#board-of-directors" className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors">Board of Directors</a>
+                      <Link to="/about-us" className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors">About Us</Link>
+                      <a href="/about-us#vision-mission" className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors">Vision & Mission</a>
+                      <a href="/about-us#core-values" className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors">Core Values</a>
+                      <a href="/about-us#our-journey" className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors">Our Journey</a>
+                      <a href="/about-us#board-of-directors" className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors">Board of Directors</a>
                     </div>
                   )}
                 </div>
@@ -152,28 +152,28 @@ const Navbar = () => {
                 <div>
                   <button 
                     onClick={() => setOpenDropdown(openDropdown === 'business' ? null : 'business')}
-                    className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors flex items-center justify-between cursor-pointer"
+                    className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors flex items-center justify-between cursor-pointer"
                   >
                     BUSINESSES
                     <i className={`ri-arrow-${openDropdown === 'business' ? 'up' : 'down'}-s-line text-base`}></i>
                   </button>
                   {openDropdown === 'business' && (
                     <div className="pl-4 mt-1 flex flex-col gap-1">
-                      <Link to="/solar-energy" className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors">Solar Energy</Link>
-                      <Link to="/compressed-bio-gas" className="px-4 py-2 text-sm text-gray-700 hover:text-green-600 transition-colors">Compressed Bio-Gas</Link>
+                      <Link to="/solar-energy" className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors">Solar Energy</Link>
+                      <Link to="/compressed-bio-gas" className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors">Compressed Bio-Gas</Link>
                     </div>
                   )}
                 </div>
 
-                <Link to="/investors" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors">
+                <Link to="/investors" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors">
                   INVESTOR RELATIONS
                 </Link>
 
-                <Link to="/esg" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors">
+                <Link to="/esg" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors">
                   ESG
                 </Link>
 
-                <Link to="/contact" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors">
+                <Link to="/contact" className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors">
                   CONTACT US
                 </Link>
               </nav>

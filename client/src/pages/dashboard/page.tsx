@@ -1334,7 +1334,7 @@ export default function DashboardPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                   activeTab === tab.id
-                    ? 'border-green-600 text-green-600'
+                    ? 'border-brand text-brand'
                     : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
                 }`}
               >
@@ -1372,7 +1372,7 @@ export default function DashboardPage() {
                 
                 <button
                   onClick={handleSave}
-                  className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap cursor-pointer"
+                  className="flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-lg bg-brand px-4 py-2 text-white transition-colors hover:bg-brand-hover"
                 >
                   <i className="ri-save-line"></i>
                   <span className="text-sm font-medium">Save</span>
@@ -1414,7 +1414,7 @@ export default function DashboardPage() {
         <div
           className={`flex items-center gap-3 px-6 py-4 rounded-lg shadow-lg min-w-[320px] ${
             snackbarType === 'success'
-              ? 'bg-green-600 text-white'
+              ? 'bg-brand text-white'
               : snackbarType === 'error'
               ? 'bg-red-600 text-white'
               : 'bg-blue-600 text-white'

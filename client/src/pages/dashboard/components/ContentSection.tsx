@@ -40,7 +40,7 @@ const ContentSection = () => {
         </div>
         <button 
           onClick={handleSave}
-          className="flex items-center gap-2 px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all whitespace-nowrap"
+          className="flex items-center gap-2 px-6 py-2 bg-brand text-white hover:bg-brand-hover rounded-lg font-medium transition-all whitespace-nowrap"
         >
           <i className="ri-save-line text-lg"></i>
           <span>{isSaved ? 'Saved!' : 'Save Changes'}</span>

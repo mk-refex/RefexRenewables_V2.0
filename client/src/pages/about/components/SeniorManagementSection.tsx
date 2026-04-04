@@ -1,14 +1,23 @@
 import FadeInUp from '@/components/common/FadeInUp';
 import { useState } from 'react';
 
+type ManagementMember = {
+  name: string;
+  position: string;
+  image: string;
+  bio: string[];
+  company: string;
+};
+
 const SeniorManagementSection = () => {
   const [selectedMember, setSelectedMember] = useState<number | null>(null);
 
-  const managementMembers = [
+  const managementMembers: ManagementMember[] = [
     {
       name: 'Purvesh Madhusudan Kapadia',
       position: 'Chief Human Resource Officer',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Purvesh.jpg',
+      company: "",
+      image: '/wp-content/uploads/2025/10/Purvesh.jpg',
       bio: [
         'In a career span of 25+ Years – Purvesh has played multiple strategic pinnacle roles ranging from CHRO-Managing Partner-COO-Director HR etc.',
         'Throughout his career he has taken up several challenging assignments and has been instrumental in redefining the HR process for several leading organizations globally. Business process reengineering is his exclusive strength tested and proven in his career span. His innate process-driven approach has helped in achieving double-digit top-line and bottom-line growth for several organizations, he has been associated with.',
@@ -18,8 +27,9 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Sahil Singla',
-      position: 'President Corporate Finance',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Sahil.jpg',
+      position: 'President',
+      company: "Corporate Finance",
+      image: '/wp-content/uploads/2025/10/Sahil.jpg',
       bio: ['Sahil has over 19 years of experience in fundraising across sectors and has cumulatively raised more than USD 5 BN from Banks/ FIs/ Private Equity etc.',
         'He has a unique blend of technical, financial and legal domain knowledge which sets him apart.',
         'His expertise is Project Structuring/ Advisory, Equity Investments & Divestments, Financial Modelling, Business Analysis, Negotiations & Regulatory/ Policy Advocacy.',
@@ -29,8 +39,9 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Sonal Jain',
-      position: 'Vice-President Accounts & Taxation',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Sonal.jpg',
+      position: 'Vice-President',
+      company: "Accounts & Taxation",
+      image: '/wp-content/uploads/2025/10/Sonal.jpg',
       bio: ['Sonal is an accomplished Chartered Accountant with excellent knowledge of financial reporting and accounting, having over 19 years of experience in Manufacturing and service industry including Transmission, Solar and EPC.',
         'He has expertise in disclosure of information in financial reporting of the listed entities and evaluation of the Internal financial controls for the business and design and implementation of the internal controls in order to mitigate the financial risks.',
         'He has worked with numerous listed entities and has released quarterly/ annual results of listed entity as per the requirement of SEBI LODR.',
@@ -42,8 +53,9 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Harini Sriraaman',
-      position: 'Vice-President Group General Counsel',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Harini.jpg',
+      position: 'Vice-President',
+      company: "Group General Counsel",
+      image: '/wp-content/uploads/2025/10/Harini.jpg',
       bio: ['Harini comes with over 17 years of experience in handling and addressing corporate legal and commercial matters and litigations. She has worked with esteemed organizations like HCL Technologies Limited, Siva Group, Tattva Group (part of India Cements Group) apart from her association with the law office of M/s. Satish Parasaran at Chennai.',
         'At Refex, as a General Counsel, she handles Contracts review and management, IPR Management, Litigation management, Mergers & Acquisitions, Corporate Governance and compliances, Disputes Resolution etc. She also heads the POSH committee.',
         'Academically Harini is a qualified Commerce and Law graduate. She is a certified M&A Professional – Legal & Business Strategies from Indian Academy of Law & Management, New Delhi.'
@@ -51,8 +63,9 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Srividya Nirmalkumar',
-      position: 'Vice-President Corporate Communications',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Srividya.jpg',
+      position: 'Vice-President',
+      company: "Corporate Communications",
+      image: '/wp-content/uploads/2025/10/Srividya.jpg',
       bio: ['Srividya is an extremely goal-oriented communication professional with over 20 years of work experience in various leading organizations. She is highly experienced in internal and external communication, social media, digital marketing and event management.',
         'Whether it is an analyst report or a marketing document, she is the go-to person. Srividya has also led diversity and inclusion and CSR initiatives in her career.',
         'She is very passionate about D&I, whether strategy or implementation and strives to make a difference to society. She has won several D&I awards and recognition for the various initiatives that she implemented.',
@@ -61,20 +74,31 @@ const SeniorManagementSection = () => {
         "Academically she has completed her Master's in Public Administration and post-graduation in Digital Marketing from Mudra Institute of Communications, Ahmedabad.",
       ]
     },
+    // {
+    //   name: 'Suhail Shariff',
+    //   position: 'Vice-President',
+    //   company: "Administration & Facility",
+    //   image: '/wp-content/uploads/2025/10/Suhail.jpg',
+    //   bio: ['Suhail has over 23 years of Facility Management experience including Asset Management, Project Management, Security Services, Transitions and Change Management.',
+    //     'A very goal-oriented leader, Suhail focuses on creating an enhanced customer experience through effective facility management solutions and has contributed to accomplishing critical FM transitions across India and global clients (APAC, EMEA & America Regions).',
+    //     'He has previously worked for esteemed organizations such as CB Richard Ellis, Cushman & Wakefield, and Jones Lang Lasalle.',
+    //     'Academically, Suhail holds a Commerce degree with a Certification in Leadership Programme issued by the Project Management Institute.'
+    //   ]
+    // },
     {
-      name: 'Suhail Shariff',
-      position: 'Vice-President Administration & Facility',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Suhail.jpg',
-      bio: ['Suhail has over 23 years of Facility Management experience including Asset Management, Project Management, Security Services, Transitions and Change Management.',
-        'A very goal-oriented leader, Suhail focuses on creating an enhanced customer experience through effective facility management solutions and has contributed to accomplishing critical FM transitions across India and global clients (APAC, EMEA & America Regions).',
-        'He has previously worked for esteemed organizations such as CB Richard Ellis, Cushman & Wakefield, and Jones Lang Lasalle.',
-        'Academically, Suhail holds a Commerce degree with a Certification in Leadership Programme issued by the Project Management Institute.'
+      name: 'Saravanan Vasanth',
+      position: 'Chief of Staff',
+      company: "MedTech & Renewables",
+      image: 'https://refex.group/uploads/images/general/general/general-general-saravanan-cos-1766577062439-5058.png',
+      bio: ['Saravanan has 11 years of experience in corporate development and strategic planning roles across the Sports, Media, Entertainment, and Manufacturing sectors. He is a chief of staff for MedTech. In his previous roles, he has managed auction strategy for an IPL franchise and ran an incubation business end-to-end. Saravanan specializes in shaping new strategic initiatives to unlock value-creation opportunities. He has worked with reputed organizations such as Times Group and Grundfos.',
+        'Academically, Saravanan is an engineer from Madras Institute of Technology (MIT) and has an MBA from IIM Rohtak.',
       ]
     },
     {
       name: 'Srivaths Varadharajan',
       position: 'Chief Technology Officer',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Srivaths-CTO-new.jpg',
+      company: "",
+      image: '/wp-content/uploads/2025/10/Srivaths-CTO-new.jpg',
       bio: ['Srivaths Varadharajan is a senior technology and business executive with over 25 years of extensive experience across diverse industries including fintech, banking, insurance, capital markets, telecom, and BPO/KPO. He has held leadership positions such as CTO, CIO, COO, CDO & CEO, demonstrating strategic vision and execution in digital transformation, enterprise architecture, cybersecurity, and platform development. His core strengths lie in aligning technology with business strategy, leading cross-functional teams, and delivering scalable digital products using emerging technologies like AI/ML, blockchain & cloud infrastructure.',
         'Throughout his career, Srivaths has driven large-scale transformation initiatives at organizations like Spice Money, Niyogin Fintech, Kotak Securities, and Reliance Group. He has led the design and implementation of rule-based engines, smart automation tools, omni-channel platforms, and open-source digital ecosystems. As a founding team member at Niyogin Fintech, he helped build a paperless SME lending platform and led the creation of 21 applications and 42 microservices in just six months. At Spice Money, he was instrumental in expanding market share from 10.5% to 17.5% by modernizing the tech stack and building scalable, API-integrated platforms.',
         'Recognized with awards such as the CIO 100 Honouree, Skoch Innovation Award, and EMC Transformers Award, Srivaths is known for delivering measurable impact on topline growth, operational efficiency, and customer experience. He holds an MBA from K. J. Somaiya Institute and certifications in Six Sigma and Project Management. A forward-thinking leader, he continues to advise organizations as an independent consultant, enabling digital transformation through design thinking, data science, and secure, cloud-native solutions.'
@@ -82,7 +106,8 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Jaya Krishna',
-      position: 'Director - Corporate Finance',
+      position: 'Director',
+      company: "Corporate Finance",
       image: 'https://refexrenewables.com/img/team/Jaya-Krishna.png',
       bio: ['Jaya Krishna is a seasoned Chartered Accountant with over two decades of leadership experience across corporate finance, project funding, strategic planning, and international financial management.',
         "Academically, he completed his Master's in Business Administration from the Indian Institute of Management - Mumbai.",
@@ -95,7 +120,8 @@ const SeniorManagementSection = () => {
     },
     {
       name: "Mr. Rajeev Vaze",
-      position: "Vice President - Supply Chain Management (SCM)",
+      position: "Vice President",
+      company: "Supply Chain Management (SCM)",
       image: 'https://refexrenewables.com/img/team/Rajeev-Vaze.png',
       bio: ["Rajeev Vaze is Vice President & Head SCM with over 30 years of extensive experience driving strategic initiatives across the renewable energy and infrastructure sectors.",
         "He is a recognized leader in Strategic Procurement, Cost Optimization, and Project Execution.",
@@ -121,7 +147,7 @@ const SeniorManagementSection = () => {
           {managementMembers.map((member, index) => (
             <div 
               key={index}
-              className="bg-green-600 text-white rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className="bg-brand text-white rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300 cursor-pointer"
               onClick={() => setSelectedMember(selectedMember === index ? null : index)}
             >
               <div className="aspect-square overflow-hidden">
@@ -131,48 +157,58 @@ const SeniorManagementSection = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold mb-2">{member.name}</h3>
-                <p className="text-sm text-white/90">{member.position}</p>
+              <div className="flex flex-col gap-1 p-6 text-left">
+                <h3 className="text-lg font-bold leading-snug">{member.name}</h3>
+                <p className="text-sm leading-snug text-white/90">
+                  {member.position}
+                </p>
+                <p className="text-xs leading-snug text-white/80">
+                  {member.company}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Modal for member details */}
+      {/* Modal — text only; height capped so content scrolls inside the viewport */}
       {selectedMember !== null && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/50"
           onClick={() => setSelectedMember(null)}
+          role="presentation"
         >
-          <div 
-            className="bg-white rounded-lg max-w-2xl w-full p-8 relative max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button 
-              onClick={() => setSelectedMember(null)}
-              className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
+          <div className="flex min-h-full items-start justify-center px-4 py-8 sm:px-6 sm:py-10">
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="senior-mgmt-modal-title"
+              className="relative w-full max-w-2xl rounded-lg bg-white shadow-xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <i className="ri-close-line text-xl"></i>
-            </button>
-            
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="md:w-1/3">
-                <img 
-                  src={managementMembers[selectedMember].image}
-                  alt={managementMembers[selectedMember].name}
-                  className="w-full aspect-square object-cover rounded-lg"
-                />
-              </div>
-              <div className="md:w-2/3">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setSelectedMember(null)}
+                className="absolute right-3 top-3 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-100 transition-colors hover:bg-gray-200"
+              >
+                <i className="ri-close-line text-xl"></i>
+              </button>
+
+              <div className="max-h-[min(85vh,calc(100dvh-4rem))] overflow-y-auto overscroll-y-contain px-6 pb-8 pt-14 sm:px-8 sm:pt-16">
+                <h3
+                  id="senior-mgmt-modal-title"
+                  className="pr-10 text-2xl font-bold text-gray-900"
+                >
                   {managementMembers[selectedMember].name}
                 </h3>
-                <p className="text-green-600 font-medium mb-4">
+                <p className="text-brand mt-2 font-medium">
                   {managementMembers[selectedMember].position}
                 </p>
-                <div className="text-gray-700 leading-relaxed space-y-3">
+                <p className="mt-1 text-sm text-gray-600">
+                  {managementMembers[selectedMember].company}
+                </p>
+                <div className="mt-4 space-y-3 leading-relaxed text-gray-700">
                   {managementMembers[selectedMember].bio.map((paragraph, i) => (
                     <p key={i}>{paragraph}</p>
                   ))}

@@ -4,7 +4,7 @@ const project = {
   id: "leh-ladakh-storage",
   name: "Indian Army 2 MW Project",
   location: "Leh, Ladakh (Partapur & Siachen Base Camps)",
-  capacity: "2 MWp with 4 MWhr of BSES",
+  capacity: "2 MWp with 4 MWhr of BESS",
   description:
     "Solar project at the highest altitude in India",
   details:
@@ -72,7 +72,7 @@ export default function ProjectsSection() {
         {/* Header (reusing FeaturedProjects style) */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Featured Energy Storage Project
+            Featured Projects
           </h2>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto">
             Leh and Ladakh – 1 MW / 2 MWh solar‑plus‑storage installation

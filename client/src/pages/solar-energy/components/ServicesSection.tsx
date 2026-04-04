@@ -1,37 +1,39 @@
 import FadeInUp from "@/components/common/FadeInUp";
-import SectionHeading from "@/components/common/SectionHeading";
+import SectionHeading, {
+  sectionMainHeadingClassName,
+} from "@/components/common/SectionHeading";
 
 export default function ServicesSection() {
   const services = [
     {
-      icon: "ri-leaf-line",
+      iconSrc: "/wp-content/uploads/svg_icons/tcb9zv145e8lkpd26yz-1.svg",
       title: "Clean Energy Solutions",
       description:
         "Design solar systems customized to your energy needs, space, and goals to ensure optimal savings, reliability, and compliance.",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/clean-energy-solutions.jpg",
+        "/wp-content/uploads/2025/08/about-483x500.png",
     },
     {
-      icon: "ri-money-dollar-circle-line",
+      iconSrc: "/wp-content/uploads/svg_icons/gn3kcvh52vlkp8lg3b.svg",
       title: "Significant Cost Savings & ROI",
       description:
         "Enable commercial and industrial (C&I) clients to lower electricity costs through solar and open access models, offering quick payback periods and sustained long-term financial benefits.",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/cost-saving-roi.jpg",
+        "/wp-content/uploads/2025/09/cost-saving-roi.jpg",
     },
     {
-      icon: "ri-plant-line",
+      iconSrc: "/wp-content/uploads/svg_icons/b259e3m4nvnlkp9o2qp.svg",
       title: "Sustainability & Energy Independence",
       description:
         "Help businesses meet ESG and net-zero goals while reducing grid dependence, supporting a cleaner and more resilient energy future.",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/sustainablity-eco.jpg",
+        "/wp-content/uploads/2025/09/sustainablity-eco.jpg",
     },
   ];
 
   return (
-    <section className="py-20 bg-[#1B1B1B]">
-      <div className="container mx-auto px-[110px]">
+    <section className="bg-[#1B1B1B] py-20">
+      <div className="container mx-auto px-4 lg:px-[110px]">
         <div className="text-center mb-16">
           <FadeInUp delay={0.2}>
             <SectionHeading
@@ -42,7 +44,7 @@ export default function ServicesSection() {
             />
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mt-3">
+            <h2 className={`${sectionMainHeadingClassName} mt-3 text-white`}>
               Why choose RRIL solar?
             </h2>
           </FadeInUp>
@@ -52,23 +54,32 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="rounded-lg bg-white shadow-lg transition-shadow duration-300 hover:shadow-xl"
             >
-              <div className="relative h-64">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute bottom-4 left-4 w-14 h-14 bg-green-600 rounded-lg flex items-center justify-center">
-                  <i className={`${service.icon} text-2xl text-white`}></i>
+              <div className="overflow-hidden rounded-t-lg">
+                <div className="relative h-64">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <div className="relative border-t border-gray-100 px-6 pb-6 pt-12">
+                <div className="absolute -top-8 left-6 z-10 flex h-16 w-16 items-center justify-center rounded-lg bg-white shadow-md ring-1 ring-gray-200">
+                  <img
+                    src={service.iconSrc}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 object-contain"
+                    decoding="async"
+                  />
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-gray-900">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-sm leading-relaxed text-gray-600">
                   {service.description}
                 </p>
               </div>

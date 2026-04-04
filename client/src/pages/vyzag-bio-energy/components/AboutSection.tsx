@@ -1,39 +1,43 @@
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
+
+const FADE_THRESHOLD = 0.98;
 
 export function AboutSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="bg-[#F6F7F9] py-12 lg:py-16">
       <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <FadeInUp delay={0.1}>
-            <img
-              src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/vizag-img.png"
-              alt="Vyzag Bio-Energy Facility"
-              className="w-full h-auto rounded-lg"
-            />
-          </FadeInUp>
-
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
+          <div className="mx-auto w-full max-w-md md:mx-0 md:max-w-none">
+            <div className="overflow-hidden rounded-lg shadow-sm md:max-w-lg">
+              <div className="aspect-[4/3] w-full sm:aspect-[5/4]">
+                <img
+                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/vizag-img.png"
+                  alt="Vyzag Bio-Energy Facility"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+            </div>
+          </div>
           <div>
-            <FadeInUp delay={0}>
-              <SectionHeading
-                badgeText="REFEX"
-                text="VYZAG BIO"
-                showWatermark={false}
-              />
-              <h2 className="text-4xl font-bold mb-6 text-gray-900 mt-3">
-                Vyzag Bio-Energy Fuel Private Limited
-              </h2>
-            </FadeInUp>
-            <FadeInUp delay={0.2}>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
+            <div className="mb-4 lg:mb-5">
+              <FadeInUp delay={0.2} threshold={FADE_THRESHOLD}>
+                <h2
+                  className={`${sectionMainHeadingClassName} text-gray-900 md:mt-0`}
+                >
+                  Vyzag Bio-Energy Fuel Private Limited
+                </h2>
+              </FadeInUp>
+            </div>
+            <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
+              <div className="space-y-4 rounded-lg bg-white p-5 text-base leading-relaxed text-[#74787C] shadow-sm sm:p-6 lg:p-7">
                 <p>
                   In 2024, RRIL successfully acquired Vyzag Bio-Energy Fuel
-                  Private Limited ("Vyzag Bio"), marking a strategic step
-                  towards its expansion into the Compressed Biogas (CBG) sector.
-                  Vyzag Bio operates a state-of-the-art CBG facility that
-                  converts segregated municipal organic waste into biogas,
-                  aligning with RRIL's vision of advancing sustainable and
+                  Private Limited (&quot;Vyzag Bio&quot;), marking a strategic
+                  step towards its expansion into the Compressed Biogas (CBG)
+                  sector. Vyzag Bio operates a state-of-the-art CBG facility
+                  that converts segregated municipal organic waste into biogas,
+                  aligning with RRIL&apos;s vision of advancing sustainable and
                   renewable energy solutions.
                 </p>
                 <p>

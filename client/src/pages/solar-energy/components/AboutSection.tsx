@@ -1,35 +1,34 @@
 import FadeInUp from "@/components/common/FadeInUp";
-import SectionHeading from "@/components/common/SectionHeading";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
 
 export default function AboutSection() {
   return (
-    <section className="py-20 bg-[#F6F7F9]">
-      <div className="container mx-auto px-[110px]">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <img
-              src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/solar-image-new.png"
-              alt="Solar Energy Installation"
-              className="w-full h-auto rounded-lg"
-            />
+    <section className="bg-[#F6F7F9] py-12 lg:py-16">
+      <div className="container mx-auto px-4 lg:px-[110px]">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
+          <div className="mx-auto w-full max-w-md md:mx-0 md:max-w-none">
+            <div className="overflow-hidden rounded-lg shadow-sm  md:max-w-lg">
+              <div className="aspect-[4/3] w-full sm:aspect-[5/4]">
+                <img
+                  src="/wp-content/uploads/2025/10/solar-image-new.png"
+                  alt="Solar Energy Installation"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+            </div>
           </div>
           <div>
-            <div className="mb-6">
+            <div className="mb-4 lg:mb-5">
               <FadeInUp delay={0.2}>
-                <SectionHeading
-                  badgeText="ABOUT"
-                  text="SOLAR ENERGY"
-                  showWatermark={false}
-                />
-              </FadeInUp>
-              <FadeInUp delay={0.2}>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-3 leading-tight">
+                <h2
+                  className={`${sectionMainHeadingClassName} text-gray-900 md:mt-0`}
+                >
                   India's leading solar power energy company
                 </h2>
               </FadeInUp>
             </div>
-            <div className="bg-white p-8 rounded-lg">
-              <p className="text-[#74787C] text-[18px] leading-relaxed text-base">
+            <div className="rounded-lg bg-white p-5 shadow-sm sm:p-6 lg:p-7">
+              <p className="text-base leading-relaxed text-[#74787C]">
                 As a leading solar power company, we empower commercial and
                 industrial (C&I) enterprises to reduce their carbon footprint
                 through customized commercial solar system solutions. With

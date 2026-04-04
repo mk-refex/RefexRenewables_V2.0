@@ -1,74 +1,84 @@
-import SectionHeading from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import FadeInUp from "@/components/common/FadeInUp";
+import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
+
+const FADE_THRESHOLD = 0.98;
+
+type Segment = { text: string; accent?: boolean };
 
 export function HighlightsSection() {
-  const highlights = [
+  const highlights: { iconSrc: string; segments: Segment[] }[] = [
     {
-      title: "The First Biogas Plant",
-      description:
-        "in Andhra Pradesh, leading the conversion of municipal waste into CBG/Bio-CNG.",
+      iconSrc: "/wp-content/uploads/svg_icons/biogas.svg",
+      segments: [
+        { text: "The " },
+        { text: "First Biogas Plant", accent: true },
+        {
+          text: " in Andhra Pradesh, leading the conversion of municipal waste into CBG/Bio-CNG.",
+        },
+      ],
     },
     {
-      title: "The First in the North Coastal Districts",
-      description:
-        "of Andhra Pradesh to partner with an Oil Marketing Company (OMC) for CBG supply.",
+      iconSrc: "/wp-content/uploads/svg_icons/gas-station.svg",
+      segments: [
+        { text: "The " },
+        { text: "First in the North Coastal Districts", accent: true },
+        {
+          text: " of Andhra Pradesh to partner with an Oil Marketing Company (OMC) for CBG supply.",
+        },
+      ],
     },
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="bg-white py-20">
       <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <FadeInUp delay={0.1}>
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <FadeInUp delay={0.1} threshold={FADE_THRESHOLD}>
             <div
-              className="h-[500px] bg-cover bg-center rounded-lg"
+              className="h-[500px] rounded-lg bg-cover bg-center"
               style={{
                 backgroundImage:
                   "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery02.jpg)",
               }}
-            ></div>
+            />
           </FadeInUp>
 
           <div>
-            <FadeInUp delay={0}>
-              <SectionHeading
-                badgeText="KEY"
-                text="Highlights"
-                showWatermark={false}
-              />
-              <h2 className="text-4xl font-bold mb-8 text-gray-900 mt-3">
-                Key Highlights
+            <FadeInUp delay={0} threshold={FADE_THRESHOLD}>
+              <h2
+                className={`${sectionMainHeadingClassName} mb-8 text-gray-900 md:mt-0`}
+              >
+                Key Highlight
               </h2>
             </FadeInUp>
-            <FadeInUp delay={0.2}>
-              <div className="space-y-6">
-                {highlights.map((highlight, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-green-600 flex items-center justify-center">
-                      <i className="ri-check-line text-green-600 text-xl"></i>
+            <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
+              <div className="space-y-8">
+                {highlights.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-5 md:gap-6"
+                  >
+                    <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center md:h-[72px] md:w-[72px]">
+                      <img
+                        src={item.iconSrc}
+                        alt=""
+                        width={72}
+                        height={72}
+                        className="h-full w-full object-contain"
+                        decoding="async"
+                      />
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
-                        {highlight.title.split(" ").map((word, i) => {
-                          if (
-                            word === "First" ||
-                            word === "Biogas" ||
-                            word === "Plant" ||
-                            word === "North" ||
-                            word === "Coastal" ||
-                            word === "Districts"
-                          ) {
-                            return (
-                              <span key={i} className="text-green-600">
-                                {word}{" "}
-                              </span>
-                            );
-                          }
-                          return word + " ";
-                        })}
-                      </h3>
-                      <p className="text-gray-700">{highlight.description}</p>
-                    </div>
+                    <p className="min-w-0 text-lg leading-relaxed text-gray-900">
+                      {item.segments.map((seg, i) =>
+                        seg.accent ? (
+                          <span key={i} className="font-bold text-brand">
+                            {seg.text}
+                          </span>
+                        ) : (
+                          <span key={i}>{seg.text}</span>
+                        ),
+                      )}
+                    </p>
                   </div>
                 ))}
               </div>
