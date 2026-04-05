@@ -5,12 +5,12 @@ const linkClass =
 
 const ContentSection = memo(() => {
   return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="space-y-12 font-['Inter'] text-base leading-relaxed text-gray-700">
+    <section className="bg-white py-10 sm:py-14 lg:py-20">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="space-y-8 font-sans text-sm leading-relaxed text-gray-700 sm:space-y-10 sm:text-base lg:space-y-12">
           {/* PRIVACY POLICY + Introduction + Objective */}
           <div>
-            <h2 className="mb-6 text-3xl font-bold text-[#16a34a]">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
             INTRODUCTION
             </h2>
             <p className="mb-4">
@@ -36,7 +36,7 @@ const ContentSection = memo(() => {
               </a>{' '}
               (the &quot;Website&quot;).
             </p>
-            <h2 className="mb-6 text-3xl font-bold text-[#16a34a]">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
             OBJECTIVE
             </h2>
             <p className="mb-4">
@@ -76,7 +76,7 @@ const ContentSection = memo(() => {
 
           {/* 1. DEFINITIONS */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               1. DEFINITIONS
             </h2>
             <p className="mb-4">
@@ -161,7 +161,7 @@ const ContentSection = memo(() => {
 
           {/* 2. SCOPE */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               2. SCOPE
             </h2>
             <p>
@@ -186,7 +186,7 @@ const ContentSection = memo(() => {
 
           {/* 3. APPLICABILITY */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               3. APPLICABILITY
             </h2>
             <p>
@@ -200,7 +200,7 @@ const ContentSection = memo(() => {
 
           {/* 4. DATA COLLECTION */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               4. DATA COLLECTION
             </h2>
             <div className="space-y-4">
@@ -297,7 +297,7 @@ const ContentSection = memo(() => {
 
           {/* 5. DATA USAGE */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               5. DATA USAGE
             </h2>
             <p className="mb-4">
@@ -362,7 +362,7 @@ const ContentSection = memo(() => {
 
           {/* 6. DATA SHARING & DISCLOSURE */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               6. DATA SHARING &amp; DISCLOSURE
             </h2>
             <p className="mb-4">
@@ -421,7 +421,7 @@ const ContentSection = memo(() => {
 
           {/* 7. DATA SAFETY */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               7. DATA SAFETY
             </h2>
             <p>
@@ -441,7 +441,7 @@ const ContentSection = memo(() => {
 
           {/* 8. INTELLECTUAL PROPERTY RIGHTS */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               8. INTELLECTUAL PROPERTY RIGHTS
             </h2>
             <p className="mb-4">
@@ -464,7 +464,7 @@ const ContentSection = memo(() => {
 
           {/* 9. POLICY CHANGES */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               9. POLICY CHANGES
             </h2>
             <p className="mb-4">
@@ -493,7 +493,7 @@ const ContentSection = memo(() => {
 
           {/* 10. ACCEPTANCE OF THE POLICY */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               10. ACCEPTANCE OF THE POLICY
             </h2>
             <p>
@@ -508,7 +508,7 @@ const ContentSection = memo(() => {
 
           {/* 11. RETENTION OF DATA */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               11. RETENTION OF DATA
             </h2>
             <p className="mb-4">
@@ -528,7 +528,7 @@ const ContentSection = memo(() => {
 
           {/* 12. LINKS TO OTHER WEBSITES */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               12. LINKS TO OTHER WEBSITES
             </h2>
             <p>
@@ -542,7 +542,7 @@ const ContentSection = memo(() => {
 
           {/* 13. GENERAL */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               13. GENERAL
             </h2>
             <p>
@@ -557,7 +557,7 @@ const ContentSection = memo(() => {
 
           {/* 14. COOKIES AND TRACKING TECHNOLOGIES */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               14. COOKIES AND TRACKING TECHNOLOGIES
             </h2>
             <p>
@@ -572,7 +572,7 @@ const ContentSection = memo(() => {
 
           {/* 15. GOVERNING LAW AND JURISDICTION */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               15. GOVERNING LAW AND JURISDICTION
             </h2>
             <p>
@@ -584,7 +584,7 @@ const ContentSection = memo(() => {
 
           {/* 16. QUESTIONS / CONTACT */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               16. QUESTIONS/ CONTACT INFORMATION
             </h2>
             <p>
@@ -600,19 +600,19 @@ const ContentSection = memo(() => {
           </div>
 
           {/* Contact card */}
-          <div className="rounded-2xl border border-green-100 bg-gradient-to-r from-green-50 to-emerald-50 p-8">
-            <h2 className="mb-6 text-3xl font-bold text-[#16a34a]">
+          <div className="rounded-xl border border-green-100 bg-gradient-to-r from-green-50 to-emerald-50 p-5 sm:rounded-2xl sm:p-6 lg:p-8">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               Contact Us
             </h2>
-            <p className="mb-4 leading-relaxed text-gray-700">
+            <p className="mb-3 leading-relaxed text-gray-700 sm:mb-4">
               If you have questions or comments regarding this Policy, please
               contact us.
             </p>
-            <div className="flex items-center">
-              <i className="ri-mail-line mr-4 text-2xl text-[#16a34a]"></i>
+            <div className="flex items-center gap-3">
+              <i className="ri-mail-line shrink-0 text-xl text-[#16a34a] sm:text-2xl" aria-hidden />
               <a
                 href="mailto:cs@refexrenewables.com"
-                className="text-gray-800 transition-colors hover:text-[#16a34a]"
+                className="break-all text-gray-800 transition-colors hover:text-[#16a34a]"
               >
                 cs@refexrenewables.com
               </a>

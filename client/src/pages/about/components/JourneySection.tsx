@@ -1,35 +1,88 @@
 import FadeInUp from '@/components/common/FadeInUp';
+import type { ReactNode } from 'react';
 import { useState } from 'react';
 
-const JourneySection = () => {
-  const [activeYear, setActiveYear] = useState(1);
+/** Brand green for this section */
+const JOURNEY_GREEN = '#4aab3d';
+const HL =
+  'font-semibold text-sm text-[#4aab3d] sm:text-base';
 
-  const journeyData = [
+const JourneySection = () => {
+  const [activeYear, setActiveYear] = useState(0);
+
+  const journeyData: { year: string; body: ReactNode }[] = [
     {
       year: '2007',
-      title: 'Foundation',
-      description: 'Refex Group was established with a vision to contribute to India\'s energy sector through sustainable and innovative solutions.'
+      body: (
+        <>
+          Refex entered the solar energy sector in <b className={HL}>2007</b>{' '}
+          through a strategic partnership with <b className={HL}>IBC Solar</b>,
+          Germany, marking the beginning of our journey in the renewable energy
+          domain.
+        </>
+      ),
     },
     {
       year: '2011',
-      title: 'India\'s first 18.7 MW',
-      description: 'ground-mounted solar power plant, setting a benchmark in utility-scale solar installation'
+      body: (
+        <>
+          Commissioned <b className={HL}>India&apos;s first 18.7 MW</b>{' '}
+          ground-mounted solar power plant, setting a benchmark in utility-scale
+          solar installation
+        </>
+      ),
     },
     {
       year: '2017',
-      title: 'Independent Power Producer (IPP)',
-      description: 'Entered the Renewable Independent Power Producer (IPP) segment, marking a strategic shift to owning and operating clean energy assets nationwide.'
+      body: (
+        <>
+          Entered the Renewable{' '}
+          <b className={HL}>Independent Power Producer (IPP)</b> segment, marking
+          a strategic shift to owning and operating clean energy assets
+          nationwide.
+        </>
+      ),
     },
     {
       year: '2020',
-      title: 'First Solar Power Plant',
-      description: 'Commenced operations with the first solar power plant, marking the beginning of our journey in renewable energy generation.'
+      body: (
+        <>
+          Recognized as a solar power partner of{' '}
+          <b className={HL}>Indian Railways</b>, contributing to their renewable
+          energy initiatives.
+        </>
+      ),
     },
     {
       year: '2022',
-      title: '1 GW Solar Capacity',
-      description: 'Achieved 1 GW solar capacity milestone and established presence across 12 states in India, strengthening our national footprint.'
-    }
+      body: (
+        <>
+          Successfully commissioned a <b className={HL}>high-altitude</b> solar
+          installation for the <b className={HL}>Indian Army</b> in Leh-Ladakh,
+          inaugurated by the Honourable Defence Minister of India.
+        </>
+      ),
+    },
+    {
+      year: '2023',
+      body: (
+        <>
+          Commissioned <b className={HL}>India&apos;s largest</b>{' '}
+          ground-mounted solar power plant for Indian Railways, with a capacity
+          of <b className={HL}>75 MWp</b>.
+        </>
+      ),
+    },
+    {
+      year: '2024',
+      body: (
+        <>
+          Secured a <b className={HL}>100 MW</b> solar project from{' '}
+          <b className={HL}>NTPC</b>, further expanding our renewable energy
+          portfolio.
+        </>
+      ),
+    },
   ];
 
   return (
@@ -61,18 +114,54 @@ const JourneySection = () => {
           animation: fadeInUp 0.6s ease-out forwards;
         }
       `}</style>
-      <section id="our-journey" className="py-12 lg:py-16 bg-white">
-        <div className="container mx-auto px-4 lg:px-[100px]">
+      <section id="our-journey" className="bg-white py-10 sm:py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-[100px]">
           <div className="text-center mb-5">
           <FadeInUp delay={0.2}>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">Our journey</h2>
+            <h2 className="text-2xl font-bold text-gray-900 lg:text-3xl">
+              Our Journey
+            </h2>
           </FadeInUp>
           </div>
 
-          <div className="max-w-6xl mx-auto">
-            {/* Half Circle Timeline with Content Inside */}
-            <div className="relative flex items-center justify-center min-h-[500px] overflow-hidden">
-              <div className="relative w-full max-w-[800px] h-[450px]">
+          <div className="mx-auto max-w-6xl">
+            {/* Mobile & tablet: vertical timeline (no horizontal overflow) */}
+            <ol className="list-none space-y-0 lg:hidden" aria-label="Company milestones by year">
+              {journeyData.map((item, index) => (
+                <li key={item.year} className="flex gap-4">
+                  <div className="flex w-5 shrink-0 flex-col items-center pt-1.5">
+                    <span
+                      className="size-3.5 shrink-0 rounded-full border-2 border-white shadow-sm ring-2 ring-gray-100"
+                      style={{ backgroundColor: JOURNEY_GREEN }}
+                      aria-hidden
+                    />
+                    {index < journeyData.length - 1 ? (
+                      <span
+                        className="my-2 w-0.5 flex-1 min-h-10 bg-gray-200 sm:min-h-12"
+                        aria-hidden
+                      />
+                    ) : null}
+                  </div>
+                  <div
+                    className={`min-w-0 flex-1 ${index < journeyData.length - 1 ? 'pb-6 sm:pb-8' : ''}`}
+                  >
+                    <h3
+                      className="mb-2 text-xl font-bold sm:text-2xl"
+                      style={{ lineHeight: 1.15, color: JOURNEY_GREEN }}
+                    >
+                      {item.year}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+                      {item.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            {/* Laptop+: half-circle timeline (unchanged layout) */}
+            <div className="relative hidden min-h-[500px] items-center justify-center overflow-x-auto overflow-y-hidden lg:flex">
+              <div className="relative h-[450px] w-full max-w-[800px] min-w-0">
                 {/* SVG Half Circle Path */}
                 <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet">
                   {/* Background arc */}
@@ -90,12 +179,10 @@ const JourneySection = () => {
                 const totalDots = journeyData.length;
                 const angleStep = 180 / (totalDots - 1);
                 
-                // Calculate how many positions away from active year
-                let offset = index - activeYear;
-                
-                // The active year should be at position 2 (middle, which is top of arc)
-                // Position 0 = 180° (left), Position 2 = 90° (top), Position 4 = 0° (right)
-                const targetPosition = 2 + offset;
+                const offset = index - activeYear;
+                // Apex of semicircle: middle index along the arc (not hardcoded — was wrong for 7 items)
+                const topSlot = (totalDots - 1) / 2;
+                const targetPosition = topSlot + offset;
                 
                 // Calculate angle for this position (180° to 0°, left to right)
                 const angle = (180 - (targetPosition * angleStep)) * (Math.PI / 180);
@@ -127,11 +214,14 @@ const JourneySection = () => {
                       onClick={() => setActiveYear(index)}
                     >
                       <div
-                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                        className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                           isActive
-                            ? 'bg-brand scale-150 shadow-lg'
-                            : 'bg-gray-400 hover:bg-gray-600 hover:scale-125'
+                            ? 'scale-150 shadow-lg'
+                            : 'bg-gray-400 hover:scale-125 hover:bg-gray-600'
                         }`}
+                        style={
+                          isActive ? { backgroundColor: JOURNEY_GREEN } : undefined
+                        }
                       ></div>
                     </div>
                     
@@ -147,8 +237,9 @@ const JourneySection = () => {
                     >
                       <div
                         className={`whitespace-nowrap text-base font-semibold transition-all duration-300 ${
-                          isActive ? 'text-brand scale-110' : 'text-gray-600'
+                          isActive ? 'scale-105' : 'text-gray-600'
                         }`}
+                        style={isActive ? { color: JOURNEY_GREEN } : undefined}
                       >
                         {item.year}
                       </div>
@@ -158,25 +249,29 @@ const JourneySection = () => {
               })}
 
                 {/* Vertical Line from Active Year to Content - Animates from dot */}
-                <div 
+                <div
                   key={activeYear}
-                  className="absolute w-0.5 bg-brand line-grow-animation"
+                  className="line-grow-animation absolute w-0.5"
                   style={{
                     left: '50%',
                     top: '80px',
                     height: '100px',
-                    transformOrigin: 'top center'
+                    transformOrigin: 'top center',
+                    backgroundColor: JOURNEY_GREEN,
                   }}
                 ></div>
 
               {/* Content INSIDE Circle - Absolutely Positioned and Centered */}
-              <div className="absolute left-1/2 top-[220px] transform -translate-x-1/2 text-center max-w-xl w-full px-4">
+              <div className="absolute left-1/2 top-[220px] w-full max-w-xl -translate-x-1/2 transform px-4 text-center">
                 <div key={activeYear} className="content-fade-in">
-                  <h3 className="text-6xl lg:text-7xl font-bold text-brand mb-3" style={{ lineHeight: '1' }}>
+                  <h3
+                    className="mb-3 text-3xl font-bold lg:text-4xl"
+                    style={{ lineHeight: 1.1, color: JOURNEY_GREEN }}
+                  >
                     {journeyData[activeYear].year}
                   </h3>
-                  <p className="text-sm lg:text-base text-gray-700 leading-relaxed">
-                    Commissioned <span className="font-semibold text-brand">{journeyData[activeYear].title}</span> {journeyData[activeYear].description}
+                  <p className="text-base leading-relaxed text-gray-700">
+                    {journeyData[activeYear].body}
                   </p>
                 </div>
               </div>

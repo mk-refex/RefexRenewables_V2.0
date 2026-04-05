@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="relative text-white px-4 lg:px-[110px]">
+    <footer className="relative px-4 text-white sm:px-6 lg:px-[110px]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -14,8 +14,8 @@ const Footer = () => {
       </div>
 
       <div className="relative z-10">
-        <div className="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-4 lg:gap-12">
             {/* About Us */}
             <div>
               <h3 className="text-base font-semibold mb-6 relative pb-3">
@@ -161,7 +161,7 @@ const Footer = () => {
                 Follow Us
                 <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-green-500"></span>
               </h3>
-              <div className="flex gap-3 mb-8">
+              <div className="mb-8 flex flex-wrap gap-3">
                 <a href="https://www.facebook.com/refexindustrieslimited/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center bg-blue-600 hover:bg-blue-700 rounded transition-all cursor-pointer">
                   <i className="ri-facebook-fill text-base"></i>
                 </a>
@@ -211,12 +211,12 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/20">
-          <div className="container mx-auto py-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-gray-300 text-center md:text-left">
+          <div className="container mx-auto px-4 py-6 sm:px-6">
+            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+              <p className="text-center text-sm text-gray-300 md:text-left">
                 © 2025 Refex Renewables & Infrastructure Limited. All rights reserved
               </p>
-              <div className="flex items-center gap-6">
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-end">
                 <a href="/terms-conditions" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
                   Terms & Conditions
                 </a>

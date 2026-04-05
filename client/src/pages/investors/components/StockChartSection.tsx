@@ -52,6 +52,16 @@ export default function StockChart() {
   const priceChartRef = useRef<HTMLDivElement>(null);
   const volumeChartRef = useRef<HTMLDivElement>(null);
 
+  const [chartCompact, setChartCompact] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const apply = () => setChartCompact(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
   // Load CMS settings
   useEffect(() => {
     loadSettings();
@@ -569,8 +579,20 @@ export default function StockChart() {
 
   // Adjust chart heights slightly for short ranges like 5 Days
   const isFiveDays = activeFilter === "5 Days";
-  const priceChartHeight = isFiveDays ? 260 : 300;
-  const volumeChartHeight = isFiveDays ? 80 : 100;
+  const priceChartHeight = chartCompact
+    ? isFiveDays
+      ? 200
+      : 220
+    : isFiveDays
+      ? 260
+      : 300;
+  const volumeChartHeight = chartCompact
+    ? isFiveDays
+      ? 56
+      : 72
+    : isFiveDays
+      ? 80
+      : 100;
 
   // Format time for display (HH:MM format)
   const formatTime = (date: Date) => {
@@ -946,9 +968,9 @@ export default function StockChart() {
   // Show loader when loading and no data exists
   if (loading && chartData.length === 0) {
     return (
-      <section className="py-16 bg-[#e7e7e7]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center py-12">
+      <section className="bg-[#e7e7e7] py-10 sm:py-12 lg:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
+          <div className="py-8 text-center sm:py-12">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#7cd244]"></div>
             <p className="mt-4 text-gray-600">Loading stock chart...</p>
           </div>
@@ -964,21 +986,21 @@ export default function StockChart() {
   const timeLabels = getTimeLabels();
 
   return (
-    <section className="py-16 bg-[#e7e7e7]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-black uppercase tracking-wider">
+    <section className="bg-[#e7e7e7] py-10 sm:py-12 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-6 text-center sm:mb-10 lg:mb-12">
+          <h2 className="text-xl font-bold uppercase tracking-wider text-black sm:text-2xl lg:text-3xl">
             {settings.title || "STOCK CHART"}
           </h2>
-          <div className="mt-4">
-            <span className="inline-block px-4 py-2 bg-[#7cd244] text-white rounded-md font-semibold text-sm">
+          <div className="mt-3 sm:mt-4">
+            <span className="inline-block rounded-md bg-[#7cd244] px-3 py-1.5 text-xs font-semibold text-white sm:px-4 sm:py-2 sm:text-sm">
               BSE
             </span>
           </div>
         </div>
 
         {/* Filter Tabs (Today, 5 Days, 1 Month, etc.) */}
-        <div className="bg-black text-white flex flex-wrap items-center px-4 py-2 gap-0">
+        <div className="flex flex-wrap items-center gap-0 bg-black px-1 py-1 text-white sm:px-2 sm:py-2 lg:px-4">
           {filters.map((filter, index) => (
             <button
               key={filter}
@@ -1002,7 +1024,7 @@ export default function StockChart() {
                 }
               }}
               disabled={loading}
-              className={`px-4 py-2 font-medium transition-all whitespace-nowrap ${
+              className={`px-2 py-1.5 text-xs font-medium transition-all whitespace-nowrap sm:px-4 sm:py-2 sm:text-sm ${
                 loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
               } ${
                 (activeFilter === filter && filter !== "Custom") ||
@@ -1018,7 +1040,7 @@ export default function StockChart() {
 
         {/* Custom Date Picker */}
         {showCustomFilter && (
-          <div className="bg-gray-100 p-4 flex flex-wrap gap-4 items-center">
+          <div className="flex flex-wrap items-center gap-3 bg-gray-100 p-3 sm:gap-4 sm:p-4">
             <div className="flex items-center gap-2">
               <label className="text-sm font-medium text-gray-700">From:</label>
               <input
@@ -1093,8 +1115,8 @@ export default function StockChart() {
           )}
 
           {/* Date and Chart Type Selector */}
-          <div className="px-6 py-3 flex items-center justify-between border-b border-gray-200">
-            <p className="text-sm text-gray-700 font-medium">
+          <div className="flex flex-col gap-2 border-b border-gray-200 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-3">
+            <p className="text-xs font-medium text-gray-700 sm:text-sm">
               {getFilterDateDisplay()}
             </p>
             <select
@@ -1102,7 +1124,7 @@ export default function StockChart() {
               onChange={(e) =>
                 setChartType(e.target.value as "line" | "candle")
               }
-              className="px-4 py-2 border border-gray-300 rounded text-sm cursor-pointer bg-white"
+              className="w-full cursor-pointer rounded border border-gray-300 bg-white px-3 py-1.5 text-xs sm:w-auto sm:px-4 sm:py-2 sm:text-sm"
             >
               <option value="line">Line</option>
               <option value="candle">Candle</option>
@@ -1303,7 +1325,7 @@ export default function StockChart() {
                         (priceChartRef.current?.clientWidth || 0) / 2
                           ? `${mousePos.x - 170}px`
                           : `${mousePos.x + 20}px`,
-                      top: `${Math.min(mousePos.y, 220)}px`,
+                      top: `${Math.min(mousePos.y, chartCompact ? 140 : 220)}px`,
                     }}
                   >
                     <div className="whitespace-nowrap">

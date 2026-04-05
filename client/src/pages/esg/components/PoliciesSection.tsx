@@ -39,13 +39,13 @@ export function PoliciesSection() {
   ];
 
   return (
-    <section id="esg-policies" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+    <section id="esg-policies" className="bg-gray-50 py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-10 text-center sm:mb-14 lg:mb-16">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:mb-5 sm:text-4xl lg:mb-6 lg:text-5xl">
             ESG Policies
           </h2>
-          <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-4xl text-base leading-relaxed text-gray-700 sm:text-lg lg:text-lg">
             Sustainable development is a core value that we take very seriously.
             Our management team is fully committed to this goal, and we strive
             to reflect this in our policies and procedures that address
@@ -68,13 +68,15 @@ export function PoliciesSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-green-900/90 via-green-900/50 to-transparent"></div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h5 className="text-xl font-bold mb-4">{policy.title}</h5>
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-5 lg:p-6">
+                <h5 className="mb-3 text-lg font-bold sm:mb-4 sm:text-xl">
+                  {policy.title}
+                </h5>
                 <a
                   href={policy.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block rounded-md bg-brand px-6 py-2 font-semibold text-white transition-colors duration-300 hover:bg-brand-hover whitespace-nowrap cursor-pointer"
+                  className="inline-block cursor-pointer whitespace-nowrap rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-brand-hover sm:px-6 sm:text-base"
                 >
                   View Policy
                 </a>

@@ -3,8 +3,8 @@ import { sectionMainHeadingClassName } from "@/components/common/SectionHeading"
 
 export default function AboutSection() {
   return (
-    <section className="bg-[#F6F7F9] py-12 lg:py-16">
-      <div className="container mx-auto px-4 lg:px-[110px]">
+    <section className="bg-[#F6F7F9] py-10 sm:py-12 lg:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
         <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
           <div className="mx-auto w-full max-w-md md:mx-0 md:max-w-none">
             <div className="overflow-hidden rounded-lg shadow-sm  md:max-w-lg">
@@ -27,8 +27,8 @@ export default function AboutSection() {
                 </h2>
               </FadeInUp>
             </div>
-            <div className="rounded-lg bg-white p-5 shadow-sm sm:p-6 lg:p-7">
-              <p className="text-base leading-relaxed text-[#74787C]">
+            <div className="rounded-lg bg-white p-4 shadow-sm sm:p-6 lg:p-7">
+              <p className="text-sm leading-relaxed text-[#74787C] sm:text-base">
                 As a leading solar power company, we empower commercial and
                 industrial (C&I) enterprises to reduce their carbon footprint
                 through customized commercial solar system solutions. With

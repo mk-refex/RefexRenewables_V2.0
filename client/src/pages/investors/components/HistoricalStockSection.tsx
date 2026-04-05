@@ -373,56 +373,56 @@ export default function HistoricalStockQuote() {
   }
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-black uppercase tracking-wider">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-6 text-center sm:mb-10 lg:mb-12">
+          <h2 className="text-xl font-bold uppercase tracking-wider text-black sm:text-2xl lg:text-3xl">
             {settings.title || 'Historical Stock Quote'}
           </h2>
-          <div className="mt-4">
-            <span className="inline-block px-4 py-2 bg-[#7cd244] text-white rounded-md font-semibold text-sm">
+          <div className="mt-3 sm:mt-4">
+            <span className="inline-block rounded-md bg-[#7cd244] px-3 py-1.5 text-xs font-semibold text-white sm:px-4 sm:py-2 sm:text-sm">
               BSE
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <div className="mb-6 flex flex-wrap gap-4 items-end">
+        <div className="rounded-lg bg-white p-4 shadow-sm sm:p-6">
+          <div className="mb-4 flex flex-wrap items-end gap-3 sm:mb-6 sm:gap-4">
 
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700 mb-2">Start Date:</label>
+            <div className="flex min-w-[140px] flex-1 flex-col sm:flex-none sm:min-w-0">
+              <label className="mb-1.5 text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm">Start Date:</label>
               <input
                 type="date"
                 value={startDate}
                 onChange={handleStartDateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm sm:px-4"
               />
             </div>
 
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700 mb-2">End Date:</label>
+            <div className="flex min-w-[140px] flex-1 flex-col sm:flex-none sm:min-w-0">
+              <label className="mb-1.5 text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm">End Date:</label>
               <input
                 type="date"
                 value={endDate}
                 onChange={handleEndDateChange}
-                className="px-4 py-2 border border-gray-300 rounded-md"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm sm:px-4"
               />
             </div>
 
             <button 
               onClick={handleSearch}
               disabled={loading}
-              className="px-6 py-2 bg-[#7cd244] text-white rounded-md font-medium hover:bg-[#6db038] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full cursor-pointer rounded-md bg-[#7cd244] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#6db038] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:px-6"
             >
               {loading ? 'Loading...' : 'Search'}
             </button>
           </div>
 
           {/* Quick Filter Buttons */}
-          <div className="mb-6 flex flex-wrap gap-3">
+          <div className="mb-4 flex flex-wrap gap-2 sm:mb-6 sm:gap-3">
             <button
               onClick={() => handleQuickFilter(1)}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+              className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors sm:px-4 sm:py-2 sm:text-sm ${
                 activeFilter === 1
                   ? 'bg-[#7cd244] text-white hover:bg-[#6db038]'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -432,7 +432,7 @@ export default function HistoricalStockQuote() {
             </button>
             <button
               onClick={() => handleQuickFilter(3)}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+              className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors sm:px-4 sm:py-2 sm:text-sm ${
                 activeFilter === 3
                   ? 'bg-[#7cd244] text-white hover:bg-[#6db038]'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -442,7 +442,7 @@ export default function HistoricalStockQuote() {
             </button>
             <button
               onClick={() => handleQuickFilter(6)}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+              className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors sm:px-4 sm:py-2 sm:text-sm ${
                 activeFilter === 6
                   ? 'bg-[#7cd244] text-white hover:bg-[#6db038]'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -452,7 +452,7 @@ export default function HistoricalStockQuote() {
             </button>
             <button
               onClick={() => handleQuickFilter(12)}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+              className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors sm:px-4 sm:py-2 sm:text-sm ${
                 activeFilter === 12
                   ? 'bg-[#7cd244] text-white hover:bg-[#6db038]'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -468,8 +468,8 @@ export default function HistoricalStockQuote() {
             </div>
           )}
 
-          <div className="mb-4 text-sm text-gray-600">
-            <p>Exchange : {exchange} | Period : {startDate} to {endDate}</p>
+          <div className="mb-4 text-xs text-gray-600 sm:text-sm">
+            <p className="break-words">Exchange : {exchange} | Period : {startDate} to {endDate}</p>
             {totalRecords > 0 && (
               <p className="mt-1">Total Records: {totalRecords} | Page {currentPage} of {totalPages}</p>
             )}
@@ -489,31 +489,31 @@ export default function HistoricalStockQuote() {
           ) : (
             <>
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-gray-300">
+                <table className="w-full min-w-[720px] border-collapse border border-gray-300">
                   <thead>
                     <tr className="bg-gray-900 text-white">
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnDate || 'DATE'}
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnOpen || 'OPEN'}
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnHigh || 'HIGH'}
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnLow || 'LOW'}
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnClose || 'CLOSE'}
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnVolume || 'VOLUME'}
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnTradeValue || 'TRADE VALUE'}
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                      <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                         {settings.columnTrades || 'No. OF TRADES'}
                       </th>
                     </tr>
@@ -521,14 +521,14 @@ export default function HistoricalStockQuote() {
                   <tbody>
                     {currentRecords.map((record, index) => (
                       <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                        <td className="border border-gray-300 px-4 py-3">{record.date}</td>
-                        <td className="border border-gray-300 px-4 py-3">{record.open}</td>
-                        <td className="border border-gray-300 px-4 py-3">{record.high}</td>
-                        <td className="border border-gray-300 px-4 py-3">{record.low}</td>
-                        <td className="border border-gray-300 px-4 py-3">{record.close}</td>
-                        <td className="border border-gray-300 px-4 py-3">{record.volume}</td>
-                        <td className="border border-gray-300 px-4 py-3">{record.tradeValue}</td>
-                        <td className="border border-gray-300 px-4 py-3">{record.trades}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.date}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.open}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.high}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.low}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.close}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.volume}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.tradeValue}</td>
+                        <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">{record.trades}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -537,7 +537,7 @@ export default function HistoricalStockQuote() {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="mt-6 flex justify-center gap-2 items-center">
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-1 sm:mt-6 sm:gap-2">
                   <button
                     onClick={() => setCurrentPage(1)}
                     disabled={currentPage === 1}

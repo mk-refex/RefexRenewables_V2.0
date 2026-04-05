@@ -8,9 +8,9 @@ const aboutStatsIcon = (name: "sites" | "projects" | "location") =>
 
 const OverviewSection = () => {
   return (
-    <section className="py-16 lg:py-24 bg-[#F6F6F6]">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <section className="bg-[#F6F6F6] py-12 sm:py-16 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left Content */}
           <div>
             <div className="mb-2">
@@ -31,7 +31,7 @@ const OverviewSection = () => {
             </div>
 
             <div className="space-y-2">
-              <p className="text-[#6E777D] text-[18px] leading-relaxed text-base">
+              <p className="text-base leading-relaxed text-[#6E777D] lg:text-lg">
                 is a leading name in solar energy, recognized for pioneering projects and
                 delivering innovative, first-of-their-kind renewable energy
                 systems across India. Operating at nearly 89 sites in 11 states,
@@ -43,7 +43,7 @@ const OverviewSection = () => {
 
           {/* Right Content */}
           <div className="space-y-4">
-            <p className="text-[#6E777D] text-[18px] leading-relaxed text-base">
+            <p className="text-base leading-relaxed text-[#6E777D] lg:text-lg">
               Since its inception in 2017 as an Independent Power Producer
               (IPP), RRIL has been at the forefront of promoting solar, wind,
               and battery energy storage systems (BESS) as sustainable
@@ -59,7 +59,7 @@ const OverviewSection = () => {
         </div>
 
         {/* Stats — centered block in each card; icons fill white tile */}
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6 sm:items-stretch">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-6 sm:items-stretch">
           <div className="flex min-h-[10rem] items-center justify-center rounded-lg bg-[#1a5d3a] px-5 py-7 text-white sm:min-h-[11rem] lg:min-h-[12rem] lg:px-8 lg:py-8">
             <div className="flex max-w-full items-center gap-4 sm:gap-5">
               <div className="grid h-20 w-20 shrink-0 place-items-stretch rounded-xl bg-white p-2.5 shadow-md ring-1 ring-black/10 sm:h-[5.25rem] sm:w-[5.25rem]">

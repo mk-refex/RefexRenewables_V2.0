@@ -63,15 +63,15 @@ export function SDGSection() {
   ];
 
   return (
-    <section className="bg-white py-20">
-      <div className="container mx-auto px-6 lg:px-8">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
         {/* Top icon row — equal tiles, even gap, centered */}
-        <div className="border-y border-gray-200 py-8">
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-6 sm:gap-8">
+        <div className="border-y border-gray-200 py-5 sm:py-6 lg:py-8">
+          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-3 sm:gap-6 lg:gap-8">
             {topStripImages.map((item, index) => (
               <div
                 key={`${item.src}-${index}`}
-                className="flex size-[104px] shrink-0 items-center justify-center sm:size-[118px]"
+                className="flex size-[76px] shrink-0 items-center justify-center sm:size-[104px] lg:size-[118px]"
               >
                 <img
                   src={item.src}
@@ -88,11 +88,11 @@ export function SDGSection() {
         </div>
 
         {/* Title + intro */}
-        <div className="mx-auto mt-16 max-w-4xl text-center">
-          <h2 className="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
+        <div className="mx-auto mt-10 max-w-4xl text-center sm:mt-12 lg:mt-16">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:mb-5 sm:text-4xl lg:mb-6 lg:text-5xl">
             Sustainable Development Goals
           </h2>
-          <div className="space-y-4 text-lg leading-relaxed text-gray-700">
+          <div className="space-y-3 text-base leading-relaxed text-gray-700 sm:space-y-4 sm:text-lg lg:text-lg">
             <p>
               We&apos;re dedicated to making the world a better place! By working
               with India and the UN to advance the Sustainable Development Goals,
@@ -110,13 +110,13 @@ export function SDGSection() {
         </div>
 
         {/* Large photo cards — flip to full description */}
-        <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-6 sm:mt-12 sm:gap-7 md:grid-cols-2 lg:mt-16 lg:gap-8">
           {sdgGoals.map((goal) => (
             <div
               key={`large-${goal.title}`}
               className="group [perspective:1200px]"
             >
-              <div className="relative h-[260px] cursor-pointer transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)] sm:h-[280px] md:h-[300px]">
+              <div className="relative h-[220px] cursor-pointer transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)] sm:h-[260px] md:h-[280px] lg:h-[300px]">
                 {/* Front — photo + overlay + SDG tile + headline */}
                 <div className="absolute inset-0 overflow-hidden rounded-xl shadow-xl [backface-visibility:hidden]">
                   <img
@@ -125,13 +125,13 @@ export function SDGSection() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/50" />
-                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 pb-6 pt-8">
+                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 pb-5 pt-6 sm:px-5 sm:pb-6 sm:pt-8">
                     <img
                       src={goal.icon}
                       alt=""
-                      className="mb-4 h-20 w-20 rounded-md object-cover shadow-lg sm:h-24 sm:w-24"
+                      className="mb-3 h-16 w-16 rounded-md object-cover shadow-lg sm:mb-4 sm:h-20 sm:w-20 lg:h-24 lg:w-24"
                     />
-                    <h3 className="text-center text-lg font-bold uppercase tracking-wide text-white sm:text-xl">
+                    <h3 className="text-center text-base font-bold uppercase tracking-wide text-white sm:text-lg lg:text-xl">
                       {goal.headline}
                     </h3>
                   </div>
@@ -139,11 +139,11 @@ export function SDGSection() {
 
                 {/* Back — content */}
                 <div className="absolute inset-0 overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                  <div className="flex h-full flex-col justify-center overflow-y-auto p-5 text-white sm:p-6">
-                    <h3 className="mb-3 text-center text-xl font-bold sm:text-2xl">
+                  <div className="flex h-full flex-col justify-center overflow-y-auto p-4 text-white sm:p-5 lg:p-6">
+                    <h3 className="mb-2 text-center text-lg font-bold sm:mb-3 sm:text-xl lg:text-2xl">
                       {goal.title}
                     </h3>
-                    <p className="text-center text-sm leading-relaxed text-white/90 sm:text-base">
+                    <p className="text-center text-xs leading-relaxed text-white/90 sm:text-sm lg:text-base">
                       {goal.description}
                     </p>
                   </div>

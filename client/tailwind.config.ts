@@ -6,6 +6,9 @@ export default {
     ],
     theme: {
       extend: {
+        fontFamily: {
+          sans: ['DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        },
         colors: {
           brand: {
             DEFAULT: "#4aab3d",

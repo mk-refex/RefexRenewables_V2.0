@@ -1,11 +1,11 @@
 export default function ContentSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="text-gray-700 leading-relaxed text-base space-y-12 font-['Inter']">
+    <section className="bg-white py-10 sm:py-14 lg:py-20">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="space-y-8 font-sans text-sm leading-relaxed text-gray-700 sm:space-y-10 sm:text-base lg:space-y-12">
           {/* I. Legal */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               I. Legal
             </h2>
             <p>
@@ -15,13 +15,13 @@ export default function ContentSection() {
 
           {/* II. Use */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               II. Use
             </h2>
             <p className="mb-4">
               You may not use, download or copy any content on this website unless:
             </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
+            <ul className="mb-4 list-disc space-y-2 pl-4 sm:pl-6">
               <li>You use the content solely for personal, informational and non-commercial purposes;</li>
               <li>The Refex Renewables trademark and copyright symbol and statement set forth on each page of this website appears on each downloaded or copied page; and</li>
               <li>No modifications are made to any content.</li>
@@ -33,7 +33,7 @@ export default function ContentSection() {
 
           {/* III. Copyright */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               III. Copyright
             </h2>
             <p className="mb-4">
@@ -46,7 +46,7 @@ export default function ContentSection() {
 
           {/* IV. Trademarks */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               IV. Trademarks
             </h2>
             <p className="mb-4">
@@ -58,7 +58,7 @@ export default function ContentSection() {
             <p>
               All other trademarks, product names, trade names, and logos used within these pages are the property of their respective holders. Use of other company/entity trademarks, trade names, product names and logos or images of the same does not necessarily constitute:
             </p>
-            <ul className="list-disc pl-6 space-y-2 mt-2">
+            <ul className="mt-2 list-disc space-y-2 pl-4 sm:pl-6">
               <li>An endorsement by such company of Refex Renewables and its products, and</li>
               <li>An endorsement of the company or its products by Refex Renewables.</li>
             </ul>
@@ -66,7 +66,7 @@ export default function ContentSection() {
 
           {/* V. Links to Third Party Sites */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               V. Links to Third Party Sites
             </h2>
             <p>
@@ -76,7 +76,7 @@ export default function ContentSection() {
 
           {/* VI. No Unlawful or Prohibited Use */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               VI. No Unlawful or Prohibited Use
             </h2>
             <p>
@@ -86,7 +86,7 @@ export default function ContentSection() {
 
           {/* VII. Disclaimer */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               VII. Disclaimer
             </h2>
             <p className="mb-4">
@@ -95,20 +95,20 @@ export default function ContentSection() {
             <p className="mb-4">
               This website could include inaccuracies or out-dated content and is subject to change at any time without notice. Your use of this website is at your own risk. You agree to hold Refex Renewables harmless from and not sue Refex Renewables for any claims based upon using this website.
             </p>
-            <p className="mb-4 font-semibold">
+            <p className="mb-4 text-sm font-semibold sm:text-base">
               THE CONTENT, DOCUMENTATION, PRODUCTS, AND SERVICES CONTAINED ON THE Refex Renewables WEBSITE ARE PROVIDED ON &quot;AS IS BASIS&quot; Refex Renewables MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NON-INFRINGEMENT OF THIRD-PARTY RIGHTS.
             </p>
-            <p className="mb-4 font-semibold">
+            <p className="mb-4 text-sm font-semibold sm:text-base">
               WITHOUT ANY WARRANTY OF ANY KIND. Refex Renewables AND ITS SUPPLIERS DISCLAIM ALL WARRANTIES RELATING TO THE CONTENT, DOCUMENTATION, PRODUCTS, AND SERVICES CONTAINED ON THE Refex Renewables WEB SITE, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTIES AGAINST INFRINGEMENT OF THIRD-PARTY RIGHTS, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR ARISING FROM A COURSE OF DEALING, USAGE, OR TRADE PRACTICE.
             </p>
-            <p className="font-semibold">
+            <p className="text-sm font-semibold sm:text-base">
               Refex Renewables AND ITS SUPPLIERS SHALL NOT BE LIABLE FOR ANY INDIRECT, SPECIAL, CONSEQUENTIAL, OR INCIDENTAL DAMAGES INCLUDING, WITHOUT LIMITATION, LOST PROFITS OR REVENUES, COSTS OF REPLACEMENT GOODS, LOSS OR DAMAGE TO DATA ARISING OUT OF THE USE OR INABILITY TO USE THIS SITE, DAMAGES RESULTING FROM USE OF OR RELIANCE ON THE INFORMATION PRESENT, EVEN IF Refex Renewables OR ITS SUPPLIERS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
             </p>
           </div>
 
           {/* VIII. Governing Law */}
           <div>
-            <h2 className="text-3xl font-bold text-[#16a34a] mb-6">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               VIII. Governing Law
             </h2>
             <p>
@@ -117,8 +117,8 @@ export default function ContentSection() {
           </div>
 
           {/* Copyright */}
-          <div className="pt-8 border-t border-gray-200">
-            <p className="text-gray-600 text-sm">
+          <div className="border-t border-gray-200 pt-6 sm:pt-8">
+            <p className="text-xs text-gray-600 sm:text-sm">
               Copyright © 2021 Refex Renewables. All rights reserved
             </p>
           </div>

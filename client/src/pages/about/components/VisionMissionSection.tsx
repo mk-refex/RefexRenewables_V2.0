@@ -2,27 +2,27 @@ import FadeInUp from "@/components/common/FadeInUp";
 
 const VisionMissionSection = () => {
   return (
-    <section id="vision-mission" className="py-16 lg:py-24 bg-white">
-      <div className="container mx-auto px-4 lg:px-[110px]">
+    <section id="vision-mission" className="bg-white py-12 sm:py-16 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
         {/* Vision */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+        <div className="mb-12 grid grid-cols-1 items-center gap-10 lg:mb-20 lg:grid-cols-2 lg:gap-16">
           <div className="order-2 lg:order-1">
             <div className="relative">
               <img
                 src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/mission-img01.jpg"
                 alt="Vision - Forest from above"
-                className="w-full h-[400px] object-cover rounded-lg shadow-lg"
+                className="h-[240px] w-full rounded-lg object-cover shadow-lg sm:h-[300px] md:h-[360px] lg:h-[400px]"
               />
             </div>
           </div>
 
           <div className="order-1 lg:order-2">
             <FadeInUp delay={0.2}>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900 sm:mb-6 sm:text-3xl lg:text-4xl">
                 Vision
               </h2>
             </FadeInUp>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <div className="space-y-4 text-sm leading-relaxed text-gray-700 sm:text-base">
               <p>
                 Refex aims to be a globally admired conglomerate, driving
                 long-term sustainable growth through innovation, purposeful
@@ -44,14 +44,14 @@ const VisionMissionSection = () => {
         </div>
 
         {/* Mission */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <FadeInUp delay={0.2}>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900 sm:mb-6 sm:text-3xl lg:text-4xl">
                 Mission
               </h2>
             </FadeInUp>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <div className="space-y-4 text-sm leading-relaxed text-gray-700 sm:text-base">
               <p>
                 Refex shall create enduring value across industries through
                 innovation, operational excellence, and sustainable practices,
@@ -77,7 +77,7 @@ const VisionMissionSection = () => {
               <img
                 src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/vision-img.jpg"
                 alt="Mission - Business professional with renewable energy vision"
-                className="w-full h-[400px] object-cover rounded-lg shadow-lg"
+                className="h-[240px] w-full rounded-lg object-cover shadow-lg sm:h-[300px] md:h-[360px] lg:h-[400px]"
               />
             </div>
           </div>

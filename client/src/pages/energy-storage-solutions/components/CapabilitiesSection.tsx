@@ -15,26 +15,26 @@ export default function CapabilitiesSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+    <section className="bg-gray-50 py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-10 text-center sm:mb-12 lg:mb-16">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:mb-4 sm:text-3xl lg:text-4xl">
             Our Capabilities
           </h2>
         </div>
         <div
           className={
             capabilities.length === 1
-              ? 'mx-auto grid max-w-xl grid-cols-1 gap-8'
-              : 'mx-auto grid max-w-6xl gap-8 md:grid-cols-2'
+              ? "mx-auto grid max-w-xl grid-cols-1 gap-6 sm:gap-8"
+              : "mx-auto grid max-w-6xl gap-6 sm:gap-8 md:grid-cols-2"
           }
         >
           {capabilities.map((capability, index) => (
             <div
               key={index}
-              className="flex flex-col items-center rounded-lg bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md"
+              className="flex flex-col items-center rounded-lg bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md sm:p-8"
             >
-              <div className="mb-6 flex justify-center">
+              <div className="mb-4 flex justify-center sm:mb-6">
                 <img
                   src={capability.iconSrc}
                   alt=""
@@ -44,10 +44,10 @@ export default function CapabilitiesSection() {
                   decoding="async"
                 />
               </div>
-              <h5 className="mb-4 w-full text-xl font-bold text-gray-900">
+              <h5 className="mb-3 w-full text-lg font-bold text-gray-900 sm:mb-4 sm:text-xl">
                 {capability.title}
               </h5>
-              <p className="w-full text-justify text-sm leading-relaxed text-gray-600">
+              <p className="w-full text-justify text-xs leading-relaxed text-gray-600 sm:text-sm">
                 {capability.description}
               </p>
             </div>

@@ -75,3 +75,14 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/*
+ * Site-wide typography (WordPress: body uses DM Sans !important).
+ * Do NOT use #root * — it overrides icon font families on <i> and breaks Remix / FA.
+ * DM Sans inherits to all text; icon stylesheets set ::before { font-family: … !important }.
+ */
+html,
+body,
+#root {
+  font-family: 'DM Sans', sans-serif !important;
+}

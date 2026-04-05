@@ -78,10 +78,10 @@ export default function RelatedLinksSection() {
 
   if (loading) {
     return (
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-[120px]">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-black uppercase tracking-wider">Related Links</h2>
+      <section className="bg-white py-10 sm:py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-[120px]">
+          <div className="mb-6 text-center sm:mb-10 lg:mb-12">
+            <h2 className="text-xl font-bold uppercase tracking-wider text-black sm:text-2xl lg:text-3xl">Related Links</h2>
           </div>
           <div className="flex justify-center py-12">
             <p className="text-gray-500 text-sm">Loading...</p>
@@ -93,12 +93,12 @@ export default function RelatedLinksSection() {
 
   if (!categories.length) {
     return (
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-[120px]">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-black uppercase tracking-wider">Related Links</h2>
+      <section className="bg-white py-10 sm:py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-[120px]">
+          <div className="mb-6 text-center sm:mb-10 lg:mb-12">
+            <h2 className="text-xl font-bold uppercase tracking-wider text-black sm:text-2xl lg:text-3xl">Related Links</h2>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-8 text-center text-gray-500 text-sm">
+          <div className="rounded-lg bg-white p-5 text-center text-sm text-gray-500 shadow-md sm:p-8">
             No related links available.
           </div>
         </div>
@@ -107,18 +107,18 @@ export default function RelatedLinksSection() {
   }
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-[120px]">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-black uppercase tracking-wider">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[120px]">
+        <div className="mb-6 text-center sm:mb-10 lg:mb-12">
+          <h2 className="text-xl font-bold uppercase tracking-wider text-black sm:text-2xl lg:text-3xl">
             Related Links
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-8">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-[30%_70%] lg:gap-8">
           {/* Left Column - Categories (30%) */}
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <ul className="space-y-3">
+          <div className="rounded-lg bg-white p-4 shadow-md sm:p-6 lg:p-8">
+            <ul className="space-y-0.5">
               {categories.map((cat) => (
                 <li key={cat.id}>
                   <button
@@ -127,7 +127,7 @@ export default function RelatedLinksSection() {
                       setSelectedCategoryId(cat.id);
                       setFilterYear('all');
                     }}
-                    className={`text-left w-full text-sm py-2 border-b border-gray-100 transition-colors cursor-pointer ${
+                    className={`w-full cursor-pointer border-b border-gray-100 py-1.5 text-left text-sm transition-colors sm:text-base ${
                       selectedCategoryId === cat.id
                         ? 'font-medium text-brand'
                         : 'text-gray-700 hover:text-brand'
@@ -141,10 +141,10 @@ export default function RelatedLinksSection() {
           </div>
 
           {/* Right Column - category name (when all FY) + filter in same row, ruler, sections & items */}
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="flex justify-between items-start gap-4 mb-4">
+          <div className="rounded-lg bg-white p-4 shadow-md sm:p-6 lg:p-8">
+            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               {allSectionsAreFinancialYear && selectedCategory ? (
-                <h3 className="text-xl font-bold text-[#2879B6]">
+                <h3 className="text-lg font-bold text-[#2879B6] sm:text-xl">
                   {selectedCategory.name}
                 </h3>
               ) : (
@@ -154,7 +154,7 @@ export default function RelatedLinksSection() {
                 <select
                   value={filterYear}
                   onChange={(e) => setFilterYear(e.target.value)}
-                  className="ml-auto px-4 py-2 border border-gray-300 rounded-md text-sm cursor-pointer"
+                  className="w-full cursor-pointer rounded-md border border-gray-300 px-3 py-2 text-sm sm:ml-auto sm:w-auto sm:px-4"
                 >
                   <option value="all">All</option>
                   {filterOptions
@@ -211,7 +211,7 @@ export default function RelatedLinksSection() {
                               ) : (
                                 <div
                                   key={item.id}
-                                  className="flex items-start justify-between gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow bg-white"
+                                  className="flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-4 transition-shadow hover:shadow-md sm:flex-row sm:items-start sm:justify-between sm:gap-4"
                                 >
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-start gap-3">
@@ -238,7 +238,7 @@ export default function RelatedLinksSection() {
                                     )}
                                   </div>
                                   {item.pdfUrl ? (
-                                    <div className="flex-shrink-0 flex gap-4 items-start">
+                                    <div className="flex shrink-0 flex-row gap-6 sm:gap-4">
                                       <div className="flex flex-col items-center">
                                         <a
                                           href={resolveImageUrl(item.pdfUrl)}
@@ -319,7 +319,7 @@ export default function RelatedLinksSection() {
                         ) : (
                           <div
                             key={item.id}
-                            className="flex items-start justify-between gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+                            className="flex flex-col gap-3 rounded-lg border border-gray-200 p-4 transition-shadow hover:shadow-md sm:flex-row sm:items-start sm:justify-between sm:gap-4"
                           >
                             <div className="flex-1 min-w-0">
                               <div className="flex items-start gap-3">
@@ -346,7 +346,7 @@ export default function RelatedLinksSection() {
                               )}
                             </div>
                             {item.pdfUrl ? (
-                              <div className="flex-shrink-0 flex gap-4 items-start">
+                              <div className="flex shrink-0 flex-row gap-6 sm:gap-4">
                                 <div className="flex flex-col items-center">
                                   <a
                                     href={resolveImageUrl(item.pdfUrl)}

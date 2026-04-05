@@ -88,7 +88,7 @@ export default function FeaturedProjects() {
   };
 
   return (
-    <section className="relative py-12 pb-24 overflow-hidden">
+    <section className="relative overflow-hidden py-10 pb-16 sm:py-12 sm:pb-20 lg:py-12 lg:pb-24">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -106,11 +106,13 @@ export default function FeaturedProjects() {
         }}
       ></div>
 
-      <div className="container mx-auto px-6 lg:px-[110px] relative z-10">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-[110px]">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">{title}</h2>
-          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+        <div className="mb-8 text-center sm:mb-12">
+          <h2 className="mb-3 text-2xl font-bold text-white sm:mb-4 sm:text-3xl lg:text-4xl">
+            {title}
+          </h2>
+          <p className="mx-auto max-w-3xl px-1 text-sm text-gray-300 sm:text-base lg:text-lg">
             {description}
           </p>
         </div>
@@ -134,7 +136,7 @@ export default function FeaturedProjects() {
         </div>
 
         {/* Project Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-2">
           {/* Left: Image Grid */}
           <div className="grid grid-cols-2 gap-4">
             {(activeProject?.images || []).map((image: any, index: number) => {
@@ -166,7 +168,7 @@ export default function FeaturedProjects() {
 
           {/* Right: Project Details */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-white">
+            <h3 className="text-2xl font-bold text-white sm:text-3xl">
               {activeProject.name}
             </h3>
 
@@ -174,16 +176,16 @@ export default function FeaturedProjects() {
               className="flex items-center gap-2"
               style={{ color: "#7dc144" }}
             >
-              <i className="ri-map-pin-line text-xl"></i>
-              <span className="text-lg">{activeProject.location}</span>
+              <i className="ri-map-pin-line text-lg sm:text-xl"></i>
+              <span className="text-base sm:text-lg">{activeProject.location}</span>
             </div>
 
-            <div className="space-y-4">
-              <p className="text-white text-lg font-bold">
+            <div className="space-y-3 sm:space-y-4">
+              <p className="text-base font-bold text-white sm:text-lg">
                 Capacity – {activeProject.capacity}
               </p>
 
-              <div className="text-white text-base leading-relaxed space-y-4">
+              <div className="space-y-3 text-sm leading-relaxed text-white sm:space-y-4 sm:text-base">
                 {activeProject.id === "indian-army" ? (
                   <>
                     <p className="font-bold">

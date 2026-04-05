@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import FadeInUp from "@/components/common/FadeInUp";
-import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
-import UseOfPilotDigestor from "./UseOfPilotDigestor";
 
 const FADE_THRESHOLD = 0.98;
 
@@ -51,8 +49,8 @@ export default function GallerySection() {
   const trackWidthPercent = (images.length / perView) * 100;
 
   return (
-    <section className="bg-white py-20">
-      <div className="container mx-auto px-4 lg:px-[110px]">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
         {/* <FadeInUp
           delay={0}
           threshold={FADE_THRESHOLD}
@@ -99,7 +97,7 @@ export default function GallerySection() {
                     <img
                       src={image}
                       alt={`Spectrum Gallery ${index + 1}`}
-                      className="h-[280px] w-full object-cover sm:h-[360px] md:h-[500px]"
+                      className="h-[220px] w-full object-cover sm:h-[300px] md:h-[400px] lg:h-[500px]"
                     />
                   </div>
                 ))}
@@ -109,7 +107,7 @@ export default function GallerySection() {
             <button
               type="button"
               onClick={prevSlide}
-              className="absolute left-2 top-1/2 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-all hover:bg-white md:left-4"
+              className="absolute left-1 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-all hover:bg-white sm:left-2 sm:h-12 sm:w-12 md:left-4"
               aria-label="Previous slide"
             >
               <i className="ri-arrow-left-s-line text-2xl text-gray-800"></i>
@@ -118,7 +116,7 @@ export default function GallerySection() {
             <button
               type="button"
               onClick={nextSlide}
-              className="absolute right-2 top-1/2 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-all hover:bg-white md:right-4"
+              className="absolute right-1 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-all hover:bg-white sm:right-2 sm:h-12 sm:w-12 md:right-4"
               aria-label="Next slide"
             >
               <i className="ri-arrow-right-s-line text-2xl text-gray-800"></i>

@@ -35,7 +35,7 @@ const PresenceSection = () => {
   };
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
@@ -45,8 +45,8 @@ const PresenceSection = () => {
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-[110px]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left - Map with Markers */}
           <div className="relative">
             <div className="relative">
@@ -125,7 +125,7 @@ const PresenceSection = () => {
             </FadeInUp>
 
             {/* State Card with Continuous Slide */}
-            <div className="relative overflow-hidden h-[280px]">
+            <div className="relative h-[220px] overflow-hidden sm:h-[260px] lg:h-[280px]">
               <div 
                 className="flex"
                 style={{
@@ -137,16 +137,16 @@ const PresenceSection = () => {
                 {states.map((state, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex items-center justify-center"
+                    className="flex flex-shrink-0 items-center justify-center rounded-2xl border border-gray-100 bg-white p-4 shadow-lg sm:p-6 lg:p-8"
                     style={{ 
                       width: `calc(100% / ${states.length})`,
                       minWidth: `calc(100% / ${states.length})`,
                       height: '100%',
                     }}
                   >
-                    <div className="flex items-center justify-center gap-8">
+                    <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
                       {/* State Map Image */}
-                      <div className="w-40 h-40 flex-shrink-0">
+                      <div className="h-28 w-28 shrink-0 sm:h-36 sm:w-36 lg:h-40 lg:w-40">
                         <img 
                           src={state.image} 
                           alt={state.name} 
@@ -155,8 +155,8 @@ const PresenceSection = () => {
                       </div>
                       
                       {/* State Name */}
-                      <div className="flex-1">
-                        <h3 className="text-3xl lg:text-4xl font-bold text-gray-900">
+                      <div className="flex-1 text-center sm:text-left">
+                        <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
                           {state.name}
                         </h3>
                       </div>

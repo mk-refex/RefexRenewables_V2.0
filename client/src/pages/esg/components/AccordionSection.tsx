@@ -85,47 +85,64 @@ export function AccordionSection() {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="mx-auto max-w-6xl">
           {items.map((item, index) => (
-            <div key={index} className="mb-4 border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              key={index}
+              className="mb-3 overflow-hidden rounded-lg border border-gray-200 sm:mb-4"
+            >
               <button
+                type="button"
                 onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                className="w-full flex items-center justify-between p-6 bg-gray-50 hover:bg-gray-100 transition-colors duration-300 cursor-pointer"
+                className="flex w-full cursor-pointer items-center justify-between gap-3 bg-gray-50 p-4 text-left transition-colors duration-300 hover:bg-gray-100 sm:p-5 lg:p-6"
               >
-                <h3 className="text-2xl font-bold text-gray-900">{item.title}</h3>
-                <i className={`ri-arrow-${openIndex === index ? 'up' : 'down'}-s-line text-3xl text-green-600`}></i>
+                <h3 className="text-lg font-bold text-gray-900 sm:text-xl lg:text-2xl">
+                  {item.title}
+                </h3>
+                <i
+                  className={`ri-arrow-${openIndex === index ? "up" : "down"}-s-line shrink-0 text-2xl text-green-600 sm:text-3xl`}
+                  aria-hidden
+                />
               </button>
-              
+
               {openIndex === index && (
-                <div className="p-8 bg-white">
-                  <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${item.imagePosition === 'right' ? 'lg:flex-row-reverse' : ''}`}>
-                    {item.imagePosition === 'left' ? (
+                <div className="bg-white p-4 sm:p-6 lg:p-8">
+                  <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-8">
+                    {item.imagePosition === "left" ? (
                       <>
-                        <div className="w-full h-96">
-                          <img 
-                            src={item.image} 
+                        <div className="h-48 w-full min-h-0 sm:h-64 md:h-80 lg:h-96">
+                          <img
+                            src={item.image}
                             alt={item.title}
-                            className="w-full h-full object-cover rounded-lg shadow-lg"
+                            className="h-full w-full rounded-lg object-cover shadow-lg"
                           />
                         </div>
-                        <div>
-                          <h2 className="text-3xl font-bold text-gray-900 mb-4">{item.title}</h2>
-                          <p className="text-lg text-gray-700 leading-relaxed">{item.content}</p>
+                        <div className="min-w-0">
+                          <h2 className="mb-3 text-xl font-bold text-gray-900 sm:mb-4 sm:text-2xl lg:text-3xl">
+                            {item.title}
+                          </h2>
+                          <p className="text-base leading-relaxed text-gray-700 sm:text-lg lg:text-lg">
+                            {item.content}
+                          </p>
                         </div>
                       </>
                     ) : (
                       <>
-                        <div>
-                          <h2 className="text-3xl font-bold text-gray-900 mb-4">{item.title}</h2>
-                          <p className="text-lg text-gray-700 leading-relaxed">{item.content}</p>
+                        <div className="min-w-0">
+                          <h2 className="mb-3 text-xl font-bold text-gray-900 sm:mb-4 sm:text-2xl lg:text-3xl">
+                            {item.title}
+                          </h2>
+                          <p className="text-base leading-relaxed text-gray-700 sm:text-lg lg:text-lg">
+                            {item.content}
+                          </p>
                         </div>
-                        <div className="w-full h-96">
-                          <img 
-                            src={item.image} 
+                        <div className="h-48 w-full min-h-0 sm:h-64 md:h-80 lg:h-96">
+                          <img
+                            src={item.image}
                             alt={item.title}
-                            className="w-full h-full object-cover rounded-lg shadow-lg"
+                            className="h-full w-full rounded-lg object-cover shadow-lg"
                           />
                         </div>
                       </>

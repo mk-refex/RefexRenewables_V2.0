@@ -5,9 +5,9 @@ const FADE_THRESHOLD = 0.98;
 
 export function AboutSection() {
   return (
-    <section className="bg-[#F6F7F9] py-12 lg:py-16">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
+    <section className="bg-[#F6F7F9] py-10 sm:py-12 lg:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="grid items-center gap-6 sm:gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
           <div className="mx-auto w-full max-w-md md:mx-0 md:max-w-none">
             <div className="overflow-hidden rounded-lg shadow-sm md:max-w-lg">
               <div className="aspect-[4/3] w-full sm:aspect-[5/4]">
@@ -30,7 +30,7 @@ export function AboutSection() {
               </FadeInUp>
             </div>
             <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
-              <div className="space-y-4 rounded-lg bg-white p-5 text-base leading-relaxed text-[#74787C] shadow-sm sm:p-6 lg:p-7">
+              <div className="space-y-4 rounded-lg bg-white p-4 text-sm leading-relaxed text-[#74787C] shadow-sm sm:p-6 sm:text-base lg:p-7">
                 <p>
                   In 2024, RRIL successfully acquired Vyzag Bio-Energy Fuel
                   Private Limited (&quot;Vyzag Bio&quot;), marking a strategic

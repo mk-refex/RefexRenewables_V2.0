@@ -1,39 +1,41 @@
 import SectionHeading, {
   sectionMainHeadingClassName,
 } from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import PageFadeInUp from "./PageFadeInUp";
+
+const ICON_BIOGAS_PRODUCTION =
+  "/wp-content/uploads/svg_icons/b259e3m4nvnlkp9o2qp%20-%20Copy%20-%20Copy.svg";
+const ICON_SATAT_ESG =
+  "/wp-content/uploads/svg_icons/gn3kcvh52vlkp8lg3b%20-%20Copy%20-%20Copy.svg";
 
 export default function ServicesSection() {
   const services = [
     {
+      iconSrc: "/wp-content/uploads/svg_icons/soil-fertility.svg",
+      text: "Multi-feedstock capability (press mud, MSW & agro-waste, cattle dung)",
       image:
         "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Multi-feedstock.png",
-      title: "Multi-feedstock capability",
-      bullets: [
-        "Press mud",
-        "Municipal solid waste (MSW)",
-        "Agricultural waste",
-        "Cattle dung",
-      ],
     },
     {
+      iconSrc: ICON_BIOGAS_PRODUCTION,
+      text: "Efficient biogas production systems",
       image:
         "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/biogas-production-systems01.png",
-      title: "Efficient biogas production systems",
     },
     {
+      iconSrc: ICON_SATAT_ESG,
+      text: "Scalable and Compliant with SATAT and ESG frameworks",
       image:
         "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/sustainablity-eco01.jpg",
-      title: "Scalable and Compliant with SATAT and ESG frameworks",
     },
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <FadeInUp
+    <section className="bg-[#1B1B1B] py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <PageFadeInUp
           delay={0}
-          className="text-center mb-16 flex flex-col items-center"
+          className="mb-10 flex flex-col items-center text-center sm:mb-12 lg:mb-16"
         >
           <SectionHeading
             badgeText="OUR"
@@ -42,36 +44,45 @@ export default function ServicesSection() {
             watermarkAlign="center"
           />
           <h2
-            className={`${sectionMainHeadingClassName} mt-3 text-gray-900`}
+            className={`${sectionMainHeadingClassName} mt-3 text-white`}
           >
             Why choose RRIL?
           </h2>
-        </FadeInUp>
-        <div className="grid md:grid-cols-3 gap-8">
+        </PageFadeInUp>
+        <div className="grid auto-rows-fr gap-6 md:grid-cols-3 md:gap-8">
           {services.map((service, index) => (
-            <FadeInUp key={index} delay={0.1 * index}>
-              <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="relative h-64 w-full">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                  />
+            <PageFadeInUp
+              key={index}
+              delay={0.04 * index}
+              className="h-full min-h-0"
+            >
+              <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-shadow duration-300 hover:shadow-xl">
+                <div className="shrink-0 overflow-hidden rounded-t-lg">
+                  <div className="relative h-48 w-full sm:h-52 md:h-56 lg:h-64">
+                    <img
+                      src={service.image}
+                      alt=""
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 leading-tight">
-                    {service.title}
-                  </h3>
-                  {"bullets" in service && service.bullets && (
-                    <ul className="mt-3 space-y-1 text-gray-700 list-disc list-inside">
-                      {service.bullets.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
+                <div className="relative flex min-h-0 flex-1 flex-col border-t border-gray-100 px-3 pb-5 pt-9 sm:px-6 sm:pb-7 sm:pt-12">
+                  <div className="absolute left-1/2 top-0 z-10 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg bg-white shadow-md ring-1 ring-gray-200 sm:h-14 sm:w-14 lg:h-16 lg:w-16">
+                    <img
+                      src={service.iconSrc}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="h-8 w-8 object-contain sm:h-9 sm:w-9 lg:h-10 lg:w-10"
+                      decoding="async"
+                    />
+                  </div>
+                  <p className="text-left text-sm font-bold leading-snug text-gray-900 sm:text-base lg:text-lg">
+                    {service.text}
+                  </p>
                 </div>
               </div>
-            </FadeInUp>
+            </PageFadeInUp>
           ))}
         </div>
       </div>

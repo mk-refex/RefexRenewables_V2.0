@@ -66,34 +66,34 @@ export default function ContactFormSection() {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <section className="bg-gray-50 py-10 sm:py-14 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
+        <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
           {/* Left Side - Text */}
           <div>
-            <div className="inline-block mb-6">
+            <div className="mb-4 inline-block sm:mb-6">
             <SectionHeading
                 badgeText={"Business Enquiries"}
                 showWatermark={false}
-                className="mb-3"
+                className="mb-2 sm:mb-3"
               />
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="mb-4 text-2xl font-bold leading-snug text-gray-900 sm:text-3xl lg:text-4xl">
               Have questions or need assistance from <span className="italic">RRIL</span>?
             </h2>
           </div>
 
           {/* Right Side - Form */}
           <div>
-            <form onSubmit={handleSubmit} className="space-y-4" data-readdy-form id="contact-form">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4" data-readdy-form id="contact-form">
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
                 <input
                   type="text"
                   name="fullName"
                   placeholder="Full Name"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                   required
                 />
                 <input
@@ -102,14 +102,14 @@ export default function ContactFormSection() {
                   placeholder="Email Address"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                   required
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
                 <div className="flex gap-2">
-                  <select className="px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+                  <select className="rounded-md border border-gray-300 bg-white px-2 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-3 sm:py-3" aria-label="Country code">
                     <option>🇮🇳</option>
                   </select>
                   <input
@@ -118,14 +118,14 @@ export default function ContactFormSection() {
                     placeholder="Phone"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                    className="min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                   />
                 </div>
                 <select
                   name="sales"
                   value={formData.sales}
                   onChange={(e) => setFormData({ ...formData, sales: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white"
+                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                 >
                   <option>Sales</option>
                   <option>Support</option>
@@ -141,7 +141,7 @@ export default function ContactFormSection() {
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 maxLength={500}
                 rows={5}
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm resize-none"
+                className="w-full resize-none rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                 required
               ></textarea>
               <div className="text-xs text-gray-500 text-right">
@@ -151,20 +151,20 @@ export default function ContactFormSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full rounded-md bg-blue-600 px-6 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:px-8 sm:py-3 whitespace-nowrap"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
 
               {submitStatus === 'success' && (
-                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-md">
-                  <p className="text-green-800 text-sm">Thank you! Your message has been sent successfully.</p>
+                <div className="mt-3 rounded-md border border-green-200 bg-green-50 p-3 sm:mt-4 sm:p-4">
+                  <p className="text-sm text-green-800">Thank you! Your message has been sent successfully.</p>
                 </div>
               )}
 
               {submitStatus === 'error' && (
-                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
-                  <p className="text-red-800 text-sm">Please fill in all required fields correctly.</p>
+                <div className="mt-3 rounded-md border border-red-200 bg-red-50 p-3 sm:mt-4 sm:p-4">
+                  <p className="text-sm text-red-800">Please fill in all required fields correctly.</p>
                 </div>
               )}
             </form>

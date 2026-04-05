@@ -24,19 +24,19 @@ export default function OfferingsSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#F6F7F9]">
-      <div className="container">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[866px] rounded-lg overflow-hidden">
+    <section className="bg-[#F6F7F9] py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
+          <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 md:h-[28rem] lg:h-[866px]">
             <img
               src="/wp-content/uploads/2025/10/solar-services-image-new.jpg"
               alt="Solar Installation Team"
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
 
           <div>
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <FadeInUp delay={0.2}>
                 <SectionHeading
                   badgeText="WHAT DO"

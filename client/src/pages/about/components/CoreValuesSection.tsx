@@ -1,9 +1,27 @@
 import FadeInUp from "@/components/common/FadeInUp";
 
+function CoreValueIcon({ src, label }: { src: string; label: string }) {
+  return (
+    <div
+      className="mx-auto flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white p-2.5 shadow-md sm:h-[4.5rem] sm:w-[4.5rem] sm:p-3"
+      role="img"
+      aria-label={label}
+    >
+      <img
+        src={src}
+        alt=""
+        className="h-full w-full object-contain"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  );
+}
+
 const CoreValuesSection = () => {
   const values = [
     {
-      icon: "ri-shield-check-line",
+      iconSrc: "/wp-content/uploads/svg_icons/value-01.svg",
       title: "Principled Excellence",
       description:
         "Doing what’s right, with integrity and intention.",
@@ -12,7 +30,7 @@ const CoreValuesSection = () => {
       accentColor: "#582a2a",
     },
     {
-      icon: "ri-lightbulb-line",
+      iconSrc: "/wp-content/uploads/svg_icons/value-02.svg",
       title: "Authenticity",
       description:
         "Bringing your true self to work, and honouring that in others.",
@@ -21,7 +39,7 @@ const CoreValuesSection = () => {
       accentColor: "#f4831d",
     },
     {
-      icon: "ri-customer-service-2-line",
+      iconSrc: "/wp-content/uploads/svg_icons/value-03.svg",
       title: "Customer Value",
       description:
         "Keeping our customers at the heart of everything we do.",
@@ -30,7 +48,7 @@ const CoreValuesSection = () => {
       accentColor: "#193164",
     },
     {
-      icon: "ri-team-line",
+      iconSrc: "/wp-content/uploads/svg_icons/value-04.svg",
       title: "Esteem Culture",
       description:
         "Fostering a workplace where respect, dignity, and belonging are everyday experiences.",
@@ -51,7 +69,7 @@ const CoreValuesSection = () => {
       `}</style>
       <section
         id="core-values"
-        className="py-16 lg:py-24 bg-white relative overflow-hidden"
+        className="relative overflow-hidden bg-white py-12 sm:py-16 lg:py-24"
       >
         {/* Background Image Overlay - Fixed on Desktop */}
         <div
@@ -64,28 +82,28 @@ const CoreValuesSection = () => {
           }}
         ></div>
 
-        <div className="container mx-auto px-4 lg:px-[110px] relative z-10">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-[110px]">
           <FadeInUp delay={0.2}>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+            <div className="mb-8 text-center sm:mb-12">
+              <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
                 Our Values
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="mx-auto max-w-2xl px-1 text-sm text-gray-600 sm:text-base">
                 The PACE values that guide how we work every day.
               </p>
             </div>
           </FadeInUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
             {values.map((value, index) => (
               <div
                 key={index}
-                className="text-white p-8 rounded-xl relative overflow-hidden group hover:-translate-y-1 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="group relative cursor-pointer overflow-hidden rounded-xl p-6 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8"
                 style={{ backgroundColor: value.bgColor }}
               >
                 <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 border border-white/40 bg-transparent mx-auto">
-                    <i className={`${value.icon} text-3xl text-white`}></i>
+                  <div className="mb-6">
+                    <CoreValueIcon src={value.iconSrc} label={value.title} />
                   </div>
                   <h3 className="text-sm font-bold tracking-[0.15em] uppercase text-center mb-3">
                     {value.title}

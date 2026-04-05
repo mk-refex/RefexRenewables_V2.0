@@ -1,7 +1,7 @@
 import SectionHeading, {
   sectionMainHeadingClassName,
 } from "../../../components/common/SectionHeading";
-import FadeInUp from '../../../components/common/FadeInUp';
+import PageFadeInUp from "./PageFadeInUp";
 
 export default function ProjectsSection() {
   const projects = [
@@ -28,9 +28,12 @@ export default function ProjectsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <FadeInUp delay={0} className="text-center mb-16 flex flex-col items-center">
+    <section className="bg-gray-50 py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-4">
+        <PageFadeInUp
+          delay={0}
+          className="mb-10 flex flex-col items-center text-center sm:mb-12 lg:mb-16"
+        >
           <SectionHeading
             badgeText="OUR"
             text="Upcoming Projects"
@@ -38,35 +41,55 @@ export default function ProjectsSection() {
             watermarkAlign="center"
           />
           <h2
-            className={`${sectionMainHeadingClassName} mt-3 text-gray-900`}
+            className={`${sectionMainHeadingClassName} mt-3 text-gray-900 max-w-4xl px-1`}
           >
-            Greenfield Project <br/> of 800 TPD input and 38 TPD CBG output
+            <span className="block sm:inline">Greenfield Project </span>
+            <span className="block sm:inline">
+              of 800 TPD input and 38 TPD CBG output
+            </span>
           </h2>
-        </FadeInUp>
-        <FadeInUp delay={0.2}>
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-emerald-600 text-white">
-                    <th className="px-6 py-4 text-left font-semibold">City</th>
-                    <th className="px-6 py-4 text-left font-semibold">Plant Capacity</th>
-                    <th className="px-6 py-4 text-left font-semibold">Feedstock Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {projects.map((project, index) => (
-                    <tr key={index} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-emerald-50 transition-colors`}>
-                      <td className="px-6 py-4 text-gray-900 font-medium">{project.city}</td>
-                      <td className="px-6 py-4 text-gray-700">{project.capacity}</td>
-                      <td className="px-6 py-4 text-gray-700">{project.feedstock}</td>
+        </PageFadeInUp>
+        <PageFadeInUp delay={0.2}>
+          <div className="mx-auto max-w-5xl">
+            <div className="overflow-hidden rounded-lg bg-white shadow-lg">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[520px]">
+                  <thead>
+                    <tr className="bg-emerald-600 text-white">
+                      <th className="px-3 py-3 text-left text-sm font-semibold sm:px-6 sm:py-4 sm:text-base">
+                        City
+                      </th>
+                      <th className="px-3 py-3 text-left text-sm font-semibold sm:px-6 sm:py-4 sm:text-base">
+                        Plant Capacity
+                      </th>
+                      <th className="px-3 py-3 text-left text-sm font-semibold sm:px-6 sm:py-4 sm:text-base">
+                        Feedstock Type
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {projects.map((project, index) => (
+                      <tr
+                        key={index}
+                        className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} transition-colors hover:bg-emerald-50`}
+                      >
+                        <td className="px-3 py-3 text-sm font-medium text-gray-900 sm:px-6 sm:py-4 sm:text-base">
+                          {project.city}
+                        </td>
+                        <td className="px-3 py-3 text-sm text-gray-700 sm:px-6 sm:py-4 sm:text-base">
+                          {project.capacity}
+                        </td>
+                        <td className="px-3 py-3 text-sm text-gray-700 sm:px-6 sm:py-4 sm:text-base">
+                          {project.feedstock}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </FadeInUp>
+        </PageFadeInUp>
       </div>
     </section>
   );

@@ -11,7 +11,7 @@ const AwardsSection = () => {
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <div className="mb-4">
@@ -35,7 +35,7 @@ const AwardsSection = () => {
                 <img 
                   src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Solar-award-768x578-1.png" 
                   alt="Solar Energy Award" 
-                  className="w-full h-64 object-contain mx-auto"
+                  className="mx-auto h-44 w-full object-contain sm:h-52 md:h-64"
                 />
               </div>
               <p className="text-white text-base leading-relaxed">
@@ -49,7 +49,7 @@ const AwardsSection = () => {
                 <img 
                   src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Refex_Group_IN_English_2025_Certification_Badge-scaled.png" 
                   alt="Great Place to Work" 
-                  className="w-full h-64 object-contain mx-auto"
+                  className="mx-auto h-44 w-full object-contain sm:h-52 md:h-64"
                 />
               </div>
               <p className="text-white text-base leading-relaxed">

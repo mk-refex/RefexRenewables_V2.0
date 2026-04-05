@@ -43,8 +43,8 @@ export default function ContactInfoSection() {
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-white py-10 sm:py-14 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
         {/* <div className="mb-12 flex flex-col items-center text-center">
           <SectionHeading
             badgeText="CONTACT"
@@ -53,37 +53,52 @@ export default function ContactInfoSection() {
             watermarkAlign="center"
           />
         </div> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7 lg:gap-8">
           {contacts.map((contact, index) => (
-            <div key={index} className="border-b border-gray-200 pb-8">
+            <div
+              key={index}
+              className="border-b border-gray-200 pb-6 sm:pb-7 lg:pb-8"
+            >
               <SectionHeading
                 badgeText={contact.title}
                 showWatermark={false}
-                className="mb-3"
+                className="mb-2 sm:mb-3"
               />
-              <h4 className="text-xl font-bold text-gray-900 mb-2">
+              <h4 className="mb-2 text-lg font-bold text-gray-900 sm:text-xl">
                 {contact.name}
               </h4>
               {contact.cin && (
-                <p className="text-sm text-gray-600 mb-3">{contact.cin}</p>
+                <p className="mb-2 text-xs text-gray-600 sm:mb-3 sm:text-sm">
+                  {contact.cin}
+                </p>
               )}
               {contact.designation && (
-                <p className="text-sm text-gray-600 mb-1">{contact.designation}</p>
+                <p className="mb-1 text-xs text-gray-600 sm:text-sm">
+                  {contact.designation}
+                </p>
               )}
               {contact.company && contact.company !== contact.name && (
-                <p className="text-base font-semibold text-gray-900 mb-3">{contact.company}</p>
+                <p className="mb-2 text-sm font-semibold text-gray-900 sm:mb-3 sm:text-base">
+                  {contact.company}
+                </p>
               )}
-              <p className="text-sm text-gray-700 mb-3 whitespace-pre-line leading-relaxed">
+              <p className="mb-3 whitespace-pre-line text-xs leading-relaxed text-gray-700 sm:text-sm">
                 {contact.address}
               </p>
               <div className="space-y-2">
-                <div className="flex items-center text-sm text-gray-700">
-                  <i className="ri-phone-line w-5 h-5 flex items-center justify-center mr-2 text-gray-600"></i>
-                  <span>{contact.phone}</span>
+                <div className="flex items-start gap-2 text-xs text-gray-700 sm:items-center sm:text-sm">
+                  <i
+                    className="ri-phone-line mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-gray-600 sm:mt-0"
+                    aria-hidden
+                  />
+                  <span className="min-w-0 break-words">{contact.phone}</span>
                 </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <i className="ri-mail-line w-5 h-5 flex items-center justify-center mr-2 text-gray-600"></i>
-                  <span>{contact.email}</span>
+                <div className="flex items-start gap-2 text-xs text-gray-700 sm:items-center sm:text-sm">
+                  <i
+                    className="ri-mail-line mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-gray-600 sm:mt-0"
+                    aria-hidden
+                  />
+                  <span className="min-w-0 break-all">{contact.email}</span>
                 </div>
               </div>
             </div>

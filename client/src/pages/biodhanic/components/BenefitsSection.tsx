@@ -61,12 +61,12 @@ export default function BenefitsSection() {
   ];
 
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="container mx-auto px-4 lg:px-[110px]">
+    <section className="bg-gray-50 py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
         <FadeInUp
           delay={0}
           threshold={FADE_THRESHOLD}
-          className="mb-16 flex flex-col items-center text-center"
+          className="mb-10 flex flex-col items-center text-center sm:mb-12 lg:mb-16"
         >
           <h2
             className={`${sectionMainHeadingClassName} max-w-4xl text-balance text-gray-900`}
@@ -83,22 +83,22 @@ export default function BenefitsSection() {
               threshold={FADE_THRESHOLD}
               className="h-full"
             >
-              <div className="flex h-full flex-col items-center gap-4 rounded-lg bg-white p-8 text-center shadow-md transition-shadow duration-300 hover:shadow-xl sm:flex-row sm:items-center sm:gap-5 sm:text-left">
-                <div className="flex w-16 flex-shrink-0 justify-center">
+              <div className="flex h-full flex-col items-center gap-3 rounded-lg bg-white p-5 text-center shadow-md transition-shadow duration-300 hover:shadow-xl sm:flex-row sm:items-center sm:gap-5 sm:p-6 sm:text-left lg:p-8">
+                <div className="flex w-14 shrink-0 justify-center sm:w-16">
                   <img
                     src={benefit.iconSrc}
                     alt=""
                     width={56}
                     height={56}
-                    className="h-14 w-14 object-contain"
+                    className="h-12 w-12 object-contain sm:h-14 sm:w-14"
                     decoding="async"
                   />
                 </div>
                 <div className="min-w-0 w-full flex-1">
-                  <h3 className="mb-3 text-xl font-bold text-gray-900 sm:text-left">
+                  <h3 className="mb-2 text-lg font-bold text-gray-900 sm:mb-3 sm:text-left sm:text-xl">
                     {benefit.title}
                   </h3>
-                  <p className="text-justify text-gray-600 leading-relaxed">
+                  <p className="text-justify text-sm leading-relaxed text-gray-600 sm:text-base">
                     {benefit.description}
                   </p>
                 </div>

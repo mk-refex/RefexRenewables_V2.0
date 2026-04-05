@@ -77,10 +77,10 @@ export default function Navbar() {
 
       {/* Main Header Section */}
       <div className="w-full bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 lg:px-[110px]">
-          <div className="flex items-center py-2 gap-8 lg:gap-[7rem]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+          <div className="flex w-full items-center justify-between gap-3 py-2 lg:justify-start lg:gap-[7rem]">
             {/* Left Container - Logo and Company Name */}
-            <div className="flex flex-col flex-shrink-0">
+            <div className="flex min-w-0 flex-shrink-0 flex-col">
               <Link to="/" className="flex-shrink-0 mb-2">
                 <img 
                   src="https://rril-website.local.sharajman.com/wp-content/uploads/2023/07/refex-logo-seperate.svg" 
@@ -90,11 +90,9 @@ export default function Navbar() {
               </Link>
               {/* Company Name */}
               <div
-                className="text-gray-800 uppercase"
+                className="max-w-[11rem] text-[9px] font-medium uppercase leading-snug tracking-wide text-gray-800 sm:max-w-none sm:text-[11.5px] sm:leading-[15px]"
                 style={{
-                  fontSize: '11.5px',
                   fontWeight: 500,
-                  lineHeight: '15px',
                   letterSpacing: '0.3px',
                 }}
               >
@@ -356,8 +354,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200 shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
-          <div className="container mx-auto px-4 py-4">
+        <div className="max-h-[calc(100vh-80px)] overflow-y-auto border-t border-gray-200 bg-white shadow-lg lg:hidden">
+          <div className="container mx-auto px-4 py-4 sm:px-6">
             {/* Company Name - Mobile */}
             <div className="text-xs font-bold text-gray-800 leading-tight uppercase mb-4 pb-4 border-b border-gray-200">
               REFEX RENEWABLES &<br />INFRASTRUCTURE LIMITED
@@ -491,7 +489,7 @@ export default function Navbar() {
                         onClick={() => setMobileSubDropdown(mobileSubDropdown === 'solar' ? null : 'solar')}
                         className="w-full px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors flex items-center justify-between cursor-pointer"
                       >
-                        Solar Energy
+                        Renewable IPP
                         <i className={`ri-arrow-${mobileSubDropdown === 'solar' ? 'up' : 'down'}-s-line text-base`}></i>
                       </button>
                       {mobileSubDropdown === 'solar' && (
@@ -533,13 +531,6 @@ export default function Navbar() {
                             Compressed Bio-Gas
                           </Link>
                           <Link 
-                            to="/biodhanic" 
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
-                          >
-                            BioDhanic
-                          </Link>
-                          <Link 
                             to="/spectrum-renewable" 
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
@@ -552,6 +543,13 @@ export default function Navbar() {
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Vyzag Bio-Energy
+                          </Link>
+                          <Link 
+                            to="/biodhanic" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
+                          >
+                            Refex Bio-Dhanic
                           </Link>
                         </div>
                       )}

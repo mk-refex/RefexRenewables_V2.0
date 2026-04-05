@@ -60,7 +60,7 @@ const StrengthsSection = () => {
 
   return (
     <section className="py-16 lg:py-24 bg-[#F6F6F6]">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 lg:mb-16">
           <SectionHeading
             badgeText="OUR"
@@ -82,7 +82,7 @@ const StrengthsSection = () => {
           {strengths.map((strength, index) => (
             <div
               key={index}
-              className="relative h-96 overflow-hidden rounded-lg shadow-lg"
+              className="relative h-80 overflow-hidden rounded-lg shadow-lg sm:h-96"
             >
               <img
                 src={strength.image}
@@ -98,11 +98,11 @@ const StrengthsSection = () => {
                 />
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 z-10 p-6">
-                <h3 className="text-2xl font-bold text-white mb-3 drop-shadow-sm">
+              <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col p-6">
+                <h3 className="mb-3 text-2xl font-bold leading-tight text-white drop-shadow-sm">
                   {strength.title}
                 </h3>
-                <p className="text-white/90 text-sm leading-relaxed">
+                <p className="min-h-[7rem] text-sm leading-relaxed text-white/90 md:min-h-[7.5rem]">
                   {strength.description}
                 </p>
               </div>

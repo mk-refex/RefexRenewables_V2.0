@@ -46,10 +46,10 @@ const AboutSection = () => {
 
   return (
     <section ref={sectionRef} id="about" className="py-16 lg:py-24 bg-white">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="grid grid-cols-1 lg:grid-cols-2  items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-0">
           {/* Left Content */}
-          <div className="pr-[10px]">
+          <div className="pr-0 lg:pr-[10px]">
             <SectionHeading badgeText="WHO WE ARE" />
 
             <FadeInUp delay={0.2}>
@@ -61,12 +61,9 @@ const AboutSection = () => {
               </h2>
             </FadeInUp>
 
-            <p
-              className="leading-relaxed mb-8"
-              style={{ fontSize: "18px", color: "#74787C" }}
-            >
+            <p className="mb-8 text-base leading-relaxed text-[#74787C] lg:text-lg">
               is a leading name in solar energy, recognized for pioneering
-              projects and delivering innovative, first-of-their-kind renewable
+              projects and delivering innovative, first of their kind renewable
               energy systems across India. We are dedicated to accelerating
               India's clean energy transition by providing affordable, reliable,
               and scalable solar solutions. From large-scale utility projects to
@@ -152,11 +149,11 @@ const AboutSection = () => {
 
               {/* 20+ Years Experience Card */}
               <div
-                className="absolute bottom-[100px] left-6 bg-white px-[18px] py-[10px] rounded-lg shadow-xl border-[1px] border-brand transition-transform duration-300 ease-out"
+                className="absolute bottom-4 left-4 rounded-lg border border-brand bg-white px-3 py-2 shadow-xl transition-transform duration-300 ease-out sm:bottom-8 sm:left-6 sm:px-[18px] sm:py-[10px] lg:bottom-[100px]"
                 style={{ transform: `translateX(${translateX}px)` }}
               >
-                <div className="text-4xl font-bold text-gray-900 mb-1">20+</div>
-                <div className="text-[18px] text-gray-600 whitespace-nowrap">
+                <div className="mb-1 text-3xl font-bold text-gray-900 sm:text-4xl">20+</div>
+                <div className="whitespace-nowrap text-sm text-gray-600 sm:text-[18px]">
                   Years Experience
                 </div>
               </div>

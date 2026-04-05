@@ -29,11 +29,11 @@ const CommitteesSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="text-center mb-12">
+    <section className="bg-gray-50 py-12 sm:py-16 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-8 text-center sm:mb-12">
           <FadeInUp delay={0.2}>
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:mb-4 sm:text-3xl lg:text-4xl">
             Composition of Committees
           </h2>
           </FadeInUp>
@@ -43,16 +43,16 @@ const CommitteesSection = () => {
           <table className="w-full bg-white rounded-lg overflow-hidden shadow-sm">
             <thead>
               <tr className="bg-brand text-white">
-                <th className="py-4 px-6 text-left font-semibold text-base lg:text-lg">
+                <th className="px-3 py-3 text-left text-sm font-semibold sm:px-4 sm:py-4 sm:text-base lg:px-6 lg:text-lg">
                   Name of Committee
                 </th>
-                <th className="py-4 px-6 text-left font-semibold text-base lg:text-lg">
+                <th className="px-3 py-3 text-left text-sm font-semibold sm:px-4 sm:py-4 sm:text-base lg:px-6 lg:text-lg">
                   Name of Committee Members
                 </th>
-                <th className="py-4 px-6 text-left font-semibold text-base lg:text-lg">
+                <th className="px-3 py-3 text-left text-sm font-semibold sm:px-4 sm:py-4 sm:text-base lg:px-6 lg:text-lg">
                   Designation
                 </th>
-                <th className="py-4 px-6 text-left font-semibold text-base lg:text-lg">
+                <th className="px-3 py-3 text-left text-sm font-semibold sm:px-4 sm:py-4 sm:text-base lg:px-6 lg:text-lg">
                   Category
                 </th>
               </tr>
@@ -68,18 +68,18 @@ const CommitteesSection = () => {
                       {memberIndex === 0 && (
                         <td 
                           rowSpan={committee.members.length}
-                          className="py-4 px-6 text-gray-900 font-medium align-top"
+                          className="px-3 py-3 align-top text-sm font-medium text-gray-900 sm:px-4 sm:py-4 sm:text-base lg:px-6"
                         >
                           {committee.name}
                         </td>
                       )}
-                      <td className="py-4 px-6 text-gray-700">
+                      <td className="px-3 py-3 text-sm text-gray-700 sm:px-4 sm:py-4 sm:text-base lg:px-6">
                         {member.name}
                       </td>
-                      <td className="py-4 px-6 text-gray-700">
+                      <td className="px-3 py-3 text-sm text-gray-700 sm:px-4 sm:py-4 sm:text-base lg:px-6">
                         {member.designation}
                       </td>
-                      <td className="py-4 px-6 text-gray-700">
+                      <td className="px-3 py-3 text-sm text-gray-700 sm:px-4 sm:py-4 sm:text-base lg:px-6">
                         {member.category}
                       </td>
                     </tr>

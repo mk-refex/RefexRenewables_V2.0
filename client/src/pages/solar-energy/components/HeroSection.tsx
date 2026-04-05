@@ -2,7 +2,7 @@ import HeroHeading from "@/components/common/HeroHeading";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[400px] flex items-center bg-gray-900 overflow-hidden">
+    <section className="relative flex h-[280px] items-center overflow-hidden bg-gray-900 sm:h-[340px] lg:h-[400px]">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -12,7 +12,7 @@ export default function HeroSection() {
       >
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="container relative z-10 mx-auto px-4 text-center sm:px-6 lg:px-8">
         <HeroHeading watermarkText="Solar Energy" text="Solar Energy" watermarkAlign="center" className="text-center" />
       </div>
     </section>

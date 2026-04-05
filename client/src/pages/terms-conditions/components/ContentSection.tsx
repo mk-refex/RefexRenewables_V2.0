@@ -5,12 +5,12 @@ const linkClass =
 
 const ContentSection = memo(() => {
   return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="space-y-12 font-['Inter'] text-base leading-relaxed text-gray-700">
+    <section className="bg-white py-10 sm:py-14 lg:py-20">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="space-y-8 font-sans text-sm leading-relaxed text-gray-700 sm:space-y-10 sm:text-base lg:space-y-12">
           {/* Title + intro */}
           <div>
-            <h2 className="mb-6 text-3xl font-bold text-[#16a34a]">
+            <h2 className="mb-4 text-2xl font-bold text-[#16a34a] sm:mb-5 sm:text-3xl lg:mb-6">
               TERMS OF USE
             </h2>
             <p>
@@ -35,7 +35,7 @@ const ContentSection = memo(() => {
 
           {/* 1 */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               1. Acceptance of Terms
             </h2>
             <p>
@@ -60,11 +60,11 @@ const ContentSection = memo(() => {
 
           {/* 2 */}
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               2. Website Access and Use
             </h2>
 
-            <h3 className="mb-4 text-lg font-semibold text-gray-900">
+            <h3 className="mb-3 text-base font-semibold text-gray-900 sm:mb-4 sm:text-lg">
               2.1 Use of the Website
             </h3>
             <p className="mb-3">
@@ -100,7 +100,7 @@ const ContentSection = memo(() => {
               </li>
             </ul>
 
-            <h3 className="mb-4 text-lg font-semibold text-gray-900">
+            <h3 className="mb-3 text-base font-semibold text-gray-900 sm:mb-4 sm:text-lg">
               2.2 Restrictions on Use
             </h3>
             <p className="mb-3">You shall not:</p>
@@ -138,7 +138,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Accuracy of information
             </h2>
             <p>
@@ -158,7 +158,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Links to other websites
             </h2>
             <p>
@@ -178,7 +178,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Prohibited uses
             </h2>
             <p className="mb-3">
@@ -210,7 +210,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Intellectual property rights
             </h2>
             <p className="mb-4">
@@ -233,7 +233,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Disclaimer of warranty
             </h2>
             <p className="mb-4">
@@ -269,7 +269,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Limitation of liability
             </h2>
             <p>
@@ -289,7 +289,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Indemnification
             </h2>
             <p>
@@ -305,7 +305,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Severability
             </h2>
             <p>
@@ -324,7 +324,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Dispute resolution
             </h2>
             <p>
@@ -336,7 +336,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Changes and amendments
             </h2>
             <p>
@@ -350,7 +350,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Acceptance of these terms
             </h2>
             <p>
@@ -362,7 +362,7 @@ const ContentSection = memo(() => {
           </div>
 
           <div>
-            <h2 className="mb-6 text-2xl font-bold text-[#16a34a] md:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-[#16a34a] sm:mb-5 sm:text-2xl md:text-3xl lg:mb-6">
               Contacting Us
             </h2>
             <p>
@@ -375,7 +375,7 @@ const ContentSection = memo(() => {
               </a>
               .
             </p>
-            <p className="mt-6 text-sm text-gray-600">
+            <p className="mt-4 text-xs text-gray-600 sm:mt-6 sm:text-sm">
               This document was last updated on 02 April, 2026.
             </p>
           </div>

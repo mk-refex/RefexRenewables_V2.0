@@ -138,18 +138,18 @@ const BoardSection = () => {
   ];
 
   return (
-    <section id="board-of-directors" className="py-8 lg:py-16 bg-white">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="text-center mb-12">
+    <section id="board-of-directors" className="bg-white py-8 sm:py-10 lg:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-8 text-center sm:mb-12">
           <FadeInUp delay={0.2}>
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Board of Directors</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:mb-4 sm:text-3xl lg:text-4xl">Board of Directors</h2>
+          <p className="mx-auto max-w-3xl px-1 text-base text-gray-600 sm:text-lg">
             Our board comprises experienced professionals who provide strategic guidance and governance
           </p>
           </FadeInUp>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {boardMembers.map((member, index) => (
             <div 
               key={index}
@@ -172,12 +172,12 @@ const BoardSection = () => {
         </div>
 
         {/* View All Button */}
-        <div className="text-center mt-12">
+        <div className="mt-8 text-center sm:mt-12">
           <a 
             href="/wp-content/uploads/2025/10/RRIL-Ceased-Directors.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block rounded-lg bg-brand px-8 py-3 font-medium text-white transition-colors hover:bg-brand-hover whitespace-nowrap cursor-pointer"
+            className="inline-block cursor-pointer whitespace-nowrap rounded-lg bg-brand px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-hover sm:px-8 sm:py-3 sm:text-base"
           >
             RRIL - Directors Ceased
           </a>

@@ -2,7 +2,7 @@ import HeroHeading from '@/components/common/HeroHeading';
 
 const HeroSection = () => {
   return (
-    <section className="relative h-[300px] lg:h-[400px] flex items-center justify-center overflow-hidden">
+    <section className="relative flex h-[300px] items-center justify-center overflow-hidden lg:h-[400px]">
       <div className="absolute inset-0">
         <img
           src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/about-us-bg-scaled-new.jpg"
@@ -12,8 +12,13 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <HeroHeading watermarkText="About Us" text="About Us" watermarkAlign="center" />
+      <div className="container relative z-10 mx-auto px-4 text-center sm:px-6 lg:px-8">
+        <HeroHeading
+          watermarkText="About Us"
+          text="About Us"
+          watermarkAlign="center"
+          className="text-center"
+        />
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import FadeInUp from "@/components/common/FadeInUp";
-import { sectionMainHeadingClassName } from "@/components/common/SectionHeading";
 
 const FADE_THRESHOLD = 0.98;
 
@@ -30,7 +29,7 @@ export default function AboutSection() {
               </FadeInUp> */}
             </div>
             <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
-              <div className="space-y-4 rounded-lg bg-white p-5 text-base leading-relaxed text-[#74787C] shadow-sm sm:p-6 lg:p-7">
+              <div className="space-y-4 rounded-lg bg-white p-4 text-sm leading-relaxed text-[#74787C] shadow-sm sm:p-6 sm:text-base lg:p-7">
                 <p>
                   <b>Refex Spectrum Renewable Energy Pvt. Ltd. (RSREPL)</b>, located at
                   Warananagar, Kolhapur, is engaged in the generation of

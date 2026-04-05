@@ -214,9 +214,9 @@ export default function StockQuote() {
 
   if (loading) {
     return (
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-center py-12">
+      <section className="bg-white py-10 sm:py-12 lg:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
+          <div className="flex items-center justify-center py-8 sm:py-12">
             <div className="text-center">
               <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#7cd244]"></div>
               <p className="mt-4 text-gray-600">Loading stock quote...</p>
@@ -232,49 +232,49 @@ export default function StockQuote() {
   }
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-black uppercase tracking-wider text-center">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-6 sm:mb-10 lg:mb-12">
+          <h2 className="text-center text-xl font-bold uppercase tracking-wider text-black sm:text-2xl lg:text-3xl">
             {currentSettings.title}
           </h2>
-          <div className="mt-4 text-center">
-            <span className="inline-block px-4 py-2 bg-[#7cd244] text-white rounded-md font-semibold text-sm">
+          <div className="mt-3 text-center sm:mt-4">
+            <span className="inline-block rounded-md bg-[#7cd244] px-3 py-1.5 text-xs font-semibold text-white sm:px-4 sm:py-2 sm:text-sm">
               BSE
             </span>
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-gray-300">
+          <table className="w-full min-w-[640px] border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-900 text-white">
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnCurrency}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnPrice}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnBid}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnOffer}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnChange}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnVolume}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr className="bg-white">
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.currency}
                 </td>
-                <td className="border border-gray-300 px-4 py-3 font-semibold">
+                <td className="border border-gray-300 px-2 py-2 text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "price",
@@ -285,7 +285,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "bid",
@@ -295,7 +295,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "offer",
@@ -309,7 +309,7 @@ export default function StockQuote() {
                   )}
                 </td>
                 <td
-                  className={`border border-gray-300 px-4 py-3 font-semibold ${isPositiveChange(getFieldValue(currentData, ["change", "Change", "CHANGE", "change_percent", "change_percentage"])) ? "text-green-600" : "text-red-600"}`}
+                  className={`border border-gray-300 px-2 py-2 text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3 ${isPositiveChange(getFieldValue(currentData, ["change", "Change", "CHANGE", "change_percent", "change_percentage"])) ? "text-green-600" : "text-red-600"}`}
                 >
                   {getChangeValue(
                     getFieldValue(currentData, [
@@ -321,7 +321,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "volume",
@@ -338,29 +338,29 @@ export default function StockQuote() {
           <table className="w-full border-collapse border border-gray-300 mt-4">
             <thead>
               <tr className="bg-gray-900 text-white">
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnTodayOpen}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnPreviousClose}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnIntradayHigh}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnIntradayLow}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnWeekHigh52}
                 </th>
-                <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
+                <th className="border border-gray-300 px-2 py-2 text-left text-xs font-semibold sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {currentSettings.columnWeekLow52}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr className="bg-white">
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "today_open",
@@ -372,7 +372,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "previous_close",
@@ -386,7 +386,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "intraday_high",
@@ -399,7 +399,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "intraday_low",
@@ -412,7 +412,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "fiftyTwoWeekHigh",
@@ -427,7 +427,7 @@ export default function StockQuote() {
                     ]),
                   )}
                 </td>
-                <td className="border border-gray-300 px-4 py-3">
+                <td className="border border-gray-300 px-2 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm lg:px-4 lg:py-3">
                   {formatValue(
                     getFieldValue(currentData, [
                       "fiftyTwoWeekLow",
@@ -447,7 +447,7 @@ export default function StockQuote() {
           </table>
         </div>
 
-        <div className="mt-6 text-right text-sm text-gray-600">
+        <div className="mt-4 text-right text-xs text-gray-600 sm:mt-6 sm:text-sm">
           <p>{currentSettings.footerText}</p>
           {lastUpdated && <p>Last Updated {lastUpdated}</p>}
         </div>

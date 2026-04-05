@@ -13,9 +13,9 @@ export default function LaunchSection() {
   ];
 
   return (
-    <section className="bg-white py-20">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <div className="mb-16 grid gap-12 md:grid-cols-2">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <div className="mb-10 grid gap-8 sm:mb-12 md:mb-16 md:grid-cols-2 md:gap-10 lg:gap-12">
           <FadeInUp
             delay={0}
             threshold={FADE_THRESHOLD}
@@ -38,7 +38,7 @@ export default function LaunchSection() {
           </FadeInUp>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
           {galleryImages.map((image, index) => (
             <FadeInUp
               key={index}
@@ -49,7 +49,7 @@ export default function LaunchSection() {
                 <img
                   src={image}
                   alt={`BioDhanic Launch Event ${index + 1}`}
-                  className="h-80 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-110 sm:h-64 md:h-72 lg:h-80"
                 />
               </div>
             </FadeInUp>

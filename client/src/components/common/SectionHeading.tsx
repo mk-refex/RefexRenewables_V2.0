@@ -71,21 +71,15 @@ const SectionHeading = ({
       {/* Watermark Text */}
       {showWatermark && (
         <span
-          className="watermark transition-transform duration-300 ease-out"
+          className="watermark pointer-events-none absolute -top-[22px] flex h-[42px] max-w-full select-none items-center whitespace-nowrap text-[42px] leading-none text-transparent sm:-top-8 sm:h-16 sm:text-[64px] lg:-top-[45px] lg:h-[95px] lg:text-[95px]"
           style={{
-            fontSize: "95px",
-            position: "absolute",
             left: watermarkAlign === "center" ? "50%" : "0px",
-            top: "-45px",
             textTransform: "uppercase",
             fontFamily: '"Exo", sans-serif',
             fontWeight: 700,
             opacity: 0.06,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            height: "95px",
-            display: "flex",
-            alignItems: "center",
             WebkitTextStroke:
               watermarkColor === "white" ? "1px #ffffff" : "1px #000000",
             translate: "none",
@@ -95,9 +89,6 @@ const SectionHeading = ({
               watermarkAlign === "center"
                 ? `translate3d(calc(-50% + ${translateX}px), 0px, 0px)`
                 : `translate3d(${translateX}px, 0px, 0px)`,
-            whiteSpace: "nowrap",
-            pointerEvents: "none",
-            maxWidth: "100%",
             boxSizing: "border-box",
           }}
         >
@@ -112,14 +103,8 @@ const SectionHeading = ({
         {/* Badge with background */}
         <span
           ref={badgeRef}
-          className="inline-block text-white font-bold relative"
+          className="relative inline-block rounded-[5px] bg-[#4AAB3D] px-3 py-2 text-lg font-bold leading-tight text-white sm:px-4 sm:py-2 sm:text-2xl lg:px-5 lg:py-2.5 lg:text-[30px] lg:leading-[30px]"
           style={{
-            backgroundColor: "#4AAB3D",
-            // textTransform: "uppercase",
-            fontSize: "30px",
-            lineHeight: "30px",
-            padding: "10px 20px",
-            borderRadius: "5px",
             display: "inline-block",
             transform: isVisible ? "translateY(0)" : "translateY(100%)",
             opacity: isVisible ? 1 : 0,
@@ -133,12 +118,8 @@ const SectionHeading = ({
         {/* Text without background - only render if text is provided */}
         {text && (
           <span
-            className="font-bold relative"
+            className="relative text-lg font-bold leading-tight text-[#4AAB3D] sm:text-2xl lg:text-[30px] lg:leading-[30px]"
             style={{
-              color: "#4AAB3D",
-              // textTransform: "uppercase",
-              fontSize: "30px",
-              lineHeight: "30px",
               transform: isVisible ? "translateY(0)" : "translateY(100%)",
               opacity: isVisible ? 1 : 0,
               transition:

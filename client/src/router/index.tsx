@@ -1,9 +1,11 @@
-
-import { useNavigate, type NavigateFunction, useLocation } from "react-router-dom";
-import { useRoutes } from "react-router-dom";
-import { useEffect, Suspense } from "react";
-import routes from "./config";
-import PageLoader from "../components/common/PageLoader";
+import { useNavigate, type NavigateFunction, useLocation } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
+import { useEffect, Suspense } from 'react';
+import routes from './config';
+import {
+  RouteContentReady,
+  RouteTransitionShell,
+} from './RouteTransitionShell';
 
 let navigateResolver: (navigate: ReturnType<typeof useNavigate>) => void;
 
@@ -32,8 +34,10 @@ export function AppRoutes() {
   }, [location.pathname]);
 
   return (
-    <Suspense fallback={<PageLoader />}>
-      {element}
-    </Suspense>
+    <RouteTransitionShell key={location.key}>
+      <Suspense fallback={null}>
+        <RouteContentReady>{element}</RouteContentReady>
+      </Suspense>
+    </RouteTransitionShell>
   );
 }

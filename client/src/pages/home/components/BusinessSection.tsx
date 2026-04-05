@@ -13,7 +13,7 @@ const BusinessSection = () => {
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(https://static.readdy.ai/image/d0ead66ce635a168f1e83b108be94826/33b8d94f94adb3857885e3267a1b144d.png)' }}></div>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-[110px] relative z-10">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-[110px]">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <div className="flex justify-center">
@@ -94,7 +94,7 @@ const BusinessSection = () => {
                 Compressed Bio-Gas
               </h3>
               <p className="mb-6 text-base leading-relaxed text-gray-600">
-                Under our CBG business unit, we are driving the transition to a circular economy through advanced waste-to-biogas solutions.
+                Under our CBG business unit, we are driving the transition to a circular economy through advanced waste to biogas solutions.
               </p>
               <a 
                 href="/compressed-bio-gas" 

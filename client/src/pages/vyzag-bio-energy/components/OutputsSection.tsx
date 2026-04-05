@@ -23,11 +23,11 @@ export function OutputsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 lg:px-[110px]">
+    <section className="bg-gray-50 py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
         <FadeInUp
           delay={0}
-          className="text-center mb-12 flex flex-col items-center"
+          className="mb-8 flex flex-col items-center text-center sm:mb-10 lg:mb-12"
         >
           <SectionHeading
             badgeText="THE PROCESS"
@@ -42,29 +42,31 @@ export function OutputsSection() {
           </h2>
         </FadeInUp>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="mx-auto grid max-w-5xl gap-5 sm:gap-6 md:grid-cols-3 md:gap-8">
           {outputs.map((output, index) => (
             <FadeInUp key={index} delay={0.1 * index}>
-              <div className="bg-white rounded-lg p-8 text-center shadow-md hover:shadow-xl transition-shadow duration-300">
+              <div className="rounded-lg bg-white p-5 text-center shadow-md transition-shadow duration-300 hover:shadow-xl sm:p-6 lg:p-8">
                 <div className="relative">
-                  <div className="text-6xl font-bold text-gray-200 mb-4">
+                  <div className="mb-3 text-5xl font-bold text-gray-200 sm:mb-4 sm:text-6xl">
                     {output.value} {output.unit}
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="text-4xl font-bold text-green-600">
+                    <h3 className="text-3xl font-bold text-green-600 sm:text-4xl">
                       {output.value}{" "}
-                      <span className="text-3xl">{output.unit}</span>
+                      <span className="text-2xl sm:text-3xl">{output.unit}</span>
                     </h3>
                   </div>
                 </div>
-                <p className="text-gray-700 mt-6 font-medium">{output.label}</p>
+                <p className="mt-5 text-sm font-medium text-gray-700 sm:mt-6 sm:text-base">
+                  {output.label}
+                </p>
               </div>
             </FadeInUp>
           ))}
         </div>
 
         <FadeInUp delay={0.4}>
-          <p className="text-center text-gray-700 mt-12 max-w-4xl mx-auto leading-relaxed">
+          <p className="mx-auto mt-8 max-w-4xl px-1 text-center text-sm leading-relaxed text-gray-700 sm:mt-10 sm:text-base lg:mt-12">
             This acquisition reinforces RRIL's commitment to sustainable waste
             management, renewable energy generation and the promotion of a
             circular economy, further strengthening its role in building a

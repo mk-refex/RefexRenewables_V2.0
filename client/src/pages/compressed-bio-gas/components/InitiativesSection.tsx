@@ -1,7 +1,7 @@
 import SectionHeading, {
   sectionMainHeadingClassName,
 } from "../../../components/common/SectionHeading";
-import FadeInUp from "../../../components/common/FadeInUp";
+import PageFadeInUp from "./PageFadeInUp";
 
 export default function InitiativesSection() {
   const initiatives = [
@@ -29,11 +29,11 @@ export default function InitiativesSection() {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 lg:px-[110px]">
-        <FadeInUp
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
+        <PageFadeInUp
           delay={0}
-          className="text-center mb-16 flex flex-col items-center"
+          className="mb-10 flex flex-col items-center text-center sm:mb-12 lg:mb-16"
         >
           <SectionHeading
             badgeText="Refex"
@@ -46,15 +46,15 @@ export default function InitiativesSection() {
           >
             Driving a Sustainable Future through Renewable Innovation
           </h2>
-        </FadeInUp>
-        <div className="grid md:grid-cols-3 gap-8">
+        </PageFadeInUp>
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-3 md:gap-8">
           {initiatives.map((initiative, index) => (
-            <FadeInUp key={index} delay={0.1 * index}>
+            <PageFadeInUp key={index} delay={0.04 * index}>
               <a
                 href={initiative.link}
-                className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 block"
+                className="group relative block overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
-                <div className="relative h-80 w-full">
+                <div className="relative h-64 w-full sm:h-72 lg:h-80">
                   <img
                     src={initiative.image}
                     alt={initiative.title}
@@ -62,13 +62,13 @@ export default function InitiativesSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bold text-white">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                  <h3 className="text-xl font-bold text-white sm:text-2xl">
                     {initiative.title}
                   </h3>
                 </div>
               </a>
-            </FadeInUp>
+            </PageFadeInUp>
           ))}
         </div>
       </div>

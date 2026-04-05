@@ -21,17 +21,22 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative bg-gray-900 py-24 overflow-hidden">
+    <section className="relative flex h-[280px] items-center overflow-hidden bg-gray-900 sm:h-[340px] lg:h-[400px]">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${resolveImageUrl(imageUrl) || DEFAULT_IMAGE})` }}
+        style={{
+          backgroundImage: `url(${resolveImageUrl(imageUrl) || DEFAULT_IMAGE})`,
+        }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div>
-          <HeroHeading watermarkText={title.split(' ')[0]} text={title} watermarkAlign="center" className="text-center" />
-        </div>
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <HeroHeading
+          watermarkText={title.split(" ")[0]}
+          text={title}
+          watermarkAlign="center"
+          className="text-center"
+        />
       </div>
     </section>
   );
