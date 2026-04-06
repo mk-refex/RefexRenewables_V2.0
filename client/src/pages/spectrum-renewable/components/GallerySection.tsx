@@ -8,8 +8,8 @@ export default function GallerySection() {
   const [perView, setPerView] = useState(3);
 
   const images = [
-    "/wp-content/uploads/2025/10/Picture3.jpg",
-    "/wp-content/uploads/2025/10/Picture2.jpg",
+    "/uploads/wp-content/uploads/2025/10/Picture3.jpg",
+    "/uploads/wp-content/uploads/2025/10/Picture2.jpg",
     "/wp-content/uploads/2025/10/Spectrum-gallery02.jpg",
     "/wp-content/uploads/2025/10/Spectrum-gallery03.jpg",
     "/wp-content/uploads/2025/10/Spectrum-gallery04.jpg",
