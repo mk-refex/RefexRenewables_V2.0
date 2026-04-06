@@ -282,10 +282,10 @@ export default function RelatedLinksSection() {
                               item.isStatic && item.staticContent ? (
                                 <div
                                   key={item.id}
-                                  className="p-4 border border-gray-200 rounded-lg bg-white"
+                                  className="overflow-x-auto rounded-lg border border-gray-200 bg-white p-4"
                                 >
                                   <div
-                                    className="text-sm text-gray-700 prose prose-sm max-w-none"
+                                    className="prose prose-sm max-w-none text-sm text-gray-700 [&_img]:h-auto [&_img]:max-w-full [&_table]:w-full [&_table]:min-w-[640px] [&_table]:border-collapse [&_td]:align-top [&_td]:break-words [&_th]:align-top [&_th]:break-words"
                                     dangerouslySetInnerHTML={{ __html: item.staticContent }}
                                   />
                                 </div>
@@ -390,10 +390,10 @@ export default function RelatedLinksSection() {
                         item.isStatic && item.staticContent ? (
                           <div
                             key={item.id}
-                            className="p-4 border border-gray-200 rounded-lg bg-white"
+                            className="overflow-x-auto rounded-lg border border-gray-200 bg-white p-4"
                           >
                             <div
-                              className="text-sm text-gray-700 prose prose-sm max-w-none"
+                              className="prose prose-sm max-w-none text-sm text-gray-700 [&_img]:h-auto [&_img]:max-w-full [&_table]:w-full [&_table]:min-w-[640px] [&_table]:border-collapse [&_td]:align-top [&_td]:break-words [&_th]:align-top [&_th]:break-words"
                               dangerouslySetInnerHTML={{ __html: item.staticContent }}
                             />
                           </div>
