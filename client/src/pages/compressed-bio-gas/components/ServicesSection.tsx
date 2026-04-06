@@ -12,7 +12,7 @@ export default function ServicesSection() {
   const services = [
     {
       iconSrc: "/wp-content/uploads/svg_icons/soil-fertility.svg",
-      text: "Multi-feedstock capability (press mud, MSW & agro-waste, cattle dung)",
+      text: "Multi-feedstock capability (Press Mud, Municipal Solid Waste (MSW), Agricultural Waste, Cattle Dung)",
       image:
         "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Multi-feedstock.png",
     },
