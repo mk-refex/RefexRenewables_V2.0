@@ -54,7 +54,7 @@ const BusinessSection = () => {
                 Solar Energy
               </h3>
               <p className="mb-6 text-base leading-relaxed text-gray-600">
-                As a leading solar power company, we empower commercial and industrial (C&I) enterprises to reduce their carbon footprint through customized commercial solar system solutions
+                As a leading solar power company, we empower commercial and industrial (C&I) enterprises to reduce their carbon footprint through customized commercial solar system solutions.
               </p>
               <a 
                 href="/solar-energy" 
