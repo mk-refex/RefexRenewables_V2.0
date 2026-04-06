@@ -38,9 +38,9 @@ export default function AboutSection() {
               <div className="space-y-4 text-sm leading-relaxed text-[#74787C] sm:text-base">
                 <p>
                   Under our CBG business unit, we are driving the transition to
-                  a circular economy through advanced waste-to-biogas solutions.
-                  By converting multiple organic waste streams—including press
-                  mud and municipal solid waste (MSW)—we produce Compressed
+                  a circular economy through advanced waste to biogas solutions.
+                  By converting multiple organic waste streams including press
+                  mud and municipal solid waste (MSW). we produce Compressed
                   Biogas (CBG), a clean and renewable biofuel, along with
                   fermented organic manure that supports sustainable agriculture.
                 </p>
@@ -48,7 +48,7 @@ export default function AboutSection() {
                   Our biogas plants not only reduce landfill pressure and
                   greenhouse gas emissions but also transform unutilized waste
                   into dual-value outputs: green energy and organic soil
-                  enhancers. These organic waste-to-energy solutions enable
+                  enhancers. These organic waste to energy solutions enable
                   cleaner cities, greener farms, and a more sustainable future.
                 </p>
               </div>
