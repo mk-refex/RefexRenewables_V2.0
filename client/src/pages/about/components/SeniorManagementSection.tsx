@@ -39,7 +39,7 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Sonal Jain',
-      position: 'Vice-President',
+      position: 'Vice President',
       company: "Accounts & Taxation",
       image: '/wp-content/uploads/2025/10/Sonal.jpg',
       bio: ['Sonal is an accomplished Chartered Accountant with excellent knowledge of financial reporting and accounting, having over 19 years of experience in Manufacturing and service industry including Transmission, Solar and EPC.',
@@ -53,7 +53,7 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Harini Sriraaman',
-      position: 'Vice-President',
+      position: 'Vice President',
       company: "Group General Counsel",
       image: '/wp-content/uploads/2025/10/Harini.jpg',
       bio: ['Harini comes with over 17 years of experience in handling and addressing corporate legal and commercial matters and litigations. She has worked with esteemed organizations like HCL Technologies Limited, Siva Group, Tattva Group (part of India Cements Group) apart from her association with the law office of M/s. Satish Parasaran at Chennai.',
@@ -63,7 +63,7 @@ const SeniorManagementSection = () => {
     },
     {
       name: 'Srividya Nirmalkumar',
-      position: 'Vice-President',
+      position: 'Vice President',
       company: "Corporate Communications",
       image: '/wp-content/uploads/2025/10/Srividya.jpg',
       bio: ['Srividya is an extremely goal-oriented communication professional with over 20 years of work experience in various leading organizations. She is highly experienced in internal and external communication, social media, digital marketing and event management.',
@@ -74,26 +74,26 @@ const SeniorManagementSection = () => {
         "Academically she has completed her Master's in Public Administration and post-graduation in Digital Marketing from Mudra Institute of Communications, Ahmedabad.",
       ]
     },
-    // {
-    //   name: 'Suhail Shariff',
-    //   position: 'Vice-President',
-    //   company: "Administration & Facility",
-    //   image: '/wp-content/uploads/2025/10/Suhail.jpg',
-    //   bio: ['Suhail has over 23 years of Facility Management experience including Asset Management, Project Management, Security Services, Transitions and Change Management.',
-    //     'A very goal-oriented leader, Suhail focuses on creating an enhanced customer experience through effective facility management solutions and has contributed to accomplishing critical FM transitions across India and global clients (APAC, EMEA & America Regions).',
-    //     'He has previously worked for esteemed organizations such as CB Richard Ellis, Cushman & Wakefield, and Jones Lang Lasalle.',
-    //     'Academically, Suhail holds a Commerce degree with a Certification in Leadership Programme issued by the Project Management Institute.'
-    //   ]
-    // },
     {
-      name: 'Saravanan Vasanth',
-      position: 'Chief of Staff',
-      company: "MedTech & Renewables",
-      image: 'https://refex.group/uploads/images/general/general/general-general-saravanan-cos-1766577062439-5058.png',
-      bio: ['Saravanan has 11 years of experience in corporate development and strategic planning roles across the Sports, Media, Entertainment, and Manufacturing sectors. He is a chief of staff for MedTech. In his previous roles, he has managed auction strategy for an IPL franchise and ran an incubation business end-to-end. Saravanan specializes in shaping new strategic initiatives to unlock value-creation opportunities. He has worked with reputed organizations such as Times Group and Grundfos.',
-        'Academically, Saravanan is an engineer from Madras Institute of Technology (MIT) and has an MBA from IIM Rohtak.',
+      name: 'Suhail Shariff',
+      position: 'Vice President',
+      company: "Administration & Facility",
+      image: '/wp-content/uploads/2025/10/Suhail.jpg',
+      bio: ['Suhail has over 23 years of Facility Management experience including Asset Management, Project Management, Security Services, Transitions and Change Management.',
+        'A very goal-oriented leader, Suhail focuses on creating an enhanced customer experience through effective facility management solutions and has contributed to accomplishing critical FM transitions across India and global clients (APAC, EMEA & America Regions).',
+        'He has previously worked for esteemed organizations such as CB Richard Ellis, Cushman & Wakefield, and Jones Lang Lasalle.',
+        'Academically, Suhail holds a Commerce degree with a Certification in Leadership Programme issued by the Project Management Institute.'
       ]
     },
+    // {
+    //   name: 'Saravanan Vasanth',
+    //   position: 'Chief of Staff',
+    //   company: "MedTech & Renewables",
+    //   image: 'https://refex.group/uploads/images/general/general/general-general-saravanan-cos-1766577062439-5058.png',
+    //   bio: ['Saravanan has 11 years of experience in corporate development and strategic planning roles across the Sports, Media, Entertainment, and Manufacturing sectors. He is a chief of staff for MedTech. In his previous roles, he has managed auction strategy for an IPL franchise and ran an incubation business end-to-end. Saravanan specializes in shaping new strategic initiatives to unlock value-creation opportunities. He has worked with reputed organizations such as Times Group and Grundfos.',
+    //     'Academically, Saravanan is an engineer from Madras Institute of Technology (MIT) and has an MBA from IIM Rohtak.',
+    //   ]
+    // },
     {
       name: 'Srivaths Varadharajan',
       position: 'Chief Technology Officer',
@@ -108,7 +108,7 @@ const SeniorManagementSection = () => {
       name: 'Jaya Krishna',
       position: 'Director',
       company: "Corporate Finance",
-      image: 'https://refexrenewables.com/img/team/Jaya-Krishna.png',
+      image: '/wp-content/uploads/2025/10/Jayakrishna.jpg',
       bio: ['Jaya Krishna is a seasoned Chartered Accountant with over two decades of leadership experience across corporate finance, project funding, strategic planning, and international financial management.',
         "Academically, he completed his Master's in Business Administration from the Indian Institute of Management - Mumbai.",
         'He holds a professional license as a Chartered Accountant from the Institute of Chartered Accountants of India and a professional accountant in the UK.',
@@ -122,7 +122,7 @@ const SeniorManagementSection = () => {
       name: "Mr. Rajeev Vaze",
       position: "Vice President",
       company: "Supply Chain Management (SCM)",
-      image: 'https://refexrenewables.com/img/team/Rajeev-Vaze.png',
+      image: '/wp-content/uploads/2025/10/Rajeev.jpg',
       bio: ["Rajeev Vaze is Vice President & Head SCM with over 30 years of extensive experience driving strategic initiatives across the renewable energy and infrastructure sectors.",
         "He is a recognized leader in Strategic Procurement, Cost Optimization, and Project Execution.",
         'He holds a Graduate degree in Mechanical Engineering from the University of Pune and a Post Graduate Diploma in Materials Management from Symbiosis Institute of Business Management, Pune.',

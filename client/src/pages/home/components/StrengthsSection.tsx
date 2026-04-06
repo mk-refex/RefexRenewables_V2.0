@@ -33,7 +33,7 @@ function StrengthIcon({
 const StrengthsSection = () => {
   const strengths = [
     {
-      iconSrc: `/wp-content/uploads/svg_icons/expertise-icon.svg`,
+      iconSrc: `/wp-content/uploads/svg_icons/end-to-end.svg`,
       title: "End-to-End Project Expertise",
       description:
         "From feasibility to commissioning and lifecycle management, we bring full-stack capability in renewable energy projects.",

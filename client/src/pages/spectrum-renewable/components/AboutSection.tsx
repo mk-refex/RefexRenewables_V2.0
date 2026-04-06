@@ -31,7 +31,7 @@ export default function AboutSection() {
             <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
               <div className="space-y-4 rounded-lg bg-white p-4 text-sm leading-relaxed text-[#74787C] shadow-sm sm:p-6 sm:text-base lg:p-7">
                 <p>
-                  <b>Refex Spectrum Renewable Energy Pvt. Ltd. (RSREPL)</b>, located at
+                  <b>Spectrum Renewable Energy Pvt. Ltd. (SREPL)</b>, located at
                   Warananagar, Kolhapur, is engaged in the generation of
                   Compressed Biogas (CBG) and organic manure from press mud and
                   other biodegradable wastes.

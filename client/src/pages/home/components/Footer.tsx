@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="bg-[#1a1a1a] text-white">
-      <div className="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
+      <div className="container mx-auto py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* About Us */}
           <div>
@@ -169,7 +169,7 @@ const Footer = () => {
             </div>
 
             <h3 className="text-base font-semibold mb-6 relative pb-3">
-              Corporate Office
+            Registered Office
               <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-green-500"></span>
             </h3>
             <div className="space-y-4">
@@ -182,9 +182,11 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <i className="ri-map-pin-line text-lg flex-shrink-0 mt-0.5 text-green-500"></i>
                 <p className="text-sm text-gray-300">
-                  Refex Building, 67, Bazullah Road,<br />
-                  Parthasarathy Puram, T Nagar,<br />
-                  Chennai – 600 017, Tamil Nadu
+                2nd Floor, Refex Towers, Sterling Road Signal,
+                  <br />
+                  313, Valluvar Kottam High Road, Nungambakkam,
+                  <br />
+                  Chennai – 600 034, Tamil Nadu
                 </p>
               </div>
               <div className="flex items-start gap-3">
@@ -218,12 +220,12 @@ const Footer = () => {
               >
                 Privacy Policy
               </Link>
-              <Link
+              {/* <Link
                 to="/legal-disclaimer"
                 className="text-gray-400 hover:text-emerald-500 transition-colors text-sm whitespace-nowrap"
               >
                 Legal Disclaimer
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

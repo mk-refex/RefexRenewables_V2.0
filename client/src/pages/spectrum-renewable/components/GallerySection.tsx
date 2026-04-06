@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import FadeInUp from "@/components/common/FadeInUp";
 
 const FADE_THRESHOLD = 0.98;
@@ -8,19 +8,19 @@ export default function GallerySection() {
   const [perView, setPerView] = useState(3);
 
   const images = [
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery01.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery02.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery03.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery04.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery05.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery06.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery07.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery08.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Spectrum-gallery09.jpg",
+    "/wp-content/uploads/2025/10/Picture3.jpg",
+    "/wp-content/uploads/2025/10/Picture2.jpg",
+    "/wp-content/uploads/2025/10/Spectrum-gallery02.jpg",
+    "/wp-content/uploads/2025/10/Spectrum-gallery03.jpg",
+    "/wp-content/uploads/2025/10/Spectrum-gallery04.jpg",
+    "/wp-content/uploads/2025/10/Spectrum-gallery05.jpg",
+    "/wp-content/uploads/2025/10/Spectrum-gallery06.jpg",
+    "/wp-content/uploads/2025/10/Spectrum-gallery07.jpg",
+    "/wp-content/uploads/2025/10/Spectrum-gallery08.jpg",
   ];
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const update = () => setPerView(mq.matches ? 3 : 1);
     update();
     mq.addEventListener("change", update);
@@ -31,7 +31,7 @@ export default function GallerySection() {
   const pageCount = maxIndex + 1;
 
   useEffect(() => {
-    setCurrentIndex((i) => Math.min(i, maxIndex));
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
   }, [maxIndex]);
 
   const nextSlide = () => {
@@ -80,7 +80,7 @@ export default function GallerySection() {
 
         <FadeInUp delay={0.1} threshold={FADE_THRESHOLD}>
           <div className="relative">
-            <div className="w-full overflow-hidden rounded-lg">
+            <div className="w-full overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{
@@ -91,14 +91,16 @@ export default function GallerySection() {
                 {images.map((image, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0"
+                    className="shrink-0 px-1.5 sm:px-2"
                     style={{ width: `${100 / images.length}%` }}
                   >
-                    <img
-                      src={image}
-                      alt={`Spectrum Gallery ${index + 1}`}
-                      className="h-[220px] w-full object-cover sm:h-[300px] md:h-[400px] lg:h-[500px]"
-                    />
+                    <div className="overflow-hidden rounded-xl border border-gray-100 bg-white p-1 shadow-md transition-transform duration-500 sm:rounded-2xl sm:p-1.5 lg:p-2">
+                      <img
+                        src={image}
+                        alt={`Spectrum Gallery ${index + 1}`}
+                        className="h-[180px] w-full rounded-lg object-cover sm:h-[230px] md:h-[280px] lg:h-[320px]"
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

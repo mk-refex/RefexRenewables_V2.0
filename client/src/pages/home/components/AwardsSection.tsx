@@ -15,7 +15,7 @@ const AwardsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <div className="mb-4">
-            <SectionHeading badgeText="AWARDS" text="ACCOLADES" className="justify-center" watermarkColor="white" watermarkAlign="center" />
+            <SectionHeading badgeText="AWARDS" text="& ACCOLADES" className="justify-center" watermarkColor="white" watermarkAlign="center" />
           </div>
           <FadeInUp delay={0.2}>
           <h2

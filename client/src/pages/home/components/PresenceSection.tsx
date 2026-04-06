@@ -2,10 +2,16 @@ import FadeInUp from '@/components/common/FadeInUp';
 import SectionHeading, {
   sectionMainHeadingClassName,
 } from "@/components/common/SectionHeading";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+
+const RESUME_SLIDE_MS = 150;
 
 const PresenceSection = () => {
   const [activeState, setActiveState] = useState(0);
+  const slidePausedRef = useRef(false);
+  const resumeSlideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   const states = [
     { name: 'Chhattisgarh', image: '/wp-content/uploads/2025/09/Chhattisgarh-map-new.png', position: { top: '50%', left: '48%' } },
@@ -21,18 +27,42 @@ const PresenceSection = () => {
     { name: 'Karnataka', image: '/wp-content/uploads/2025/09/Karnataka-map.png', position: { top: '73%', left: '26%' } }
   ];
 
-  // Auto-slide effect - continuously update active state
+  // Auto-slide when not hovering a map pin (ref avoids stale interval closure)
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveState((prev) => (prev + 1) % states.length);
+      if (!slidePausedRef.current) {
+        setActiveState((prev) => (prev + 1) % states.length);
+      }
     }, 3000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (resumeSlideTimeoutRef.current) {
+        clearTimeout(resumeSlideTimeoutRef.current);
+        resumeSlideTimeoutRef.current = null;
+      }
+    };
   }, [states.length]);
 
-  const handleStateChange = (index: number) => {
+  const handleMarkerEnter = useCallback((index: number) => {
+    if (resumeSlideTimeoutRef.current) {
+      clearTimeout(resumeSlideTimeoutRef.current);
+      resumeSlideTimeoutRef.current = null;
+    }
+    slidePausedRef.current = true;
     setActiveState(index);
-  };
+  }, []);
+
+  /** Debounced so moving between pins does not briefly re-enable auto-slide */
+  const handleMarkerLeave = useCallback(() => {
+    if (resumeSlideTimeoutRef.current) {
+      clearTimeout(resumeSlideTimeoutRef.current);
+    }
+    resumeSlideTimeoutRef.current = setTimeout(() => {
+      slidePausedRef.current = false;
+      resumeSlideTimeoutRef.current = null;
+    }, RESUME_SLIDE_MS);
+  }, []);
 
   return (
     <section className="relative overflow-hidden py-12 sm:py-16 lg:py-20">
@@ -66,7 +96,8 @@ const PresenceSection = () => {
                     left: state.position.left,
                     transform: 'translate(-50%, -50%)'
                   }}
-                  onMouseEnter={() => handleStateChange(index)}
+                  onMouseEnter={() => handleMarkerEnter(index)}
+                  onMouseLeave={handleMarkerLeave}
                 >
                   {/* Marker with Glow Effect */}
                   <div className="relative">

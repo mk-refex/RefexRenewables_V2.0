@@ -16,7 +16,7 @@ export default function VyzagBioEnergyPage() {
         {/* <OutputsSection /> */}
         <HighlightsSection />
         <LFOMSection />
-        <GallerySection />
+        {/* <GallerySection /> */}
         <ContactSection />
       </div>
     </Layout>

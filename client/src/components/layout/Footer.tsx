@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="relative px-4 text-white sm:px-6 lg:px-[110px]">
+    <footer className="relative px-4 text-white sm:px-6 lg:px-[90px]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -14,7 +14,7 @@ const Footer = () => {
       </div>
 
       <div className="relative z-10">
-        <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="container mx-auto py-12 sm:px-2 lg:py-16">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-4 lg:gap-12">
             {/* About Us */}
             <div>
@@ -117,37 +117,37 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <Link to="/investors" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
+                  <Link to="/investors?tab=related-links&categoryKey=annual-reports" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
                     <i className="ri-arrow-right-s-line text-green-500 group-hover:text-green-400"></i>
                     <span>Annual Reports</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/investors" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
+                  <Link to="/investors?tab=related-links&categoryKey=shareholding-pattern" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
                     <i className="ri-arrow-right-s-line text-green-500 group-hover:text-green-400"></i>
                     <span>Shareholding Pattern</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/investors" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
+                  <Link to="/investors?tab=related-links&categoryKey=audited-financial-results" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
                     <i className="ri-arrow-right-s-line text-green-500 group-hover:text-green-400"></i>
                     <span>Audited Financial Results</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/investors" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
+                  <Link to="/investors?tab=related-links&categoryKey=policies" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
                     <i className="ri-arrow-right-s-line text-green-500 group-hover:text-green-400"></i>
                     <span>Policies</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/investors" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
+                  <Link to="/investors?tab=related-links&categoryKey=annual-return" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
                     <i className="ri-arrow-right-s-line text-green-500 group-hover:text-green-400"></i>
                     <span>Annual Return</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/investors" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
+                  <Link to="/investors?tab=related-links&categoryKey=board-meeting-intimation-financial-results" className="text-sm text-gray-300 hover:text-green-500 transition-colors flex items-center gap-2 group">
                     <i className="ri-arrow-right-s-line text-green-500 group-hover:text-green-400"></i>
                     <span>Board Meeting Intimation Approving Financial Results</span>
                   </Link>
@@ -180,7 +180,7 @@ const Footer = () => {
               </div>
 
               <h3 className="text-base font-semibold mb-6 relative pb-3">
-                Corporate Office
+                Registered Office
                 <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-green-500"></span>
               </h3>
               <div className="space-y-4">
@@ -193,9 +193,11 @@ const Footer = () => {
                 <div className="flex items-start gap-3">
                   <i className="ri-map-pin-line text-lg flex-shrink-0 mt-0.5 text-green-500"></i>
                   <p className="text-sm text-gray-300">
-                    Refex Building, 67, Bazullah Road,<br />
-                    Parthasarathy Puram, T Nagar,<br />
-                    Chennai – 600 017, Tamil Nadu
+                  2nd Floor, Refex Towers, Sterling Road Signal,
+                  <br />
+                  313, Valluvar Kottam High Road, Nungambakkam,
+                  <br />
+                  Chennai – 600 034, Tamil Nadu
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
@@ -223,9 +225,9 @@ const Footer = () => {
                 <a href="/privacy-policy" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
                 Privacy Policy
                 </a>
-                <a href="/legal-disclaimer" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
+                {/* <a href="/legal-disclaimer" className="text-sm text-gray-300 hover:text-green-500 transition-colors">
                 Legal Disclaimer
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

@@ -1,7 +1,39 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { investorApi, resolveImageUrl, type RelatedLinksCategory } from '@/services/api';
 
+const normalize = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+const matchesCategoryKey = (key: string, categoryName: string) => {
+  const name = normalize(categoryName);
+  switch (key) {
+    case 'annual-reports':
+      return name.includes('annual reports');
+    case 'shareholding-pattern':
+      return name.includes('shareholding pattern');
+    case 'audited-financial-results':
+      return name.includes('audited financial results');
+    case 'policies':
+      return name.includes('policies');
+    case 'annual-return':
+      return name.includes('annual return');
+    case 'board-meeting-intimation-financial-results':
+      return (
+        name.includes('board meeting') &&
+        name.includes('intimation') &&
+        name.includes('financial results')
+      );
+    default:
+      return false;
+  }
+};
+
 export default function RelatedLinksSection() {
+  const location = useLocation();
   const [categories, setCategories] = useState<RelatedLinksCategory[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
   const [filterYear, setFilterYear] = useState<string>('all');
@@ -9,17 +41,66 @@ export default function RelatedLinksSection() {
   /** Section ids that are expanded when category is collapsible */
   const [expandedSectionIds, setExpandedSectionIds] = useState<number[]>([]);
 
+  const requestedCategoryName = useMemo(() => {
+    return new URLSearchParams(location.search).get('category')?.trim() ?? '';
+  }, [location.search]);
+  const requestedCategoryKey = useMemo(() => {
+    return new URLSearchParams(location.search).get('categoryKey')?.trim() ?? '';
+  }, [location.search]);
+
   useEffect(() => {
     investorApi.getRelatedLinks()
       .then((data) => {
-        setCategories(Array.isArray(data) ? data : []);
-        if (Array.isArray(data) && data.length) {
-          setSelectedCategoryId(data[0].id ?? null);
+        const parsed = Array.isArray(data) ? data : [];
+        setCategories(parsed);
+        if (parsed.length) {
+          const requested = normalize(requestedCategoryName);
+          const matchedByKey = requestedCategoryKey
+            ? parsed.find((cat) =>
+                matchesCategoryKey(requestedCategoryKey, cat.name ?? ''),
+              )
+            : null;
+          const matchedByName = requested
+            ? parsed.find((cat) => normalize(cat.name ?? '') === requested)
+            : null;
+          const matchedByContains = requested
+            ? parsed.find((cat) => normalize(cat.name ?? '').includes(requested))
+            : null;
+          const matched = matchedByKey ?? matchedByName ?? matchedByContains;
+          setSelectedCategoryId((matched ?? parsed[0]).id ?? null);
+          setFilterYear('all');
         }
       })
       .catch(() => setCategories([]))
       .finally(() => setLoading(false));
-  }, []);
+  }, [requestedCategoryKey, requestedCategoryName]);
+
+  useEffect(() => {
+    if (!categories.length || (!requestedCategoryName && !requestedCategoryKey))
+      return;
+    const requested = normalize(requestedCategoryName);
+    const matchedByKey = requestedCategoryKey
+      ? categories.find((cat) =>
+          matchesCategoryKey(requestedCategoryKey, cat.name ?? ''),
+        )
+      : null;
+    const matchedByName = requested
+      ? categories.find((cat) => normalize(cat.name ?? '') === requested)
+      : null;
+    const matchedByContains = requested
+      ? categories.find((cat) => normalize(cat.name ?? '').includes(requested))
+      : null;
+    const matched = matchedByKey ?? matchedByName ?? matchedByContains;
+    if (matched?.id !== undefined && matched.id !== selectedCategoryId) {
+      setSelectedCategoryId(matched.id);
+      setFilterYear('all');
+    }
+  }, [
+    categories,
+    requestedCategoryKey,
+    requestedCategoryName,
+    selectedCategoryId,
+  ]);
 
   const selectedCategory = useMemo(
     () => categories.find((c) => c.id === selectedCategoryId) ?? null,
@@ -109,11 +190,11 @@ export default function RelatedLinksSection() {
   return (
     <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-[120px]">
-        <div className="mb-6 text-center sm:mb-10 lg:mb-12">
+        {/* <div className="mb-6 text-center sm:mb-10 lg:mb-12">
           <h2 className="text-xl font-bold uppercase tracking-wider text-black sm:text-2xl lg:text-3xl">
             Related Links
           </h2>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-[30%_70%] lg:gap-8">
           {/* Left Column - Categories (30%) */}

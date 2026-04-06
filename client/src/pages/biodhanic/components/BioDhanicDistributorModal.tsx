@@ -5,7 +5,7 @@ const DISTRIBUTORS = [
     dealer: 'Balaji Sheti Seva Kendra Yewati',
     district: 'Kolhapur',
     address:
-      'Yevati, Milkat No.13, Post : Yevati, Tal : Karveer, Kolhapur, MAHARASHTRA-416001',
+      'Yevati, Milkat No. 13, Post: Yevati, Tal: Karveer, Kolhapur, Maharashtra - 416001',
     officer: 'Ranjit Yashwant Sawant',
     contact: '9623152048',
   },
@@ -13,7 +13,7 @@ const DISTRIBUTORS = [
     dealer: 'Shetkri Krishi Seva Kendra Karita',
     district: 'Kolhapur',
     address:
-      'POST- AARE, TAL - KARVEER, DIST -KOLHAPUR, INDIA, 416001',
+      'Post: Aare, Tal: Karveer, Dist: Kolhapur, India - 416001',
     officer: 'Ranjit Yashwant Sawant',
     contact: '9623152048',
   },
@@ -28,14 +28,14 @@ const DISTRIBUTORS = [
     dealer: 'Shri Swami Samarth Krushi Udyog',
     district: 'Satara',
     address:
-      'GROUND FLOOR, UMBRAJ, MILKAT NO. 730/6, GALA NO. 4, NEAR VARADRAJ MANGAL KARYALAY, A/P-UMBRAJ, TALUKA-KARAD, UMBRAJ, Satara, Maharashtra, 415109',
+      'Ground Floor, Umbraj, Milkat No. 730/6, Gala No. 4, Near Varadraj Mangal Karyalay, A/P Umbraj, Taluka Karad, Umbraj, Satara, Maharashtra - 415109',
     officer: 'Vishwatej Tanaji Pawar',
     contact: '9359327242',
   },
   {
     dealer: 'Samruddhi Agro Services',
     district: 'Satara',
-    address: 'POST-Shere,Tal. Karad, Dist. Satara -415108',
+    address: 'Post: Shere, Tal: Karad, Dist: Satara - 415108',
     officer: 'Vishwatej Tanaji Pawar',
     contact: '9359327242',
   },
@@ -43,7 +43,7 @@ const DISTRIBUTORS = [
     dealer: 'Sampada Krushi Seva Kendra',
     district: 'Kolhapur',
     address:
-      'SHINNOLI KH, BELGAUM VENGURLA ROAD, CHANDGAD, Kolhapur, Maharashtra, 416507',
+      'Shinnoli Kh, Belgaum-Vengurla Road, Chandgad, Kolhapur, Maharashtra - 416507',
     officer: 'Ranjit Yashwant Sawant',
     contact: '9623152048',
   },
@@ -51,14 +51,14 @@ const DISTRIBUTORS = [
     dealer: 'Saibel Krushi Seva Kendra',
     district: 'Satara',
     address:
-      'NAVARASTA, PATAN, SATARA , 19-Maharashtra, 91-India, 415207',
+      'Navarasta, Patan, Satara, Maharashtra, India - 415207',
     officer: 'Vishwatej Tanaji Pawar',
     contact: '9359327242',
   },
   {
     dealer: 'KRUSHNAI KRUSHI SEVA KENDRA',
     district: 'Sangli',
-    address: 'No 321/1,Sakharale,Sangli, Maharashtra,415414',
+    address: 'No. 321/1, Sakharale, Sangli, Maharashtra - 415414',
     officer: 'Vishwatej Tanaji Pawar',
     contact: '9359327242',
   },
@@ -66,7 +66,7 @@ const DISTRIBUTORS = [
     dealer: 'Sri Siddhivinayak Agri Corporation',
     district: 'Kolhapur',
     address:
-      'HOUSE NO. 857, NEAR VIDYMANDIR KOROCHI, KOROCHI, KOROCHI, TAL HATKANANGALE, Kolhapur, Maharashtra, 416109',
+      'House No. 857, Near Vidyamandir Korochi, Korochi, Tal: Hatkanangale, Kolhapur, Maharashtra - 416109',
     officer: 'Ranjit Yashwant Sawant',
     contact: '9623152048',
   },
@@ -191,7 +191,7 @@ export default function BioDhanicDistributorModal({ open, onClose }: Props) {
             </table>
           </div>
 
-          <h3 className="mb-3 text-lg font-bold text-gray-900">Product Link</h3>
+          {/* <h3 className="mb-3 text-lg font-bold text-gray-900">Product Link</h3>
           <ul className="mb-8 space-y-2 text-sm">
             {PRODUCT_LINKS.map((href) => (
               <li key={href}>
@@ -205,7 +205,7 @@ export default function BioDhanicDistributorModal({ open, onClose }: Props) {
                 </a>
               </li>
             ))}
-          </ul>
+          </ul> */}
 
           <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-green-50/80 to-emerald-50/50 p-5">
             <h3 className="mb-3 text-lg font-bold text-gray-900">
