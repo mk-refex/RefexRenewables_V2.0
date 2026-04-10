@@ -64,7 +64,7 @@ export default function FacilitySection() {
               className="h-64 w-full rounded-lg bg-cover bg-center sm:h-80 md:h-[28rem] lg:h-[600px]"
               style={{
                 backgroundImage:
-                  "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/spectrum-img.jpg)",
+                  "url(/uploads/wp-content/uploads/2025/10/Picture3.jpg)",
               }}
             />
           </FadeInUp>

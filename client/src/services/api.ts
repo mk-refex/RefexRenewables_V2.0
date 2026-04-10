@@ -436,6 +436,111 @@ export const usersApi = {
   },
 };
 
+export interface SmtpConfigResponse {
+  id?: number;
+  host: string;
+  port: number;
+  secure: boolean;
+  username: string;
+  fromEmail: string;
+  fromName: string;
+  replyToEmail: string;
+  isEnabled: boolean;
+  hasPassword: boolean;
+}
+
+export interface SmtpConfigSavePayload {
+  host: string;
+  port: number;
+  secure: boolean;
+  username: string;
+  password?: string;
+  fromEmail: string;
+  fromName?: string;
+  replyToEmail?: string;
+  isEnabled: boolean;
+}
+
+export const smtpApi = {
+  get: async (): Promise<SmtpConfigResponse> => {
+    const token = localStorage.getItem("auth_token");
+    const base = getServerBase();
+    const res = await fetch(`${base}/api/smtp`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      throw new Error((j.message as string) || "Failed to load SMTP settings");
+    }
+    return res.json() as Promise<SmtpConfigResponse>;
+  },
+  save: async (payload: SmtpConfigSavePayload): Promise<SmtpConfigResponse> => {
+    const token = localStorage.getItem("auth_token");
+    const base = getServerBase();
+    const res = await fetch(`${base}/api/smtp`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify(payload),
+    });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error((j.message as string) || "Failed to save SMTP settings");
+    }
+    return j as SmtpConfigResponse;
+  },
+  sendTest: async (testEmail: string): Promise<{ message: string }> => {
+    const token = localStorage.getItem("auth_token");
+    const base = getServerBase();
+    const res = await fetch(`${base}/api/smtp/test`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify({ testEmail }),
+    });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error((j.message as string) || "Failed to send test email");
+    }
+    return j as { message: string };
+  },
+};
+
+export const contactApi = {
+  submit: async (payload: {
+    fullName: string;
+    email: string;
+    phone?: string;
+    sales?: string;
+    message: string;
+  }) => {
+    const base = getServerBase();
+    const res = await fetch(`${base}/api/contact/submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(
+        (j.message as string) ||
+          "Unable to send message right now. Please try again later.",
+      );
+    }
+    return j as { message: string };
+  },
+};
+
 // // Home CMS API
 // export const homeCmsApi = {
 //   // Hero Slides

@@ -47,7 +47,7 @@ export default function RelatedLinksSection() {
   const requestedCategoryKey = useMemo(() => {
     return new URLSearchParams(location.search).get('categoryKey')?.trim() ?? '';
   }, [location.search]);
-
+ 
   useEffect(() => {
     investorApi.getRelatedLinks()
       .then((data) => {

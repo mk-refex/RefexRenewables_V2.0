@@ -6,7 +6,7 @@ export default function HeroSection() {
       className="relative flex min-h-[300px] w-full items-center overflow-hidden bg-cover bg-center sm:min-h-[400px] lg:min-h-[500px]"
       style={{
         backgroundImage:
-          "url(/uploads/wp-content/uploads/2025/10/Picture3.jpg)",
+          "url(/uploads/images/spr_img.jpg.jpeg)",
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" />

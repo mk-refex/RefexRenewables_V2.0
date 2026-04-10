@@ -56,7 +56,7 @@ const DISTRIBUTORS = [
     contact: '9359327242',
   },
   {
-    dealer: 'KRUSHNAI KRUSHI SEVA KENDRA',
+    dealer: 'Krushnai Krushi Seva Kendra',
     district: 'Sangli',
     address: 'No. 321/1, Sakharale, Sangli, Maharashtra - 415414',
     officer: 'Vishwatej Tanaji Pawar',

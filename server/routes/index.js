@@ -6,6 +6,8 @@ import investorContentRouter from "./investorContent.routes.js";
 import investorHeroRouter from "./investorHero.routes.js";
 import pageContentRouter from "./pageContent.routes.js";
 import uploadRouter from "./upload.routes.js";
+import smtpRouter from "./smtp.routes.js";
+import contactRouter from "./contact.routes.js";
 import { getOverview } from "../controllers/overview.controller.js";
 import { authRequired } from "../middleware/auth.js";
 
@@ -18,6 +20,8 @@ router.use("/page-access", pageAccessRouter);
 router.use("/investor-content", investorContentRouter);
 router.use("/investor-hero", investorHeroRouter);
 router.use("/page-content", pageContentRouter);
+router.use("/smtp", smtpRouter);
+router.use("/contact", contactRouter);
 router.get("/overview", authRequired, getOverview);
 
 export default router;

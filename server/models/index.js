@@ -2,6 +2,7 @@ import { User } from "./User.js";
 import { InvestorContent } from "./InvestorContent.js";
 import { InvestorHero } from "./InvestorHero.js";
 import { PageContent } from "./PageContent.js";
+import { SmtpConfig } from "./SmtpConfig.js";
 // import { Report } from "./Report.js";
 // import { Transaction } from "./Transaction.js";
 // import { HrmsConfig } from "./HrmsConfig.js";
@@ -14,4 +15,4 @@ import { PageContent } from "./PageContent.js";
 
 export function applyAssociations() {}
 
-export { User, InvestorContent, InvestorHero, PageContent };
+export { User, InvestorContent, InvestorHero, PageContent, SmtpConfig };

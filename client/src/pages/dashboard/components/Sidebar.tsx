@@ -25,6 +25,7 @@ const Sidebar = ({ isOpen, onClose, activePage, onPageChange }: SidebarProps) =>
     { id: 'esg', label: 'ESG', icon: 'ri-plant-line' },
     { id: 'investors', label: 'Investors', icon: 'ri-stock-line' },
     { id: 'contact', label: 'Contact', icon: 'ri-mail-line' },
+    { id: 'settings', label: 'Settings', icon: 'ri-settings-3-line' },
   ];
 
   return (

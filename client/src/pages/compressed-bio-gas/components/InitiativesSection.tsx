@@ -6,22 +6,21 @@ import PageFadeInUp from "./PageFadeInUp";
 export default function InitiativesSection() {
   const initiatives = [
     {
-      image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/bio-dhanic-cover.png",
+      image:"/uploads/images/BioDhanic Launch_page.jpg",
       title: "Refex BioDhanic",
       number: "01",
       link: "/biodhanic",
     },
     {
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/spectrum-cover.png",
+        "/wp-content/uploads/2025/10/spectrum-cover.png",
       title: "Refex Spectrum Renewable",
       number: "02",
       link: "/spectrum-renewable",
     },
     {
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/vizag-cover.png",
+        "/wp-content/uploads/2025/10/vizag-cover.png",
       title: "Refex Vyzag Bio-Energy",
       number: "03",
       link: "/vyzag-bio-energy",

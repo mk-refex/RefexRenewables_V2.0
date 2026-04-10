@@ -6,10 +6,10 @@ const FADE_THRESHOLD = 0.98;
 export default function LaunchSection() {
   const galleryImages = [
     "/wp-content/uploads/2025/10/biodhanicgallery01.jpg",
-    "/wp-content/uploads/2025/10/biodhanicgallery02.jpg",
-    "/wp-content/uploads/2025/10/biodhanicgallery03.jpg",
-    "/wp-content/uploads/2025/10/biodhanicgallery04.jpg",
+    // "/wp-content/uploads/2025/10/biodhanicgallery02.jpg",
     "/wp-content/uploads/2025/10/biodhanicgallery05.jpg",
+    "/wp-content/uploads/2025/10/biodhanicgallery03.jpg",
+    // "/wp-content/uploads/2025/10/biodhanicgallery04.jpg",
   ];
 
   return (

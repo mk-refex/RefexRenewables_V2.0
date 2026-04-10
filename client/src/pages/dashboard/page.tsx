@@ -4,7 +4,7 @@ import DashboardHeader from './components/DashboardHeader';
 import Sidebar from './components/Sidebar';
 import OverviewSection from './components/OverviewSection';
 import UsersSection from './components/UsersSection';
-import { investorApi, resolveImageUrl, uploadImage, uploadPdf } from '@/services/api';
+import { investorApi, resolveImageUrl, smtpApi, uploadImage, uploadPdf } from '@/services/api';
 
 type RelatedLinkSectionLabelType = 'name' | 'financialYear';
 interface RelatedLinkSectionType {
@@ -72,6 +72,21 @@ export default function DashboardPage() {
   ]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [expandedSections, setExpandedSections] = useState<number[]>([]);
+  const [smtpForm, setSmtpForm] = useState({
+    host: '',
+    port: 587,
+    secure: false,
+    username: '',
+    password: '',
+    fromEmail: '',
+    fromName: '',
+    replyToEmail: '',
+    isEnabled: true,
+  });
+  const [smtpHasPassword, setSmtpHasPassword] = useState(false);
+  const [smtpLoading, setSmtpLoading] = useState(false);
+  const [smtpTestEmail, setSmtpTestEmail] = useState('');
+  const [smtpTestSending, setSmtpTestSending] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('auth_token');
@@ -102,6 +117,32 @@ export default function DashboardPage() {
         setSelectedCategory(categories[0]?.id ?? null);
       }
     }).catch(() => {});
+  }, [activePage, activeTab]);
+
+  // Load SMTP settings for admin settings page
+  useEffect(() => {
+    if (activePage !== 'settings' || activeTab !== 'smtp') return;
+    setSmtpLoading(true);
+    smtpApi
+      .get()
+      .then((cfg) => {
+        setSmtpForm({
+          host: cfg.host || '',
+          port: cfg.port || 587,
+          secure: !!cfg.secure,
+          username: cfg.username || '',
+          password: '',
+          fromEmail: cfg.fromEmail || '',
+          fromName: cfg.fromName || '',
+          replyToEmail: cfg.replyToEmail || '',
+          isEnabled: cfg.isEnabled ?? true,
+        });
+        setSmtpHasPassword(!!cfg.hasPassword);
+      })
+      .catch((error: any) => {
+        showNotification(error?.message || 'Failed to load SMTP settings', 'error');
+      })
+      .finally(() => setSmtpLoading(false));
   }, [activePage, activeTab]);
 
   // Snackbar function
@@ -135,6 +176,7 @@ export default function DashboardPage() {
       contact: 'hero',
       header: 'navigation',
       footer: 'about-links',
+      settings: 'smtp',
     };
     setActiveTab(defaultTabs[page] || '');
   };
@@ -239,6 +281,9 @@ export default function DashboardPage() {
       { id: 'investor-links', label: 'Investor Links' },
       { id: 'copyright', label: 'Copyright' },
     ],
+    settings: [
+      { id: 'smtp', label: 'SMTP' },
+    ],
   };
 
   const currentTabs = pageTabs[activePage] || [];
@@ -310,6 +355,30 @@ export default function DashboardPage() {
         ]);
         setSelectedCategory(null);
       }
+      if (activePage === 'settings' && activeTab === 'smtp') {
+        setSmtpLoading(true);
+        smtpApi
+          .get()
+          .then((cfg) => {
+            setSmtpForm({
+              host: cfg.host || '',
+              port: cfg.port || 587,
+              secure: !!cfg.secure,
+              username: cfg.username || '',
+              password: '',
+              fromEmail: cfg.fromEmail || '',
+              fromName: cfg.fromName || '',
+              replyToEmail: cfg.replyToEmail || '',
+              isEnabled: cfg.isEnabled ?? true,
+            });
+            setSmtpHasPassword(!!cfg.hasPassword);
+            showNotification('SMTP settings reloaded successfully!', 'info');
+          })
+          .catch((error: any) => {
+            showNotification(error?.message || 'Failed to reload SMTP settings', 'error');
+          })
+          .finally(() => setSmtpLoading(false));
+      }
 
       showNotification('Changes have been reset successfully!', 'info');
     }
@@ -337,7 +406,44 @@ export default function DashboardPage() {
       }
       return;
     }
+    if (activePage === 'settings' && activeTab === 'smtp') {
+      try {
+        await smtpApi.save({
+          host: smtpForm.host,
+          port: Number(smtpForm.port),
+          secure: smtpForm.secure,
+          username: smtpForm.username,
+          password: smtpForm.password || undefined,
+          fromEmail: smtpForm.fromEmail,
+          fromName: smtpForm.fromName,
+          replyToEmail: smtpForm.replyToEmail,
+          isEnabled: smtpForm.isEnabled,
+        });
+        setSmtpForm((prev) => ({ ...prev, password: '' }));
+        setSmtpHasPassword(true);
+        showNotification('SMTP settings saved successfully!', 'success');
+      } catch (error: any) {
+        showNotification(error?.message || 'Failed to save SMTP settings', 'error');
+      }
+      return;
+    }
     showNotification('Changes saved successfully!', 'success');
+  };
+
+  const handleSmtpTest = async () => {
+    if (!smtpTestEmail) {
+      showNotification('Please enter a test email address', 'error');
+      return;
+    }
+    setSmtpTestSending(true);
+    try {
+      await smtpApi.sendTest(smtpTestEmail);
+      showNotification('Test email sent successfully!', 'success');
+    } catch (error: any) {
+      showNotification(error?.message || 'Failed to send test email', 'error');
+    } finally {
+      setSmtpTestSending(false);
+    }
   };
 
   const handleImageUrlChange = (url: string) => {
@@ -1290,6 +1396,120 @@ export default function DashboardPage() {
       );
     }
 
+    if (activePage === 'settings' && activeTab === 'smtp') {
+      return (
+        <div className="space-y-6">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <h3 className="mb-2 text-sm font-semibold text-gray-900">SMTP Configuration</h3>
+            <p className="text-xs text-gray-600">
+              Configure mail server details used for contact-form email sending and test delivery.
+            </p>
+          </div>
+
+          {smtpLoading ? (
+            <div className="py-10 text-sm text-gray-500">Loading SMTP settings...</div>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <input
+                type="text"
+                value={smtpForm.host}
+                onChange={(e) => setSmtpForm((prev) => ({ ...prev, host: e.target.value }))}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder="SMTP Host (e.g. smtp.gmail.com)"
+              />
+              <input
+                type="number"
+                value={smtpForm.port}
+                onChange={(e) =>
+                  setSmtpForm((prev) => ({ ...prev, port: Number(e.target.value || 0) }))
+                }
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder="Port"
+              />
+              <label className="flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-3 text-sm">
+                <input
+                  type="checkbox"
+                  checked={smtpForm.secure}
+                  onChange={(e) => setSmtpForm((prev) => ({ ...prev, secure: e.target.checked }))}
+                />
+                <span>Use SSL/TLS (secure)</span>
+              </label>
+              <label className="flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-3 text-sm">
+                <input
+                  type="checkbox"
+                  checked={smtpForm.isEnabled}
+                  onChange={(e) =>
+                    setSmtpForm((prev) => ({ ...prev, isEnabled: e.target.checked }))
+                  }
+                />
+                <span>Enable SMTP</span>
+              </label>
+              <input
+                type="text"
+                value={smtpForm.username}
+                onChange={(e) => setSmtpForm((prev) => ({ ...prev, username: e.target.value }))}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder="SMTP Username"
+              />
+              <input
+                type="password"
+                value={smtpForm.password}
+                onChange={(e) => setSmtpForm((prev) => ({ ...prev, password: e.target.value }))}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder={
+                  smtpHasPassword ? 'Leave blank to keep existing password' : 'SMTP Password'
+                }
+              />
+              <input
+                type="email"
+                value={smtpForm.fromEmail}
+                onChange={(e) => setSmtpForm((prev) => ({ ...prev, fromEmail: e.target.value }))}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder="From Email"
+              />
+              <input
+                type="text"
+                value={smtpForm.fromName}
+                onChange={(e) => setSmtpForm((prev) => ({ ...prev, fromName: e.target.value }))}
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder="From Name (optional)"
+              />
+              <input
+                type="email"
+                value={smtpForm.replyToEmail}
+                onChange={(e) =>
+                  setSmtpForm((prev) => ({ ...prev, replyToEmail: e.target.value }))
+                }
+                className="md:col-span-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder="Reply-To Email (optional)"
+              />
+            </div>
+          )}
+
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <h4 className="mb-3 text-sm font-semibold text-gray-900">Test SMTP</h4>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <input
+                type="email"
+                value={smtpTestEmail}
+                onChange={(e) => setSmtpTestEmail(e.target.value)}
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500"
+                placeholder="Enter test email address"
+              />
+              <button
+                type="button"
+                onClick={handleSmtpTest}
+                disabled={smtpTestSending}
+                className="rounded-lg bg-blue-600 px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {smtpTestSending ? 'Sending...' : 'Test SMTP'}
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     // Default message for sections without CMS fields yet
     return (
       <div className="flex flex-col items-center justify-center py-16 px-4">
@@ -1352,15 +1572,19 @@ export default function DashboardPage() {
             </h2>
             
             {/* Action Buttons - Only show when CMS fields are available */}
-            {((activePage === 'investors' && activeTab === 'hero') || (activePage === 'investors' && activeTab === 'links')) && (
+            {((activePage === 'investors' && activeTab === 'hero') ||
+              (activePage === 'investors' && activeTab === 'links') ||
+              (activePage === 'settings' && activeTab === 'smtp')) && (
               <div className="flex items-center gap-3">
-                <button
-                  onClick={handlePreview}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  <i className="ri-eye-line"></i>
-                  <span className="text-sm font-medium">Preview</span>
-                </button>
+                {!(activePage === 'settings' && activeTab === 'smtp') && (
+                  <button
+                    onClick={handlePreview}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap cursor-pointer"
+                  >
+                    <i className="ri-eye-line"></i>
+                    <span className="text-sm font-medium">Preview</span>
+                  </button>
+                )}
                 
                 <button
                   onClick={handleReset}

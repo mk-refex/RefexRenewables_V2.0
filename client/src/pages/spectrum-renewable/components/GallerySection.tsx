@@ -10,10 +10,10 @@ export default function GallerySection() {
   const images = [
     "/uploads/wp-content/uploads/2025/10/Picture3.jpg",
     "/uploads/wp-content/uploads/2025/10/Picture2.jpg",
-    "/wp-content/uploads/2025/10/Spectrum-gallery02.jpg",
-    "/wp-content/uploads/2025/10/Spectrum-gallery03.jpg",
+    // "/wp-content/uploads/2025/10/Spectrum-gallery02.jpg",
+    // "/wp-content/uploads/2025/10/Spectrum-gallery03.jpg",
     "/wp-content/uploads/2025/10/Spectrum-gallery04.jpg",
-    "/wp-content/uploads/2025/10/Spectrum-gallery05.jpg",
+    // "/wp-content/uploads/2025/10/Spectrum-gallery05.jpg",
     "/wp-content/uploads/2025/10/Spectrum-gallery06.jpg",
     "/wp-content/uploads/2025/10/Spectrum-gallery07.jpg",
     "/wp-content/uploads/2025/10/Spectrum-gallery08.jpg",

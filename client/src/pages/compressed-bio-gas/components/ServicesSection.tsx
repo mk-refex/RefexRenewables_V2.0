@@ -14,19 +14,19 @@ export default function ServicesSection() {
       iconSrc: "/wp-content/uploads/svg_icons/soil-fertility.svg",
       text: "Multi-feedstock capability (Press Mud, Municipal Solid Waste (MSW), Agricultural Waste, Cattle Dung)",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/Multi-feedstock.png",
+        "/uploads/images/MSW waste Feeding area.png",
     },
     {
       iconSrc: ICON_BIOGAS_PRODUCTION,
       text: "Efficient biogas production systems",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/biogas-production-systems01.png",
+        "/uploads/images/Upgradation unit vizag.png",
     },
     {
       iconSrc: ICON_SATAT_ESG,
       text: "Scalable and Compliant with SATAT and ESG frameworks",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/sustainablity-eco01.jpg",
+        "/wp-content/uploads/2025/09/sustainablity-eco01.jpg",
     },
   ];
 

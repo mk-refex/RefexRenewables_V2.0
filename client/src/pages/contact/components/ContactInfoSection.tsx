@@ -44,7 +44,7 @@ export default function ContactInfoSection() {
 
   return (
     <section className="bg-white py-10 sm:py-14 lg:py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* <div className="mb-12 flex flex-col items-center text-center">
           <SectionHeading
             badgeText="CONTACT"
