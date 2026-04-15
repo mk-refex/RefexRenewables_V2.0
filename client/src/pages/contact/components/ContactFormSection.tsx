@@ -1,5 +1,5 @@
 import SectionHeading from '@/components/common/SectionHeading';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { contactApi } from '@/services/api';
 
 type CountryOption = {
@@ -30,6 +30,7 @@ export default function ContactFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
+  const countryDropdownRef = useRef<HTMLDivElement | null>(null);
   const [captchaText, setCaptchaText] = useState('');
   const [captchaInput, setCaptchaInput] = useState('');
   const [captchaImage, setCaptchaImage] = useState('');
@@ -171,6 +172,44 @@ export default function ContactFormSection() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isCountryOpen) return;
+
+    const closeIfOutside = (target: EventTarget | null) => {
+      const el = countryDropdownRef.current;
+      if (!el) return;
+      if (target instanceof Node && el.contains(target)) return;
+      setIsCountryOpen(false);
+    };
+
+    const onMouseDown = (e: MouseEvent) => closeIfOutside(e.target);
+    const onFocusIn = (e: FocusEvent) => closeIfOutside(e.target);
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'Tab') {
+        setIsCountryOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('focusin', onFocusIn);
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('focusin', onFocusIn);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isCountryOpen]);
+
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
+
+  const getPhoneDigits = (phone: string) => String(phone || '').replace(/\D/g, '');
+  const isValidGlobalPhone = (phone: string) => {
+    const digits = getPhoneDigits(phone);
+    return digits.length === 0 || (digits.length >= 7 && digits.length <= 15);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -178,6 +217,20 @@ export default function ContactFormSection() {
     if (!formData.fullName || !formData.email || !formData.message) {
       setSubmitStatus('error');
       setSubmitErrorMessage('Please fill in all required fields correctly.');
+      return;
+    }
+
+    // Validate email format (strict client-side check for better UX)
+    if (!isValidEmail(formData.email)) {
+      setSubmitStatus('error');
+      setSubmitErrorMessage('Please enter a valid email address.');
+      return;
+    }
+
+    // Validate phone format (global digits length, allow empty)
+    if (!isValidGlobalPhone(formData.phone)) {
+      setSubmitStatus('error');
+      setSubmitErrorMessage('Please enter a valid phone number.');
       return;
     }
 
@@ -263,14 +316,25 @@ export default function ContactFormSection() {
                   name="email"
                   placeholder="Email Address"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) => {
+                    const next = e.target.value.replace(/\s/g, '');
+                    setFormData({ ...formData, email: next });
+                  }}
+                  onBlur={() => {
+                    if (formData.email && !isValidEmail(formData.email)) {
+                      setSubmitStatus('error');
+                      setSubmitErrorMessage('Please enter a valid email address.');
+                    }
+                  }}
                   className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
+                  autoComplete="email"
+                  inputMode="email"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,20%)_minmax(0,40%)_minmax(0,40%)] md:gap-4">
-                <div className="relative">
+                <div className="relative" ref={countryDropdownRef}>
                   <button
                     type="button"
                     onClick={() => setIsCountryOpen((prev) => !prev)}
@@ -334,9 +398,21 @@ export default function ContactFormSection() {
                   name="phone"
                   placeholder="Phone"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(e) => {
+                    const raw = e.target.value;
+                    // allow digits + basic separators for user typing; store filtered value
+                    const filtered = raw.replace(/[^\d\s()-]/g, '');
+                    setFormData({ ...formData, phone: filtered });
+                  }}
+                  onBlur={() => {
+                    if (!isValidGlobalPhone(formData.phone)) {
+                      setSubmitStatus('error');
+                      setSubmitErrorMessage('Please enter a valid phone number.');
+                    }
+                  }}
                   className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                   inputMode="tel"
+                  autoComplete="tel"
                 />
 
                 <select
@@ -366,7 +442,7 @@ export default function ContactFormSection() {
                 {formData.message.length}/500 characters
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <img
                   src={captchaImage}
                   alt="Captcha"
@@ -388,13 +464,17 @@ export default function ContactFormSection() {
                   className="min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-sm uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                   required
                 />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="shrink-0 whitespace-nowrap rounded-md bg-blue-600 px-4 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 sm:px-6 sm:py-3"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit'}
-                </button>
+
+                {/* Mobile: move submit to next row, right aligned; sm+: keep inline */}
+                <div className="w-full sm:w-auto sm:flex sm:items-center sm:justify-end">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="ml-auto block shrink-0 whitespace-nowrap rounded-md bg-blue-600 px-4 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 sm:ml-0 sm:inline-flex sm:px-6 sm:py-3"
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                  </button>
+                </div>
               </div>
               <div>
                 {captchaError ? (
