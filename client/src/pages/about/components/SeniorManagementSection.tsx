@@ -17,7 +17,7 @@ const SeniorManagementSection = () => {
       name: 'Purvesh Madhusudan Kapadia',
       position: 'Chief Human Resource Officer',
       company: "",
-      image: '/uploads/images/Purvesh_img.jpg',
+      image: "/uploads/images/Purvesh_img.jpg",
       bio: [
         'In a career span of 25+ Years – Purvesh has played multiple strategic pinnacle roles ranging from CHRO-Managing Partner-COO-Director HR etc.',
         'Throughout his career he has taken up several challenging assignments and has been instrumental in redefining the HR process for several leading organizations globally. Business process reengineering is his exclusive strength tested and proven in his career span. His innate process-driven approach has helped in achieving double-digit top-line and bottom-line growth for several organizations, he has been associated with.',
