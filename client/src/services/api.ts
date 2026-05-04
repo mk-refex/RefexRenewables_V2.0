@@ -515,6 +515,24 @@ export const smtpApi = {
 };
 
 export const contactApi = {
+  /** API-based duplicate check (email + phone digits) — align with other Refex sites */
+  checkEnquiry: async (payload: { email: string; phone: string }) => {
+    const base = getServerBase();
+    const res = await fetch(`${base}/api/contact/check-enquiry`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(
+        (j.message as string) || "Unable to verify enquiry. Please try again.",
+      );
+    }
+    return j as { duplicate: boolean };
+  },
   submit: async (payload: {
     fullName: string;
     email: string;

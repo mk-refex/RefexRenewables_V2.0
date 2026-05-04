@@ -1,72 +1,53 @@
 import SectionHeading from '@/components/common/SectionHeading';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEmailValidation } from '@/hooks/useEmailValidation';
+import { usePhoneValidation } from '@/hooks/usePhoneValidation';
 import { contactApi } from '@/services/api';
-
-type CountryOption = {
-  name: string;
-  cca2: string;
-  dialCode: string;
-  flag: string;
-};
-
-const FALLBACK_COUNTRIES: CountryOption[] = [
-  { name: 'India', cca2: 'IN', dialCode: '+91', flag: '🇮🇳' },
-  { name: 'United States', cca2: 'US', dialCode: '+1', flag: '🇺🇸' },
-  { name: 'United Kingdom', cca2: 'GB', dialCode: '+44', flag: '🇬🇧' },
-  { name: 'United Arab Emirates', cca2: 'AE', dialCode: '+971', flag: '🇦🇪' },
-  { name: 'Singapore', cca2: 'SG', dialCode: '+65', flag: '🇸🇬' },
-];
+import { useCallback, useEffect, useRef, useState } from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const CAPTCHA_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+const MIN_NAME_LEN = 2;
+const MIN_MESSAGE_LEN = 15;
+const SUBMIT_COOLDOWN_MS = 10_000;
+
+/** E.164 for libphonenumber / API; react-phone-input-2 `value` is digits-only */
+function digitsToE164(digitsValue: string): string {
+  const d = String(digitsValue ?? '').replace(/\D/g, '');
+  return d ? `+${d}` : '';
+}
 
 export default function ContactFormSection() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    phone: '',
-    sales: 'Sales',
-    message: ''
+    sales: '',
+    message: '',
   });
+  const [phoneDigits, setPhoneDigits] = useState('');
+
+  const { error: emailError, setError: setEmailError, validate: validateEmail } =
+    useEmailValidation({ required: true });
+  const { error: phoneError, setError: setPhoneError, validate: validatePhone } =
+    usePhoneValidation({ required: true });
+
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [messageError, setMessageError] = useState<string | null>(null);
+  const [salesError, setSalesError] = useState<string | null>(null);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitErrorMessage, setSubmitErrorMessage] = useState('');
-  const countryDropdownRef = useRef<HTMLDivElement | null>(null);
+
   const [captchaText, setCaptchaText] = useState('');
   const [captchaInput, setCaptchaInput] = useState('');
-  const [captchaImage, setCaptchaImage] = useState('');
   const [captchaError, setCaptchaError] = useState('');
-  const [countryOptions, setCountryOptions] = useState<CountryOption[]>(FALLBACK_COUNTRIES);
-  const [countryCode, setCountryCode] = useState('+91');
-  const [countryQuery, setCountryQuery] = useState('');
-  const [isCountryOpen, setIsCountryOpen] = useState(false);
-  const selectedCountry = useMemo(
-    () =>
-      countryOptions.find((country) => country.dialCode === countryCode) ??
-      FALLBACK_COUNTRIES[0],
-    [countryOptions, countryCode],
-  );
-  const filteredCountryOptions = useMemo(() => {
-    const q = countryQuery.trim().toLowerCase();
-    if (!q) return countryOptions;
-    return countryOptions.filter((country) =>
-      `${country.name} ${country.cca2} ${country.dialCode}`
-        .toLowerCase()
-        .includes(q),
-    );
-  }, [countryOptions, countryQuery]);
+  const [captchaImage, setCaptchaImage] = useState('');
 
-  const setSelectedCountry = useCallback((country: CountryOption) => {
-    setCountryCode(country.dialCode);
-    setCountryQuery('');
-    setIsCountryOpen(false);
-  }, []);
+  const lastSubmitAtRef = useRef(0);
 
-  const getFlagEmoji = (countryCode2: string) =>
-    countryCode2
-      .toUpperCase()
-      .replace(/./g, (char) =>
-        String.fromCodePoint(127397 + char.charCodeAt(0)),
-      );
+  const phoneE164 = digitsToE164(phoneDigits);
 
   const generateCaptcha = useCallback(() => {
     const text = Array.from({ length: 6 }, () =>
@@ -128,117 +109,62 @@ export default function ContactFormSection() {
     generateCaptcha();
   }, [generateCaptcha]);
 
-  useEffect(() => {
-    let active = true;
-    fetch('https://restcountries.com/v3.1/all?fields=name,idd,cca2')
-      .then((res) => res.json())
-      .then((data: any[]) => {
-        if (!active || !Array.isArray(data)) return;
-        const parsed: CountryOption[] = data
-          .map((item) => {
-            const root = item?.idd?.root ?? '';
-            const suffix = Array.isArray(item?.idd?.suffixes)
-              ? item.idd.suffixes[0]
-              : '';
-            const dialCode = `${root}${suffix}`.trim();
-            const cca2 = String(item?.cca2 ?? '').toUpperCase();
-            if (!dialCode.startsWith('+') || cca2.length !== 2) return null;
-            return {
-              name: String(item?.name?.common ?? ''),
-              cca2,
-              dialCode,
-              flag: getFlagEmoji(cca2),
-            } as CountryOption;
-          })
-          .filter((item): item is CountryOption => Boolean(item))
-          .sort((a, b) => a.name.localeCompare(b.name));
+  const validateName = (value: string) => {
+    const v = value.trim();
+    if (v.length < MIN_NAME_LEN) {
+      setNameError('Name must be at least 2 characters');
+      return false;
+    }
+    setNameError(null);
+    return true;
+  };
 
-        if (parsed.length) {
-          setCountryOptions(parsed);
-          const india = parsed.find((c) => c.cca2 === 'IN');
-          const next = india ?? parsed[0];
-          setCountryCode(next.dialCode);
-          setCountryQuery('');
-        }
-      })
-      .catch(() => {
-        setCountryOptions(FALLBACK_COUNTRIES);
-        setCountryCode('+91');
-        setCountryQuery('');
-      });
+  const validateMessage = (value: string) => {
+    const v = value.trim();
+    if (v.length < MIN_MESSAGE_LEN) {
+      setMessageError(`Message must be at least ${MIN_MESSAGE_LEN} characters`);
+      return false;
+    }
+    setMessageError(null);
+    return true;
+  };
 
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isCountryOpen) return;
-
-    const closeIfOutside = (target: EventTarget | null) => {
-      const el = countryDropdownRef.current;
-      if (!el) return;
-      if (target instanceof Node && el.contains(target)) return;
-      setIsCountryOpen(false);
-    };
-
-    const onMouseDown = (e: MouseEvent) => closeIfOutside(e.target);
-    const onFocusIn = (e: FocusEvent) => closeIfOutside(e.target);
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' || e.key === 'Tab') {
-        setIsCountryOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', onMouseDown);
-    document.addEventListener('focusin', onFocusIn);
-    document.addEventListener('keydown', onKeyDown);
-
-    return () => {
-      document.removeEventListener('mousedown', onMouseDown);
-      document.removeEventListener('focusin', onFocusIn);
-      document.removeEventListener('keydown', onKeyDown);
-    };
-  }, [isCountryOpen]);
-
-  const isValidEmail = (email: string) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
-
-  const getPhoneDigits = (phone: string) => String(phone || '').replace(/\D/g, '');
-  const isValidGlobalPhone = (phone: string) => {
-    const digits = getPhoneDigits(phone);
-    return digits.length === 0 || (digits.length >= 7 && digits.length <= 15);
+  const validateSales = (value: string) => {
+    if (!String(value ?? '').trim()) {
+      setSalesError('Please select an enquiry type');
+      return false;
+    }
+    setSalesError(null);
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate required fields
-    if (!formData.fullName || !formData.email || !formData.message) {
+
+    const now = Date.now();
+    if (now - lastSubmitAtRef.current < SUBMIT_COOLDOWN_MS) {
       setSubmitStatus('error');
-      setSubmitErrorMessage('Please fill in all required fields correctly.');
+      setSubmitErrorMessage('Please wait before submitting again.');
       return;
     }
 
-    // Validate email format (strict client-side check for better UX)
-    if (!isValidEmail(formData.email)) {
+    const okName = validateName(formData.fullName);
+    const okEmail = validateEmail(formData.email);
+    const okPhone = validatePhone(phoneE164);
+    const okSales = validateSales(formData.sales);
+    const okMessage = validateMessage(formData.message);
+
+    if (!okName || !okEmail || !okPhone || !okSales || !okMessage) {
       setSubmitStatus('error');
-      setSubmitErrorMessage('Please enter a valid email address.');
+      setSubmitErrorMessage('');
       return;
     }
 
-    // Validate phone format (global digits length, allow empty)
-    if (!isValidGlobalPhone(formData.phone)) {
-      setSubmitStatus('error');
-      setSubmitErrorMessage('Please enter a valid phone number.');
-      return;
-    }
-
-    // Validate message length
     if (formData.message.length > 500) {
-      alert('Message must be 500 characters or less');
+      setMessageError('Message must be 500 characters or less');
       return;
     }
+
     if (captchaInput.trim().toUpperCase() !== captchaText) {
       setSubmitStatus('idle');
       generateCaptcha();
@@ -252,27 +178,47 @@ export default function ContactFormSection() {
     setCaptchaError('');
 
     try {
+      const { duplicate } = await contactApi.checkEnquiry({
+        email: formData.email.trim(),
+        phone: phoneE164,
+      });
+      if (duplicate) {
+        setSubmitStatus('error');
+        setSubmitErrorMessage(
+          'This enquiry was already submitted recently. Please try again later.',
+        );
+        return;
+      }
+
       await contactApi.submit({
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: `${countryCode} ${formData.phone}`.trim(),
-        sales: formData.sales,
-        message: formData.message,
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: phoneE164,
+        sales: formData.sales.trim(),
+        message: formData.message.trim(),
       });
 
+      lastSubmitAtRef.current = Date.now();
       setSubmitStatus('success');
       setFormData({
         fullName: '',
         email: '',
-        phone: '',
-        sales: 'Sales',
-        message: ''
+        sales: '',
+        message: '',
       });
+      setPhoneDigits('');
+      setEmailError(null);
+      setPhoneError(null);
+      setNameError(null);
+      setMessageError(null);
+      setSalesError(null);
       generateCaptcha();
-    } catch (error: any) {
+    } catch (error: unknown) {
       setSubmitStatus('error');
       setSubmitErrorMessage(
-        error?.message || 'Unable to send message right now. Please try again later.',
+        error instanceof Error
+          ? error.message
+          : 'Unable to send message right now. Please try again later.',
       );
     } finally {
       setIsSubmitting(false);
@@ -283,163 +229,156 @@ export default function ContactFormSection() {
     <section className="bg-gray-50 py-10 sm:py-14 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
         <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
-          {/* Left Side - Text */}
           <div>
             <div className="mb-4 inline-block sm:mb-6">
-            <SectionHeading
-                badgeText={"Business Enquiries"}
+              <SectionHeading
+                badgeText={'Business Enquiries'}
                 showWatermark={false}
                 className="mb-2 sm:mb-3"
               />
             </div>
             <h2 className="mb-4 text-2xl font-bold leading-snug text-gray-900 sm:text-3xl lg:text-4xl">
-              Have questions or need assistance from RRIL?<br />
+              Have questions or need assistance from RRIL?
+              <br />
               Get in touch with us
             </h2>
           </div>
 
-          {/* Right Side - Form */}
           <div>
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4" data-readdy-form id="contact-form">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-3 sm:space-y-4"
+              data-readdy-form
+              id="contact-form"
+              noValidate
+            >
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
-                <input
-                  type="text"
-                  name="fullName"
-                  placeholder="Full Name"
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={(e) => {
-                    const next = e.target.value.replace(/\s/g, '');
-                    setFormData({ ...formData, email: next });
-                  }}
-                  onBlur={() => {
-                    if (formData.email && !isValidEmail(formData.email)) {
-                      setSubmitStatus('error');
-                      setSubmitErrorMessage('Please enter a valid email address.');
-                    }
-                  }}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
-                  autoComplete="email"
-                  inputMode="email"
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,20%)_minmax(0,40%)_minmax(0,40%)] md:gap-4">
-                <div className="relative" ref={countryDropdownRef}>
-                  <button
-                    type="button"
-                    onClick={() => setIsCountryOpen((prev) => !prev)}
-                    className="flex h-[42px] w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:h-[48px] sm:px-4"
-                    aria-label="Select country code"
-                    aria-expanded={isCountryOpen}
-                  >
-                    <span className="flex items-center gap-2">
-                      <span className="text-base">{selectedCountry.flag}</span>
-                      <span className="text-gray-600">{selectedCountry.dialCode}</span>
-                    </span>
-                    <i className={`ri-arrow-${isCountryOpen ? 'up' : 'down'}-s-line text-base text-gray-500`} />
-                  </button>
-                  {isCountryOpen && (
-                    <div className="absolute z-20 mt-1 max-h-72 w-[340px] max-w-[92vw] overflow-hidden rounded-md border border-gray-200 bg-white shadow-lg">
-                      <div className="border-b border-gray-200 p-2">
-                        <input
-                          type="text"
-                          value={countryQuery}
-                          onChange={(e) => setCountryQuery(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' && filteredCountryOptions[0]) {
-                              e.preventDefault();
-                              setSelectedCountry(filteredCountryOptions[0]);
-                            }
-                          }}
-                          autoFocus
-                          placeholder="Search country or code"
-                          className="w-full rounded-md border border-gray-300 px-2.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        />
-                      </div>
-                      <div className="max-h-56 overflow-y-auto">
-                      {filteredCountryOptions.length ? (
-                        filteredCountryOptions.map((country) => (
-                          <button
-                            key={`${country.cca2}-${country.dialCode}`}
-                            type="button"
-                            onMouseDown={(e) => e.preventDefault()}
-                            onClick={() => setSelectedCountry(country)}
-                            className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-gray-800 transition-colors hover:bg-gray-100 ${
-                              country.dialCode === countryCode ? 'bg-gray-50' : ''
-                            }`}
-                          >
-                            <span>{country.flag}</span>
-                            <span className="min-w-0 flex-1 truncate">{country.name}</span>
-                            <span className="text-gray-500">{country.dialCode}</span>
-                          </button>
-                        ))
-                      ) : (
-                        <div className="px-3 py-2 text-sm text-gray-500">
-                          No countries found.
-                        </div>
-                      )}
-                      </div>
-                    </div>
-                  )}
+                <div>
+                  <input
+                    type="text"
+                    name="fullName"
+                    placeholder="Full Name"
+                    value={formData.fullName}
+                    onChange={(e) => {
+                      setFormData({ ...formData, fullName: e.target.value });
+                      if (nameError) setNameError(null);
+                    }}
+                    onBlur={() => validateName(formData.fullName)}
+                    className={`w-full rounded-md border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
+                      nameError ? 'border-red-400' : 'border-gray-300'
+                    }`}
+                    autoComplete="name"
+                  />
+                  {nameError ? (
+                    <p className="mt-1 text-sm text-red-700">{nameError}</p>
+                  ) : null}
                 </div>
-
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone"
-                  value={formData.phone}
-                  onChange={(e) => {
-                    const raw = e.target.value;
-                    // allow digits + basic separators for user typing; store filtered value
-                    const filtered = raw.replace(/[^\d\s()-]/g, '');
-                    setFormData({ ...formData, phone: filtered });
-                  }}
-                  onBlur={() => {
-                    if (!isValidGlobalPhone(formData.phone)) {
-                      setSubmitStatus('error');
-                      setSubmitErrorMessage('Please enter a valid phone number.');
-                    }
-                  }}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
-                  inputMode="tel"
-                  autoComplete="tel"
-                />
-
-                <select
-                  name="sales"
-                  value={formData.sales}
-                  onChange={(e) => setFormData({ ...formData, sales: e.target.value })}
-                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
-                >
-                  <option>Sales</option>
-                  <option>Support</option>
-                  <option>General Inquiry</option>
-                  <option>Investor Relations</option>
-                </select>
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={(e) => {
+                      const next = e.target.value.replace(/\s/g, '');
+                      setFormData({ ...formData, email: next });
+                      if (emailError) setEmailError(null);
+                    }}
+                    onBlur={() => validateEmail(formData.email)}
+                    className={`w-full rounded-md border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
+                      emailError ? 'border-red-400' : 'border-gray-300'
+                    }`}
+                    autoComplete="email"
+                    inputMode="email"
+                  />
+                  {emailError ? (
+                    <p className="mt-1 text-sm text-red-700">{emailError}</p>
+                  ) : null}
+                </div>
               </div>
 
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                maxLength={500}
-                rows={5}
-                className="w-full resize-none rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
-                required
-              ></textarea>
-              <div className="text-xs text-gray-500 text-right">
-                {formData.message.length}/500 characters
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+                <div className="contact-phone-input">
+                  <PhoneInput
+                    country="in"
+                    preferredCountries={['in']}
+                    value={phoneDigits}
+                    onChange={(value) => {
+                      setPhoneDigits(value);
+                      if (phoneError) setPhoneError(null);
+                    }}
+                    onBlur={() => validatePhone(phoneE164)}
+                    inputProps={{
+                      name: 'phone',
+                      required: true,
+                      autoComplete: 'tel',
+                      'aria-invalid': Boolean(phoneError),
+                    }}
+                    placeholder="Mobile number"
+                    containerClass="w-full"
+                    inputClass={`!w-full !h-[42px] sm:!h-[48px] !rounded-md !text-sm !pl-14 !border ${
+                      phoneError ? '!border-red-400' : '!border-gray-300'
+                    }`}
+                    buttonClass={`!rounded-l-md !border ${
+                      phoneError ? '!border-red-400' : '!border-gray-300'
+                    }`}
+                    dropdownClass="!text-sm"
+                    enableSearch
+                    disableSearchIcon
+                  />
+                  {phoneError ? (
+                    <p className="mt-1 text-sm text-red-700">{phoneError}</p>
+                  ) : null}
+                </div>
+                <div>
+                  <select
+                    name="sales"
+                    value={formData.sales}
+                    onChange={(e) => {
+                      setFormData({ ...formData, sales: e.target.value });
+                      if (salesError) setSalesError(null);
+                    }}
+                    onBlur={() => validateSales(formData.sales)}
+                    className={`w-full rounded-md border bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
+                      salesError ? 'border-red-400' : 'border-gray-300'
+                    }`}
+                    required
+                  >
+                    <option value="">Select enquiry type</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Support">Support</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Investor Relations">Investor Relations</option>
+                  </select>
+                  {salesError ? (
+                    <p className="mt-1 text-sm text-red-700">{salesError}</p>
+                  ) : null}
+                </div>
+              </div>
+
+              <div>
+                <textarea
+                  name="message"
+                  placeholder="Your message (at least 15 characters)"
+                  value={formData.message}
+                  onChange={(e) => {
+                    setFormData({ ...formData, message: e.target.value });
+                    if (messageError) setMessageError(null);
+                  }}
+                  onBlur={() => validateMessage(formData.message)}
+                  maxLength={500}
+                  rows={5}
+                  className={`w-full resize-none rounded-md border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
+                    messageError ? 'border-red-400' : 'border-gray-300'
+                  }`}
+                />
+                <div className="mt-1 flex justify-between text-xs text-gray-500">
+                  <span>Minimum {MIN_MESSAGE_LEN} characters</span>
+                  <span>{formData.message.length}/500 characters</span>
+                </div>
+                {messageError ? (
+                  <p className="mt-1 text-sm text-red-700">{messageError}</p>
+                ) : null}
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -465,7 +404,6 @@ export default function ContactFormSection() {
                   required
                 />
 
-                {/* Mobile: move submit to next row, right aligned; sm+: keep inline */}
                 <div className="w-full sm:w-auto sm:flex sm:items-center sm:justify-end">
                   <button
                     type="submit"
@@ -484,17 +422,17 @@ export default function ContactFormSection() {
 
               {submitStatus === 'success' && (
                 <div className="mt-3 rounded-md border border-green-200 bg-green-50 p-3 sm:mt-4 sm:p-4">
-                  <p className="text-sm text-green-800">Thank you! Your message has been sent successfully.</p>
-                </div>
-              )}
-
-              {submitStatus === 'error' && (
-                <div className="mt-3 rounded-md border border-red-200 bg-red-50 p-3 sm:mt-4 sm:p-4">
-                  <p className="text-sm text-red-800">
-                    {submitErrorMessage || 'Please fill in all required fields correctly.'}
+                  <p className="text-sm text-green-800">
+                    Thank you! Your message has been sent successfully.
                   </p>
                 </div>
               )}
+
+              {submitStatus === 'error' && submitErrorMessage ? (
+                <div className="mt-3 rounded-md border border-red-200 bg-red-50 p-3 sm:mt-4 sm:p-4">
+                  <p className="text-sm text-red-800">{submitErrorMessage}</p>
+                </div>
+              ) : null}
             </form>
           </div>
         </div>
