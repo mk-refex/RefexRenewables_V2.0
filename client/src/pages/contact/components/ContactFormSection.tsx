@@ -1,4 +1,5 @@
 import SectionHeading from '@/components/common/SectionHeading';
+import SubmissionSuccessOverlay from '@/components/common/SubmissionSuccessOverlay';
 import IndiaCityCombobox from './IndiaCityCombobox';
 import { useEmailValidation } from '@/hooks/useEmailValidation';
 import { usePhoneValidation } from '@/hooks/usePhoneValidation';
@@ -65,6 +66,10 @@ export default function ContactFormSection() {
   const [captchaImage, setCaptchaImage] = useState('');
 
   const lastSubmitAtRef = useRef(0);
+
+  const dismissSuccessOverlay = useCallback(() => {
+    setSubmitStatus('idle');
+  }, []);
 
   const phoneE164 = digitsToE164(phoneDigits);
 
@@ -304,7 +309,12 @@ export default function ContactFormSection() {
   };
 
   return (
-    <section className="bg-gray-50 py-10 sm:py-14 lg:py-16">
+    <>
+      {submitStatus === 'success' ? (
+        <SubmissionSuccessOverlay onDone={dismissSuccessOverlay} />
+      ) : null}
+
+      <section className="bg-gray-50 py-10 sm:py-14 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-[110px]">
         <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
@@ -599,14 +609,6 @@ export default function ContactFormSection() {
                 ) : null}
               </div>
 
-              {submitStatus === 'success' && (
-                <div className="mt-3 rounded-md border border-green-200 bg-green-50 p-3 sm:mt-4 sm:p-4">
-                  <p className="text-sm text-green-800">
-                    Thank you! Your message has been sent successfully.
-                  </p>
-                </div>
-              )}
-
               {submitStatus === 'error' && submitErrorMessage ? (
                 <div className="mt-3 rounded-md border border-red-200 bg-red-50 p-3 sm:mt-4 sm:p-4">
                   <p className="text-sm text-red-800">{submitErrorMessage}</p>
@@ -616,6 +618,7 @@ export default function ContactFormSection() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
