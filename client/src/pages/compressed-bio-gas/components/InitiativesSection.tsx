@@ -6,22 +6,20 @@ import PageFadeInUp from "./PageFadeInUp";
 export default function InitiativesSection() {
   const initiatives = [
     {
-      image:"/uploads/images/BioDhanic Launch_page.jpg",
+      image: "/uploads/images/BioDhanic Launch_page.jpg",
       title: "Refex BioDhanic",
       number: "01",
       link: "/biodhanic",
     },
     {
-      image:
-        "/wp-content/uploads/2025/10/spectrum-cover.png",
-      title: "Refex Spectrum Renewable",
+      image: "/wp-content/uploads/2025/10/spectrum-cover.png",
+      title: "Refex CBG Kolhapur",
       number: "02",
       link: "/spectrum-renewable",
     },
     {
-      image:
-        "/wp-content/uploads/2025/10/vizag-cover.png",
-      title: "Refex Vyzag Bio-Energy",
+      image: "/wp-content/uploads/2025/10/vizag-cover.png",
+      title: "Vyzag Bio-Energy",
       number: "03",
       link: "/vyzag-bio-energy",
     },
@@ -40,9 +38,7 @@ export default function InitiativesSection() {
             className="justify-center"
             showWatermark={false}
           />
-          <h2
-            className={`${sectionMainHeadingClassName} mt-3 text-gray-900`}
-          >
+          <h2 className={`${sectionMainHeadingClassName} mt-3 text-gray-900`}>
             Driving a Sustainable Future through Renewable Innovation
           </h2>
         </PageFadeInUp>

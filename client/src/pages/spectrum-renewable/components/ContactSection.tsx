@@ -26,9 +26,9 @@ export default function ContactSection() {
         <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
           <div className="mx-auto mb-6 max-w-4xl space-y-1.5 text-base leading-relaxed text-white/95 sm:mb-8 sm:space-y-2 sm:text-lg lg:text-xl">
             <p className="font-semibold text-white">
-              Refex Spectrum Renewable Energy Private Limited
+              Refex CBG Kolhapur Private Limited
             </p>
-            <p>Gat.No.1165, Warananagar, AP-Kodoli</p>
+            <p>Site Address: Gat.No.1165, Warananagar, AP-Kodoli</p>
             <p>Panhala -Taluka, Kolhapur Dist</p>
             <p>PIN – 416113, Maharashtra.</p>
           </div>

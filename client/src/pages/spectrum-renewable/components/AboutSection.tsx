@@ -31,16 +31,18 @@ export default function AboutSection() {
             <FadeInUp delay={0.15} threshold={FADE_THRESHOLD}>
               <div className="space-y-4 rounded-lg bg-white p-4 text-sm leading-relaxed text-[#74787C] shadow-sm sm:p-6 sm:text-base lg:p-7">
                 <p>
-                  <b>Spectrum Renewable Energy Pvt. Ltd. (SREPL)</b>, located at
+                  <b>Refex CBG Kolhapur Private Limited</b>, located at
                   Warananagar, Kolhapur, is engaged in the generation of
                   Compressed Biogas (CBG) and organic manure from press mud and
                   other biodegradable wastes.
                 </p>
                 <p>
-                  A subsidiary of Refex Sustainability Solutions Private
-                  Limited (RSSPL) is a leading bio-energy company committed to
-                  providing innovative renewable energy solutions for organic
-                  waste management and sustainable agriculture.
+                  Refex CBG Kolhapur Private Limited, a subsidiary of Refex
+                  Sustainability Solutions Limited (RSSL) and a step-down
+                  subsidiary of Refex Renewables & Infrastructure Limited
+                  (RRIL), is a leading bio-energy company committed to providing
+                  innovative renewable energy solutions for organic waste
+                  management and sustainable agriculture.
                 </p>
                 {/* <p>
                   The company operates an integrated, end-to-end value chain

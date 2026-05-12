@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { getCurrentStockPrice, type StockPriceResponse } from '@/services/api';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getCurrentStockPrice, type StockPriceResponse } from "@/services/api";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -12,41 +12,52 @@ export default function Navbar() {
   const [isSmartODROpen, setIsSmartODROpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
-  const [mobileSubDropdown, setMobileSubDropdown] = useState<string | null>(null);
+  const [mobileSubDropdown, setMobileSubDropdown] = useState<string | null>(
+    null,
+  );
   const [stockData, setStockData] = useState<StockPriceResponse | null>(null);
   const [stockLoading, setStockLoading] = useState(true);
 
-  const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+  const handleSectionClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
     e.preventDefault();
-    navigate('/about-us');
+    navigate("/about-us");
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 100);
     setIsAboutOpen(false);
   };
 
-  const handleMobileSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+  const handleMobileSectionClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
     e.preventDefault();
-    navigate('/about-us');
+    navigate("/about-us");
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 100);
     setIsMobileMenuOpen(false);
   };
 
-  const handleESGSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+  const handleESGSectionClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
     e.preventDefault();
-    navigate('/esg');
+    navigate("/esg");
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 100);
   };
@@ -63,18 +74,19 @@ export default function Navbar() {
   }, []);
 
   const getStockIcon = () => {
-    if (!stockData) return 'ri-arrow-down-s-fill';
-    return stockData.index.startsWith('+') ? 'ri-arrow-up-s-fill' : 'ri-arrow-down-s-fill';
+    if (!stockData) return "ri-arrow-down-s-fill";
+    return stockData.index.startsWith("+")
+      ? "ri-arrow-up-s-fill"
+      : "ri-arrow-down-s-fill";
   };
 
   const getStockColor = () => {
-    if (!stockData) return 'text-red-400';
-    return stockData.index.startsWith('+') ? 'text-green-400' : 'text-red-400';
+    if (!stockData) return "text-red-400";
+    return stockData.index.startsWith("+") ? "text-green-400" : "text-red-400";
   };
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
-
       {/* Main Header Section */}
       <div className="w-full bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
@@ -82,9 +94,9 @@ export default function Navbar() {
             {/* Left Container - Logo and Company Name */}
             <div className="flex min-w-0 flex-shrink-0 flex-col">
               <Link to="/" className="flex-shrink-0 mb-2">
-                <img 
-                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2023/07/refex-logo-seperate.svg" 
-                  alt="Refex Logo" 
+                <img
+                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2023/07/refex-logo-seperate.svg"
+                  alt="Refex Logo"
                   className="h-10 md:h-12"
                 />
               </Link>
@@ -93,10 +105,11 @@ export default function Navbar() {
                 className="max-w-[11rem] text-[9px] font-medium uppercase leading-snug tracking-wide text-gray-800 sm:max-w-none sm:text-[11.5px] sm:leading-[15px]"
                 style={{
                   fontWeight: 500,
-                  letterSpacing: '0.3px',
+                  letterSpacing: "0.3px",
                 }}
               >
-                REFEX RENEWABLES &<br />INFRASTRUCTURE LIMITED
+                REFEX RENEWABLES &<br />
+                INFRASTRUCTURE LIMITED
               </div>
             </div>
 
@@ -111,10 +124,26 @@ export default function Navbar() {
                 ) : stockData ? (
                   <div className="flex items-center gap-2 text-xs text-gray-800">
                     <span className="font-semibold">{stockData.exchange}</span>
-                    <i className={`${getStockIcon()} ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}></i>
-                    <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>₹ {stockData.current_price.toFixed(2)}</span>
-                    <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>{stockData.index}</span>
-                    <span className={stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}>
+                    <i
+                      className={`${getStockIcon()} ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
+                    ></i>
+                    <span
+                      className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
+                    >
+                      ₹ {stockData.current_price.toFixed(2)}
+                    </span>
+                    <span
+                      className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {stockData.index}
+                    </span>
+                    <span
+                      className={
+                        stockData.index.startsWith("+")
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }
+                    >
                       ({stockData.overall_index}%)
                     </span>
                   </div>
@@ -134,141 +163,191 @@ export default function Navbar() {
 
               {/* Navigation Links */}
               <div className="flex items-center gap-6 xl:gap-10">
-              <Link 
-                to="/" 
-                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
-                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
-              >
-                HOME
-              </Link>
-              
-              {/* About Us Dropdown */}
-              <div 
-                className="relative group"
-                onMouseEnter={() => setIsAboutOpen(true)}
-                onMouseLeave={() => setIsAboutOpen(false)}
-              >
-                <Link 
-                  to="/about-us" 
-                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1"
-                  style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
+                <Link
+                  to="/"
+                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
                 >
-                  ABOUT US
-                  <i className="ri-arrow-down-s-line"></i>
+                  HOME
                 </Link>
-                {isAboutOpen && (
-                  <div className="absolute top-full left-0 mt-0 w-56 bg-white shadow-lg rounded-lg py-2 z-50">
-                    <a 
-                      href="/about-us#vision-mission" 
-                      onClick={(e) => handleSectionClick(e, 'vision-mission')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
-                    >
-                      Vision & Mission
-                    </a>
-                    <a 
-                      href="/about-us#core-values" 
-                      onClick={(e) => handleSectionClick(e, 'core-values')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
-                    >
-                      Core Values
-                    </a>
-                    <a 
-                      href="/about-us#our-journey" 
-                      onClick={(e) => handleSectionClick(e, 'our-journey')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
-                    >
-                      Our Journey
-                    </a>
-                    <a 
-                      href="/about-us#board-of-directors" 
-                      onClick={(e) => handleSectionClick(e, 'board-of-directors')}
-                      className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
-                    >
-                      Board of Directors
-                    </a>
-                    <a href="https://www.refex.group/careers/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                      Careers
-                    </a>
-                    <a href="https://www.refex.group/diversity-inclusion/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                      Diversity Inclusion
-                    </a>
-                    <a href="https://www.refex.group/gallery/" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                      Gallery
-                    </a>
-                  </div>
-                )}
-              </div>
 
-              {/* Businesses Dropdown */}
-              <div 
-                className="relative group"
-                onMouseEnter={() => setIsBusinessOpen(true)}
-                onMouseLeave={() => {
-                  setIsBusinessOpen(false);
-                  setIsSolarOpen(false);
-                  setIsCBGOpen(false);
-                }}
-              >
-                <button 
-                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1"
-                  style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
+                {/* About Us Dropdown */}
+                <div
+                  className="relative group"
+                  onMouseEnter={() => setIsAboutOpen(true)}
+                  onMouseLeave={() => setIsAboutOpen(false)}
                 >
-                  BUSINESSES
-                  <i className="ri-arrow-down-s-line"></i>
-                </button>
-                {isBusinessOpen && (
-                  <div className="absolute top-full left-0 mt-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                    {/* Renewable IPP with Sub-dropdown */}
-                    <div 
-                      className="relative group/solar"
-                      onMouseEnter={() => setIsSolarOpen(true)}
-                      onMouseLeave={() => setIsSolarOpen(false)}
-                    >
-                      <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap flex items-center justify-between">
-                      Renewable IPP
-                        <i className="ri-arrow-right-s-line"></i>
-                      </Link>
-                      {isSolarOpen && (
-                        <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                                                    <Link to="/solar-energy" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                            Solar Energy
-                          </Link>
-                                                <Link to="/energy-storage-solutions" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                                                  Energy Storage Solutions
-                                                </Link>
-                                              </div>
-                      )}
+                  <Link
+                    to="/about-us"
+                    className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1"
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    ABOUT US
+                    <i className="ri-arrow-down-s-line"></i>
+                  </Link>
+                  {isAboutOpen && (
+                    <div className="absolute top-full left-0 mt-0 w-56 bg-white shadow-lg rounded-lg py-2 z-50">
+                      <a
+                        href="/about-us#vision-mission"
+                        onClick={(e) => handleSectionClick(e, "vision-mission")}
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
+                      >
+                        Vision & Mission
+                      </a>
+                      <a
+                        href="/about-us#core-values"
+                        onClick={(e) => handleSectionClick(e, "core-values")}
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
+                      >
+                        Core Values
+                      </a>
+                      <a
+                        href="/about-us#our-journey"
+                        onClick={(e) => handleSectionClick(e, "our-journey")}
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
+                      >
+                        Our Journey
+                      </a>
+                      <a
+                        href="/about-us#board-of-directors"
+                        onClick={(e) =>
+                          handleSectionClick(e, "board-of-directors")
+                        }
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
+                      >
+                        Board of Directors
+                      </a>
+                      <a
+                        href="https://www.refex.group/careers/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                      >
+                        Careers
+                      </a>
+                      <a
+                        href="https://www.refex.group/diversity-inclusion/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                      >
+                        Diversity Inclusion
+                      </a>
+                      <a
+                        href="https://www.refex.group/gallery/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                      >
+                        Gallery
+                      </a>
                     </div>
+                  )}
+                </div>
 
-                    {/* Compressed Bio-Gas with Sub-dropdown */}
-                    <div 
-                      className="relative group/cbg"
-                      onMouseEnter={() => setIsCBGOpen(true)}
-                      onMouseLeave={() => setIsCBGOpen(false)}
-                    >
-                      <Link to="/compressed-bio-gas" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap flex items-center justify-between">
-                        Compressed Bio-Gas
-                        <i className="ri-arrow-right-s-line"></i>
-                      </Link>
-                      {isCBGOpen && (
-                        <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
-                          <Link to="/spectrum-renewable" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                            Spectrum Renewables
-                          </Link>
-                          <Link to="/vyzag-bio-energy" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                            Vyzag Bio-Energy
-                          </Link>
-                          <Link to="/biodhanic" className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap">
-                            Refex Bio-Dhanic
-                          </Link>
-                        </div>
-                      )}
+                {/* Businesses Dropdown */}
+                <div
+                  className="relative group"
+                  onMouseEnter={() => setIsBusinessOpen(true)}
+                  onMouseLeave={() => {
+                    setIsBusinessOpen(false);
+                    setIsSolarOpen(false);
+                    setIsCBGOpen(false);
+                  }}
+                >
+                  <button
+                    className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap flex items-center gap-1"
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    BUSINESSES
+                    <i className="ri-arrow-down-s-line"></i>
+                  </button>
+                  {isBusinessOpen && (
+                    <div className="absolute top-full left-0 mt-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
+                      {/* Renewable IPP with Sub-dropdown */}
+                      <div
+                        className="relative group/solar"
+                        onMouseEnter={() => setIsSolarOpen(true)}
+                        onMouseLeave={() => setIsSolarOpen(false)}
+                      >
+                        <Link
+                          to="/solar-energy"
+                          className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap flex items-center justify-between"
+                        >
+                          Renewable IPP
+                          <i className="ri-arrow-right-s-line"></i>
+                        </Link>
+                        {isSolarOpen && (
+                          <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
+                            <Link
+                              to="/solar-energy"
+                              className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                            >
+                              Solar Energy
+                            </Link>
+                            <Link
+                              to="/energy-storage-solutions"
+                              className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                            >
+                              Energy Storage Solutions
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Compressed Bio-Gas with Sub-dropdown */}
+                      <div
+                        className="relative group/cbg"
+                        onMouseEnter={() => setIsCBGOpen(true)}
+                        onMouseLeave={() => setIsCBGOpen(false)}
+                      >
+                        <Link
+                          to="/compressed-bio-gas"
+                          className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap flex items-center justify-between"
+                        >
+                          Compressed Bio-Gas
+                          <i className="ri-arrow-right-s-line"></i>
+                        </Link>
+                        {isCBGOpen && (
+                          <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
+                            <Link
+                              to="/spectrum-renewable"
+                              className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                            >
+                              Refex CBG Kolhapur
+                            </Link>
+                            <Link
+                              to="/vyzag-bio-energy"
+                              className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                            >
+                              Vyzag Bio-Energy
+                            </Link>
+                            <Link
+                              to="/biodhanic"
+                              className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
+                            >
+                              Refex Bio-Dhanic
+                            </Link>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              {/* Investor Relations Dropdown 
+                {/* Investor Relations Dropdown 
               <div 
                 className="relative group"
                 onMouseEnter={() => setIsInvestorOpen(true)}
@@ -315,38 +394,52 @@ export default function Navbar() {
               </div>
               */}
 
-<Link 
-                to="/investors" 
-                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
-                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
-              >
-                INVESTOR RELATIONS
-              </Link>
+                <Link
+                  to="/investors"
+                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  INVESTOR RELATIONS
+                </Link>
 
-              <Link 
-                to="/esg" 
-                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
-                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
-              >
-                ESG
-              </Link>
+                <Link
+                  to="/esg"
+                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  ESG
+                </Link>
 
-              <Link 
-                to="/contact" 
-                className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
-                style={{ fontSize: '16px', fontWeight: 600, textTransform: 'uppercase' }}
-              >
-                CONTACT US
-              </Link>
+                <Link
+                  to="/contact"
+                  className="text-gray-700 hover:text-brand transition-colors whitespace-nowrap"
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  CONTACT US
+                </Link>
               </div>
             </div>
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-800 hover:text-brand transition-colors cursor-pointer"
             >
-              <i className={`${isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl`}></i>
+              <i
+                className={`${isMobileMenuOpen ? "ri-close-line" : "ri-menu-line"} text-2xl`}
+              ></i>
             </button>
           </div>
         </div>
@@ -358,7 +451,8 @@ export default function Navbar() {
           <div className="container mx-auto px-4 py-4 sm:px-6">
             {/* Company Name - Mobile */}
             <div className="text-xs font-bold text-gray-800 leading-tight uppercase mb-4 pb-4 border-b border-gray-200">
-              REFEX RENEWABLES &<br />INFRASTRUCTURE LIMITED
+              REFEX RENEWABLES &<br />
+              INFRASTRUCTURE LIMITED
             </div>
 
             {/* Stock Ticker - Mobile */}
@@ -367,11 +461,29 @@ export default function Navbar() {
                 <span className="text-gray-800">Loading BSE Data...</span>
               ) : stockData ? (
                 <>
-                  <span className="font-semibold text-gray-800">{stockData.exchange}</span>
-                  <i className={`${getStockIcon()} ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}></i>
-                  <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>₹ {stockData.current_price.toFixed(2)}</span>
-                  <span className={`font-semibold ${stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>{stockData.index}</span>
-                  <span className={stockData.index.startsWith('+') ? 'text-green-600' : 'text-red-600'}>
+                  <span className="font-semibold text-gray-800">
+                    {stockData.exchange}
+                  </span>
+                  <i
+                    className={`${getStockIcon()} ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
+                  ></i>
+                  <span
+                    className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
+                  >
+                    ₹ {stockData.current_price.toFixed(2)}
+                  </span>
+                  <span
+                    className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
+                  >
+                    {stockData.index}
+                  </span>
+                  <span
+                    className={
+                      stockData.index.startsWith("+")
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }
+                  >
                     ({stockData.overall_index}%)
                   </span>
                 </>
@@ -387,81 +499,95 @@ export default function Navbar() {
             </div>
 
             <nav className="flex flex-col gap-2">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
                 HOME
               </Link>
-              
+
               {/* About Us Dropdown - Mobile */}
               <div>
-                <button 
-                  onClick={() => setMobileDropdown(mobileDropdown === 'about' ? null : 'about')}
+                <button
+                  onClick={() =>
+                    setMobileDropdown(
+                      mobileDropdown === "about" ? null : "about",
+                    )
+                  }
                   className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors flex items-center justify-between cursor-pointer"
                 >
                   ABOUT US
-                  <i className={`ri-arrow-${mobileDropdown === 'about' ? 'up' : 'down'}-s-line text-base`}></i>
+                  <i
+                    className={`ri-arrow-${mobileDropdown === "about" ? "up" : "down"}-s-line text-base`}
+                  ></i>
                 </button>
-                {mobileDropdown === 'about' && (
+                {mobileDropdown === "about" && (
                   <div className="pl-4 mt-1 flex flex-col gap-1">
-                    <Link 
-                      to="/about-us" 
+                    <Link
+                      to="/about-us"
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                     >
                       About Us
                     </Link>
-                    <a 
-                      href="/about-us#vision-mission" 
-                      onClick={(e) => handleMobileSectionClick(e, 'vision-mission')}
+                    <a
+                      href="/about-us#vision-mission"
+                      onClick={(e) =>
+                        handleMobileSectionClick(e, "vision-mission")
+                      }
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Vision & Mission
                     </a>
-                    <a 
-                      href="/about-us#core-values" 
-                      onClick={(e) => handleMobileSectionClick(e, 'core-values')}
+                    <a
+                      href="/about-us#core-values"
+                      onClick={(e) =>
+                        handleMobileSectionClick(e, "core-values")
+                      }
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Core Values
                     </a>
-                    <a 
-                      href="/about-us#our-journey" 
-                      onClick={(e) => handleMobileSectionClick(e, 'our-journey')}
+                    <a
+                      href="/about-us#our-journey"
+                      onClick={(e) =>
+                        handleMobileSectionClick(e, "our-journey")
+                      }
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Our Journey
                     </a>
-                    <a 
-                      href="/about-us#board-of-directors" 
-                      onClick={(e) => handleMobileSectionClick(e, 'board-of-directors')}
+                    <a
+                      href="/about-us#board-of-directors"
+                      onClick={(e) =>
+                        handleMobileSectionClick(e, "board-of-directors")
+                      }
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Board of Directors
                     </a>
-                    <a 
-                      href="https://www.refex.group/careers/" 
-                      target="_blank" 
+                    <a
+                      href="https://www.refex.group/careers/"
+                      target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                     >
                       Careers
                     </a>
-                    <a 
-                      href="https://www.refex.group/diversity-inclusion/" 
-                      target="_blank" 
+                    <a
+                      href="https://www.refex.group/diversity-inclusion/"
+                      target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                     >
                       Diversity Inclusion
                     </a>
-                    <a 
-                      href="https://www.refex.group/gallery/" 
-                      target="_blank" 
+                    <a
+                      href="https://www.refex.group/gallery/"
+                      target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
@@ -474,35 +600,47 @@ export default function Navbar() {
 
               {/* Businesses Dropdown - Mobile */}
               <div>
-                <button 
-                  onClick={() => setMobileDropdown(mobileDropdown === 'business' ? null : 'business')}
+                <button
+                  onClick={() =>
+                    setMobileDropdown(
+                      mobileDropdown === "business" ? null : "business",
+                    )
+                  }
                   className="w-full px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors flex items-center justify-between cursor-pointer"
                 >
                   BUSINESSES
-                  <i className={`ri-arrow-${mobileDropdown === 'business' ? 'up' : 'down'}-s-line text-base`}></i>
+                  <i
+                    className={`ri-arrow-${mobileDropdown === "business" ? "up" : "down"}-s-line text-base`}
+                  ></i>
                 </button>
-                {mobileDropdown === 'business' && (
+                {mobileDropdown === "business" && (
                   <div className="pl-4 mt-1 flex flex-col gap-1">
                     {/* Solar Energy with Sub-dropdown */}
                     <div>
-                      <button 
-                        onClick={() => setMobileSubDropdown(mobileSubDropdown === 'solar' ? null : 'solar')}
+                      <button
+                        onClick={() =>
+                          setMobileSubDropdown(
+                            mobileSubDropdown === "solar" ? null : "solar",
+                          )
+                        }
                         className="w-full px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors flex items-center justify-between cursor-pointer"
                       >
                         Renewable IPP
-                        <i className={`ri-arrow-${mobileSubDropdown === 'solar' ? 'up' : 'down'}-s-line text-base`}></i>
+                        <i
+                          className={`ri-arrow-${mobileSubDropdown === "solar" ? "up" : "down"}-s-line text-base`}
+                        ></i>
                       </button>
-                      {mobileSubDropdown === 'solar' && (
+                      {mobileSubDropdown === "solar" && (
                         <div className="pl-4 mt-1 flex flex-col gap-1">
-                          <Link 
-                            to="/solar-energy" 
+                          <Link
+                            to="/solar-energy"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Solar Energy
                           </Link>
-                          <Link 
-                            to="/energy-storage-solutions" 
+                          <Link
+                            to="/energy-storage-solutions"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
@@ -514,38 +652,44 @@ export default function Navbar() {
 
                     {/* Compressed Bio-Gas with Sub-dropdown */}
                     <div>
-                      <button 
-                        onClick={() => setMobileSubDropdown(mobileSubDropdown === 'cbg' ? null : 'cbg')}
+                      <button
+                        onClick={() =>
+                          setMobileSubDropdown(
+                            mobileSubDropdown === "cbg" ? null : "cbg",
+                          )
+                        }
                         className="w-full px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors flex items-center justify-between cursor-pointer"
                       >
                         Compressed Bio-Gas
-                        <i className={`ri-arrow-${mobileSubDropdown === 'cbg' ? 'up' : 'down'}-s-line text-base`}></i>
+                        <i
+                          className={`ri-arrow-${mobileSubDropdown === "cbg" ? "up" : "down"}-s-line text-base`}
+                        ></i>
                       </button>
-                      {mobileSubDropdown === 'cbg' && (
+                      {mobileSubDropdown === "cbg" && (
                         <div className="pl-4 mt-1 flex flex-col gap-1">
-                          <Link 
-                            to="/compressed-bio-gas" 
+                          <Link
+                            to="/compressed-bio-gas"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Compressed Bio-Gas
                           </Link>
-                          <Link 
-                            to="/spectrum-renewable" 
+                          <Link
+                            to="/spectrum-renewable"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Spectrum Renewables
                           </Link>
-                          <Link 
-                            to="/vyzag-bio-energy" 
+                          <Link
+                            to="/vyzag-bio-energy"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
                             Vyzag Bio-Energy
                           </Link>
-                          <Link 
-                            to="/biodhanic" 
+                          <Link
+                            to="/biodhanic"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >
@@ -614,24 +758,24 @@ export default function Navbar() {
               </div>
               */}
 
-            <Link 
-                to="/investors" 
+              <Link
+                to="/investors"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
                 INVESTOR RELATIONS
               </Link>
 
-              <Link 
-                to="/esg" 
+              <Link
+                to="/esg"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
                 ESG
               </Link>
 
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-brand/10 hover:text-brand rounded-md transition-colors"
               >
