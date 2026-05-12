@@ -323,7 +323,7 @@ export default function Navbar() {
                         {isCBGOpen && (
                           <div className="absolute left-full top-0 ml-0 w-64 bg-white shadow-lg rounded-lg py-2 z-50">
                             <Link
-                              to="/spectrum-renewable"
+                              to="/refex-cbg-kolhapur"
                               className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap"
                             >
                               Refex CBG Kolhapur
@@ -675,7 +675,7 @@ export default function Navbar() {
                             Compressed Bio-Gas
                           </Link>
                           <Link
-                            to="/spectrum-renewable"
+                            to="/refex-cbg-kolhapur"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="px-4 py-2 text-sm text-gray-600 hover:text-brand transition-colors"
                           >

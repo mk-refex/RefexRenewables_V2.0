@@ -15,7 +15,7 @@ export default function InitiativesSection() {
       image: "/wp-content/uploads/2025/10/spectrum-cover.png",
       title: "Refex CBG Kolhapur",
       number: "02",
-      link: "/spectrum-renewable",
+      link: "/refex-cbg-kolhapur",
     },
     {
       image: "/wp-content/uploads/2025/10/vizag-cover.png",
