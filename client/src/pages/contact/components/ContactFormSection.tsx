@@ -1,4 +1,5 @@
 import SectionHeading from '@/components/common/SectionHeading';
+import IndiaCityCombobox from './IndiaCityCombobox';
 import { useEmailValidation } from '@/hooks/useEmailValidation';
 import { usePhoneValidation } from '@/hooks/usePhoneValidation';
 import { contactApi } from '@/services/api';
@@ -12,6 +13,18 @@ const MIN_NAME_LEN = 2;
 const MIN_MESSAGE_LEN = 15;
 const SUBMIT_COOLDOWN_MS = 10_000;
 
+const FIELD_LABEL_CLASS =
+  'mb-1 block text-sm font-medium text-gray-800';
+
+const PRODUCT_OPTIONS = [
+  'Solar Energy',
+  'Energy Storage Solutions',
+  'Compressed Bio-Gas',
+  'Spectrum Renewables',
+  'Vyzag Bio-Energy',
+  'Refex Bio-Dhanic',
+] as const;
+
 /** E.164 for libphonenumber / API; react-phone-input-2 `value` is digits-only */
 function digitsToE164(digitsValue: string): string {
   const d = String(digitsValue ?? '').replace(/\D/g, '');
@@ -22,7 +35,10 @@ export default function ContactFormSection() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    sales: '',
+    company: '',
+    product: '',
+    enquiryType: '',
+    city: '',
     message: '',
   });
   const [phoneDigits, setPhoneDigits] = useState('');
@@ -34,7 +50,10 @@ export default function ContactFormSection() {
 
   const [nameError, setNameError] = useState<string | null>(null);
   const [messageError, setMessageError] = useState<string | null>(null);
-  const [salesError, setSalesError] = useState<string | null>(null);
+  const [companyError, setCompanyError] = useState<string | null>(null);
+  const [productError, setProductError] = useState<string | null>(null);
+  const [enquiryTypeError, setEnquiryTypeError] = useState<string | null>(null);
+  const [cityError, setCityError] = useState<string | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -129,12 +148,43 @@ export default function ContactFormSection() {
     return true;
   };
 
-  const validateSales = (value: string) => {
+  const validateCompany = (value: string) => {
     if (!String(value ?? '').trim()) {
-      setSalesError('Please select an enquiry type');
+      setCompanyError('Company name is required');
       return false;
     }
-    setSalesError(null);
+    setCompanyError(null);
+    return true;
+  };
+
+  const validateProduct = (value: string) => {
+    if (!String(value ?? '').trim()) {
+      setProductError('Please select a product / business line');
+      return false;
+    }
+    if (!PRODUCT_OPTIONS.includes(value as (typeof PRODUCT_OPTIONS)[number])) {
+      setProductError('Please select a valid product / business line');
+      return false;
+    }
+    setProductError(null);
+    return true;
+  };
+
+  const validateEnquiryType = (value: string) => {
+    if (!String(value ?? '').trim()) {
+      setEnquiryTypeError('Please select an enquiry type');
+      return false;
+    }
+    setEnquiryTypeError(null);
+    return true;
+  };
+
+  const validateCity = (value: string) => {
+    if (!String(value ?? '').trim()) {
+      setCityError('City is required');
+      return false;
+    }
+    setCityError(null);
     return true;
   };
 
@@ -151,10 +201,22 @@ export default function ContactFormSection() {
     const okName = validateName(formData.fullName);
     const okEmail = validateEmail(formData.email);
     const okPhone = validatePhone(phoneE164);
-    const okSales = validateSales(formData.sales);
+    const okCompany = validateCompany(formData.company);
+    const okProduct = validateProduct(formData.product);
+    const okEnquiryType = validateEnquiryType(formData.enquiryType);
+    const okCity = validateCity(formData.city);
     const okMessage = validateMessage(formData.message);
 
-    if (!okName || !okEmail || !okPhone || !okSales || !okMessage) {
+    if (
+      !okName ||
+      !okEmail ||
+      !okPhone ||
+      !okCompany ||
+      !okProduct ||
+      !okEnquiryType ||
+      !okCity ||
+      !okMessage
+    ) {
       setSubmitStatus('error');
       setSubmitErrorMessage('');
       return;
@@ -162,6 +224,13 @@ export default function ContactFormSection() {
 
     if (formData.message.length > 500) {
       setMessageError('Message must be 500 characters or less');
+      return;
+    }
+
+    if (!captchaInput.trim()) {
+      setSubmitStatus('error');
+      setSubmitErrorMessage('');
+      setCaptchaError('CAPTCHA is required.');
       return;
     }
 
@@ -194,7 +263,10 @@ export default function ContactFormSection() {
         fullName: formData.fullName.trim(),
         email: formData.email.trim(),
         phone: phoneE164,
-        sales: formData.sales.trim(),
+        company: formData.company.trim(),
+        product: formData.product.trim(),
+        enquiryType: formData.enquiryType.trim(),
+        city: formData.city.trim(),
         message: formData.message.trim(),
       });
 
@@ -203,7 +275,10 @@ export default function ContactFormSection() {
       setFormData({
         fullName: '',
         email: '',
-        sales: '',
+        company: '',
+        product: '',
+        enquiryType: '',
+        city: '',
         message: '',
       });
       setPhoneDigits('');
@@ -211,7 +286,10 @@ export default function ContactFormSection() {
       setPhoneError(null);
       setNameError(null);
       setMessageError(null);
-      setSalesError(null);
+      setCompanyError(null);
+      setProductError(null);
+      setEnquiryTypeError(null);
+      setCityError(null);
       generateCaptcha();
     } catch (error: unknown) {
       setSubmitStatus('error');
@@ -254,10 +332,14 @@ export default function ContactFormSection() {
             >
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
                 <div>
+                  <label htmlFor="contact-full-name" className={FIELD_LABEL_CLASS}>
+                    Full Name <span className="text-red-600">*</span>
+                  </label>
                   <input
+                    id="contact-full-name"
                     type="text"
                     name="fullName"
-                    placeholder="Full Name"
+                    placeholder="Enter full name"
                     value={formData.fullName}
                     onChange={(e) => {
                       setFormData({ ...formData, fullName: e.target.value });
@@ -268,16 +350,21 @@ export default function ContactFormSection() {
                       nameError ? 'border-red-400' : 'border-gray-300'
                     }`}
                     autoComplete="name"
+                    required
                   />
                   {nameError ? (
                     <p className="mt-1 text-sm text-red-700">{nameError}</p>
                   ) : null}
                 </div>
                 <div>
+                  <label htmlFor="contact-email" className={FIELD_LABEL_CLASS}>
+                    Email <span className="text-red-600">*</span>
+                  </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
-                    placeholder="Email Address"
+                    placeholder="Enter email address"
                     value={formData.email}
                     onChange={(e) => {
                       const next = e.target.value.replace(/\s/g, '');
@@ -290,6 +377,7 @@ export default function ContactFormSection() {
                     }`}
                     autoComplete="email"
                     inputMode="email"
+                    required
                   />
                   {emailError ? (
                     <p className="mt-1 text-sm text-red-700">{emailError}</p>
@@ -298,7 +386,10 @@ export default function ContactFormSection() {
               </div>
 
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
-                <div className="contact-phone-input">
+                <div className="contact-phone-input relative z-0">
+                  <label htmlFor="contact-phone" className={FIELD_LABEL_CLASS}>
+                    Mobile Number <span className="text-red-600">*</span>
+                  </label>
                   <PhoneInput
                     country="in"
                     preferredCountries={['in']}
@@ -309,6 +400,7 @@ export default function ContactFormSection() {
                     }}
                     onBlur={() => validatePhone(phoneE164)}
                     inputProps={{
+                      id: 'contact-phone',
                       name: 'phone',
                       required: true,
                       autoComplete: 'tel',
@@ -331,16 +423,48 @@ export default function ContactFormSection() {
                   ) : null}
                 </div>
                 <div>
-                  <select
-                    name="sales"
-                    value={formData.sales}
+                  <label htmlFor="contact-company" className={FIELD_LABEL_CLASS}>
+                    Company Name <span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    id="contact-company"
+                    type="text"
+                    name="company"
+                    placeholder="Enter company name"
+                    value={formData.company}
                     onChange={(e) => {
-                      setFormData({ ...formData, sales: e.target.value });
-                      if (salesError) setSalesError(null);
+                      setFormData({ ...formData, company: e.target.value });
+                      if (companyError) setCompanyError(null);
                     }}
-                    onBlur={() => validateSales(formData.sales)}
+                    onBlur={() => validateCompany(formData.company)}
+                    className={`w-full rounded-md border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
+                      companyError ? 'border-red-400' : 'border-gray-300'
+                    }`}
+                    autoComplete="organization"
+                    required
+                  />
+                  {companyError ? (
+                    <p className="mt-1 text-sm text-red-700">{companyError}</p>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+                <div>
+                  <label htmlFor="contact-enquiry-type" className={FIELD_LABEL_CLASS}>
+                    Enquiry Type <span className="text-red-600">*</span>
+                  </label>
+                  <select
+                    id="contact-enquiry-type"
+                    name="enquiryType"
+                    value={formData.enquiryType}
+                    onChange={(e) => {
+                      setFormData({ ...formData, enquiryType: e.target.value });
+                      if (enquiryTypeError) setEnquiryTypeError(null);
+                    }}
+                    onBlur={() => validateEnquiryType(formData.enquiryType)}
                     className={`w-full rounded-md border bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
-                      salesError ? 'border-red-400' : 'border-gray-300'
+                      enquiryTypeError ? 'border-red-400' : 'border-gray-300'
                     }`}
                     required
                   >
@@ -350,16 +474,67 @@ export default function ContactFormSection() {
                     <option value="General Inquiry">General Inquiry</option>
                     <option value="Investor Relations">Investor Relations</option>
                   </select>
-                  {salesError ? (
-                    <p className="mt-1 text-sm text-red-700">{salesError}</p>
+                  {enquiryTypeError ? (
+                    <p className="mt-1 text-sm text-red-700">{enquiryTypeError}</p>
+                  ) : null}
+                </div>
+                <div>
+                  <label htmlFor="contact-product" className={FIELD_LABEL_CLASS}>
+                    Product / Service <span className="text-red-600">*</span>
+                  </label>
+                  <select
+                    id="contact-product"
+                    name="product"
+                    value={formData.product}
+                    onChange={(e) => {
+                      setFormData({ ...formData, product: e.target.value });
+                      if (productError) setProductError(null);
+                    }}
+                    onBlur={() => validateProduct(formData.product)}
+                    className={`w-full rounded-md border bg-white px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
+                      productError ? 'border-red-400' : 'border-gray-300'
+                    }`}
+                    required
+                  >
+                    <option value="">Select product / service</option>
+                    {PRODUCT_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  {productError ? (
+                    <p className="mt-1 text-sm text-red-700">{productError}</p>
                   ) : null}
                 </div>
               </div>
 
+              <div className="relative z-20">
+                <label
+                  htmlFor="contact-city-combobox"
+                  className={FIELD_LABEL_CLASS}
+                >
+                  City <span className="text-red-600">*</span>
+                </label>
+                <IndiaCityCombobox
+                  value={formData.city}
+                  onChange={(city) => {
+                    setFormData({ ...formData, city });
+                    if (cityError) setCityError(null);
+                  }}
+                  error={cityError}
+                  onBlur={() => validateCity(formData.city)}
+                />
+              </div>
+
               <div>
+                <label htmlFor="contact-message" className={FIELD_LABEL_CLASS}>
+                  Message <span className="text-red-600">*</span>
+                </label>
                 <textarea
+                  id="contact-message"
                   name="message"
-                  placeholder="Your message (at least 15 characters)"
+                  placeholder="Enter your message (at least 15 characters)"
                   value={formData.message}
                   onChange={(e) => {
                     setFormData({ ...formData, message: e.target.value });
@@ -371,6 +546,7 @@ export default function ContactFormSection() {
                   className={`w-full resize-none rounded-md border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3 ${
                     messageError ? 'border-red-400' : 'border-gray-300'
                   }`}
+                  required
                 />
                 <div className="mt-1 flex justify-between text-xs text-gray-500">
                   <span>Minimum {MIN_MESSAGE_LEN} characters</span>
@@ -398,7 +574,10 @@ export default function ContactFormSection() {
                 <input
                   type="text"
                   value={captchaInput}
-                  onChange={(e) => setCaptchaInput(e.target.value)}
+                  onChange={(e) => {
+                    setCaptchaInput(e.target.value);
+                    if (captchaError) setCaptchaError('');
+                  }}
                   placeholder="Enter CAPTCHA"
                   className="min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-sm uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:px-4 sm:py-3"
                   required

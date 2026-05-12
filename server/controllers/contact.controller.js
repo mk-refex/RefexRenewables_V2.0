@@ -11,6 +11,15 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const DUPLICATE_WINDOW_MS = 60 * 60 * 1000;
 const recentEnquiryKeys = new Map();
 
+const PRODUCT_OPTIONS = [
+  "Solar Energy",
+  "Energy Storage Solutions",
+  "Compressed Bio-Gas",
+  "Spectrum Renewables",
+  "Vyzag Bio-Energy",
+  "Refex Bio-Dhanic",
+];
+
 function fingerprint(email, phoneDigits) {
   return `${String(email).trim().toLowerCase()}:${phoneDigits}`;
 }
@@ -61,7 +70,16 @@ const contactSubmissionSchema = z.object({
     .trim()
     .min(1, "Enter a valid mobile number")
     .refine((val) => isValidContactMobile(val), "Enter a valid mobile number"),
-  sales: z.string().trim().min(1, "Please select an enquiry type"),
+  company: z.string().trim().min(1, "Company name is required"),
+  product: z
+    .string()
+    .trim()
+    .refine(
+      (val) => PRODUCT_OPTIONS.includes(val),
+      "Please select a valid product / business line",
+    ),
+  enquiryType: z.string().trim().min(1, "Please select an enquiry type"),
+  city: z.string().trim().min(1, "City is required"),
   message: z
     .string()
     .trim()
@@ -103,6 +121,14 @@ export async function submitContactForm(req, res) {
       if (phoneErrors?.length) {
         return res.status(400).json({ message: phoneErrors[0] });
       }
+      const cityErrors = parse.error.flatten().fieldErrors.city;
+      if (cityErrors?.length) {
+        return res.status(400).json({ message: cityErrors[0] });
+      }
+      const productErrors = parse.error.flatten().fieldErrors.product;
+      if (productErrors?.length) {
+        return res.status(400).json({ message: productErrors[0] });
+      }
       return res.status(400).json({
         message: "Please fill in all required fields correctly.",
         errors: parse.error.flatten().fieldErrors,
@@ -129,7 +155,10 @@ export async function submitContactForm(req, res) {
       email: parse.data.email,
       phone: phoneDigits,
       Phone_Number: phoneDigits,
-      company: parse.data.sales || "",
+      company: parse.data.company,
+      Product: parse.data.product,
+      enquiryType: parse.data.enquiryType,
+      city: parse.data.city,
       message: parse.data.message,
       ...meta,
     };

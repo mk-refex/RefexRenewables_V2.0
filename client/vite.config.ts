@@ -77,7 +77,15 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    /** Use 5173 so `/api/*` can be proxied to the Express app (default port 3000) without clashing. */
+    port: Number(process.env.VITE_DEV_PORT) || 5173,
     host: "0.0.0.0",
+    proxy: {
+      "/api": {
+        target:
+          process.env.VITE_DEV_PROXY_TARGET || "http://127.0.0.1:3000",
+        changeOrigin: true,
+      },
+    },
   },
 });

@@ -214,6 +214,27 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20">
           <div className="container mx-auto px-4 py-6 sm:px-6">
+            <p className="mb-4 text-center text-xs text-gray-400">
+              Location data includes information from{' '}
+              <a
+                href="https://www.openstreetmap.org/copyright"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-green-400"
+              >
+                OpenStreetMap
+              </a>{' '}
+              and{' '}
+              <a
+                href="https://github.com/dr5hn/countrystatecity-countries"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-green-400"
+              >
+                CountryStateCity
+              </a>{' '}
+              (ODbL-1.0).
+            </p>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
               <p className="text-center text-sm text-gray-300 md:text-left">
                 © 2025 Refex Renewables & Infrastructure Limited. All rights reserved

@@ -514,6 +514,28 @@ export const smtpApi = {
   },
 };
 
+/** India city list (ODbL). Cached 24h on server. */
+export const geoApi = {
+  getIndiaCities: async (): Promise<string[]> => {
+    const base = getServerBase();
+    const res = await fetch(`${base}/api/geo/india-cities`, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+    });
+    const j = (await res.json().catch(() => ({}))) as {
+      success?: boolean;
+      cities?: string[];
+      message?: string;
+    };
+    if (!res.ok || j.success === false || !Array.isArray(j.cities)) {
+      throw new Error(
+        (j.message as string) || "Unable to load India cities.",
+      );
+    }
+    return j.cities;
+  },
+};
+
 export const contactApi = {
   /** API-based duplicate check (email + phone digits) — align with other Refex sites */
   checkEnquiry: async (payload: { email: string; phone: string }) => {
@@ -537,7 +559,10 @@ export const contactApi = {
     fullName: string;
     email: string;
     phone?: string;
-    sales?: string;
+    company: string;
+    product: string;
+    enquiryType: string;
+    city: string;
     message: string;
   }) => {
     const base = getServerBase();

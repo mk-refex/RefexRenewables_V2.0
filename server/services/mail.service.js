@@ -75,7 +75,7 @@ export async function sendContactAcknowledgement(form) {
     to: form.email,
     replyTo: config.replyToEmail || undefined,
     subject: "We received your enquiry - Refex Renewables",
-    text: `Hello ${form.fullName},\n\nThank you for contacting Refex Renewables. We have received your enquiry and our team will get back to you shortly.\n\nYour details:\n- Email: ${form.email}\n- Phone: ${form.phone || "N/A"}\n- Department: ${form.sales || "N/A"}\n- Message: ${form.message}\n\nRegards,\nRefex Renewables`,
+    text: `Hello ${form.fullName},\n\nThank you for contacting Refex Renewables. We have received your enquiry and our team will get back to you shortly.\n\nYour details:\n- Email: ${form.email}\n- Phone: ${form.phone || "N/A"}\n- Company: ${form.company || "N/A"}\n- Product / sales: ${form.product || "N/A"}\n- Enquiry type: ${form.enquiryType || "N/A"}\n- City: ${form.city || "N/A"}\n- Message: ${form.message}\n\nRegards,\nRefex Renewables`,
     html: `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
         <h2 style="margin-bottom: 8px;">Thank you for contacting Refex Renewables</h2>
@@ -84,7 +84,10 @@ export async function sendContactAcknowledgement(form) {
         <div style="margin: 16px 0; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb;">
           <p style="margin: 0 0 6px;"><strong>Email:</strong> ${form.email}</p>
           <p style="margin: 0 0 6px;"><strong>Phone:</strong> ${form.phone || "N/A"}</p>
-          <p style="margin: 0 0 6px;"><strong>Department:</strong> ${form.sales || "N/A"}</p>
+          <p style="margin: 0 0 6px;"><strong>Company:</strong> ${form.company || "N/A"}</p>
+          <p style="margin: 0 0 6px;"><strong>Product / sales:</strong> ${form.product || "N/A"}</p>
+          <p style="margin: 0 0 6px;"><strong>Enquiry type:</strong> ${form.enquiryType || "N/A"}</p>
+          <p style="margin: 0 0 6px;"><strong>City:</strong> ${form.city || "N/A"}</p>
           <p style="margin: 0;"><strong>Message:</strong> ${form.message}</p>
         </div>
         <p>Regards,<br/>Refex Renewables</p>
