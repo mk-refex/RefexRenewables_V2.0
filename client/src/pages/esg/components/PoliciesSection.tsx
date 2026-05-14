@@ -1,17 +1,17 @@
 export function PoliciesSection() {
   const policies = [
     {
-      title: "Quality Policy",
+      title: "QHSE Policy",
       image:
         "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/environment.jpg",
-      link: "https://www.refex.group/wp-content/uploads/2023/03/Quality-Policy.pdf",
+      link: "https://refex.group/uploads/documents/Refex_Group_QHSE_Policy.pdf",
     },
-    {
-      title: "EHS Policy",
-      image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/renewable-energy.jpg",
-      link: "https://www.refex.group/wp-content/uploads/2023/03/EHS-Policy.pdf",
-    },
+    // {
+    //   title: "EHS Policy",
+    //   image:
+    //     "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/renewable-energy.jpg",
+    //   link: "https://www.refex.group/wp-content/uploads/2023/03/EHS-Policy.pdf",
+    // },
     {
       title: "Sustainability Policy",
       image:
@@ -38,6 +38,38 @@ export function PoliciesSection() {
     },
   ];
 
+  const firstRowPolicies = policies.slice(0, 2);
+  const secondRowPolicies = policies.slice(2);
+
+  const renderPolicyCard = (policy: (typeof policies)[number], index: number) => (
+    <div
+      key={`${policy.title}-${index}`}
+      className="group relative w-full max-w-sm overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl"
+    >
+      <div className="relative h-80 overflow-hidden">
+        <img
+          src={policy.image}
+          alt={policy.title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-green-900/90 via-green-900/50 to-transparent"></div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-5 lg:p-6">
+        <h5 className="mb-3 text-lg font-bold sm:mb-4 sm:text-xl">
+          {policy.title}
+        </h5>
+        <a
+          href={policy.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block cursor-pointer whitespace-nowrap rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-brand-hover sm:px-6 sm:text-base"
+        >
+          View Policy
+        </a>
+      </div>
+    </div>
+  );
+
   return (
     <section id="esg-policies" className="bg-gray-50 py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
@@ -54,35 +86,15 @@ export function PoliciesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {policies.map((policy, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="relative h-80 overflow-hidden">
-                <img
-                  src={policy.image}
-                  alt={policy.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-green-900/90 via-green-900/50 to-transparent"></div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-5 lg:p-6">
-                <h5 className="mb-3 text-lg font-bold sm:mb-4 sm:text-xl">
-                  {policy.title}
-                </h5>
-                <a
-                  href={policy.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block cursor-pointer whitespace-nowrap rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-brand-hover sm:px-6 sm:text-base"
-                >
-                  View Policy
-                </a>
-              </div>
-            </div>
-          ))}
+        <div className="space-y-8">
+          <div className="flex flex-wrap justify-center gap-8">
+            {firstRowPolicies.map((policy, index) => renderPolicyCard(policy, index))}
+          </div>
+          <div className="flex flex-wrap justify-center gap-8">
+            {secondRowPolicies.map((policy, index) =>
+              renderPolicyCard(policy, firstRowPolicies.length + index),
+            )}
+          </div>
         </div>
       </div>
     </section>
