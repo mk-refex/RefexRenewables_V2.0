@@ -61,7 +61,7 @@ const AwardsSection = () => {
             <div className="text-center flex-1">
               <div className="mb-6">
                 <img
-                  src="https:refex.group/uploads/images/general/general/general-general-refex-group-in-english-2026-certification-badge-1779775736541-609938.svg"
+                  src="https://refex.group/uploads/images/general/general/general-general-refex-group-in-english-2026-certification-badge-1779775736541-609938.svg"
                   alt="Great Place to Work"
                   className="mx-auto h-44 w-full object-contain sm:h-52 md:h-64"
                 />
