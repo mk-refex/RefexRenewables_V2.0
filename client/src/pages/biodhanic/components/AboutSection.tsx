@@ -10,7 +10,7 @@ export default function AboutSection() {
             <div className="overflow-hidden rounded-lg shadow-sm md:max-w-lg">
               <div className="aspect-[4/3] w-full sm:aspect-[5/4]">
                 <img
-                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/bio-dhanic-img.png"
+                  src="/wp-content/uploads/2025/10/bio-dhanic-img.png"
                   alt="BioDhanic Product"
                   className="h-full w-full object-cover object-center"
                 />
@@ -36,9 +36,10 @@ export default function AboutSection() {
                 </p>
                 <p>
                   Crafted from the by-products of our Compressed Biogas (CBG)
-                  plants, Bio-Dhanic is a soil enhancer derived from agricultural
-                  and organic waste, designed to boost soil productivity, enrich
-                  fertility, and support environmental sustainability.
+                  plants, Bio-Dhanic is a soil enhancer derived from
+                  agricultural and organic waste, designed to boost soil
+                  productivity, enrich fertility, and support environmental
+                  sustainability.
                 </p>
               </div>
             </div>

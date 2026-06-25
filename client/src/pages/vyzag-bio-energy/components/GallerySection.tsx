@@ -5,13 +5,13 @@ const FADE_THRESHOLD = 0.98;
 
 export function GallerySection() {
   const images = [
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery01.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery02.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery03.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery04.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery05.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery06.jpg",
-    "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery07.jpg",
+    "/wp-content/uploads/2025/10/Vjzag-gallery01.jpg",
+    "/wp-content/uploads/2025/10/Vjzag-gallery02.jpg",
+    "/wp-content/uploads/2025/10/Vjzag-gallery03.jpg",
+    "/wp-content/uploads/2025/10/Vjzag-gallery04.jpg",
+    "/wp-content/uploads/2025/10/Vjzag-gallery05.jpg",
+    "/wp-content/uploads/2025/10/Vjzag-gallery06.jpg",
+    "/wp-content/uploads/2025/10/Vjzag-gallery07.jpg",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

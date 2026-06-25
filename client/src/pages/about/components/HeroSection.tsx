@@ -1,11 +1,11 @@
-import HeroHeading from '@/components/common/HeroHeading';
+import HeroHeading from "@/components/common/HeroHeading";
 
 const HeroSection = () => {
   return (
     <section className="relative flex h-[300px] items-center justify-center overflow-hidden lg:h-[400px]">
       <div className="absolute inset-0">
         <img
-          src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/about-us-bg-scaled-new.jpg"
+          src="/wp-content/uploads/2025/10/about-us-bg-scaled-new.jpg"
           alt="About Us"
           className="w-full h-full object-cover"
         />

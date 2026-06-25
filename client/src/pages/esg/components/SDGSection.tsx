@@ -1,5 +1,4 @@
-const GLOBAL_GOALS_LOGO =
-  "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/global-goals.png";
+const GLOBAL_GOALS_LOGO = "/wp-content/uploads/2025/10/global-goals.png";
 
 type SdgGoal = {
   title: string;
@@ -13,7 +12,7 @@ const sdgGoals: SdgGoal[] = [
   {
     title: "Quality Education",
     headline: "QUALITY EDUCATION",
-    icon: "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/E_SDG_Icons-04.jpg",
+    icon: "/wp-content/uploads/2025/10/E_SDG_Icons-04.jpg",
     coverImage:
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80",
     description:
@@ -22,7 +21,7 @@ const sdgGoals: SdgGoal[] = [
   {
     title: "Affordable & Clean Energy",
     headline: "AFFORDABLE & CLEAN ENERGY",
-    icon: "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/E_SDG_Icons-07.jpg",
+    icon: "/wp-content/uploads/2025/10/E_SDG_Icons-07.jpg",
     coverImage:
       "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=80",
     description:
@@ -31,7 +30,7 @@ const sdgGoals: SdgGoal[] = [
   {
     title: "Climate Action",
     headline: "CLIMATE ACTION",
-    icon: "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/E_SDG_Icons-13.jpg",
+    icon: "/wp-content/uploads/2025/10/E_SDG_Icons-13.jpg",
     coverImage:
       "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1200&q=80",
     description:
@@ -40,11 +39,11 @@ const sdgGoals: SdgGoal[] = [
   {
     title: "Life on Land",
     headline: "LIFE ON LAND",
-    icon: "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/E_SDG_Icons-15.jpg",
+    icon: "/wp-content/uploads/2025/10/E_SDG_Icons-15.jpg",
     coverImage:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80",
     description:
-      'Refex\'s initiatives create a better life on land! "Plant for Future" will see 1,00,000 trees planted, while our coal and ash handling business rehabilitates abandoned mines. And we are supporting sustainable agriculture by offering land to local farmers for free. Let\'s make a better world together!',
+      "Refex's initiatives create a better life on land! \"Plant for Future\" will see 1,00,000 trees planted, while our coal and ash handling business rehabilitates abandoned mines. And we are supporting sustainable agriculture by offering land to local farmers for free. Let's make a better world together!",
   },
 ];
 
@@ -94,11 +93,12 @@ export function SDGSection() {
           </h2>
           <div className="space-y-3 text-base leading-relaxed text-gray-700 sm:space-y-4 sm:text-lg lg:text-lg">
             <p>
-              We&apos;re dedicated to making the world a better place! By working
-              with India and the UN to advance the Sustainable Development Goals,
-              we believe that together, we can create meaningful change. Our
-              focus goes beyond shareholder value—we aim to generate positive
-              impact for people, communities, and the planet.
+              We&apos;re dedicated to making the world a better place! By
+              working with India and the UN to advance the Sustainable
+              Development Goals, we believe that together, we can create
+              meaningful change. Our focus goes beyond shareholder value—we aim
+              to generate positive impact for people, communities, and the
+              planet.
             </p>
             <p>
               As proud members of the UN Global Compact, we collaborate with

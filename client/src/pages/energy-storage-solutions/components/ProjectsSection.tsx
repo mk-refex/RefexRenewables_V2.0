@@ -5,22 +5,19 @@ const project = {
   name: "Indian Army 2 MW Project",
   location: "Leh, Ladakh (Partapur & Siachen Base Camps)",
   capacity: "2 MWp with 4 MWhr of BESS",
-  description:
-    "Solar project at the highest altitude in India",
-  details:
-    "Project Completed in July 2022.",
-  extraDetails:
-    "Name of off-taker – Indian Army",
+  description: "Solar project at the highest altitude in India",
+  details: "Project Completed in July 2022.",
+  extraDetails: "Name of off-taker – Indian Army",
   images: [
     "https://refex.group/uploads/images/general/general/general-general-renewables-projects-leh-ladak-1-1766686551455-424737.jpg",
     "https://refex.group/uploads/images/general/general/general-general-renewables-projects-leh-ladak-2-1766686559986-99377.jpg",
     "https://refex.group/uploads/images/general/general/general-general-renewables-projects-leh-ladak-3-1766686568337-360877.jpg",
-    "https://refex.group/uploads/images/general/general/general-general-renewables-projects-leh-ladak-6-1766686576292-88688.jpg"
+    "https://refex.group/uploads/images/general/general/general-general-renewables-projects-leh-ladak-6-1766686576292-88688.jpg",
   ],
 };
 
 const backgroundImage =
-  "https://rril-website.local.sharajman.com/wp-content/uploads/2025/11/energy-solution-gallery01.jpg";
+  "/wp-content/uploads/2025/11/energy-solution-gallery01.jpg";
 
 const getImageSrc = (imagePath: any): string => {
   if (!imagePath) return "";

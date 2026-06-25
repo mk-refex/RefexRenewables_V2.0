@@ -32,7 +32,7 @@ export function LFOMSection() {
           >
             <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white p-1 shadow-md sm:p-1.5">
               <img
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery03.jpg"
+                src="/wp-content/uploads/2025/10/Vjzag-gallery03.jpg"
                 alt="Liquid Fermented Organic manure (LFOM)"
                 className="h-[220px] w-full rounded-xl object-cover sm:h-[260px] md:h-[300px] lg:h-[340px]"
               />

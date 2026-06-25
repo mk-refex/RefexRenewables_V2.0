@@ -23,8 +23,7 @@ const CoreValuesSection = () => {
     {
       iconSrc: "/wp-content/uploads/svg_icons/value-01.svg",
       title: "Principled Excellence",
-      description:
-        "Doing what’s right, with integrity and intention.",
+      description: "Doing what’s right, with integrity and intention.",
       letter: "P",
       bgColor: "#582a2a",
       accentColor: "#582a2a",
@@ -41,8 +40,7 @@ const CoreValuesSection = () => {
     {
       iconSrc: "/wp-content/uploads/svg_icons/value-03.svg",
       title: "Customer Value",
-      description:
-        "Keeping our customers at the heart of everything we do.",
+      description: "Keeping our customers at the heart of everything we do.",
       letter: "C",
       bgColor: "#193164",
       accentColor: "#193164",
@@ -75,8 +73,7 @@ const CoreValuesSection = () => {
         <div
           className="core-values-bg-overlay absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage:
-              "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/green-bg.png)",
+            backgroundImage: "url(/wp-content/uploads/2025/08/green-bg.png)",
             backgroundAttachment: "scroll",
             opacity: 0.1,
           }}

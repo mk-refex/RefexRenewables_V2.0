@@ -2,38 +2,35 @@ export function PoliciesSection() {
   const policies = [
     {
       title: "QHSE Policy",
-      image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/environment.jpg",
+      image: "/wp-content/uploads/2025/10/environment.jpg",
       link: "https://refex.group/uploads/documents/Refex_Group_QHSE_Policy.pdf",
     },
     // {
     //   title: "EHS Policy",
     //   image:
-    //     "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/renewable-energy.jpg",
+    //     "/wp-content/uploads/2025/10/renewable-energy.jpg",
     //   link: "https://www.refex.group/wp-content/uploads/2023/03/EHS-Policy.pdf",
     // },
     {
       title: "Sustainability Policy",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Ecosystem-Restoration-and-Plantation-Drive.jpg",
+        "/wp-content/uploads/2025/10/Ecosystem-Restoration-and-Plantation-Drive.jpg",
       link: "https://www.refex.group/wp-content/uploads/2023/03/Sustainability-ESG-Policy.pdf",
     },
     {
       title: "Grievance Policy",
-      image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Water-Stewardship.jpg",
+      image: "/wp-content/uploads/2025/10/Water-Stewardship.jpg",
       link: "https://www.refex.group/wp-content/uploads/2023/02/Grievance-Policy.pdf",
     },
     {
       title: "Signed ABAC Policy",
       image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Waste-Management-Material-Circularity.jpg",
+        "/wp-content/uploads/2025/10/Waste-Management-Material-Circularity.jpg",
       link: "https://www.refex.group/wp-content/uploads/2025/06/Anti-Bribery-Anti-Corruption-ABAC-Policy.pdf",
     },
     {
       title: "Signed Supplier Vendor Code of Conduct",
-      image:
-        "https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Health-Safety.jpg",
+      image: "/wp-content/uploads/2025/10/Health-Safety.jpg",
       link: "https://www.refex.group/wp-content/uploads/2025/06/Vendor-Code-of-Conduct.pdf",
     },
   ];
@@ -41,7 +38,10 @@ export function PoliciesSection() {
   const firstRowPolicies = policies.slice(0, 2);
   const secondRowPolicies = policies.slice(2);
 
-  const renderPolicyCard = (policy: (typeof policies)[number], index: number) => (
+  const renderPolicyCard = (
+    policy: (typeof policies)[number],
+    index: number,
+  ) => (
     <div
       key={`${policy.title}-${index}`}
       className="group relative w-full max-w-sm overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl"
@@ -88,7 +88,9 @@ export function PoliciesSection() {
 
         <div className="space-y-8">
           <div className="flex flex-wrap justify-center gap-8">
-            {firstRowPolicies.map((policy, index) => renderPolicyCard(policy, index))}
+            {firstRowPolicies.map((policy, index) =>
+              renderPolicyCard(policy, index),
+            )}
           </div>
           <div className="flex flex-wrap justify-center gap-8">
             {secondRowPolicies.map((policy, index) =>

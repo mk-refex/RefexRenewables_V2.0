@@ -12,7 +12,7 @@ export default function AboutSection() {
             <div className="overflow-hidden rounded-lg shadow-sm md:max-w-lg">
               <div className="aspect-[4/3] w-full sm:aspect-[5/4]">
                 <img
-                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/biogas-image.png"
+                  src="/wp-content/uploads/2025/09/biogas-image.png"
                   alt="Compressed Biogas"
                   className="h-full w-full object-contain object-center"
                 />
@@ -42,7 +42,8 @@ export default function AboutSection() {
                   By converting multiple organic waste streams including press
                   mud and municipal solid waste (MSW). we produce Compressed
                   Biogas (CBG), a clean and renewable biofuel, along with
-                  fermented organic manure that supports sustainable agriculture.
+                  fermented organic manure that supports sustainable
+                  agriculture.
                 </p>
                 <p>
                   Our biogas plants not only reduce landfill pressure and

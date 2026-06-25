@@ -11,7 +11,7 @@ export default function AboutSection() {
             <div className="overflow-hidden rounded-lg shadow-sm md:max-w-lg">
               <div className="aspect-[4/3] w-full sm:aspect-[5/4]">
                 <img
-                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/SREPL-img.png"
+                  src="/wp-content/uploads/2025/10/SREPL-img.png"
                   alt="Spectrum Renewable Energy"
                   className="h-full w-full object-cover object-center"
                 />

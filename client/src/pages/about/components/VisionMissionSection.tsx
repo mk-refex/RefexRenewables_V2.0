@@ -9,7 +9,7 @@ const VisionMissionSection = () => {
           <div className="order-2 lg:order-1">
             <div className="relative">
               <img
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/mission-img01.jpg"
+                src="/wp-content/uploads/2025/09/mission-img01.jpg"
                 alt="Vision - Forest from above"
                 className="h-[240px] w-full rounded-lg object-cover shadow-lg sm:h-[300px] md:h-[360px] lg:h-[400px]"
               />
@@ -27,7 +27,8 @@ const VisionMissionSection = () => {
                 Refex aims to be a globally admired conglomerate, driving
                 long-term sustainable growth through innovation, purposeful
                 collaborations and partnerships, and an unwavering commitment to
-                excellence, while contributing meaningfully to societal progress.
+                excellence, while contributing meaningfully to societal
+                progress.
               </p>
               {/* <p>
                 To lead India's clean energy revolution, making sustainable
@@ -75,7 +76,7 @@ const VisionMissionSection = () => {
           <div>
             <div className="relative">
               <img
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/09/vision-img.jpg"
+                src="/wp-content/uploads/2025/09/vision-img.jpg"
                 alt="Mission - Business professional with renewable energy vision"
                 className="h-[240px] w-full rounded-lg object-cover shadow-lg sm:h-[300px] md:h-[360px] lg:h-[400px]"
               />

@@ -47,7 +47,7 @@ const AwardsSection = () => {
             <div className="text-center flex-1">
               <div className="mb-6">
                 <img
-                  src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/08/Solar-award-768x578-1.png"
+                  src="/wp-content/uploads/2025/08/Solar-award-768x578-1.png"
                   alt="Solar Energy Award"
                   className="mx-auto h-44 w-full object-contain sm:h-52 md:h-64"
                 />

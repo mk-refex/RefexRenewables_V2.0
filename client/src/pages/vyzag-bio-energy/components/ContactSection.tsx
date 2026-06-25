@@ -6,8 +6,7 @@ export function ContactSection() {
     <section
       className="relative bg-cover bg-center py-16 sm:py-24 lg:py-32"
       style={{
-        backgroundImage:
-          "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/Vjzag-gallery04.jpg)",
+        backgroundImage: "url(/wp-content/uploads/2025/10/Vjzag-gallery04.jpg)",
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50" />

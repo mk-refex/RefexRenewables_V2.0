@@ -142,7 +142,7 @@ const AboutSection = () => {
           <div className="relative">
             <div className="relative">
               <img
-                src="https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/about-new.png"
+                src="/wp-content/uploads/2025/10/about-new.png"
                 alt="Solar Energy Infrastructure"
                 className="w-full h-auto object-cover"
               />
@@ -152,7 +152,9 @@ const AboutSection = () => {
                 className="absolute bottom-4 left-4 rounded-lg border border-brand bg-white px-3 py-2 shadow-xl transition-transform duration-300 ease-out sm:bottom-8 sm:left-6 sm:px-[18px] sm:py-[10px] lg:bottom-[100px]"
                 style={{ transform: `translateX(${translateX}px)` }}
               >
-                <div className="mb-1 text-3xl font-bold text-gray-900 sm:text-4xl">20+</div>
+                <div className="mb-1 text-3xl font-bold text-gray-900 sm:text-4xl">
+                  20+
+                </div>
                 <div className="whitespace-nowrap text-sm text-gray-600 sm:text-[18px]">
                   Years Experience
                 </div>

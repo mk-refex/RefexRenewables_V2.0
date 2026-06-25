@@ -1,15 +1,15 @@
 export function ReportsSection() {
   const reports = [
     {
-      title: 'Sustainability report',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/environment.jpg',
-      link: 'https://www.refex.group/wp-content/uploads/2025/01/Sustainability-Report-2023-24.pdf'
+      title: "Sustainability report",
+      image: "/wp-content/uploads/2025/10/environment.jpg",
+      link: "https://www.refex.group/wp-content/uploads/2025/01/Sustainability-Report-2023-24.pdf",
     },
     {
-      title: 'ESG Dashboard',
-      image: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/renewable-energy.jpg',
-      link: 'https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/RRIL-ESG-Dashboard-FY25.pdf'
-    }
+      title: "ESG Dashboard",
+      image: "/wp-content/uploads/2025/10/renewable-energy.jpg",
+      link: "/wp-content/uploads/2025/10/RRIL-ESG-Dashboard-FY25.pdf",
+    },
   ];
 
   return (
@@ -22,8 +22,8 @@ export function ReportsSection() {
               className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl"
             >
               <div className="relative h-64 overflow-hidden sm:h-80 md:h-96">
-                <img 
-                  src={report.image} 
+                <img
+                  src={report.image}
                   alt={report.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />

@@ -58,7 +58,7 @@ export default function MicroGridSection() {
             className="h-64 rounded-lg bg-cover bg-center sm:h-80 md:h-[28rem] lg:h-[600px]"
             style={{
               backgroundImage:
-                "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/11/energy-solutions-img02.png-1.jpg)",
+                "url(/wp-content/uploads/2025/11/energy-solutions-img02.png-1.jpg)",
             }}
           />
         </div>

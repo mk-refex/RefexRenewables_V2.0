@@ -7,13 +7,18 @@ export default function HeroSection() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url(https://rril-website.local.sharajman.com/wp-content/uploads/2025/10/solar-energy-bg-new01.jpg)",
+            "url(/wp-content/uploads/2025/10/solar-energy-bg-new01.jpg)",
         }}
       >
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
       <div className="container relative z-10 mx-auto px-4 text-center sm:px-6 lg:px-8">
-        <HeroHeading watermarkText="Solar Energy" text="Solar Energy" watermarkAlign="center" className="text-center" />
+        <HeroHeading
+          watermarkText="Solar Energy"
+          text="Solar Energy"
+          watermarkAlign="center"
+          className="text-center"
+        />
       </div>
     </section>
   );
