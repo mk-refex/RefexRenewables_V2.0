@@ -95,7 +95,7 @@ export default function Navbar() {
             <div className="flex min-w-0 flex-shrink-0 flex-col">
               <Link to="/" className="flex-shrink-0 mb-2">
                 <img
-                  src="/wp-content/uploads/2023/07/refex-logo-seperate.svg"
+                  src="/wp-content/uploads/2023/07/refex-logo-seperate.png"
                   alt="Refex Logo"
                   className="h-10 md:h-12"
                 />

@@ -26,7 +26,7 @@ const Navbar = () => {
               {/* Logo */}
               <Link to="/" className="flex-shrink-0">
                 <img
-                  src="/wp-content/uploads/2023/07/refex-logo-seperate.svg"
+                  src="/wp-content/uploads/2023/07/refex-logo-seperate.png"
                   alt="Refex Logo"
                   className="h-12"
                 />
