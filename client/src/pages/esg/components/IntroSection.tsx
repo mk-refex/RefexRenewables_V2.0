@@ -1,8 +1,8 @@
 export function IntroSection() {
   return (
     <section className="bg-white py-10 sm:py-16 lg:py-20">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-[60px]">
-        <div className="grid items-center gap-6 sm:gap-8 md:grid-cols-[3fr_2fr] md:gap-10 lg:gap-14">
+      <div className="container mx-auto max-w-8xl px-4 sm:px-6 lg:px-[110px]">
+        <div className="grid items-center gap-6 sm:gap-8 md:grid-cols-[3.3fr_1.7fr] md:gap-10 lg:gap-14">
           <div className="w-full">
             <div className="overflow-hidden rounded-lg shadow-sm">
               <img
