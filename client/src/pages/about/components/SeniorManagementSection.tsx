@@ -14,6 +14,19 @@ const SeniorManagementSection = () => {
 
   const managementMembers: ManagementMember[] = [
     {
+      name: "Mr. Rajeev Vaze",
+      position: "Chief Operating Officer",
+      company: "Compressed Bio-Gas (“CBG”) business",
+      image: "/uploads/wp-content/uploads/2025/10/Rajeev.jpg",
+      bio: [
+        "Rajeev Vaze, Vice President, has over 30 years of extensive experience driving strategic initiatives across the renewable energy and infrastructure sectors.",
+        "He is a recognized leader in Strategic Procurement, Cost Optimization, and Project Execution.",
+        "He holds a Graduate degree in Mechanical Engineering from the University of Pune and a Post Graduate Diploma in Materials Management from Symbiosis Institute of Business Management, Pune.",
+        "His proven track record includes impactful assignments at industry-leading companies such as Vikram Solar, Suzlon Energy, Kirloskar Brothers Ltd, and Thermax Ltd.",
+        "He had been handling SCM at organisation al level and now, w.e.f. May 01, 2026, he has been designated as Chief Operating Officer – Compressed Bio-Gas (“CBG”) Business, in the category of ‘senior managerial person’.",
+      ],
+    },
+    {
       name: "Purvesh Madhusudan Kapadia",
       position: "Chief Human Resource Officer",
       company: "",
@@ -110,34 +123,21 @@ const SeniorManagementSection = () => {
         "Recognized with awards such as the CIO 100 Honouree, Skoch Innovation Award, and EMC Transformers Award, Srivaths is known for delivering measurable impact on topline growth, operational efficiency, and customer experience. He holds an MBA from K. J. Somaiya Institute and certifications in Six Sigma and Project Management. A forward-thinking leader, he continues to advise organizations as an independent consultant, enabling digital transformation through design thinking, data science, and secure, cloud-native solutions.",
       ],
     },
-    {
-      name: "Jaya Krishna",
-      position: "Director",
-      company: "Corporate Finance",
-      image: "/uploads/wp-content/uploads/2025/10/Jayakrishna.jpg",
-      bio: [
-        "Jaya Krishna is a seasoned Chartered Accountant with over two decades of leadership experience across corporate finance, project funding, strategic planning, and international financial management.",
-        "Academically, he completed his Master's in Business Administration from the Indian Institute of Management - Mumbai.",
-        "He holds a professional license as a Chartered Accountant from the Institute of Chartered Accountants of India and a professional accountant in the UK.",
-        "Before Refex, he was with MEIL Group.",
-        "He has spearheaded critical financial functions for multinational companies, managing end-to-end finance operations including IPOs, M&A, private equity, treasury, international taxation, and regulatory compliance. His expertise spans diverse sectors and geographies, with a proven track record in handling large-scale greenfield projects, complex acquisition financing, and cross-border funding exceeding ₹15,000 Cr and USD 300+ Million.",
-        "He has played a pivotal role in managing investor relations, board reporting, and global financial consolidation across India, the US, and Europe. His leadership extends to SAP/ERP implementation, cost optimization, risk management, and working capital strategies. With deep knowledge of IFRS, US GAAP, and Indian GAAP, he has ensured strong financial controls and governance while successfully leading audits, compliance, and tax functions. He has also overseen strategic initiatives including debt syndication, structured finance, capital expenditure control, and expansion projects.",
-        "His key achievements include completing 6 successful M&A deals, securing large-scale financing from over 20 banks, leading global joint ventures, and setting up end-to-end finance, commercial, and IT systems. A strategic leader and mentor, he is committed to driving financial excellence, business growth, and long-term stakeholder value.",
-      ],
-    },
-    {
-      name: "Mr. Rajeev Vaze",
-      position: "Chief Operating Officer",
-      company: "Compressed Bio-Gas (“CBG”) business",
-      image: "/uploads/wp-content/uploads/2025/10/Rajeev.jpg",
-      bio: [
-        "Rajeev Vaze, Vice President, has over 30 years of extensive experience driving strategic initiatives across the renewable energy and infrastructure sectors.",
-        "He is a recognized leader in Strategic Procurement, Cost Optimization, and Project Execution.",
-        "He holds a Graduate degree in Mechanical Engineering from the University of Pune and a Post Graduate Diploma in Materials Management from Symbiosis Institute of Business Management, Pune.",
-        "His proven track record includes impactful assignments at industry-leading companies such as Vikram Solar, Suzlon Energy, Kirloskar Brothers Ltd, and Thermax Ltd.",
-        "He had been handling SCM at organisation al level and now, w.e.f. May 01, 2026, he has been designated as Chief Operating Officer – Compressed Bio-Gas (“CBG”) Business, in the category of ‘senior managerial person’.",
-      ],
-    },
+    // {
+    //   name: "Jaya Krishna",
+    //   position: "Director",
+    //   company: "Corporate Finance",
+    //   image: "/uploads/wp-content/uploads/2025/10/Jayakrishna.jpg",
+    //   bio: [
+    //     "Jaya Krishna is a seasoned Chartered Accountant with over two decades of leadership experience across corporate finance, project funding, strategic planning, and international financial management.",
+    //     "Academically, he completed his Master's in Business Administration from the Indian Institute of Management - Mumbai.",
+    //     "He holds a professional license as a Chartered Accountant from the Institute of Chartered Accountants of India and a professional accountant in the UK.",
+    //     "Before Refex, he was with MEIL Group.",
+    //     "He has spearheaded critical financial functions for multinational companies, managing end-to-end finance operations including IPOs, M&A, private equity, treasury, international taxation, and regulatory compliance. His expertise spans diverse sectors and geographies, with a proven track record in handling large-scale greenfield projects, complex acquisition financing, and cross-border funding exceeding ₹15,000 Cr and USD 300+ Million.",
+    //     "He has played a pivotal role in managing investor relations, board reporting, and global financial consolidation across India, the US, and Europe. His leadership extends to SAP/ERP implementation, cost optimization, risk management, and working capital strategies. With deep knowledge of IFRS, US GAAP, and Indian GAAP, he has ensured strong financial controls and governance while successfully leading audits, compliance, and tax functions. He has also overseen strategic initiatives including debt syndication, structured finance, capital expenditure control, and expansion projects.",
+    //     "His key achievements include completing 6 successful M&A deals, securing large-scale financing from over 20 banks, leading global joint ventures, and setting up end-to-end finance, commercial, and IT systems. A strategic leader and mentor, he is committed to driving financial excellence, business growth, and long-term stakeholder value.",
+    //   ],
+    // },
   ];
 
   return (
