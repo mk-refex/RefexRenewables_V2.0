@@ -9,6 +9,8 @@ import uploadRouter from "./upload.routes.js";
 import smtpRouter from "./smtp.routes.js";
 import contactRouter from "./contact.routes.js";
 import geoRouter from "./geo.routes.js";
+import seniorManagementRouter from "./seniorManagement.routes.js";
+import boardOfDirectorsRouter from "./boardOfDirectors.routes.js";
 import { getOverview } from "../controllers/overview.controller.js";
 import { authRequired } from "../middleware/auth.js";
 
@@ -24,6 +26,8 @@ router.use("/page-content", pageContentRouter);
 router.use("/smtp", smtpRouter);
 router.use("/contact", contactRouter);
 router.use("/geo", geoRouter);
+router.use("/senior-management", seniorManagementRouter);
+router.use("/board-of-directors", boardOfDirectorsRouter);
 router.get("/overview", authRequired, getOverview);
 
 export default router;

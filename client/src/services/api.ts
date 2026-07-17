@@ -157,6 +157,95 @@ export async function uploadPdf(file: File): Promise<string> {
   return j.pdfUrl ?? "";
 }
 
+export type SeniorManagementMember = {
+  id: number;
+  name: string;
+  position: string;
+  company: string;
+  image: string;
+  bio: string[];
+  order: number;
+};
+
+export type SeniorManagementContent = {
+  title: string;
+  description: string;
+  members: SeniorManagementMember[];
+};
+
+/** About Us — Senior Management CMS */
+export const seniorManagementApi = {
+  get: async (): Promise<SeniorManagementContent> => {
+    const res = await fetch(`${getServerBase()}/api/senior-management`);
+    if (!res.ok) throw new Error("Failed to fetch senior management");
+    return res.json();
+  },
+  save: async (data: SeniorManagementContent): Promise<SeniorManagementContent> => {
+    const token = localStorage.getItem("auth_token");
+    const res = await fetch(`${getServerBase()}/api/senior-management`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      throw new Error((j.message as string) || "Failed to save senior management");
+    }
+    return res.json();
+  },
+};
+
+export type BoardDirectorMember = {
+  id: number;
+  name: string;
+  position: string;
+  din: string;
+  image: string;
+  bio: string[];
+  directorships: string[];
+  order: number;
+};
+
+export type BoardCeasedButton = {
+  label: string;
+  url: string;
+};
+
+export type BoardOfDirectorsContent = {
+  title: string;
+  description: string;
+  members: BoardDirectorMember[];
+  ceasedButton: BoardCeasedButton;
+};
+
+/** About Us — Board of Directors CMS */
+export const boardOfDirectorsApi = {
+  get: async (): Promise<BoardOfDirectorsContent> => {
+    const res = await fetch(`${getServerBase()}/api/board-of-directors`);
+    if (!res.ok) throw new Error("Failed to fetch board of directors");
+    return res.json();
+  },
+  save: async (data: BoardOfDirectorsContent): Promise<BoardOfDirectorsContent> => {
+    const token = localStorage.getItem("auth_token");
+    const res = await fetch(`${getServerBase()}/api/board-of-directors`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      throw new Error((j.message as string) || "Failed to save board of directors");
+    }
+    return res.json();
+  },
+};
+
 /** Investor Relations CMS API – Hero and Related Links (uses server running by default) */
 export const investorApi = {
   getHero: async () => {
