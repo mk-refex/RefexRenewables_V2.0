@@ -194,7 +194,7 @@ export default function Navbar() {
                     <i className="ri-arrow-down-s-line"></i>
                   </Link>
                   {isAboutOpen && (
-                    <div className="absolute top-full left-0 mt-0 w-56 bg-white shadow-lg rounded-lg py-2 z-50">
+                    <div className="absolute top-full left-0 mt-0 w-72 bg-white shadow-lg rounded-lg py-2 z-50">
                       <a
                         href="/about-us#vision-mission"
                         onClick={(e) => handleSectionClick(e, "vision-mission")}
@@ -224,6 +224,24 @@ export default function Navbar() {
                         className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
                       >
                         Board of Directors
+                      </a>
+                      <a
+                        href="/about-us#key-managerial"
+                        onClick={(e) =>
+                          handleSectionClick(e, "key-managerial")
+                        }
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
+                      >
+                        Key Managerial Personnel
+                      </a>
+                      <a
+                        href="/about-us#senior-management"
+                        onClick={(e) =>
+                          handleSectionClick(e, "senior-management")
+                        }
+                        className="block px-4 py-2 text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors whitespace-nowrap cursor-pointer"
+                      >
+                        Senior Management Personnel
                       </a>
                       <a
                         href="https://www.refex.group/careers/"
@@ -566,6 +584,24 @@ export default function Navbar() {
                       className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
                     >
                       Board of Directors
+                    </a>
+                    <a
+                      href="/about-us#key-managerial"
+                      onClick={(e) =>
+                        handleMobileSectionClick(e, "key-managerial")
+                      }
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
+                    >
+                      KMP
+                    </a>
+                    <a
+                      href="/about-us#senior-management"
+                      onClick={(e) =>
+                        handleMobileSectionClick(e, "senior-management")
+                      }
+                      className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors cursor-pointer"
+                    >
+                      SMP
                     </a>
                     <a
                       href="https://www.refex.group/careers/"

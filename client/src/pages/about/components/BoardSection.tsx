@@ -63,11 +63,11 @@ const BoardSection = () => {
         {loading ? (
           <div className="py-12 text-center text-gray-500">Loading…</div>
         ) : (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          <div className="flex flex-wrap justify-center gap-5 sm:gap-6">
             {boardMembers.map((member, index) => (
               <div
                 key={member.id ?? index}
-                className="bg-brand text-white rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="w-full max-w-[300px] bg-brand text-white rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300 cursor-pointer sm:w-[calc(50%-0.75rem)] sm:max-w-none lg:w-[calc(33.333%-1rem)]"
                 onClick={() =>
                   setSelectedMember(selectedMember === index ? null : index)
                 }

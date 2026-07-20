@@ -198,6 +198,37 @@ export const seniorManagementApi = {
   },
 };
 
+/** Same shape as senior management members */
+export type KeyManagerialMember = SeniorManagementMember;
+export type KeyManagerialContent = SeniorManagementContent;
+
+/** About Us — Key Managerial Personnel CMS */
+export const keyManagerialApi = {
+  get: async (): Promise<KeyManagerialContent> => {
+    const res = await fetch(`${getServerBase()}/api/key-managerial`);
+    if (!res.ok) throw new Error("Failed to fetch key managerial personnel");
+    return res.json();
+  },
+  save: async (data: KeyManagerialContent): Promise<KeyManagerialContent> => {
+    const token = localStorage.getItem("auth_token");
+    const res = await fetch(`${getServerBase()}/api/key-managerial`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      throw new Error(
+        (j.message as string) || "Failed to save key managerial personnel"
+      );
+    }
+    return res.json();
+  },
+};
+
 export type BoardDirectorMember = {
   id: number;
   name: string;

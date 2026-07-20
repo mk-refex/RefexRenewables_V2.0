@@ -5,6 +5,7 @@ import { PageContent } from "./PageContent.js";
 import { SmtpConfig } from "./SmtpConfig.js";
 import { SeniorManagement } from "./SeniorManagement.js";
 import { BoardOfDirectors } from "./BoardOfDirectors.js";
+import { KeyManagerialPersonnel } from "./KeyManagerialPersonnel.js";
 // import { Report } from "./Report.js";
 // import { Transaction } from "./Transaction.js";
 // import { HrmsConfig } from "./HrmsConfig.js";
@@ -25,4 +26,5 @@ export {
   SmtpConfig,
   SeniorManagement,
   BoardOfDirectors,
+  KeyManagerialPersonnel,
 };

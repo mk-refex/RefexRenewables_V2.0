@@ -2,33 +2,33 @@ import FadeInUp from "@/components/common/FadeInUp";
 import { useEffect, useState } from "react";
 import {
   resolveImageUrl,
-  seniorManagementApi,
-  type SeniorManagementMember,
+  keyManagerialApi,
+  type KeyManagerialMember,
 } from "@/services/api";
 
-const SeniorManagementSection = () => {
+const KeyManagerialSection = () => {
   const [selectedMember, setSelectedMember] = useState<number | null>(null);
-  const [title, setTitle] = useState("Senior Management Personnel");
+  const [title, setTitle] = useState("Key Managerial Personnel");
   const [description, setDescription] = useState(
-    "Our leadership team brings decades of combined experience across various domains"
+    "Our key managerial personnel drive strategy, compliance, and day-to-day leadership across the organization"
   );
-  const [managementMembers, setManagementMembers] = useState<SeniorManagementMember[]>([]);
+  const [managementMembers, setManagementMembers] = useState<KeyManagerialMember[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        const data = await seniorManagementApi.get();
+        const data = await keyManagerialApi.get();
         if (cancelled) return;
-        setTitle(data.title || "Senior Management Personnel");
+        setTitle(data.title || "Key Managerial Personnel");
         setDescription(
           data.description ||
-            "Our leadership team brings decades of combined experience across various domains"
+            "Our key managerial personnel drive strategy, compliance, and day-to-day leadership across the organization"
         );
         setManagementMembers(Array.isArray(data.members) ? data.members : []);
       } catch (error) {
-        console.error("Failed to load senior management:", error);
+        console.error("Failed to load key managerial personnel:", error);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -40,7 +40,7 @@ const SeniorManagementSection = () => {
 
   return (
     <section
-      id="senior-management"
+      id="key-managerial"
       className="bg-gray-50 py-12 sm:py-16 lg:py-24"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-[110px]">
@@ -101,7 +101,7 @@ const SeniorManagementSection = () => {
             <div
               role="dialog"
               aria-modal="true"
-              aria-labelledby="senior-mgmt-modal-title"
+              aria-labelledby="key-mgr-modal-title"
               className="relative w-full max-w-2xl rounded-lg bg-white shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
@@ -116,7 +116,7 @@ const SeniorManagementSection = () => {
 
               <div className="max-h-[min(85vh,calc(100dvh-4rem))] overflow-y-auto overscroll-y-contain px-6 pb-8 pt-14 sm:px-8 sm:pt-16">
                 <h3
-                  id="senior-mgmt-modal-title"
+                  id="key-mgr-modal-title"
                   className="pr-10 text-2xl font-bold text-gray-900"
                 >
                   {managementMembers[selectedMember].name}
@@ -143,4 +143,4 @@ const SeniorManagementSection = () => {
   );
 };
 
-export default SeniorManagementSection;
+export default KeyManagerialSection;

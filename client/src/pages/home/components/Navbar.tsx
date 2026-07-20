@@ -76,7 +76,7 @@ const Navbar = () => {
                     ABOUT US
                     <i className="ri-arrow-down-s-line text-base"></i>
                   </button>
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                  <div className="absolute top-full left-0 mt-2 w-72 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                     <Link
                       to="/about-us"
                       className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors"
@@ -106,6 +106,18 @@ const Navbar = () => {
                       className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors"
                     >
                       Board of Directors
+                    </a>
+                    <a
+                      href="/about-us#key-managerial"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors"
+                    >
+                      Key Managerial Personnel
+                    </a>
+                    <a
+                      href="/about-us#senior-management"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-brand/10 hover:text-brand transition-colors"
+                    >
+                      Senior Management Personnel
                     </a>
                     <a
                       href="https://www.refex.group/careers/"
@@ -253,6 +265,18 @@ const Navbar = () => {
                         className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
                       >
                         Board of Directors
+                      </a>
+                      <a
+                        href="/about-us#key-managerial"
+                        className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
+                      >
+                        KMP
+                      </a>
+                      <a
+                        href="/about-us#senior-management"
+                        className="px-4 py-2 text-sm text-gray-700 hover:text-brand transition-colors"
+                      >
+                        SMP
                       </a>
                     </div>
                   )}

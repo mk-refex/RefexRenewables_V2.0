@@ -6,6 +6,7 @@ import OverviewSection from './components/OverviewSection';
 import UsersSection from './components/UsersSection';
 import SeniorManagementCMS from './components/SeniorManagementCMS';
 import BoardDirectorsCMS from './components/BoardDirectorsCMS';
+import KeyManagerialCMS from './components/KeyManagerialCMS';
 import RelatedLinksCMS from './components/RelatedLinksCMS';
 import { investorApi, resolveImageUrl, smtpApi } from '@/services/api';
 
@@ -141,7 +142,8 @@ export default function DashboardPage() {
       { id: 'vision', label: 'Vision & Mission' },
       { id: 'values', label: 'Core Values' },
       { id: 'journey', label: 'Journey' },
-      { id: 'board', label: 'Board' },
+      { id: 'board', label: 'Board of Directors' },
+      { id: 'key-managerial', label: 'Key Managerial Personnel' },
       { id: 'management', label: 'Senior Management' },
       { id: 'committees', label: 'Committees' },
     ],
@@ -565,14 +567,19 @@ export default function DashboardPage() {
       );
     }
 
-    // About Us — Senior Management CMS
-    if (activePage === 'about' && activeTab === 'management') {
-      return <SeniorManagementCMS showNotification={showNotification} />;
-    }
-
     // About Us — Board of Directors CMS
     if (activePage === 'about' && activeTab === 'board') {
       return <BoardDirectorsCMS showNotification={showNotification} />;
+    }
+
+    // About Us — Key Managerial Personnel CMS
+    if (activePage === 'about' && activeTab === 'key-managerial') {
+      return <KeyManagerialCMS showNotification={showNotification} />;
+    }
+
+    // About Us — Senior Management CMS
+    if (activePage === 'about' && activeTab === 'management') {
+      return <SeniorManagementCMS showNotification={showNotification} />;
     }
 
     // Default message for sections without CMS fields yet

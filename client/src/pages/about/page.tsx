@@ -6,6 +6,7 @@ import VisionMissionSection from './components/VisionMissionSection';
 import CoreValuesSection from './components/CoreValuesSection';
 import JourneySection from './components/JourneySection';
 import BoardSection from './components/BoardSection';
+import KeyManagerialSection from './components/KeyManagerialSection';
 import SeniorManagementSection from './components/SeniorManagementSection';
 import CommitteesSection from './components/CommitteesSection';
 
@@ -18,6 +19,7 @@ const AboutPage = () => {
       <CoreValuesSection />
       <JourneySection />
       <BoardSection />
+      <KeyManagerialSection />
       <SeniorManagementSection />
       <CommitteesSection />
     </Layout>
