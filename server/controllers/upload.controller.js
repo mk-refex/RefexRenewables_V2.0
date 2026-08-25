@@ -19,20 +19,24 @@ const pdfStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase() || ".pdf";
-    const name = path.basename(file.originalname, path.extname(file.originalname));
+    const name = path.basename(
+      file.originalname,
+      path.extname(file.originalname),
+    );
     const safe = `${name}-${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
     cb(null, safe);
   },
 });
 
 const pdfFilter = (req, file, cb) => {
-  const ok = /\.pdf$/i.test(file.originalname) || file.mimetype === "application/pdf";
+  const ok =
+    /\.pdf$/i.test(file.originalname) || file.mimetype === "application/pdf";
   cb(null, ok);
 };
 
 export const uploadPdf = multer({
   storage: pdfStorage,
-  limits: { fileSize: 15 * 1024 * 1024 },
+  limits: { fileSize: 50 * 1024 * 1024 },
   fileFilter: pdfFilter,
 });
 
