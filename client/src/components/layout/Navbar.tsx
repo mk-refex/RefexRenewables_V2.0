@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getCurrentStockPrice, type StockPriceResponse } from "@/services/api";
+
+// Stock ticker temporarily hidden until stock APIs are updated.
+const SHOW_STOCK_TICKER = false;
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -15,8 +17,6 @@ export default function Navbar() {
   const [mobileSubDropdown, setMobileSubDropdown] = useState<string | null>(
     null,
   );
-  const [stockData, setStockData] = useState<StockPriceResponse | null>(null);
-  const [stockLoading, setStockLoading] = useState(true);
 
   const handleSectionClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -62,29 +62,6 @@ export default function Navbar() {
     }, 100);
   };
 
-  useEffect(() => {
-    getCurrentStockPrice()
-      .then((data) => {
-        setStockData(data);
-        setStockLoading(false);
-      })
-      .catch(() => {
-        setStockLoading(false);
-      });
-  }, []);
-
-  const getStockIcon = () => {
-    if (!stockData) return "ri-arrow-down-s-fill";
-    return stockData.index.startsWith("+")
-      ? "ri-arrow-up-s-fill"
-      : "ri-arrow-down-s-fill";
-  };
-
-  const getStockColor = () => {
-    if (!stockData) return "text-red-400";
-    return stockData.index.startsWith("+") ? "text-green-400" : "text-red-400";
-  };
-
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       {/* Main Header Section */}
@@ -115,48 +92,14 @@ export default function Navbar() {
 
             {/* Right Container - Stock Ticker, Ruler Line, and Navigation */}
             <div className="hidden lg:flex flex-col flex-1 ">
-              {/* Stock Ticker */}
-              <div className="mb-2">
-                {stockLoading ? (
-                  <div className="flex items-center gap-2 text-xs text-gray-800">
-                    <span className="font-semibold">Loading BSE Data...</span>
-                  </div>
-                ) : stockData ? (
-                  <div className="flex items-center gap-2 text-xs text-gray-800">
-                    <span className="font-semibold">{stockData.exchange}</span>
-                    <i
-                      className={`${getStockIcon()} ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
-                    ></i>
-                    <span
-                      className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
-                    >
-                      ₹ {stockData.current_price.toFixed(2)}
-                    </span>
-                    <span
-                      className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
-                    >
-                      {stockData.index}
-                    </span>
-                    <span
-                      className={
-                        stockData.index.startsWith("+")
-                          ? "text-green-600"
-                          : "text-red-600"
-                      }
-                    >
-                      ({stockData.overall_index}%)
-                    </span>
-                  </div>
-                ) : (
+              {/* Stock Ticker — temporarily hidden until APIs are updated */}
+              {SHOW_STOCK_TICKER && (
+                <div className="mb-2">
                   <div className="flex items-center gap-2 text-xs text-gray-800">
                     <span className="font-semibold">BSE</span>
-                    <i className="ri-arrow-down-s-fill text-red-600"></i>
-                    <span className="font-semibold text-red-600">₹ 310.00</span>
-                    <span className="font-semibold text-red-600">-10.65</span>
-                    <span className="text-red-600">(-4.03%)</span>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Horizontal Ruler Line */}
               <div className="w-full border-b border-gray-200 mb-3"></div>
@@ -473,48 +416,12 @@ export default function Navbar() {
               INFRASTRUCTURE LIMITED
             </div>
 
-            {/* Stock Ticker - Mobile */}
-            <div className="sm:hidden flex items-center gap-2 text-xs mb-4 pb-4 border-b border-gray-200">
-              {stockLoading ? (
-                <span className="text-gray-800">Loading BSE Data...</span>
-              ) : stockData ? (
-                <>
-                  <span className="font-semibold text-gray-800">
-                    {stockData.exchange}
-                  </span>
-                  <i
-                    className={`${getStockIcon()} ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
-                  ></i>
-                  <span
-                    className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
-                  >
-                    ₹ {stockData.current_price.toFixed(2)}
-                  </span>
-                  <span
-                    className={`font-semibold ${stockData.index.startsWith("+") ? "text-green-600" : "text-red-600"}`}
-                  >
-                    {stockData.index}
-                  </span>
-                  <span
-                    className={
-                      stockData.index.startsWith("+")
-                        ? "text-green-600"
-                        : "text-red-600"
-                    }
-                  >
-                    ({stockData.overall_index}%)
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span className="font-semibold text-gray-800">BSE</span>
-                  <i className="ri-arrow-down-s-fill text-red-600"></i>
-                  <span className="font-semibold text-red-600">₹ 310.00</span>
-                  <span className="font-semibold text-red-600">-10.65</span>
-                  <span className="text-red-600">(-4.03%)</span>
-                </>
-              )}
-            </div>
+            {/* Stock Ticker - Mobile — temporarily hidden until APIs are updated */}
+            {SHOW_STOCK_TICKER && (
+              <div className="sm:hidden flex items-center gap-2 text-xs mb-4 pb-4 border-b border-gray-200">
+                <span className="font-semibold text-gray-800">BSE</span>
+              </div>
+            )}
 
             <nav className="flex flex-col gap-2">
               <Link

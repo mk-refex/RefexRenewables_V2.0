@@ -32,13 +32,15 @@ const Navbar = () => {
                 />
               </Link>
 
-              {/* Stock Ticker */}
+              {/* Stock Ticker — temporarily hidden until APIs are updated */}
+              {false && (
               <div className="flex items-center gap-2 text-xs ml-8">
                 <span className="font-semibold text-gray-800">BSE</span>
                 <i className="ri-arrow-down-s-fill text-red-600"></i>
                 <span className="font-semibold text-red-600">₹ 310</span>
                 <span className="text-red-600">(-2.82%)</span>
               </div>
+              )}
             </div>
           </div>
           {/* Horizontal line that stops at logo */}
